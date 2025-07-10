@@ -727,26 +727,29 @@ Kriterien = {
 # Ergebnis-Speicherung
 ergebnisse = {}
 
+
 # Tab-Namen definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
-# Tab-Auswahl oben (sichtbare Navigation)
-selected_tab = st.radio("Navigation", tab_names, horizontal=True)
-
-# Index für Zurück/Weiter merken
+# Session-Index initialisieren
 if "current_tab_index" not in st.session_state:
-    st.session_state.current_tab_index = tab_names.index(selected_tab)
-else:
-    st.session_state.current_tab_index = tab_names.index(selected_tab)
+    st.session_state.current_tab_index = 0
 
-# Funktion zur Navigation 
+# Navigation oben (nur Anzeige)
+st.markdown("### Navigation")
+st.markdown(" ➤ ".join([
+    f"**:blue[{name}]**" if i == st.session_state.current_tab_index else name
+    for i, name in enumerate(tab_names)
+]))
+
+# Navigation unten
 def navigate_tabs(offset):
     new_index = st.session_state.current_tab_index + offset
     st.session_state.current_tab_index = max(0, min(len(tab_names) - 1, new_index))
 
-# Aktueller Tab
 current_tab = tab_names[st.session_state.current_tab_index]
-st.title(f"{current_tab}")
+st.title(current_tab)
+
 
 # Inhalte je Tab
 if current_tab == "Start":
@@ -844,11 +847,13 @@ elif current_tab == "Auswertung":
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
 
-# Navigation unten
+# Weiter-/Zurück-Buttons
 col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
-    if st.button("← Zurück"):
-        navigate_tabs(-1)
+    if st.session_state.current_tab_index > 0:
+        if st.button("← Zurück"):
+            navigate_tabs(-1)
 with col3:
-    if st.button("Weiter →"):
-        navigate_tabs(1)
+    if st.session_state.current_tab_index < len(tab_names) - 1:
+        if st.button("Weiter →"):
+            navigate_tabs(1)
