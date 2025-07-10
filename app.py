@@ -724,26 +724,29 @@ Kriterien = {
 
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
-# Tabs definieren
+# Tabs
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
-# Ergebnis-Speicher
-if "ergebnisse" not in st.session_state:
-    st.session_state.ergebnisse = {}
+# Initialisierung
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 
+if "ergebnisse" not in st.session_state:
+    st.session_state.ergebnisse = {}
+
+# Titel nur einmal
+if st.session_state.current_tab_index == 0:
+    st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+
 # Navigation oben
-st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 st.markdown("### Navigation")
 st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
 ]), unsafe_allow_html=True)
 
-# Inhalt
+# Aktuellen Tab holen
 current_tab = tab_names[st.session_state.current_tab_index]
-st.subheader(f"{current_tab}")
 
 if current_tab == "Start":
     st.markdown("""
@@ -793,18 +796,19 @@ elif current_tab == "Auswertung":
         ax.set_yticklabels(['1', '2', '3', '4'])
         st.pyplot(fig)
 
-# Navigation Buttons (oben + unten)
-def nav_buttons():
+# Navigationslogik
+def nav_buttons(position):
     col1, col2, col3 = st.columns([1, 6, 1])
     with col1:
         if st.session_state.current_tab_index > 0:
-            if st.button("← Zurück", key=f"back_{st.session_state.current_tab_index}"):
+            if st.button("← Zurück", key=f"back_{position}"):
                 st.session_state.current_tab_index -= 1
-                st.experimental_rerun()
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
-            if st.button("Weiter →", key=f"next_{st.session_state.current_tab_index}"):
+            if st.button("Weiter →", key=f"next_{position}"):
                 st.session_state.current_tab_index += 1
-                st.experimental_rerun()
 
-nav_buttons()
+# Buttons oben und unten
+nav_buttons("top")
+st.markdown("---")
+nav_buttons("bottom")
