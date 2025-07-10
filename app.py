@@ -846,7 +846,7 @@ elif current_tab == "Auswertung":
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
 
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
-            antwort = frage_chatgpt_auswertung(st.session_state.ergebnisse)
+                antwort = frage_chatgpt_auswertung(st.session_state.ergebnisse)
 
             st.markdown(antwort)
            
