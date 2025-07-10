@@ -492,7 +492,7 @@ Kriterien = {
             "begründung": "Autonomie über Pausen wirkt positiv auf Erholung, Effizienz und Zeitautonomie."
         }
     ],
-    "Produktionsorgansiation": [
+    "Produktionsorganisation": [
         {
             "frage": "O3.1 Die Aufgaben sind hinsichtlich ihrer Präsenzpflicht analysiert und systematisch aufteilbar.",
             "begründung": "Differenzierung präsenzkritischer und mobil bearbeitbarer Aufgaben ist Voraussetzung für Flexibilität."
@@ -724,28 +724,31 @@ Kriterien = {
     ]
 }
 
-# Ergebnis-Speicherung
-ergebnisse = {}
+dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
-# Tab-Namen definieren
+# Ergebnis-Speicherung
+if "ergebnisse" not in st.session_state:
+    st.session_state.ergebnisse = {}
+
+# Tab-Namen
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
-# Initialisierung der Session-Variablen
+# Tab-Index initialisieren
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 
-# Navigation unten – muss **vor** dem Rendering erfolgen
+# Navigation unten
 col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
     if st.button("← Zurück") and st.session_state.current_tab_index > 0:
         st.session_state.current_tab_index -= 1
-        st.experimental_rerun()
+        st.stop()
 with col3:
     if st.button("Weiter →") and st.session_state.current_tab_index < len(tab_names) - 1:
         st.session_state.current_tab_index += 1
-        st.experimental_rerun()
+        st.stop()
 
-# Navigation oben (visuelle Anzeige)
+# Navigation oben (Anzeige)
 nav_display = " ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
@@ -753,19 +756,12 @@ nav_display = " ➤ ".join([
 st.markdown("### Navigation", unsafe_allow_html=True)
 st.markdown(nav_display, unsafe_allow_html=True)
 
-# Aktuellen Tab bestimmen
+# Scroll-to-top
+st.markdown("""<script>window.scrollTo(0, 0);</script>""", unsafe_allow_html=True)
+
+# Aktuellen Tab laden
 current_tab = tab_names[st.session_state.current_tab_index]
 st.title(current_tab)
-
-# Scroll-to-top nach Rerender
-st.markdown(
-    """
-    <script>
-        window.scrollTo(0, 0);
-    </script>
-    """,
-    unsafe_allow_html=True
-)
 
 # Inhalte je Tab
 if current_tab == "Start":
@@ -777,14 +773,12 @@ if current_tab == "Start":
     In jedem Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
 
     **Bewertungsskala:**
-    - **1 = niedrig** – Das Kriterium ist kaum oder gar nicht erfüllt.
-    - **2 = mittel** – Das Kriterium ist teilweise erfüllt, es bestehen Lücken oder Unsicherheiten.
-    - **3 = hoch** – Das Kriterium ist weitgehend erfüllt, jedoch nicht vollständig systematisiert.
-    - **4 = sehr hoch** – Das Kriterium ist vollständig erfüllt und fest im Alltag etabliert.
+    - **1 = niedrig**
+    - **2 = mittel**
+    - **3 = hoch**
+    - **4 = sehr hoch**
 
-    Nach dem Ausfüllen aller Handlungsfelder erhalten Sie eine grafische Auswertung sowie eine indikative Zuordnung zu einem Clustertyp. Ergänzend werden automatisiert passende Handlungsempfehlungen gegeben.
-
-    **Hinweis:** Die Auswertung basiert auf einer wissenschaftlichen Analyse und wurde speziell für die zerspanende Fertigung entwickelt.
+    Nach dem Ausfüllen aller Handlungsfelder erhalten Sie eine grafische Auswertung sowie eine indikative Zuordnung zu einem Clustertyp.
     """)
 
 elif current_tab in mtok_structure:
@@ -803,35 +797,23 @@ elif current_tab in mtok_structure:
                 key=f"{dimension}_{feld}_{idx}"
             )
             scores.append(score)
-        ergebnisse[feld] = np.mean(scores) if scores else 0
+        st.session_state.ergebnisse[feld] = np.mean(scores) if scores else 0
 
 elif current_tab == "Abschließende Fragen":
-    st.markdown("Bitte beantworten Sie die folgenden Fragen. Diese Angaben helfen bei der Interpretation der Ergebnisse und sind teilweise optional.")
-
-    st.markdown("1. In welcher Branche ist Ihr Unternehmen tätig?")
-    st.text_input("", key="branche")
-
-    st.markdown("2. Wie viele Beschäftigte hat Ihr Unternehmen?")
-    st.radio("", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende")
-
-    st.markdown("3. In welcher Funktion sind Sie tätig?")
-    st.radio("", ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"], key="funktion")
-
-    st.markdown("4. Wie hoch ist der Jahresumsatz Ihres Unternehmens?")
-    st.radio("", ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"], key="umsatz")
-
-    st.markdown("5. Wo ist Ihr Unternehmen zu Hause? (Postleitzahl, optional)")
-    st.text_input("", key="plz")
-
-    st.markdown("6. Ihre E-Mail-Adresse (optional, für Ergebniszusendung)")
-    st.text_input("", key="email")
-
-    st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
+    st.markdown("Bitte beantworten Sie folgende Angaben:")
+    st.text_input("1. Branche Ihres Unternehmens", key="branche")
+    st.radio("2. Mitarbeitendenzahl", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende")
+    st.radio("3. Ihre Funktion", ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"], key="funktion")
+    st.radio("4. Jahresumsatz", ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"], key="umsatz")
+    st.text_input("5. Postleitzahl (optional)", key="plz")
+    st.text_input("6. Ihre E-Mail-Adresse (optional)", key="email")
+    st.info("Sie können nun zur Auswertung übergehen.")
 
 elif current_tab == "Auswertung":
     if st.button("Radar-Diagramm anzeigen"):
-        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in ergebnisse.keys()]
-        values = list(ergebnisse.values())
+        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse.keys()]
+        values = list(st.session_state.ergebnisse.values())
+
         if not values:
             st.warning("Bitte zuerst alle Fragen beantworten.")
         else:
