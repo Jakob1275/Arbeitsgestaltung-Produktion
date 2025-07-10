@@ -724,127 +724,107 @@ Kriterien = {
     ]
 }
 
-# Ergebnisse speichern
-if "ergebnisse" not in st.session_state:
-    st.session_state.ergebnisse = {}
-ergebnisse = st.session_state.ergebnisse
+dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
-# Tab-Steuerung
-tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+# Session-State initialisieren
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
+if "ergebnisse" not in st.session_state:
+    st.session_state.ergebnisse = {}
 
-current_tab = tab_names[st.session_state.current_tab_index]
+tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+current = tab_names[st.session_state.current_tab_index]
 
-# Titel nur einmal anzeigen
-if current_tab == "Start":
-    st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
-else:
-    st.header("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+# Einführungstitel (einmal)
+st.title("Readiness‑Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen")
+st.write("")  # kleiner Spacer
 
-# Navigation oben
-st.markdown("### Navigation")
-st.markdown(" ➤ ".join([
-    f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
-    for i, name in enumerate(tab_names)
-]), unsafe_allow_html=True)
+# Navigation oben (Textleiste)
+nav = " ➤ ".join([
+    f"**<span style='color:#1f77b4'>{name}</span>**" if name == current else name
+    for name in tab_names
+])
+st.markdown(nav, unsafe_allow_html=True)
+st.write("")  # Abstand
 
-# Navigation oben: Weiter/Zurück
-def nav_buttons(location="top"):
-    col1, col2, col3 = st.columns([1, 6, 1])
-    with col1:
-        if st.button("← Zurück", key=f"back_{location}") and st.session_state.current_tab_index > 0:
-            st.session_state.current_tab_index -= 1
-            st.experimental_set_query_params(tab=st.session_state.current_tab_index)
-            st.experimental_rerun()
-    with col3:
-        if st.button("Weiter →", key=f"next_{location}") and st.session_state.current_tab_index < len(tab_names) - 1:
-            st.session_state.current_tab_index += 1
-            st.experimental_set_query_params(tab=st.session_state.current_tab_index)
-            st.experimental_rerun()
+# ---- Inhalte pro Tab ----
+if current == "Start":
+    st.write("""
+    Dieser Readiness‑Check unterstützt Sie …
+    """.strip())
 
-nav_buttons("top")
-
-# Inhalt des aktuellen Tabs
-if current_tab == "Start":
-    st.markdown("""
-    Dieser Readiness-Check unterstützt Sie dabei, den betrieblichen Stand zur Einführung mobiler und zeitflexibler Arbeit systematisch zu erfassen.
-
-    Basierend auf den vier Dimensionen des MTOK-Modells – **Mensch**, **Technik**, **Organisation** und **Kultur** – werden insgesamt neun Handlungsfelder betrachtet.
-
-    In jedem Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
-
-    **Bewertungsskala:**
-    - **1 = niedrig** – kaum oder gar nicht erfüllt
-    - **2 = mittel** – teilweise erfüllt, aber unsystematisch
-    - **3 = hoch** – weitgehend erfüllt, aber nicht systematisiert
-    - **4 = sehr hoch** – vollständig erfüllt, systematisch etabliert
-
-    Nach dem Ausfüllen erhalten Sie eine grafische Auswertung sowie Handlungsempfehlungen.
-    """)
-
-elif current_tab in mtok_structure:
-    dimension = current_tab
-    for feld in mtok_structure[dimension]:
+elif current in mtok_structure:
+    for feld in mtok_structure[current]:
         st.subheader(f"Handlungsfeld: {feld}")
         kriterien = Kriterien.get(feld, [])
         scores = []
         for idx, item in enumerate(kriterien):
             st.markdown(f"**{item['frage']}**")
-            st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
-            score = st.radio(
-                "Bitte bewerten:",
-                [1, 2, 3, 4],
-                horizontal=True,
-                key=f"{dimension}_{feld}_{idx}"
-            )
+            st.markdown(f"<span style='color:gray'>{item['begründung']}</span>", unsafe_allow_html=True)
+            score = st.radio("", [1,2,3,4], key=f"{current}_{feld}_{idx}", horizontal=True)
             scores.append(score)
         st.session_state.ergebnisse[feld] = np.mean(scores) if scores else 0
 
-elif current_tab == "Abschließende Fragen":
-    st.markdown("Bitte beantworten Sie folgende Angaben:")
-    st.text_input("1. Branche Ihres Unternehmens", key="branche")
-    st.radio("2. Mitarbeitendenzahl", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende")
-    st.radio("3. Ihre Funktion", ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"], key="funktion")
-    st.radio("4. Jahresumsatz", ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"], key="umsatz")
-    st.text_input("5. Postleitzahl (optional)", key="plz")
-    st.text_input("6. Ihre E-Mail-Adresse (optional)", key="email")
-    st.info("Sie können nun zur Auswertung übergehen.")
+elif current == "Abschließende Fragen":
+    st.text_input("1. Branche", key="branche")
+    st.radio("2. Mitarbeitende", ["1-9","10-49","50-199","200‑499","500‑1999",">2000"], key="mitarbeitende")
+    st.radio("3. Funktion", ["Geschäftsführung","Abteilungsleitung","Fachexpert*in","Produktion","Sonstige"], key="funktion")
+    st.radio("4. Jahresumsatz", ["<2 Mio","2‑9 Mio","10‑49 Mio",">50 Mio"], key="umsatz")
+    st.text_input("5. PLZ (optional)", key="plz")
+    st.text_input("6. E‑Mail (optional)", key="email")
+    st.info("Zum Abschluss bitte weiter klicken…")
 
-elif current_tab == "Auswertung":
-    if st.button("Radar-Diagramm anzeigen"):
-        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in ergebnisse.keys()]
-        values = list(ergebnisse.values())
-        if not values:
-            st.warning("Bitte zuerst alle Fragen beantworten.")
+elif current == "Auswertung":
+    if st.button("Radar‑Diagramm anzeigen"):
+        ers = st.session_state.ergebnisse
+        labels = [f"{f}\n({dim_map[f]})" for f in ers]
+        vals = list(ers.values())
+        if not vals:
+            st.warning("Bitte zuerst in allen Feldern bewerten.")
         else:
-            angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
-            values_cycle = values + values[:1]
-            angles_cycle = angles + angles[:1]
-            fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
-            ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
-            ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
-            ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1 = niedrig', '2', '3', '4 = sehr hoch'], fontsize=8)
-            ax.set_xticks(angles)
-            ax.set_xticklabels(labels, fontsize=9)
-            ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=14, pad=20)
+            angles = np.linspace(0, 2*np.pi, len(labels), endpoint=False).tolist()
+            vals_cycle = vals + vals[:1]; ang_cycle = angles + angles[:1]
+            fig, ax = plt.subplots(subplot_kw=dict(polar=True), figsize=(6,6))
+            ax.fill(ang_cycle, vals_cycle, color="skyblue", alpha=0.3)
+            ax.plot(ang_cycle, vals_cycle, color="steelblue", lw=2)
+            ax.set_yticks([1,2,3,4]); ax.set_xticks(angles); ax.set_xticklabels(labels, fontsize=8)
             st.pyplot(fig)
-            avg = np.mean(values)
-            if avg >= 3.5:
-                cluster = "Cluster 3 – Digital-affin und akzeptanzstark"
-                st.success(f"Der Betrieb gehört wahrscheinlich zu {cluster}.")
-            elif avg >= 2.8:
-                cluster = "Cluster 4 – Effizient, aber strukturell gehemmt"
-                st.info(f"Der Betrieb zeigt Merkmale von {cluster}.")
-            elif avg >= 2.0:
-                cluster = "Cluster 2 – Produktionsstark, aber mobilitätsfern"
-                st.warning(f"Der Betrieb weist Charakteristika von {cluster} auf.")
-            else:
-                cluster = "Cluster 1 – Traditionell und reaktiv"
-                st.error(f"Der Betrieb gehört vermutlich zu {cluster}.")
-            st.subheader("Individuelle Handlungsempfehlung")
-            st.markdown("⚠️ GPT-Anbindung aktivieren, um Empfehlungen zu erhalten.")
 
-# Navigation unten
-nav_buttons("bottom")
+            avg = np.mean(vals)
+            if avg>=3.5:
+                st.success("Cluster 3 – Digital‑affin...")
+            elif avg>=2.8:
+                st.info("Cluster 4 – Effizient...")
+            elif avg>=2.0:
+                st.warning("Cluster 2 – Mobilitätsfern")
+            else:
+                st.error("Cluster 1 – Traditionell")
+
+            st.subheader("Handlungsempfehlungen")
+            st.write("Hier kommt die GPT‑Antwort rein.")
+
+# ---- Navigation Buttons oben UND unten ----
+def on_nav(offset):
+    st.session_state.current_tab_index = min(max(0, st.session_state.current_tab_index + offset), len(tab_names)-1)
+
+btn_col1, btn_col2, btn_col3 = st.columns([1,6,1])
+with btn_col1:
+    if st.button("← Zurück", key="k_back"):
+        on_nav(-1)
+        st.experimental_rerun()
+with btn_col3:
+    if st.button("Weiter →", key="k_next"):
+        on_nav(1)
+        st.experimental_rerun()
+
+# Spacer & Buttons unten identisch
+st.write("")
+btn_col1b, _, btn_col3b = st.columns([1,6,1])
+with btn_col1b:
+    if st.button("← Zurück", key="k_back2"):
+        on_nav(-1)
+        st.experimental_rerun()
+with btn_col3b:
+    if st.button("Weiter →", key="k_next2"):
+        on_nav(1)
+        st.experimental_rerun()
