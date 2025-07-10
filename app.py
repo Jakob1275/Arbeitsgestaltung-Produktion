@@ -724,57 +724,45 @@ Kriterien = {
     ]
 }
 
-# DimMap vorbereiten
-dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
-
 # Initialisierung
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
-if "ergebnisse" not in st.session_state:
-    st.session_state.ergebnisse = {}
-if "tab_jump" not in st.session_state:
-    st.session_state.tab_jump = None
 
-# Tab-Namen definieren
+# Tab-Namen
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
-
-# Falls Navigation ausgelöst wurde
-if st.session_state.tab_jump is not None:
-    st.session_state.current_tab_index = st.session_state.tab_jump
-    st.session_state.tab_jump = None
-
 current_tab = tab_names[st.session_state.current_tab_index]
 
-# Scroll to top
-st.markdown("<script>window.scrollTo(0, 0);</script>", unsafe_allow_html=True)
+# DimMap
+dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
+
+# Ergebnisse
+if "ergebnisse" not in st.session_state:
+    st.session_state.ergebnisse = {}
+
+# Titel
+st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 
 # Navigation oben
-st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 st.markdown("### Navigation")
 st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
 ]), unsafe_allow_html=True)
 
-# Navigation oben (Buttons)
+# Steuerung oben
 col1_top, col2_top, col3_top = st.columns([1, 6, 1])
 with col1_top:
     if st.session_state.current_tab_index > 0:
-        if st.button("← Zurück", key="top_back"):
-            st.session_state.tab_jump = st.session_state.current_tab_index - 1
-            st.experimental_rerun()
+        if st.button("← Zurück", key="btn_back_top"):
+            st.session_state.current_tab_index -= 1
 with col3_top:
     if st.session_state.current_tab_index < len(tab_names) - 1:
-        if st.button("Weiter →", key="top_next"):
-            st.session_state.tab_jump = st.session_state.current_tab_index + 1
-            st.experimental_rerun()
+        if st.button("Weiter →", key="btn_next_top"):
+            st.session_state.current_tab_index += 1
 
-# Inhalte je Tab
+# Inhalt je Tab
 if current_tab == "Start":
-    st.markdown("""
-    Dieser Readiness-Check unterstützt Sie dabei, den betrieblichen Stand zur Einführung mobiler und zeitflexibler Arbeit systematisch zu erfassen.
-    ... [gekürzt für Übersicht] ...
-    """)
+    st.markdown("...Dein Einführungstext...")
 
 elif current_tab in mtok_structure:
     dimension = current_tab
@@ -800,8 +788,8 @@ elif current_tab == "Abschließende Fragen":
     st.info("Sie können nun zur Auswertung übergehen.")
 
 elif current_tab == "Auswertung":
-    if st.button("Radar-Diagramm anzeigen"):
-        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse.keys()]
+    if st.button("Radar-Diagramm anzeigen", key="auswertung_btn"):
+        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse]
         values = list(st.session_state.ergebnisse.values())
         if not values:
             st.warning("Bitte zuerst alle Fragen beantworten.")
@@ -818,7 +806,6 @@ elif current_tab == "Auswertung":
             ax.set_xticklabels(labels, fontsize=9)
             ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=14, pad=20)
             st.pyplot(fig)
-
             avg = np.mean(values)
             if avg >= 3.5:
                 st.success("Cluster 3 – Digital-affin und akzeptanzstark")
@@ -829,15 +816,13 @@ elif current_tab == "Auswertung":
             else:
                 st.error("Cluster 1 – Traditionell und reaktiv")
 
-# Navigation unten (Buttons)
+# Steuerung unten
 col1_bot, col2_bot, col3_bot = st.columns([1, 6, 1])
 with col1_bot:
     if st.session_state.current_tab_index > 0:
-        if st.button("← Zurück", key="bot_back"):
-            st.session_state.tab_jump = st.session_state.current_tab_index - 1
-            st.experimental_rerun()
+        if st.button("← Zurück", key="btn_back_bot"):
+            st.session_state.current_tab_index -= 1
 with col3_bot:
     if st.session_state.current_tab_index < len(tab_names) - 1:
-        if st.button("Weiter →", key="bot_next"):
-            st.session_state.tab_jump = st.session_state.current_tab_index + 1
-            st.experimental_rerun()
+        if st.button("Weiter →", key="btn_next_bot"):
+            st.session_state.current_tab_index += 1
