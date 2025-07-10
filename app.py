@@ -724,50 +724,48 @@ Kriterien = {
     ]
 }
 
-# Mapping der Handlungsfelder zu Dimensionen (dim_map)
-dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
-
-# Ergebnis-Speicherung initialisieren
+# Ergebnisse speichern
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
+ergebnisse = st.session_state.ergebnisse
 
-# Tabs definieren
+# Tab-Steuerung
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
-
-# Aktuellen Index merken
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 
+current_tab = tab_names[st.session_state.current_tab_index]
+
+# Titel nur einmal anzeigen
+if current_tab == "Start":
+    st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+else:
+    st.header("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+
 # Navigation oben
-st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 st.markdown("### Navigation")
 st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
 ]), unsafe_allow_html=True)
 
-# Navigationsfunktion
-def render_nav_buttons(location="top"):
+# Navigation oben: Weiter/Zurück
+def nav_buttons(location="top"):
     col1, col2, col3 = st.columns([1, 6, 1])
     with col1:
-        if st.session_state.current_tab_index > 0:
-            if st.button("← Zurück", key=f"{location}_back"):
-                st.session_state.current_tab_index -= 1
-                st.stop()
+        if st.button("← Zurück", key=f"back_{location}") and st.session_state.current_tab_index > 0:
+            st.session_state.current_tab_index -= 1
+            st.experimental_set_query_params(tab=st.session_state.current_tab_index)
+            st.experimental_rerun()
     with col3:
-        if st.session_state.current_tab_index < len(tab_names) - 1:
-            if st.button("Weiter →", key=f"{location}_next"):
-                st.session_state.current_tab_index += 1
-                st.stop()
+        if st.button("Weiter →", key=f"next_{location}") and st.session_state.current_tab_index < len(tab_names) - 1:
+            st.session_state.current_tab_index += 1
+            st.experimental_set_query_params(tab=st.session_state.current_tab_index)
+            st.experimental_rerun()
 
-# Navigation am Seitenanfang
-render_nav_buttons("top")
+nav_buttons("top")
 
-# Aktueller Tab
-current_tab = tab_names[st.session_state.current_tab_index]
-st.header(current_tab)
-
-# Inhalte je Tab
+# Inhalt des aktuellen Tabs
 if current_tab == "Start":
     st.markdown("""
     Dieser Readiness-Check unterstützt Sie dabei, den betrieblichen Stand zur Einführung mobiler und zeitflexibler Arbeit systematisch zu erfassen.
@@ -777,14 +775,12 @@ if current_tab == "Start":
     In jedem Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
 
     **Bewertungsskala:**
-    - **1 = niedrig** – Das Kriterium ist kaum oder gar nicht erfüllt.
-    - **2 = mittel** – Das Kriterium ist teilweise erfüllt, es bestehen Lücken oder Unsicherheiten.
-    - **3 = hoch** – Das Kriterium ist weitgehend erfüllt, jedoch nicht vollständig systematisiert.
-    - **4 = sehr hoch** – Das Kriterium ist vollständig erfüllt und fest im Alltag etabliert.
+    - **1 = niedrig** – kaum oder gar nicht erfüllt
+    - **2 = mittel** – teilweise erfüllt, aber unsystematisch
+    - **3 = hoch** – weitgehend erfüllt, aber nicht systematisiert
+    - **4 = sehr hoch** – vollständig erfüllt, systematisch etabliert
 
-    Nach dem Ausfüllen aller Handlungsfelder erhalten Sie eine grafische Auswertung sowie eine indikative Zuordnung zu einem Clustertyp. Ergänzend werden automatisiert passende Handlungsempfehlungen gegeben.
-
-    **Hinweis:** Die Auswertung basiert auf einer wissenschaftlichen Analyse und wurde speziell für die zerspanende Fertigung entwickelt.
+    Nach dem Ausfüllen erhalten Sie eine grafische Auswertung sowie Handlungsempfehlungen.
     """)
 
 elif current_tab in mtok_structure:
@@ -796,7 +792,12 @@ elif current_tab in mtok_structure:
         for idx, item in enumerate(kriterien):
             st.markdown(f"**{item['frage']}**")
             st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
-            score = st.radio("Bitte bewerten:", [1, 2, 3, 4], horizontal=True, key=f"{dimension}_{feld}_{idx}")
+            score = st.radio(
+                "Bitte bewerten:",
+                [1, 2, 3, 4],
+                horizontal=True,
+                key=f"{dimension}_{feld}_{idx}"
+            )
             scores.append(score)
         st.session_state.ergebnisse[feld] = np.mean(scores) if scores else 0
 
@@ -812,15 +813,14 @@ elif current_tab == "Abschließende Fragen":
 
 elif current_tab == "Auswertung":
     if st.button("Radar-Diagramm anzeigen"):
-        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse.keys()]
-        values = list(st.session_state.ergebnisse.values())
+        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in ergebnisse.keys()]
+        values = list(ergebnisse.values())
         if not values:
             st.warning("Bitte zuerst alle Fragen beantworten.")
         else:
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
-
             fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
@@ -830,7 +830,6 @@ elif current_tab == "Auswertung":
             ax.set_xticklabels(labels, fontsize=9)
             ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=14, pad=20)
             st.pyplot(fig)
-
             avg = np.mean(values)
             if avg >= 3.5:
                 cluster = "Cluster 3 – Digital-affin und akzeptanzstark"
@@ -844,9 +843,8 @@ elif current_tab == "Auswertung":
             else:
                 cluster = "Cluster 1 – Traditionell und reaktiv"
                 st.error(f"Der Betrieb gehört vermutlich zu {cluster}.")
+            st.subheader("Individuelle Handlungsempfehlung")
+            st.markdown("⚠️ GPT-Anbindung aktivieren, um Empfehlungen zu erhalten.")
 
-            st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
-            st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
-
-# Navigation am Seitenende
-render_nav_buttons("bottom")
+# Navigation unten
+nav_buttons("bottom")
