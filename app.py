@@ -724,44 +724,49 @@ Kriterien = {
     ]
 }
 
+# DimMap vorbereiten 
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
-# Ergebnis-Speicherung
+# Initialisierung
+if "current_tab_index" not in st.session_state:
+    st.session_state.current_tab_index = 0
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
 
-# Tab-Namen
+# Tab-Namen definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+current_tab = tab_names[st.session_state.current_tab_index]
 
-# Tab-Index initialisieren
-if "current_tab_index" not in st.session_state:
-    st.session_state.current_tab_index = 0
+# Scroll to top
+st.markdown(
+    """
+    <script>
+        window.scrollTo(0, 0);
+    </script>
+    """,
+    unsafe_allow_html=True
+)
 
-# Navigation unten
-col1, col2, col3 = st.columns([1, 6, 1])
-with col1:
-    if st.button("← Zurück") and st.session_state.current_tab_index > 0:
-        st.session_state.current_tab_index -= 1
-        st.stop()
-with col3:
-    if st.button("Weiter →") and st.session_state.current_tab_index < len(tab_names) - 1:
-        st.session_state.current_tab_index += 1
-        st.stop()
-
-# Navigation oben (Anzeige)
-nav_display = " ➤ ".join([
+# Navigation oben
+st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+st.markdown("### Navigation")
+st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
-])
-st.markdown("### Navigation", unsafe_allow_html=True)
-st.markdown(nav_display, unsafe_allow_html=True)
+]), unsafe_allow_html=True)
 
-# Scroll-to-top
-st.markdown("""<script>window.scrollTo(0, 0);</script>""", unsafe_allow_html=True)
-
-# Aktuellen Tab laden
-current_tab = tab_names[st.session_state.current_tab_index]
-st.title(current_tab)
+# Navigation oben (Buttons)
+col1_top, col2_top, col3_top = st.columns([1, 6, 1])
+with col1_top:
+    if st.session_state.current_tab_index > 0:
+        if st.button("← Zurück", key="top_back"):
+            st.session_state.current_tab_index -= 1
+            st.experimental_rerun()
+with col3_top:
+    if st.session_state.current_tab_index < len(tab_names) - 1:
+        if st.button("Weiter →", key="top_next"):
+            st.session_state.current_tab_index += 1
+            st.experimental_rerun()
 
 # Inhalte je Tab
 if current_tab == "Start":
@@ -813,7 +818,6 @@ elif current_tab == "Auswertung":
     if st.button("Radar-Diagramm anzeigen"):
         labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse.keys()]
         values = list(st.session_state.ergebnisse.values())
-
         if not values:
             st.warning("Bitte zuerst alle Fragen beantworten.")
         else:
@@ -847,3 +851,16 @@ elif current_tab == "Auswertung":
 
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
+
+# Navigation unten
+col1_bot, col2_bot, col3_bot = st.columns([1, 6, 1])
+with col1_bot:
+    if st.session_state.current_tab_index > 0:
+        if st.button("← Zurück", key="bot_back"):
+            st.session_state.current_tab_index -= 1
+            st.experimental_rerun()
+with col3_bot:
+    if st.session_state.current_tab_index < len(tab_names) - 1:
+        if st.button("Weiter →", key="bot_next"):
+            st.session_state.current_tab_index += 1
+            st.experimental_rerun()
