@@ -753,10 +753,7 @@ nav_buttons("top")
 current_tab = tab_names[st.session_state.current_tab_index]
 
 # Oben anzeigen: Dimensionstitel
-if current_tab in mtok_structure:
-    st.markdown(f"### Dimension: {current_tab}")
-else:
-    st.markdown("###")
+st.markdown(f"###  {current_tab}")
 st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
