@@ -784,19 +784,23 @@ elif current_tab in mtok_structure:
         ergebnisse[feld] = np.mean(scores) if scores else 0
 
 elif current_tab == "Abschließende Fragen":
-    
+    #st.header("Abschließende Angaben")
     st.markdown("Bitte beantworten Sie die folgenden Fragen. Diese Angaben helfen bei der Interpretation der Ergebnisse und sind teilweise optional.")
 
-    st.text_input("1. In welcher Branche ist Ihr Unternehmen tätig?")
-    for option in ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"]:
-        st.checkbox(option, key=f"ma_{option}")
-    for option in ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"]:
-        st.checkbox(option, key=f"funktion_{option}")
-    for option in ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"]:
-        st.checkbox(option, key=f"umsatz_{option}")
-    st.multiselect("5. Weiterbildungsinteresse (optional)", ["Produktentwicklung", "Beschaffung und Einkauf", "Planung und Steuerung von Produktionsabläufen", "Marketing", "Vertrieb", "Logistik", "Innerbetriebliche Verwaltung"])
-    st.text_input("6. Postleitzahl (optional)")
-    st.text_input("7. E-Mail (optional, für Ergebniszusendung)")
+    st.text_input("1. In welcher Branche ist Ihr Unternehmen tätig?", key="branche")
+
+    st.markdown("2. Wie viele Beschäftigte hat Ihr Unternehmen?")
+    st.radio("", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="Beschäftigte")
+
+    st.markdown("3. In welcher Funktion sind Sie tätig?")
+    st.radio("", ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"], key="funktion")
+
+    st.markdown("4. Wie hoch ist der Jahresumsatz Ihres Unternehmens?")
+    st.radio("", ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"], key="umsatz")
+
+    st.text_input("5. Wo ist Ihr Unternehmen zu Hause? (Postleitzahl, optional)", key="plz")
+    st.text_input("6. Ihre E-Mail-Adresse (optional, für Ergebniszusendung)", key="email")
+
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
 elif current_tab == "Auswertung":
