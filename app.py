@@ -750,7 +750,7 @@ def nav_buttons(position):
 nav_buttons("top")
 
 # Navigationsanzeige oben
-st.markdown("### {current_tab}")
+st.markdown(f"### {current_tab}")
 st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
