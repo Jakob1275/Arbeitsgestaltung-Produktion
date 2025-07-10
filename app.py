@@ -784,7 +784,7 @@ elif current_tab in mtok_structure:
         ergebnisse[feld] = np.mean(scores) if scores else 0
 
 elif current_tab == "Abschließende Fragen":
-    st.header("Abschließende Angaben")
+    
     st.markdown("Bitte beantworten Sie die folgenden Fragen. Diese Angaben helfen bei der Interpretation der Ergebnisse und sind teilweise optional.")
 
     st.text_input("1. In welcher Branche ist Ihr Unternehmen tätig?")
@@ -800,7 +800,7 @@ elif current_tab == "Abschließende Fragen":
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
 elif current_tab == "Auswertung":
-    st.header("Auswertung")
+    
     if st.button("Radar-Diagramm anzeigen"):
         labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in ergebnisse.keys()]
         values = list(ergebnisse.values())
