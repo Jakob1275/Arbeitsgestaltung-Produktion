@@ -724,45 +724,66 @@ Kriterien = {
     ]
 }
 
-# Initialisierung
-if "current_tab_index" not in st.session_state:
-    st.session_state.current_tab_index = 0
-
-# Tab-Namen
-tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
-current_tab = tab_names[st.session_state.current_tab_index]
-
-# DimMap
+# dim_map vorbereiten (Beispiel)
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
-# Ergebnisse
+# Ergebnis-Speicherung
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
 
-# Titel
-st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+# Tabs definieren
+tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+
+# Initialisierung Index
+if "current_tab_index" not in st.session_state:
+    st.session_state.current_tab_index = 0
 
 # Navigation oben
+st.markdown("## Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+
 st.markdown("### Navigation")
 st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
 ]), unsafe_allow_html=True)
 
-# Steuerung oben
-col1_top, col2_top, col3_top = st.columns([1, 6, 1])
-with col1_top:
-    if st.session_state.current_tab_index > 0:
-        if st.button("← Zurück", key="btn_back_top"):
-            st.session_state.current_tab_index -= 1
-with col3_top:
-    if st.session_state.current_tab_index < len(tab_names) - 1:
-        if st.button("Weiter →", key="btn_next_top"):
-            st.session_state.current_tab_index += 1
+# Navigation-Buttons oben
+def nav_buttons():
+    col1, col2, col3 = st.columns([1, 6, 1])
+    with col1:
+        if st.session_state.current_tab_index > 0:
+            if st.button("← Zurück", key=f"back_top_{st.session_state.current_tab_index}"):
+                st.session_state.current_tab_index -= 1
+                st.experimental_set_query_params()  # verhindert doppeltes Laden
+    with col3:
+        if st.session_state.current_tab_index < len(tab_names) - 1:
+            if st.button("Weiter →", key=f"next_top_{st.session_state.current_tab_index}"):
+                st.session_state.current_tab_index += 1
+                st.experimental_set_query_params()
 
-# Inhalt je Tab
+nav_buttons()
+
+# Aktuellen Tab bestimmen
+current_tab = tab_names[st.session_state.current_tab_index]
+st.header(current_tab)
+
+# Inhalte je Tab
 if current_tab == "Start":
-    st.markdown("...Dein Einführungstext...")
+    st.markdown("""
+    Dieser Readiness-Check unterstützt Sie dabei, den betrieblichen Stand zur Einführung mobiler und zeitflexibler Arbeit systematisch zu erfassen.
+
+    Basierend auf den vier Dimensionen des MTOK-Modells – **Mensch**, **Technik**, **Organisation** und **Kultur** – werden insgesamt neun Handlungsfelder betrachtet.
+
+    In jedem Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
+
+    **Bewertungsskala:**
+    - **1 = niedrig** – kaum erfüllt
+    - **2 = mittel** – teilweise erfüllt
+    - **3 = hoch** – weitgehend erfüllt
+    - **4 = sehr hoch** – vollständig erfüllt
+
+    Nach dem Ausfüllen erhalten Sie eine grafische Auswertung sowie eine Zuordnung zu einem Clustertyp.
+    """)
 
 elif current_tab in mtok_structure:
     dimension = current_tab
@@ -788,8 +809,8 @@ elif current_tab == "Abschließende Fragen":
     st.info("Sie können nun zur Auswertung übergehen.")
 
 elif current_tab == "Auswertung":
-    if st.button("Radar-Diagramm anzeigen", key="auswertung_btn"):
-        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse]
+    if st.button("Radar-Diagramm anzeigen"):
+        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse.keys()]
         values = list(st.session_state.ergebnisse.values())
         if not values:
             st.warning("Bitte zuerst alle Fragen beantworten.")
@@ -797,6 +818,7 @@ elif current_tab == "Auswertung":
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
+
             fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
@@ -806,23 +828,23 @@ elif current_tab == "Auswertung":
             ax.set_xticklabels(labels, fontsize=9)
             ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=14, pad=20)
             st.pyplot(fig)
+
             avg = np.mean(values)
             if avg >= 3.5:
-                st.success("Cluster 3 – Digital-affin und akzeptanzstark")
+                cluster = "Cluster 3 – Digital-affin und akzeptanzstark"
+                st.success(f"Der Betrieb gehört wahrscheinlich zu {cluster}.")
             elif avg >= 2.8:
-                st.info("Cluster 4 – Effizient, aber strukturell gehemmt")
+                cluster = "Cluster 4 – Effizient, aber strukturell gehemmt"
+                st.info(f"Der Betrieb zeigt Merkmale von {cluster}.")
             elif avg >= 2.0:
-                st.warning("Cluster 2 – Produktionsstark, aber mobilitätsfern")
+                cluster = "Cluster 2 – Produktionsstark, aber mobilitätsfern"
+                st.warning(f"Der Betrieb weist Charakteristika von {cluster} auf.")
             else:
-                st.error("Cluster 1 – Traditionell und reaktiv")
+                cluster = "Cluster 1 – Traditionell und reaktiv"
+                st.error(f"Der Betrieb gehört vermutlich zu {cluster}.")
 
-# Steuerung unten
-col1_bot, col2_bot, col3_bot = st.columns([1, 6, 1])
-with col1_bot:
-    if st.session_state.current_tab_index > 0:
-        if st.button("← Zurück", key="btn_back_bot"):
-            st.session_state.current_tab_index -= 1
-with col3_bot:
-    if st.session_state.current_tab_index < len(tab_names) - 1:
-        if st.button("Weiter →", key="btn_next_bot"):
-            st.session_state.current_tab_index += 1
+            st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
+            st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
+
+# Navigation unten
+nav_buttons()
