@@ -730,26 +730,42 @@ ergebnisse = {}
 # Tab-Namen definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
-# Session-Index initialisieren
+# Initialisierung der Session-Variablen
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 
-# Navigation unten (nur Steuerung)
-def navigate_tabs(offset):
-    new_index = st.session_state.current_tab_index + offset
-    st.session_state.current_tab_index = max(0, min(len(tab_names) - 1, new_index))
-    st.experimental_rerun()
+# Navigation unten – muss **vor** dem Rendering erfolgen
+col1, col2, col3 = st.columns([1, 6, 1])
+with col1:
+    if st.button("← Zurück") and st.session_state.current_tab_index > 0:
+        st.session_state.current_tab_index -= 1
+        st.experimental_rerun()
+with col3:
+    if st.button("Weiter →") and st.session_state.current_tab_index < len(tab_names) - 1:
+        st.session_state.current_tab_index += 1
+        st.experimental_rerun()
 
-# Aktueller Tab
+# Navigation oben (visuelle Anzeige)
+nav_display = " ➤ ".join([
+    f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
+    for i, name in enumerate(tab_names)
+])
+st.markdown("### Navigation", unsafe_allow_html=True)
+st.markdown(nav_display, unsafe_allow_html=True)
+
+# Aktuellen Tab bestimmen
 current_tab = tab_names[st.session_state.current_tab_index]
 st.title(current_tab)
 
-# Oben: Visuelle Darstellung des Fortschritts
-st.markdown("### Navigation")
-st.markdown(" ➤ ".join([
-    f"**:blue[{name}]**" if i == st.session_state.current_tab_index else name
-    for i, name in enumerate(tab_names)
-]))
+# Scroll-to-top nach Rerender
+st.markdown(
+    """
+    <script>
+        window.scrollTo(0, 0);
+    </script>
+    """,
+    unsafe_allow_html=True
+)
 
 # Inhalte je Tab
 if current_tab == "Start":
@@ -775,13 +791,17 @@ elif current_tab in mtok_structure:
     dimension = current_tab
     for feld in mtok_structure[dimension]:
         st.subheader(f"Handlungsfeld: {feld}")
-        st.markdown("<div id='top'></div>", unsafe_allow_html=True)
         kriterien = Kriterien.get(feld, [])
         scores = []
         for idx, item in enumerate(kriterien):
             st.markdown(f"**{item['frage']}**")
             st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
-            score = st.radio("Bitte bewerten:", [1, 2, 3, 4], horizontal=True, key=f"{dimension}_{feld}_{idx}")
+            score = st.radio(
+                "Bitte bewerten:",
+                [1, 2, 3, 4],
+                horizontal=True,
+                key=f"{dimension}_{feld}_{idx}"
+            )
             scores.append(score)
         ergebnisse[feld] = np.mean(scores) if scores else 0
 
@@ -845,16 +865,3 @@ elif current_tab == "Auswertung":
 
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
-
-# Weiter-/Zurück-Buttons
-col1, col2, col3 = st.columns([1, 6, 1])
-with col1:
-    if st.session_state.current_tab_index > 0:
-        if st.button("← Zurück"):
-            navigate_tabs(-1)
-with col3:
-    if st.session_state.current_tab_index < len(tab_names) - 1:
-        if st.button("Weiter →"):
-            navigate_tabs(1)
-
-# HTML-Scroll oben (nicht nötig bei Rerender durch experimental_rerun)
