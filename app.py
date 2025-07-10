@@ -727,7 +727,6 @@ Kriterien = {
 # Ergebnis-Speicherung
 ergebnisse = {}
 
-
 # Tab-Namen definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
@@ -735,21 +734,22 @@ tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", 
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 
-# Navigation oben (nur Anzeige)
+# Navigation unten (nur Steuerung)
+def navigate_tabs(offset):
+    new_index = st.session_state.current_tab_index + offset
+    st.session_state.current_tab_index = max(0, min(len(tab_names) - 1, new_index))
+    st.experimental_rerun()
+
+# Aktueller Tab
+current_tab = tab_names[st.session_state.current_tab_index]
+st.title(current_tab)
+
+# Oben: Visuelle Darstellung des Fortschritts
 st.markdown("### Navigation")
 st.markdown(" ➤ ".join([
     f"**:blue[{name}]**" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
 ]))
-
-# Navigation unten
-def navigate_tabs(offset):
-    new_index = st.session_state.current_tab_index + offset
-    st.session_state.current_tab_index = max(0, min(len(tab_names) - 1, new_index))
-
-current_tab = tab_names[st.session_state.current_tab_index]
-st.title(current_tab)
-
 
 # Inhalte je Tab
 if current_tab == "Start":
@@ -775,6 +775,7 @@ elif current_tab in mtok_structure:
     dimension = current_tab
     for feld in mtok_structure[dimension]:
         st.subheader(f"Handlungsfeld: {feld}")
+        st.markdown("<div id='top'></div>", unsafe_allow_html=True)
         kriterien = Kriterien.get(feld, [])
         scores = []
         for idx, item in enumerate(kriterien):
@@ -785,7 +786,6 @@ elif current_tab in mtok_structure:
         ergebnisse[feld] = np.mean(scores) if scores else 0
 
 elif current_tab == "Abschließende Fragen":
-    
     st.markdown("Bitte beantworten Sie die folgenden Fragen. Diese Angaben helfen bei der Interpretation der Ergebnisse und sind teilweise optional.")
 
     st.markdown("1. In welcher Branche ist Ihr Unternehmen tätig?")
@@ -809,7 +809,6 @@ elif current_tab == "Abschließende Fragen":
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
 elif current_tab == "Auswertung":
-    
     if st.button("Radar-Diagramm anzeigen"):
         labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in ergebnisse.keys()]
         values = list(ergebnisse.values())
@@ -858,8 +857,4 @@ with col3:
         if st.button("Weiter →"):
             navigate_tabs(1)
 
-# Seite scrollt beim Navigieren automatisch nach oben
-st.markdown(
-    "<script>window.scrollTo(0, 0);</script>",
-    unsafe_allow_html=True
-)
+# HTML-Scroll oben (nicht nötig bei Rerender durch experimental_rerun)
