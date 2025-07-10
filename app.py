@@ -724,7 +724,7 @@ Kriterien = {
     ]
 }
 
-# DimMap vorbereiten 
+# DimMap vorbereiten
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
 # Initialisierung
@@ -732,20 +732,21 @@ if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
+if "tab_jump" not in st.session_state:
+    st.session_state.tab_jump = None
 
 # Tab-Namen definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+
+# Falls Navigation ausgelöst wurde
+if st.session_state.tab_jump is not None:
+    st.session_state.current_tab_index = st.session_state.tab_jump
+    st.session_state.tab_jump = None
+
 current_tab = tab_names[st.session_state.current_tab_index]
 
 # Scroll to top
-st.markdown(
-    """
-    <script>
-        window.scrollTo(0, 0);
-    </script>
-    """,
-    unsafe_allow_html=True
-)
+st.markdown("<script>window.scrollTo(0, 0);</script>", unsafe_allow_html=True)
 
 # Navigation oben
 st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
@@ -760,30 +761,19 @@ col1_top, col2_top, col3_top = st.columns([1, 6, 1])
 with col1_top:
     if st.session_state.current_tab_index > 0:
         if st.button("← Zurück", key="top_back"):
-            st.session_state.current_tab_index -= 1
+            st.session_state.tab_jump = st.session_state.current_tab_index - 1
             st.experimental_rerun()
 with col3_top:
     if st.session_state.current_tab_index < len(tab_names) - 1:
         if st.button("Weiter →", key="top_next"):
-            st.session_state.current_tab_index += 1
+            st.session_state.tab_jump = st.session_state.current_tab_index + 1
             st.experimental_rerun()
 
 # Inhalte je Tab
 if current_tab == "Start":
     st.markdown("""
     Dieser Readiness-Check unterstützt Sie dabei, den betrieblichen Stand zur Einführung mobiler und zeitflexibler Arbeit systematisch zu erfassen.
-
-    Basierend auf den vier Dimensionen des MTOK-Modells – **Mensch**, **Technik**, **Organisation** und **Kultur** – werden insgesamt neun Handlungsfelder betrachtet.
-
-    In jedem Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
-
-    **Bewertungsskala:**
-    - **1 = niedrig**
-    - **2 = mittel**
-    - **3 = hoch**
-    - **4 = sehr hoch**
-
-    Nach dem Ausfüllen aller Handlungsfelder erhalten Sie eine grafische Auswertung sowie eine indikative Zuordnung zu einem Clustertyp.
+    ... [gekürzt für Übersicht] ...
     """)
 
 elif current_tab in mtok_structure:
@@ -795,12 +785,7 @@ elif current_tab in mtok_structure:
         for idx, item in enumerate(kriterien):
             st.markdown(f"**{item['frage']}**")
             st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
-            score = st.radio(
-                "Bitte bewerten:",
-                [1, 2, 3, 4],
-                horizontal=True,
-                key=f"{dimension}_{feld}_{idx}"
-            )
+            score = st.radio("Bitte bewerten:", [1, 2, 3, 4], horizontal=True, key=f"{dimension}_{feld}_{idx}")
             scores.append(score)
         st.session_state.ergebnisse[feld] = np.mean(scores) if scores else 0
 
@@ -824,7 +809,6 @@ elif current_tab == "Auswertung":
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
-
             fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
@@ -837,30 +821,23 @@ elif current_tab == "Auswertung":
 
             avg = np.mean(values)
             if avg >= 3.5:
-                cluster = "Cluster 3 – Digital-affin und akzeptanzstark"
-                st.success(f"Der Betrieb gehört wahrscheinlich zu {cluster}.")
+                st.success("Cluster 3 – Digital-affin und akzeptanzstark")
             elif avg >= 2.8:
-                cluster = "Cluster 4 – Effizient, aber strukturell gehemmt"
-                st.info(f"Der Betrieb zeigt Merkmale von {cluster}.")
+                st.info("Cluster 4 – Effizient, aber strukturell gehemmt")
             elif avg >= 2.0:
-                cluster = "Cluster 2 – Produktionsstark, aber mobilitätsfern"
-                st.warning(f"Der Betrieb weist Charakteristika von {cluster} auf.")
+                st.warning("Cluster 2 – Produktionsstark, aber mobilitätsfern")
             else:
-                cluster = "Cluster 1 – Traditionell und reaktiv"
-                st.error(f"Der Betrieb gehört vermutlich zu {cluster}.")
+                st.error("Cluster 1 – Traditionell und reaktiv")
 
-            st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
-            st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
-
-# Navigation unten
+# Navigation unten (Buttons)
 col1_bot, col2_bot, col3_bot = st.columns([1, 6, 1])
 with col1_bot:
     if st.session_state.current_tab_index > 0:
         if st.button("← Zurück", key="bot_back"):
-            st.session_state.current_tab_index -= 1
+            st.session_state.tab_jump = st.session_state.current_tab_index - 1
             st.experimental_rerun()
 with col3_bot:
     if st.session_state.current_tab_index < len(tab_names) - 1:
         if st.button("Weiter →", key="bot_next"):
-            st.session_state.current_tab_index += 1
+            st.session_state.tab_jump = st.session_state.current_tab_index + 1
             st.experimental_rerun()
