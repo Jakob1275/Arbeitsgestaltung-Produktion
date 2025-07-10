@@ -831,21 +831,22 @@ elif current_tab == "Auswertung":
             st.subheader("Clusterzuordnung")
             if avg >= 3.5:
                 cluster = "Cluster 3 – Digital-affin und akzeptanzstark"
-                st.success(f"Der Betrieb gehört wahrscheinlich zu {cluster}.")
+                st.info(f"Der Betrieb gehört wahrscheinlich zu {cluster}.")
             elif avg >= 2.8:
                 cluster = "Cluster 4 – Effizient, aber strukturell gehemmt"
                 st.info(f"Der Betrieb zeigt Merkmale von {cluster}.")
             elif avg >= 2.0:
                 cluster = "Cluster 2 – Produktionsstark, aber mobilitätsfern"
-                st.warning(f"Der Betrieb weist Charakteristika von {cluster} auf.")
+                st.info(f"Der Betrieb weist Charakteristika von {cluster} auf.")
             else:
                 cluster = "Cluster 1 – Traditionell und reaktiv"
-                st.error(f"Der Betrieb gehört vermutlich zu {cluster}.")
+                st.info(f"Der Betrieb gehört vermutlich zu {cluster}.")
 
             # GPT-Auswertung
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
-            st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
-
+            antwort = frage_chatgpt_auswertung(st.session_state.ergebnisse)
+            st.markdown(antwort)
+           
 # Trenner und Navigationsbuttons unten
 st.markdown("---")
 nav_buttons("bottom")
