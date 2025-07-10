@@ -37,11 +37,9 @@ def frage_chatgpt_auswertung(ergebnisse):
     except Exception as e:
         return f"Fehler bei der GPT-Abfrage: {e}"
 
-
-
 # Struktur der Anwendung
 st.set_page_config(page_title="Readiness-Check", layout="wide")
-st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+#st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
@@ -726,92 +724,87 @@ Kriterien = {
 
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
-# Session-Initialisierung
-if "tab_index" not in st.session_state:
-    st.session_state.tab_index = 0
+# Tabs definieren
+tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+
+# Ergebnis-Speicher
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
-
-tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
-current_tab = tab_names[st.session_state.tab_index]
-
-# Titel nur einmal
-st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+if "current_tab_index" not in st.session_state:
+    st.session_state.current_tab_index = 0
 
 # Navigation oben
-nav_line = " ➤ ".join(
-    f"<b style='color:#1f77b4'>{n}</b>" if n == current_tab else n
-    for n in tab_names
-)
-st.markdown(nav_line, unsafe_allow_html=True)
-st.markdown("---")
+st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+st.markdown("### Navigation")
+st.markdown(" ➤ ".join([
+    f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
+    for i, name in enumerate(tab_names)
+]), unsafe_allow_html=True)
 
-# Inhalte pro Tab
+# Inhalt
+current_tab = tab_names[st.session_state.current_tab_index]
+st.subheader(f"{current_tab}")
+
 if current_tab == "Start":
     st.markdown("""
     Dieser Readiness-Check unterstützt Sie dabei, den betrieblichen Stand zur Einführung mobiler und zeitflexibler Arbeit systematisch zu erfassen.
-
+    
     Basierend auf den vier Dimensionen des MTOK-Modells – **Mensch**, **Technik**, **Organisation** und **Kultur** – werden insgesamt neun Handlungsfelder betrachtet.
-
+    
     In jedem Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
-
-    - **1 = niedrig**
-    - **2 = mittel**
-    - **3 = hoch**
-    - **4 = sehr hoch**
-
-    Nach dem Ausfüllen aller Handlungsfelder erhalten Sie eine grafische Auswertung sowie eine indikative Zuordnung zu einem Clustertyp.
+    - **1 = niedrig** – kaum erfüllt
+    - **2 = mittel** – teilweise erfüllt
+    - **3 = hoch** – weitgehend erfüllt
+    - **4 = sehr hoch** – voll erfüllt und etabliert
+    
+    Nach dem Ausfüllen erhalten Sie eine grafische Auswertung und Handlungsempfehlungen.
     """)
 
 elif current_tab in mtok_structure:
-    for feld in mtok_structure[current_tab]:
+    dimension = current_tab
+    for feld in mtok_structure[dimension]:
         st.subheader(f"Handlungsfeld: {feld}")
-        kriterien = Kriterien.get(feld, [])
-        scores = []
-        for idx, item in enumerate(kriterien):
+        for idx, item in enumerate(Kriterien.get(feld, [])):
             st.markdown(f"**{item['frage']}**")
-            st.markdown(f"<span style='color:gray'>{item['begründung']}</span>", unsafe_allow_html=True)
-            score = st.radio("Bitte bewerten:", [1, 2, 3, 4], horizontal=True, key=f"{feld}_{idx}")
-            scores.append(score)
-        st.session_state.ergebnisse[feld] = np.mean(scores) if scores else 0
+            st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
+            score = st.radio("Bitte bewerten:", [1, 2, 3, 4], horizontal=True, key=f"{dimension}_{feld}_{idx}")
+            st.session_state.ergebnisse[feld] = score
 
 elif current_tab == "Abschließende Fragen":
-    st.text_input("1. Branche", key="branche")
-    st.radio("2. Mitarbeitendenzahl", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeiter")
-    st.radio("3. Funktion", ["GF", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion")
-    st.radio("4. Umsatz", ["<2 Mio", "2-9 Mio", "10-49 Mio", ">50 Mio"], key="umsatz")
-    st.text_input("5. PLZ (optional)", key="plz")
-    st.text_input("6. E-Mail (optional)", key="email")
+    st.text_input("Branche", key="branche")
+    st.radio("Mitarbeitende", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende")
+    st.radio("Funktion", ["Geschäftsführung", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion")
+    st.text_input("PLZ (optional)", key="plz")
+    st.text_input("E-Mail (optional)", key="email")
 
 elif current_tab == "Auswertung":
     if st.button("Radar-Diagramm anzeigen"):
-        labels = [f"{f}\n({dim_map.get(f,'')})" for f in st.session_state.ergebnisse]
+        labels = [f"{feld} ({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse]
         values = list(st.session_state.ergebnisse.values())
-        if values:
-            angles = np.linspace(0, 2*np.pi, len(labels), endpoint=False).tolist()
-            values += values[:1]
-            angles += angles[:1]
-            fig, ax = plt.subplots(subplot_kw=dict(polar=True), figsize=(6,6))
-            ax.fill(angles, values, color='lightblue', alpha=0.4)
-            ax.plot(angles, values, color='blue')
-            ax.set_xticks(angles[:-1])
-            ax.set_xticklabels(labels, fontsize=8)
-            ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1', '2', '3', '4'])
-            st.pyplot(fig)
-        else:
-            st.warning("Bitte zuerst Fragen beantworten.")
+        angles = np.linspace(0, 2*np.pi, len(labels), endpoint=False).tolist()
+        values_cycle = values + values[:1]
+        angles_cycle = angles + angles[:1]
+        fig, ax = plt.subplots(figsize=(8, 8), subplot_kw=dict(polar=True))
+        ax.fill(angles_cycle, values_cycle, alpha=0.25)
+        ax.plot(angles_cycle, values_cycle, linewidth=2)
+        ax.set_xticks(angles)
+        ax.set_xticklabels(labels)
+        ax.set_yticks([1, 2, 3, 4])
+        ax.set_yticklabels(['1', '2', '3', '4'])
+        st.pyplot(fig)
 
-# --- Navigation Buttons oben & unten ---
-def render_nav_buttons(pos: str):
-    cols = st.columns([1, 6, 1])
-    with cols[0]:
-        if st.button("← Zurück", key=f"back_{pos}", use_container_width=True):
-            st.session_state.tab_index = max(0, st.session_state.tab_index - 1)
-    with cols[2]:
-        if st.button("Weiter →", key=f"next_{pos}", use_container_width=True):
-            st.session_state.tab_index = min(len(tab_names) - 1, st.session_state.tab_index + 1)
+# Navigation Buttons (oben + unten)
+def nav_buttons():
+    col1, col2, col3 = st.columns([1, 6, 1])
+    with col1:
+        if st.session_state.current_tab_index > 0:
+            if st.button("← Zurück", key=f"back_{st.session_state.current_tab_index}"):
+                st.session_state.current_tab_index -= 1
+                st.experimental_rerun()
+    with col3:
+        if st.session_state.current_tab_index < len(tab_names) - 1:
+            if st.button("Weiter →", key=f"next_{st.session_state.current_tab_index}"):
+                st.session_state.current_tab_index += 1
+                st.experimental_rerun()
 
-render_nav_buttons("top")
-st.markdown("---")
-render_nav_buttons("bottom")
+nav_buttons()
