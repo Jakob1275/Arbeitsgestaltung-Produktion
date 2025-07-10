@@ -5,7 +5,7 @@ import numpy as np
 import openai # type: ignore
 
 # API-Key aus Umgebungsvariable
-client = openai.OpenAI(api_key="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")
+client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def frage_chatgpt_auswertung(ergebnisse):
     try:
@@ -728,17 +728,25 @@ Kriterien = {
 ergebnisse = {}
 
 # Tabs für jede Dimension inklusive Start, Abschließende Fragen und Auswertung
-tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen"] + ["Auswertung"]
-tabs = st.tabs(tab_names)
+if "current_tab_index" not in st.session_state:
+    st.session_state.current_tab_index = 0
 
-# Titelseite im Tab "Start"
-with tabs[0]:
-    st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeit")
+tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+
+# Navigation über Buttons
+def navigate_tabs(offset):
+    st.session_state.current_tab_index = max(0, min(len(tab_names) - 1, st.session_state.current_tab_index + offset))
+
+# Aktuellen Tab laden
+current_tab = tab_names[st.session_state.current_tab_index]
+st.title(f"{current_tab}")
+
+if current_tab == "Start":
     st.markdown("""
     Dieser Readiness-Check unterstützt Sie dabei, den betrieblichen Stand zur Einführung mobiler und zeitflexibler Arbeit systematisch zu erfassen.
 
     Basierend auf den vier Dimensionen des MTOK-Modells – **Mensch**, **Technik**, **Organisation** und **Kultur** – werden insgesamt neun Handlungsfelder betrachtet.
-    
+
     In jedem Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
 
     **Bewertungsskala:**
@@ -747,99 +755,63 @@ with tabs[0]:
     - **3 = hoch** – Das Kriterium ist weitgehend erfüllt, jedoch nicht vollständig systematisiert.
     - **4 = sehr hoch** – Das Kriterium ist vollständig erfüllt und fest im Alltag etabliert.
 
-    Nach dem Ausfüllen aller Handlungsfelder erhalten Sie eine grafische Auswertung sowie eine indikative Zuordnung zu einem Clustertyp (z. B. *traditionell und reaktiv* oder *digital-affin und akzeptanzstark*). Ergänzend werden automatisiert passende Handlungsempfehlungen ausgesprochen.
+    Nach dem Ausfüllen aller Handlungsfelder erhalten Sie eine grafische Auswertung sowie eine indikative Zuordnung zu einem Clustertyp. Ergänzend werden automatisiert passende Handlungsempfehlungen gegeben.
 
     **Hinweis:** Die Auswertung basiert auf einer wissenschaftlichen Analyse und wurde speziell für die zerspanende Fertigung entwickelt.
     """)
 
-# Fragen + Begründungen
-for i, (dimension, felder) in enumerate(mtok_structure.items(), start=1):
-    with tabs[i]:
-        st.header(f"Dimension: {dimension}")
-        for feld in felder:
-            st.subheader(f"Handlungsfeld: {feld}")
-            kriterien = Kriterien.get(feld, [])
-            scores = []
-            for idx, item in enumerate(kriterien):
-                # Frage ohne Nummerierung
-                st.markdown(f"**{item['frage']}**")
-                # Begründung direkt unterhalb in grauer, kleiner Schrift
-                st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
-                # Bewertungsoptionen
-                score = st.radio(
-                    label="Bitte bewerten:",
-                    options=[1, 2, 3, 4],
-                    horizontal=True,
-                    key=f"{dimension}_{feld}_{idx}"
-                )
-                scores.append(score)
-            ergebnisse[feld] = np.mean(scores) if scores else 0
+elif current_tab in mtok_structure:
+    dimension = current_tab
+    st.header(f"Dimension: {dimension}")
+    for feld in mtok_structure[dimension]:
+        st.subheader(f"Handlungsfeld: {feld}")
+        kriterien = Kriterien.get(feld, [])
+        scores = []
+        for idx, item in enumerate(kriterien):
+            st.markdown(f"**{item['frage']}**")
+            st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
+            score = st.radio("Bitte bewerten:", [1, 2, 3, 4], horizontal=True, key=f"{dimension}_{feld}_{idx}")
+            scores.append(score)
+        ergebnisse[feld] = np.mean(scores) if scores else 0
 
-with tabs[-2]:
+elif current_tab == "Abschließende Fragen":
     st.header("Abschließende Angaben")
-
     st.markdown("Bitte beantworten Sie die folgenden Fragen. Diese Angaben helfen bei der Interpretation der Ergebnisse und sind teilweise optional.")
 
-    branche = st.text_input("1. In welcher Branche ist Ihr Unternehmen tätig?")
+    st.text_input("1. In welcher Branche ist Ihr Unternehmen tätig?")
 
     st.markdown("2. Wie viele Mitarbeitende hat Ihr Unternehmen?")
-    ma_options = ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"]
-    mitarbeitende = ""
-    for option in ma_options:
-        if st.checkbox(option, key=f"ma_{option}"):
-            mitarbeitende = option
+    for option in ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"]:
+        st.checkbox(option, key=f"ma_{option}")
 
     st.markdown("3. In welcher Funktion sind Sie tätig?")
-    funktionsbereiche = ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"]
-    funktion = ""
-    for option in funktionsbereiche:
-        if st.checkbox(option, key=f"funktion_{option}"):
-            funktion = option
+    for option in ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"]:
+        st.checkbox(option, key=f"funktion_{option}")
 
     st.markdown("4. Wie hoch ist der Jahresumsatz Ihres Unternehmens?")
-    umsatzbereiche = ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"]
-    umsatz = ""
-    for option in umsatzbereiche:
-        if st.checkbox(option, key=f"umsatz_{option}"):
-            umsatz = option
+    for option in ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"]:
+        st.checkbox(option, key=f"umsatz_{option}")
 
     st.markdown("5. In welchem der aufgeführten Bereiche würden Sie sich gerne noch weiterbilden? (optional)")
-    weiterbildung = st.multiselect(
-        "",
-        [            "Produktentwicklung",
-            "Beschaffung und Einkauf",
-            "Planung und Steuerung von Produktionsabläufen",
-            "Marketing",
-            "Vertrieb",
-            "Logistik",
-            "Innerbetriebliche Verwaltung"
-        ]
-    )
+    st.multiselect("", ["Produktentwicklung", "Beschaffung und Einkauf", "Planung und Steuerung von Produktionsabläufen", "Marketing", "Vertrieb", "Logistik", "Innerbetriebliche Verwaltung"])
 
-    plz = st.text_input("6. Wo ist Ihr Unternehmen zu Hause? (Postleitzahl, optional)")
-
-    email = st.text_input("7. Ihre E-Mail-Adresse (optional, für Ergebniszusendung):")
-
+    st.text_input("6. Wo ist Ihr Unternehmen zu Hause? (Postleitzahl, optional)")
+    st.text_input("7. Ihre E-Mail-Adresse (optional, für Ergebniszusendung):")
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
-# Mapping der Handlungsfelder zu ihren MTOK-Dimensionen
-dim_map = {
-    "Produktivität und Motivation": "Mensch",
-    "Persönliches Umfeld": "Mensch",
-    "Arbeitsplatzgestaltung und Automatisierung": "Technik",
-    "IT-Systemlandschaft und digital vernetzte Infrastruktur": "Technik",
-    "Kommunikation, Kooperation und Zusammenarbeit": "Organisation",
-    "Soziokulturelle und organisatorische Umwelt": "Organisation",
-    "Produktionsorganisation": "Organisation",
-    "Unternehmenskultur": "Kultur",
-    "Soziale Beziehungen und Interaktion": "Kultur"
-}
-
-#Auswertung
-with tabs[-1]:
+elif current_tab == "Auswertung":
     st.header("Auswertung")
-
-    cluster = None
+    dim_map = {
+        "Produktivität und Motivation": "Mensch",
+        "Persönliches Umfeld": "Mensch",
+        "Arbeitsplatzgestaltung und Automatisierung": "Technik",
+        "IT-Systemlandschaft und digital vernetzte Infrastruktur": "Technik",
+        "Kommunikation, Kooperation und Zusammenarbeit": "Organisation",
+        "Soziokulturelle und organisatorische Umwelt": "Organisation",
+        "Produktionsorganisation": "Organisation",
+        "Unternehmenskultur": "Kultur",
+        "Soziale Beziehungen und Interaktion": "Kultur"
+    }
 
     if st.button("Radar-Diagramm anzeigen"):
         labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in ergebnisse.keys()]
@@ -856,17 +828,14 @@ with tabs[-1]:
             fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
-            
             ax.set_yticks([1, 2, 3, 4])
             ax.set_yticklabels(['1 = niedrig', '2', '3', '4 = sehr hoch'], fontsize=8)
             ax.set_xticks(angles)
             ax.set_xticklabels(labels, fontsize=9)
-            
             ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=14, pad=20)
             st.pyplot(fig)
 
             avg = np.mean(values)
-            st.subheader("Clusterzuordnung")
             if avg >= 3.5:
                 cluster = "Cluster 3 – Digital-affin und akzeptanzstark"
                 st.success(f"Der Betrieb gehört wahrscheinlich zu {cluster}.")
@@ -880,7 +849,15 @@ with tabs[-1]:
                 cluster = "Cluster 1 – Traditionell und reaktiv"
                 st.error(f"Der Betrieb gehört vermutlich zu {cluster}.")
 
-            # OpenAI-gestützte Handlungsempfehlung
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             mitteilungen = frage_chatgpt_auswertung(ergebnisse)
             st.markdown(mitteilungen)
+
+# Navigation unten auf allen Seiten
+col1, col2, col3 = st.columns([1, 6, 1])
+with col1:
+    if st.button("← Zurück"):
+        navigate_tabs(-1)
+with col3:
+    if st.button("Weiter →"):
+        navigate_tabs(1)
