@@ -857,3 +857,9 @@ with col3:
     if st.session_state.current_tab_index < len(tab_names) - 1:
         if st.button("Weiter →"):
             navigate_tabs(1)
+
+# Seite scrollt beim Navigieren automatisch nach oben
+st.markdown(
+    "<script>window.scrollTo(0, 0);</script>",
+    unsafe_allow_html=True
+)
