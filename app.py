@@ -727,37 +727,6 @@ Kriterien = {
 # Ergebnis-Speicherung
 ergebnisse = {}
 
-import streamlit as st
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Beispielstruktur (durch echte Inhalte ersetzen)
-mtok_structure = {
-    "Mensch": ["Produktivität und Motivation", "Persönliches Umfeld"],
-    "Technik": ["Arbeitsplatzgestaltung und Automatisierung", "IT-Systemlandschaft und digital vernetzte Infrastruktur"],
-    "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Soziokulturelle und organisatorische Umwelt", "Produktionsorganisation"],
-    "Kultur": ["Unternehmenskultur", "Soziale Beziehungen und Interaktion"]
-}
-
-Kriterien = {
-    "Produktivität und Motivation": [
-        {"frage": "Beispiel-Frage", "begründung": "Begründung zur Frage"}
-    ]
-}
-
-ergebnisse = {}
-dim_map = {
-    "Produktivität und Motivation": "Mensch",
-    "Persönliches Umfeld": "Mensch",
-    "Arbeitsplatzgestaltung und Automatisierung": "Technik",
-    "IT-Systemlandschaft und digital vernetzte Infrastruktur": "Technik",
-    "Kommunikation, Kooperation und Zusammenarbeit": "Organisation",
-    "Soziokulturelle und organisatorische Umwelt": "Organisation",
-    "Produktionsorganisation": "Organisation",
-    "Unternehmenskultur": "Kultur",
-    "Soziale Beziehungen und Interaktion": "Kultur"
-}
-
 # Tab-Namen definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
