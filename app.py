@@ -749,12 +749,8 @@ def nav_buttons(position):
 # Buttons oben
 nav_buttons("top")
 
-# Titel nur auf Startseite
-if st.session_state.current_tab_index == 0:
-    st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
-
 # Navigationsanzeige oben
-st.markdown("### Navigation")
+st.markdown("### current_tab")
 st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
