@@ -739,12 +739,10 @@ if "current_tab_index" not in st.session_state:
 else:
     st.session_state.current_tab_index = tab_names.index(selected_tab)
 
-# Funktion zur Navigation
+# Funktion zur Navigation 
 def navigate_tabs(offset):
     new_index = st.session_state.current_tab_index + offset
-    new_index = max(0, min(len(tab_names) - 1, new_index))
-    st.session_state.current_tab_index = new_index
-    st.experimental_rerun()
+    st.session_state.current_tab_index = max(0, min(len(tab_names) - 1, new_index))
 
 # Aktueller Tab
 current_tab = tab_names[st.session_state.current_tab_index]
@@ -784,13 +782,14 @@ elif current_tab in mtok_structure:
         ergebnisse[feld] = np.mean(scores) if scores else 0
 
 elif current_tab == "Abschließende Fragen":
-    #st.header("Abschließende Angaben")
+    st.header("Abschließende Angaben")
     st.markdown("Bitte beantworten Sie die folgenden Fragen. Diese Angaben helfen bei der Interpretation der Ergebnisse und sind teilweise optional.")
 
-    st.text_input("1. In welcher Branche ist Ihr Unternehmen tätig?", key="branche")
+    st.markdown("1. In welcher Branche ist Ihr Unternehmen tätig?")
+    st.text_input("", key="branche")
 
     st.markdown("2. Wie viele Beschäftigte hat Ihr Unternehmen?")
-    st.radio("", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="Beschäftigte")
+    st.radio("", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende")
 
     st.markdown("3. In welcher Funktion sind Sie tätig?")
     st.radio("", ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"], key="funktion")
@@ -798,8 +797,11 @@ elif current_tab == "Abschließende Fragen":
     st.markdown("4. Wie hoch ist der Jahresumsatz Ihres Unternehmens?")
     st.radio("", ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"], key="umsatz")
 
-    st.text_input("5. Wo ist Ihr Unternehmen zu Hause? (Postleitzahl, optional)", key="plz")
-    st.text_input("6. Ihre E-Mail-Adresse (optional, für Ergebniszusendung)", key="email")
+    st.markdown("5. Wo ist Ihr Unternehmen zu Hause? (Postleitzahl, optional)")
+    st.text_input("", key="plz")
+
+    st.markdown("6. Ihre E-Mail-Adresse (optional, für Ergebniszusendung)")
+    st.text_input("", key="email")
 
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
