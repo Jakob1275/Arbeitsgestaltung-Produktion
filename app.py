@@ -727,20 +727,61 @@ Kriterien = {
 # Ergebnis-Speicherung
 ergebnisse = {}
 
-# Tabs für jede Dimension inklusive Start, Abschließende Fragen und Auswertung
-if "current_tab_index" not in st.session_state:
-    st.session_state.current_tab_index = 0
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
 
+# Beispielstruktur (durch echte Inhalte ersetzen)
+mtok_structure = {
+    "Mensch": ["Produktivität und Motivation", "Persönliches Umfeld"],
+    "Technik": ["Arbeitsplatzgestaltung und Automatisierung", "IT-Systemlandschaft und digital vernetzte Infrastruktur"],
+    "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Soziokulturelle und organisatorische Umwelt", "Produktionsorganisation"],
+    "Kultur": ["Unternehmenskultur", "Soziale Beziehungen und Interaktion"]
+}
+
+Kriterien = {
+    "Produktivität und Motivation": [
+        {"frage": "Beispiel-Frage", "begründung": "Begründung zur Frage"}
+    ]
+}
+
+ergebnisse = {}
+dim_map = {
+    "Produktivität und Motivation": "Mensch",
+    "Persönliches Umfeld": "Mensch",
+    "Arbeitsplatzgestaltung und Automatisierung": "Technik",
+    "IT-Systemlandschaft und digital vernetzte Infrastruktur": "Technik",
+    "Kommunikation, Kooperation und Zusammenarbeit": "Organisation",
+    "Soziokulturelle und organisatorische Umwelt": "Organisation",
+    "Produktionsorganisation": "Organisation",
+    "Unternehmenskultur": "Kultur",
+    "Soziale Beziehungen und Interaktion": "Kultur"
+}
+
+# Tab-Namen definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
-# Navigation über Buttons
-def navigate_tabs(offset):
-    st.session_state.current_tab_index = max(0, min(len(tab_names) - 1, st.session_state.current_tab_index + offset))
+# Tab-Auswahl oben (sichtbare Navigation)
+selected_tab = st.radio("Navigation", tab_names, horizontal=True)
 
-# Aktuellen Tab laden
+# Index für Zurück/Weiter merken
+if "current_tab_index" not in st.session_state:
+    st.session_state.current_tab_index = tab_names.index(selected_tab)
+else:
+    st.session_state.current_tab_index = tab_names.index(selected_tab)
+
+# Funktion zur Navigation
+def navigate_tabs(offset):
+    new_index = st.session_state.current_tab_index + offset
+    new_index = max(0, min(len(tab_names) - 1, new_index))
+    st.session_state.current_tab_index = new_index
+    st.experimental_rerun()
+
+# Aktueller Tab
 current_tab = tab_names[st.session_state.current_tab_index]
 st.title(f"{current_tab}")
 
+# Inhalte je Tab
 if current_tab == "Start":
     st.markdown("""
     Dieser Readiness-Check unterstützt Sie dabei, den betrieblichen Stand zur Einführung mobiler und zeitflexibler Arbeit systematisch zu erfassen.
@@ -762,7 +803,6 @@ if current_tab == "Start":
 
 elif current_tab in mtok_structure:
     dimension = current_tab
-    st.header(f"Dimension: {dimension}")
     for feld in mtok_structure[dimension]:
         st.subheader(f"Handlungsfeld: {feld}")
         kriterien = Kriterien.get(feld, [])
@@ -779,49 +819,26 @@ elif current_tab == "Abschließende Fragen":
     st.markdown("Bitte beantworten Sie die folgenden Fragen. Diese Angaben helfen bei der Interpretation der Ergebnisse und sind teilweise optional.")
 
     st.text_input("1. In welcher Branche ist Ihr Unternehmen tätig?")
-
-    st.markdown("2. Wie viele Mitarbeitende hat Ihr Unternehmen?")
     for option in ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"]:
         st.checkbox(option, key=f"ma_{option}")
-
-    st.markdown("3. In welcher Funktion sind Sie tätig?")
     for option in ["Geschäftsführung", "Abteilungs-/Projektleitung", "Fachexpert*in", "Mitarbeiter*in der Produktion", "Sonstige"]:
         st.checkbox(option, key=f"funktion_{option}")
-
-    st.markdown("4. Wie hoch ist der Jahresumsatz Ihres Unternehmens?")
     for option in ["< 2 Mio. €", "2-9 Mio. €", "10-49 Mio. €", "> 50 Mio. €"]:
         st.checkbox(option, key=f"umsatz_{option}")
-
-    st.markdown("5. In welchem der aufgeführten Bereiche würden Sie sich gerne noch weiterbilden? (optional)")
-    st.multiselect("", ["Produktentwicklung", "Beschaffung und Einkauf", "Planung und Steuerung von Produktionsabläufen", "Marketing", "Vertrieb", "Logistik", "Innerbetriebliche Verwaltung"])
-
-    st.text_input("6. Wo ist Ihr Unternehmen zu Hause? (Postleitzahl, optional)")
-    st.text_input("7. Ihre E-Mail-Adresse (optional, für Ergebniszusendung):")
+    st.multiselect("5. Weiterbildungsinteresse (optional)", ["Produktentwicklung", "Beschaffung und Einkauf", "Planung und Steuerung von Produktionsabläufen", "Marketing", "Vertrieb", "Logistik", "Innerbetriebliche Verwaltung"])
+    st.text_input("6. Postleitzahl (optional)")
+    st.text_input("7. E-Mail (optional, für Ergebniszusendung)")
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
 elif current_tab == "Auswertung":
     st.header("Auswertung")
-    dim_map = {
-        "Produktivität und Motivation": "Mensch",
-        "Persönliches Umfeld": "Mensch",
-        "Arbeitsplatzgestaltung und Automatisierung": "Technik",
-        "IT-Systemlandschaft und digital vernetzte Infrastruktur": "Technik",
-        "Kommunikation, Kooperation und Zusammenarbeit": "Organisation",
-        "Soziokulturelle und organisatorische Umwelt": "Organisation",
-        "Produktionsorganisation": "Organisation",
-        "Unternehmenskultur": "Kultur",
-        "Soziale Beziehungen und Interaktion": "Kultur"
-    }
-
     if st.button("Radar-Diagramm anzeigen"):
         labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in ergebnisse.keys()]
         values = list(ergebnisse.values())
-
         if not values:
-            st.warning("Bitte füllen Sie zuerst die Bewertungen in den anderen Tabs aus.")
+            st.warning("Bitte zuerst alle Fragen beantworten.")
         else:
-            num_vars = len(labels)
-            angles = np.linspace(0, 2 * np.pi, num_vars, endpoint=False).tolist()
+            angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
 
@@ -850,10 +867,9 @@ elif current_tab == "Auswertung":
                 st.error(f"Der Betrieb gehört vermutlich zu {cluster}.")
 
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
-            mitteilungen = frage_chatgpt_auswertung(ergebnisse)
-            st.markdown(mitteilungen)
+            st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
 
-# Navigation unten auf allen Seiten
+# Navigation unten
 col1, col2, col3 = st.columns([1, 6, 1])
 with col1:
     if st.button("← Zurück"):
