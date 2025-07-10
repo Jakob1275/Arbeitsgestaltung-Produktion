@@ -724,46 +724,46 @@ Kriterien = {
     ]
 }
 
-# dim_map vorbereiten (Beispiel)
+# Mapping der Handlungsfelder zu Dimensionen (dim_map)
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
-# Ergebnis-Speicherung
+# Ergebnis-Speicherung initialisieren
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
 
 # Tabs definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
-# Initialisierung Index
+# Aktuellen Index merken
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 
 # Navigation oben
-st.markdown("## Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
-
+st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 st.markdown("### Navigation")
 st.markdown(" ➤ ".join([
     f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
     for i, name in enumerate(tab_names)
 ]), unsafe_allow_html=True)
 
-# Navigation-Buttons oben
-def nav_buttons():
+# Navigationsfunktion
+def render_nav_buttons(location="top"):
     col1, col2, col3 = st.columns([1, 6, 1])
     with col1:
         if st.session_state.current_tab_index > 0:
-            if st.button("← Zurück", key=f"back_top_{st.session_state.current_tab_index}"):
+            if st.button("← Zurück", key=f"{location}_back"):
                 st.session_state.current_tab_index -= 1
-                st.experimental_set_query_params()  # verhindert doppeltes Laden
+                st.stop()
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
-            if st.button("Weiter →", key=f"next_top_{st.session_state.current_tab_index}"):
+            if st.button("Weiter →", key=f"{location}_next"):
                 st.session_state.current_tab_index += 1
-                st.experimental_set_query_params()
+                st.stop()
 
-nav_buttons()
+# Navigation am Seitenanfang
+render_nav_buttons("top")
 
-# Aktuellen Tab bestimmen
+# Aktueller Tab
 current_tab = tab_names[st.session_state.current_tab_index]
 st.header(current_tab)
 
@@ -777,12 +777,14 @@ if current_tab == "Start":
     In jedem Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
 
     **Bewertungsskala:**
-    - **1 = niedrig** – kaum erfüllt
-    - **2 = mittel** – teilweise erfüllt
-    - **3 = hoch** – weitgehend erfüllt
-    - **4 = sehr hoch** – vollständig erfüllt
+    - **1 = niedrig** – Das Kriterium ist kaum oder gar nicht erfüllt.
+    - **2 = mittel** – Das Kriterium ist teilweise erfüllt, es bestehen Lücken oder Unsicherheiten.
+    - **3 = hoch** – Das Kriterium ist weitgehend erfüllt, jedoch nicht vollständig systematisiert.
+    - **4 = sehr hoch** – Das Kriterium ist vollständig erfüllt und fest im Alltag etabliert.
 
-    Nach dem Ausfüllen erhalten Sie eine grafische Auswertung sowie eine Zuordnung zu einem Clustertyp.
+    Nach dem Ausfüllen aller Handlungsfelder erhalten Sie eine grafische Auswertung sowie eine indikative Zuordnung zu einem Clustertyp. Ergänzend werden automatisiert passende Handlungsempfehlungen gegeben.
+
+    **Hinweis:** Die Auswertung basiert auf einer wissenschaftlichen Analyse und wurde speziell für die zerspanende Fertigung entwickelt.
     """)
 
 elif current_tab in mtok_structure:
@@ -846,5 +848,5 @@ elif current_tab == "Auswertung":
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             st.markdown("⚠️ Stelle sicher, dass die GPT-Anbindung korrekt eingerichtet ist.")
 
-# Navigation unten
-nav_buttons()
+# Navigation am Seitenende
+render_nav_buttons("bottom")
