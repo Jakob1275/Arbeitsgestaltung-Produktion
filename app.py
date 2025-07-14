@@ -481,13 +481,14 @@ if st.session_state.scroll_top:
     components.html(
         """
         <script>
-            window.scrollTo(0, 0);
-            document.body.scrollTop = 0;
-            document.documentElement.scrollTop = 0;
+            const main = window.parent.document.querySelector('.main');
+            if (main) {
+                main.scrollTo({ top: 0, behavior: 'smooth' });
+            }
         </script>
         """,
         height=0,
-    )    
+    )
     st.session_state.scroll_top = False
 
 # Navigationsbuttons
