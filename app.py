@@ -471,16 +471,8 @@ tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", 
 # Session-Variablen initialisieren
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
-if "navigate_offset" not in st.session_state:
-    st.session_state.navigate_offset = 0
-if "ergebnisse" not in st.session_state:
-    st.session_state.ergebnisse = {}
-
-# Navigation anwenden – bei gesetztem Offset
-if st.session_state.navigate_offset != 0:
-    st.session_state.current_tab_index += st.session_state.navigate_offset
-    st.session_state.navigate_offset = 0
-    st.experimental_rerun()
+if "navigate" not in st.session_state:
+    st.session_state.navigate = None
 
 # Navigationsbuttons
 def nav_buttons(position):
@@ -488,18 +480,22 @@ def nav_buttons(position):
     with col1:
         if st.session_state.current_tab_index > 0:
             if st.button("← Zurück", key=f"back_{position}_{st.session_state.current_tab_index}"):
-                st.session_state.navigate_offset = -1
-                st.experimental_rerun()
-                st.stop()
+                st.session_state.navigate = "back"
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}_{st.session_state.current_tab_index}"):
-                st.session_state.navigate_offset = 1
-                st.experimental_rerun()
-                st.stop()
+                st.session_state.navigate = "next"
 
 # Buttons oben
 nav_buttons("top")
+
+# Navigation ausführen (einmal pro Zyklus)
+if st.session_state.navigate == "next" and st.session_state.current_tab_index < len(tab_names) - 1:
+    st.session_state.current_tab_index += 1
+    st.session_state.navigate = None
+elif st.session_state.navigate == "back" and st.session_state.current_tab_index > 0:
+    st.session_state.current_tab_index -= 1
+    st.session_state.navigate = None
 
 # Aktuellen Tab bestimmen
 current_tab = tab_names[st.session_state.current_tab_index]
