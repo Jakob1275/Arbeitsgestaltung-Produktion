@@ -476,15 +476,17 @@ if "ergebnisse" not in st.session_state:
 if "scroll_top" not in st.session_state:
     st.session_state.scroll_top = False
 
-# Scroll nur, wenn gesetzt
-if st.session_state.scroll_top:
+#Scrollen
+if st.session_state.get("scroll_top", False):
     components.html(
         """
         <script>
-            const main = window.parent.document.querySelector('.main');
-            if (main) {
-                main.scrollTo({ top: 0, behavior: 'smooth' });
-            }
+            setTimeout(() => {
+                const main = window.parent.document.querySelector('.main');
+                if (main) {
+                    main.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }, 100); // Verzögerung in Millisekunden
         </script>
         """,
         height=0,
