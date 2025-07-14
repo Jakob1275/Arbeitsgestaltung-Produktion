@@ -3,7 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import openai # type: ignore
-import streamlit.components.v1 as components
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -484,12 +483,12 @@ def nav_buttons(position):
         if st.session_state.current_tab_index > 0:
             if st.button("← Zurück", key=f"back_{position}"):
                 st.session_state.current_tab_index -= 1
-                st.experimental_rerun()
+                st.rerun()
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}"):
                 st.session_state.current_tab_index += 1
-                st.experimental_rerun()
+                st.rerun()
 
 # Oben: Navigation anzeigen
 nav_buttons("top")
