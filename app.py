@@ -462,33 +462,48 @@ Kriterien = {
 # Mappings vorbereiten
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
+def frage_chatgpt_auswertung(ergebnisse):
+    return "→ Beispielausgabe: Handlungsempfehlungen individuell angepasst."
+
 # Tabs definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
 # Session-Variablen initialisieren
+if "current_tab_index" not in st.session_state:
+    st.session_state.current_tab_index = 0
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
 
-# Tab-Navigation ohne Rerun
-selected_tab = st.radio(
-    "Navigation",
-    tab_names,
-    index=0,
-    key="navigation_tab",
-    horizontal=True
-)
+# Scroll-Anker oben
+st.markdown("<div id='top'></div>", unsafe_allow_html=True)
 
-# Aktuellen Tab anzeigen
-st.markdown(f"## {selected_tab}")
+# Navigationsbuttons
+def nav_buttons(position):
+    col1, col2, col3 = st.columns([1, 6, 1])
+    with col1:
+        if st.session_state.current_tab_index > 0:
+            if st.button("← Zurück", key=f"back_{position}"):
+                st.session_state.current_tab_index -= 1
+                st.experimental_rerun()
+    with col3:
+        if st.session_state.current_tab_index < len(tab_names) - 1:
+            if st.button("Weiter →", key=f"next_{position}"):
+                st.session_state.current_tab_index += 1
+                st.experimental_rerun()
 
-# Oben anzeigen: Navigationspfad
+# Oben: Navigation anzeigen
+nav_buttons("top")
+
+# Aktuellen Tab bestimmen
+current_tab = tab_names[st.session_state.current_tab_index]
+st.markdown(f"## {current_tab}")
 st.markdown(" ➤ ".join([
-    f"<b style='color:#1f77b4'>{name}</b>" if name == selected_tab else name
+    f"<b style='color:#1f77b4'>{name}</b>" if name == current_tab else name
     for name in tab_names
 ]), unsafe_allow_html=True)
 
 # Inhalt der Tabs
-if selected_tab == "Start":
+if current_tab == "Start":
     st.markdown("""
     Dieser Readiness-Check dient der systematischen Erfassung des betrieblichen Reifegrads zur Einführung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung.
 
@@ -504,8 +519,8 @@ if selected_tab == "Start":
     Nach der Eingabe erhalten Sie ein grafisches Readiness-Profil sowie individuelle Handlungsempfehlungen auf Basis Ihrer Angaben.
     """)
 
-elif selected_tab in mtok_structure:
-    dimension = selected_tab
+elif current_tab in mtok_structure:
+    dimension = current_tab
     for feld in mtok_structure[dimension]:
         st.subheader(f"Handlungsfeld: {feld}")
         scores = []
@@ -522,7 +537,7 @@ elif selected_tab in mtok_structure:
         if scores:
             st.session_state.ergebnisse[feld] = np.mean(scores)
 
-elif selected_tab == "Abschließende Fragen":
+elif current_tab == "Abschließende Fragen":
     st.text_input("Branche", key="branche")
     st.radio("Mitarbeitende", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende")
     st.radio("Funktion", ["Geschäftsführung", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion")
@@ -530,7 +545,7 @@ elif selected_tab == "Abschließende Fragen":
     st.text_input("E-Mail (optional)", key="email")
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
-elif selected_tab == "Auswertung":
+elif current_tab == "Auswertung":
     if st.button("Radar-Diagramm anzeigen"):
         labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse]
         values = list(st.session_state.ergebnisse.values())
@@ -571,5 +586,23 @@ elif selected_tab == "Auswertung":
                 antwort = frage_chatgpt_auswertung(st.session_state.ergebnisse)
             st.markdown(antwort)
 
-# Trenner unten
+# Trenner
 st.markdown("---")
+
+# Navigationsbuttons unten
+nav_buttons("bottom")
+
+# Fester Nach-oben-Button
+st.markdown(
+    """
+    <a href="#top">
+        <button style='position: fixed; bottom: 40px; right: 40px; z-index: 9999;
+                       background-color: #1f77b4; color: white; border: none;
+                       padding: 10px 16px; border-radius: 6px; font-size: 16px;
+                       box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer;'>
+            ⬆ Nach oben
+        </button>
+    </a>
+    """,
+    unsafe_allow_html=True
+)
