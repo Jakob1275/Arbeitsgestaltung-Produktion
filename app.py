@@ -490,11 +490,13 @@ def nav_buttons(position):
             if st.button("← Zurück", key=f"back_{position}_{st.session_state.current_tab_index}"):
                 st.session_state.navigate_offset = -1
                 st.experimental_rerun()
+                st.stop()
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}_{st.session_state.current_tab_index}"):
                 st.session_state.navigate_offset = 1
                 st.experimental_rerun()
+                st.stop()
 
 # Buttons oben
 nav_buttons("top")
