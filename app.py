@@ -41,6 +41,13 @@ def frage_chatgpt_auswertung(ergebnisse):
 st.set_page_config(page_title="Readiness-Check", layout="wide")
 st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 
+# Seite nach jedem Neuladen an den Anfang scrollen
+st.markdown("""
+    <script>
+        window.scrollTo(0, 0);
+    </script>
+""", unsafe_allow_html=True)
+
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
     "Mensch": ["Produktivität und Motivation", "Persönliches Umfeld"],
