@@ -473,18 +473,20 @@ if "ergebnisse" not in st.session_state:
 if "scroll_top" not in st.session_state:
     st.session_state.scroll_top = False
 
-# Scroll robust per JavaScript (nach Rerun)
-if st.session_state.get("scroll_top", False):
+# Scrollverhalten steuern
+if st.session_state.scroll_top:
     components.html(
         """
+        <div style="display: none;" id="scroll-check">Scroll aktiv</div>
         <script>
             function forceScrollTop(attempt = 0) {
                 const container = window.parent.document.querySelector('.main .block-container');
                 if (container) {
                     container.scrollTo({ top: 0, behavior: 'smooth' });
+                    console.log("Scroll-Versuch: " + attempt);
                 }
-                // Wiederhole bis zu 5x alle 100ms, falls DOM noch nicht stabil
-                if (attempt < 5) {
+                // Wiederhole bis zu 10x, falls der Container noch nicht bereit ist
+                if (attempt < 10) {
                     setTimeout(() => forceScrollTop(attempt + 1), 100);
                 }
             }
