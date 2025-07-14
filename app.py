@@ -466,58 +466,30 @@ dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felde
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
 # Session-Variablen initialisieren
-if "current_tab_index" not in st.session_state:
-    st.session_state.current_tab_index = 0
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
-if "scroll_top" not in st.session_state:
-    st.session_state.scroll_top = False
 
-# Scrollverhalten steuern
-if st.session_state.scroll_top:
-    components.html(
-        """
-        <div style="display: none;" id="scroll-check">Scroll aktiv</div>
-        <script>
-            function forceScrollTop(attempt = 0) {
-                const container = window.parent.document.querySelector('.main .block-container');
-                if (container) {
-                    container.scrollTo({ top: 0, behavior: 'smooth' });
-                    console.log("Scroll-Versuch: " + attempt);
-                }
-                // Wiederhole bis zu 10x, falls der Container noch nicht bereit ist
-                if (attempt < 10) {
-                    setTimeout(() => forceScrollTop(attempt + 1), 100);
-                }
-            }
-            setTimeout(() => forceScrollTop(), 100);
-        </script>
-        """,
-        height=0,
-    )
-    st.session_state.scroll_top = False
+# Tab-Navigation ohne Rerun
+selected_tab = st.radio(
+    "Navigation",
+    tab_names,
+    index=0,
+    key="navigation_tab",
+    horizontal=True
+)
 
-# Navigationsbuttons
-def nav_buttons(position):
-    col1, col2, col3 = st.columns([1, 6, 1])
-    with col1:
-        if st.session_state.current_tab_index > 0:
-            if st.button("← Zurück", key=f"back_{position}_{st.session_state.current_tab_index}"):
-                st.session_state.current_tab_index -= 1
-                st.session_state.scroll_top = True
-                st.rerun()
-    with col3:
-        if st.session_state.current_tab_index < len(tab_names) - 1:
-            if st.button("Weiter →", key=f"next_{position}_{st.session_state.current_tab_index}"):
-                st.session_state.current_tab_index += 1
-                st.session_state.scroll_top = True
-                st.rerun()
+# Aktuellen Tab anzeigen
+st.markdown(f"## {selected_tab}")
 
-# Buttons oben
-nav_buttons("top")
-
-# Aktuellen Tab bestimmen
-current_tab = tab_names[st.session_state.current_tab_index]
+# Beispiel-Logik: Inhalt je Tab anzeigen
+if selected_tab == "Start":
+    st.write("Dies ist die Startseite.")
+elif selected_tab == "Abschließende Fragen":
+    st.write("Hier kommen die abschließenden Fragen.")
+elif selected_tab == "Auswertung":
+    st.write("Hier wird ausgewertet.")
+else:
+    st.write(f"Inhalte für die Dimension **{selected_tab}**")
 
 # Oben anzeigen: Dimensionstitel
 st.markdown(f"###  {current_tab}")
