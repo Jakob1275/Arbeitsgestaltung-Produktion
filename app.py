@@ -3,6 +3,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import openai # type: ignore
+import streamlit.components.v1 as components
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -472,14 +473,23 @@ if "ergebnisse" not in st.session_state:
 if "scroll_top" not in st.session_state:
     st.session_state.scroll_top = False
 
-# Zielanker ganz oben
-st.markdown("<div id='top-anchor'></div>", unsafe_allow_html=True)
-
-# Scroll per HTML-Meta-Refresh
+# Scroll robust per JavaScript (nach Rerun)
 if st.session_state.scroll_top:
-    st.markdown(
-        "<meta http-equiv='refresh' content='0; url=#top-anchor'>",
-        unsafe_allow_html=True
+    components.html(
+        """
+        <script>
+            function scrollToTop() {
+                const main = window.parent.document.querySelector('.main');
+                if (main) {
+                    main.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    requestAnimationFrame(scrollToTop);
+                }
+            }
+            requestAnimationFrame(scrollToTop);
+        </script>
+        """,
+        height=0,
     )
     st.session_state.scroll_top = False
 
