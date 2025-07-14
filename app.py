@@ -481,7 +481,7 @@ if st.session_state.scroll_top:
     components.html(
         """
         <script>
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            document.documentElement.scrollTop = 0;
         </script>
         """,
         height=0,
