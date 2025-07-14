@@ -479,14 +479,14 @@ def nav_buttons(position):
         if st.session_state.current_tab_index > 0:
             if st.button("← Zurück", key=f"back_{position}_{st.session_state.current_tab_index}"):
                 st.session_state.current_tab_index -= 1
-                st.query_params(tab=st.session_state.current_tab_index)  # optional visuelle Navigation aktualisieren
-                st.stop()
+                st.query_params["tab"] = str(st.session_state.current_tab_index)  # URL aktualisieren
+                st.rerun()
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}_{st.session_state.current_tab_index}"):
                 st.session_state.current_tab_index += 1
-                st.query_params(tab=st.session_state.current_tab_index)
-                st.stop()
+                st.query_params["tab"] = str(st.session_state.current_tab_index)
+                st.rerun()
 
 # Buttons oben
 nav_buttons("top")
