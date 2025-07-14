@@ -508,20 +508,20 @@ st.markdown(" ➤ ".join([
 
 # Inhalt der Tabs
 if current_tab == "Start":
-st.markdown("""
-Dieser Readiness-Check dient der systematischen Erfassung des betrieblichen Reifegrads zur Einführung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung.
+    st.markdown("""
+    Dieser Readiness-Check dient der systematischen Erfassung des betrieblichen Reifegrads zur Einführung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung.
 
-Er basiert auf den vier arbeitswissenschaftlichen Gestaltungsdimensionen des MTOK-Modells – **Mensch**, **Technik**, **Organisation** und **Kultur** – und differenziert diese in insgesamt neun empirisch fundierte Handlungsfelder.
+    Er basiert auf den vier arbeitswissenschaftlichen Gestaltungsdimensionen des MTOK-Modells – **Mensch**, **Technik**, **Organisation** und **Kultur** – und differenziert diese in insgesamt neun empirisch fundierte Handlungsfelder.
 
-Für jedes Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
+    Für jedes Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
 
-- **1 = niedrig** – aktuell nicht erfüllt  
-- **2 = mittel** – in Ansätzen erfüllt  
-- **3 = hoch** – weitgehend umgesetzt  
-- **4 = sehr hoch** – vollständig umgesetzt und etabliert  
+    - **1 = niedrig** – aktuell nicht erfüllt  
+    - **2 = mittel** – in Ansätzen erfüllt  
+    - **3 = hoch** – weitgehend umgesetzt  
+    - **4 = sehr hoch** – vollständig umgesetzt und etabliert  
 
-Nach der Eingabe erhalten Sie ein grafisches Readiness-Profil sowie individuelle Handlungsempfehlungen auf Basis Ihrer Angaben.
-""")
+    Nach der Eingabe erhalten Sie ein grafisches Readiness-Profil sowie individuelle Handlungsempfehlungen auf Basis Ihrer Angaben.
+    """)
 
 elif current_tab in mtok_structure:
     dimension = current_tab
