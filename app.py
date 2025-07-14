@@ -462,9 +462,6 @@ Kriterien = {
 # Mappings vorbereiten
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
-import streamlit as st
-import streamlit.components.v1 as components
-
 # Tabs definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
@@ -479,18 +476,26 @@ if "scroll_top" not in st.session_state:
 #Scrollen
 if st.session_state.get("scroll_top", False):
     components.html(
-        """
-        <script>
-            setTimeout(() => {
-                const main = window.parent.document.querySelector('.main');
-                if (main) {
-                    main.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-            }, 100); // Verzögerung in Millisekunden
-        </script>
-        """,
-        height=0,
-    )
+    """
+    <script>
+        setTimeout(function() {
+            const main = window.parent.document.querySelector('.main');
+            const html = window.parent.document.documentElement;
+            const body = window.parent.document.body;
+            if (main) {
+                main.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            if (html) {
+                html.scrollTop = 0;
+            }
+            if (body) {
+                body.scrollTop = 0;
+            }
+        }, 100);
+    </script>
+    """,
+    height=0,
+)
     st.session_state.scroll_top = False
 
 # Navigationsbuttons
