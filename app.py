@@ -471,6 +471,8 @@ tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", 
 # Session-Variablen initialisieren
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
+if "ergebnisse" not in st.session_state:
+    st.session_state.ergebnisse = {}
 
 # Navigationsbuttons
 def nav_buttons(position):
@@ -479,13 +481,13 @@ def nav_buttons(position):
         if st.session_state.current_tab_index > 0:
             if st.button("← Zurück", key=f"back_{position}_{st.session_state.current_tab_index}"):
                 st.session_state.current_tab_index -= 1
-                st.query_params["tab"] = str(st.session_state.current_tab_index)  # URL aktualisieren
+                st.query_params = {"tab": str(st.session_state.current_tab_index)}
                 st.rerun()
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}_{st.session_state.current_tab_index}"):
                 st.session_state.current_tab_index += 1
-                st.query_params["tab"] = str(st.session_state.current_tab_index)
+                st.query_params = {"tab": str(st.session_state.current_tab_index)}
                 st.rerun()
 
 # Buttons oben
