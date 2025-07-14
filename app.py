@@ -5,15 +5,6 @@ import numpy as np
 import openai # type: ignore
 import streamlit.components.v1 as components
 
-components.html(
-    """
-    <script>
-        window.scrollTo(0, 0);
-    </script>
-    """,
-    height=0,
-)
-
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
@@ -49,14 +40,6 @@ def frage_chatgpt_auswertung(ergebnisse):
 
 # Struktur der Anwendung
 st.set_page_config(page_title="Readiness-Check", layout="wide")
-
-# Seite nach jedem Neuladen an den Anfang scrollen
-st.markdown("""
-    <script>
-        window.scrollTo(0, 0);
-    </script>
-""", unsafe_allow_html=True)
-
 st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 
 # MTOK-Dimensionen und Handlungsfelder
@@ -479,6 +462,9 @@ Kriterien = {
 # Mappings vorbereiten
 dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
 
+import streamlit as st
+import streamlit.components.v1 as components
+
 # Tabs definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
 
@@ -487,6 +473,20 @@ if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
+if "scroll_top" not in st.session_state:
+    st.session_state.scroll_top = False
+
+# Scroll nur, wenn gesetzt
+if st.session_state.scroll_top:
+    components.html(
+        """
+        <script>
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        </script>
+        """,
+        height=0,
+    )
+    st.session_state.scroll_top = False
 
 # Navigationsbuttons
 def nav_buttons(position):
@@ -495,13 +495,13 @@ def nav_buttons(position):
         if st.session_state.current_tab_index > 0:
             if st.button("← Zurück", key=f"back_{position}_{st.session_state.current_tab_index}"):
                 st.session_state.current_tab_index -= 1
-                st.query_params = {"tab": str(st.session_state.current_tab_index)}
+                st.session_state.scroll_top = True
                 st.rerun()
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}_{st.session_state.current_tab_index}"):
                 st.session_state.current_tab_index += 1
-                st.query_params = {"tab": str(st.session_state.current_tab_index)}
+                st.session_state.scroll_top = True
                 st.rerun()
 
 # Buttons oben
