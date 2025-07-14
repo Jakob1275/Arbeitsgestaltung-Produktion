@@ -39,12 +39,14 @@ def frage_chatgpt_auswertung(ergebnisse):
 
 # Struktur der Anwendung
 st.set_page_config(page_title="Readiness-Check", layout="wide")
-# Scroll to top after reload
+
+# Seite nach jedem Neuladen an den Anfang scrollen
 st.markdown("""
     <script>
         window.scrollTo(0, 0);
     </script>
 """, unsafe_allow_html=True)
+
 st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 
 # MTOK-Dimensionen und Handlungsfelder
@@ -478,12 +480,6 @@ if "ergebnisse" not in st.session_state:
 
 # Navigationsbuttons
 def nav_buttons(position):
-    st.markdown("""
-        <script>
-            window.scrollTo(0, 0);
-        </script>
-    """, unsafe_allow_html=True)
-
     col1, col2, col3 = st.columns([1, 6, 1])
     with col1:
         if st.session_state.current_tab_index > 0:
