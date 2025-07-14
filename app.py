@@ -595,7 +595,7 @@ nav_buttons("bottom")
 st.markdown(
     """
     <a href="#top">
-        <button style='position: fixed; bottom: 40px; right: 400px; z-index: 9999;
+        <button style='position: fixed; bottom: 40px; right: 50%px; transform: translateX(-50%); z-index: 9999;
                        background-color: #1f77b4; color: white; border: none;
                        padding: 10px 16px; border-radius: 6px; font-size: 16px;
                        box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer;'>
