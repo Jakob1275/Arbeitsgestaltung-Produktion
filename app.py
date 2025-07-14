@@ -3,6 +3,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import openai # type: ignore
+import streamlit.components.v1 as components
+
+components.html(
+    """
+    <script>
+        window.scrollTo(0, 0);
+    </script>
+    """,
+    height=0,
+)
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
