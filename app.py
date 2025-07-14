@@ -481,21 +481,10 @@ selected_tab = st.radio(
 # Aktuellen Tab anzeigen
 st.markdown(f"## {selected_tab}")
 
-# Beispiel-Logik: Inhalt je Tab anzeigen
-if selected_tab == "Start":
-    st.write("Dies ist die Startseite.")
-elif selected_tab == "Abschließende Fragen":
-    st.write("Hier kommen die abschließenden Fragen.")
-elif selected_tab == "Auswertung":
-    st.write("Hier wird ausgewertet.")
-else:
-    st.write(f"Inhalte für die Dimension **{selected_tab}**")
-
-# Oben anzeigen: Dimensionstitel
-st.markdown(f"###  {selected_tab}")
+# Oben anzeigen: Navigationspfad
 st.markdown(" ➤ ".join([
-    f"<b style='color:#1f77b4'>{name}</b>" if i == st.session_state.current_tab_index else name
-    for i, name in enumerate(tab_names)
+    f"<b style='color:#1f77b4'>{name}</b>" if name == selected_tab else name
+    for name in tab_names
 ]), unsafe_allow_html=True)
 
 # Inhalt der Tabs
@@ -568,25 +557,19 @@ elif selected_tab == "Auswertung":
             st.subheader("Clusterzuordnung")
             if avg >= 3.5:
                 cluster = "Cluster 3 – Digital-affin und akzeptanzstark"
-                st.info(f"Der Betrieb gehört wahrscheinlich zu {cluster}.")
             elif avg >= 2.8:
                 cluster = "Cluster 4 – Effizient, aber strukturell gehemmt"
-                st.info(f"Der Betrieb zeigt Merkmale von {cluster}.")
             elif avg >= 2.0:
                 cluster = "Cluster 2 – Produktionsstark, aber mobilitätsfern"
-                st.info(f"Der Betrieb weist Charakteristika von {cluster} auf.")
             else:
                 cluster = "Cluster 1 – Traditionell und reaktiv"
-                st.info(f"Der Betrieb gehört vermutlich zu {cluster}.")
+            st.info(f"Der Betrieb gehört vermutlich zu {cluster}.")
 
             # GPT-Auswertung
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
-
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 antwort = frage_chatgpt_auswertung(st.session_state.ergebnisse)
-
             st.markdown(antwort)
-           
-# Trenner und Navigationsbuttons unten
+
+# Trenner unten
 st.markdown("---")
-nav_buttons("bottom")
