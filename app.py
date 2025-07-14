@@ -474,19 +474,21 @@ if "scroll_top" not in st.session_state:
     st.session_state.scroll_top = False
 
 # Scroll robust per JavaScript (nach Rerun)
-if st.session_state.scroll_top:
+if st.session_state.get("scroll_top", False):
     components.html(
         """
         <script>
-            function scrollToTop() {
-                const main = window.parent.document.querySelector('.main');
-                if (main) {
-                    main.scrollTo({ top: 0, behavior: 'smooth' });
-                } else {
-                    requestAnimationFrame(scrollToTop);
+            function forceScrollTop(attempt = 0) {
+                const container = window.parent.document.querySelector('.main .block-container');
+                if (container) {
+                    container.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                // Wiederhole bis zu 5x alle 100ms, falls DOM noch nicht stabil
+                if (attempt < 5) {
+                    setTimeout(() => forceScrollTop(attempt + 1), 100);
                 }
             }
-            requestAnimationFrame(scrollToTop);
+            setTimeout(() => forceScrollTop(), 100);
         </script>
         """,
         height=0,
