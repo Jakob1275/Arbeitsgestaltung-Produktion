@@ -499,7 +499,7 @@ st.markdown(" ➤ ".join([
 ]), unsafe_allow_html=True)
 
 # Inhalt der Tabs
-if current_tab == "Start":
+if selected_tab == "Start":
     st.markdown("""
     Dieser Readiness-Check dient der systematischen Erfassung des betrieblichen Reifegrads zur Einführung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung.
 
@@ -515,8 +515,8 @@ if current_tab == "Start":
     Nach der Eingabe erhalten Sie ein grafisches Readiness-Profil sowie individuelle Handlungsempfehlungen auf Basis Ihrer Angaben.
     """)
 
-elif current_tab in mtok_structure:
-    dimension = current_tab
+elif selected_tab in mtok_structure:
+    dimension = selected_tab
     for feld in mtok_structure[dimension]:
         st.subheader(f"Handlungsfeld: {feld}")
         scores = []
@@ -533,7 +533,7 @@ elif current_tab in mtok_structure:
         if scores:
             st.session_state.ergebnisse[feld] = np.mean(scores)
 
-elif current_tab == "Abschließende Fragen":
+elif selected_tab == "Abschließende Fragen":
     st.text_input("Branche", key="branche")
     st.radio("Mitarbeitende", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende")
     st.radio("Funktion", ["Geschäftsführung", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion")
@@ -541,7 +541,7 @@ elif current_tab == "Abschließende Fragen":
     st.text_input("E-Mail (optional)", key="email")
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
-elif current_tab == "Auswertung":
+elif selected_tab == "Auswertung":
     if st.button("Radar-Diagramm anzeigen"):
         labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse]
         values = list(st.session_state.ergebnisse.values())
