@@ -499,7 +499,6 @@ elif st.session_state.navigate == "back" and st.session_state.current_tab_index 
 
 # Aktuellen Tab bestimmen
 current_tab = tab_names[st.session_state.current_tab_index]
-st.markdown(f"### {current_tab}")
 
 # Oben anzeigen: Dimensionstitel
 st.markdown(f"###  {current_tab}")
