@@ -39,7 +39,6 @@ def frage_chatgpt_auswertung(ergebnisse):
 
 # Struktur der Anwendung
 st.set_page_config(page_title="Readiness-Check", layout="wide")
-st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 
 # Seite nach jedem Neuladen an den Anfang scrollen
 st.markdown("""
@@ -47,6 +46,8 @@ st.markdown("""
         window.scrollTo(0, 0);
     </script>
 """, unsafe_allow_html=True)
+
+st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
