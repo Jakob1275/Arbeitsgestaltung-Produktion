@@ -482,10 +482,6 @@ def categorize_laufzeit(laufzeit_str):
     }
     return mapping.get(laufzeit_str, np.nan)
 
-st.write("📦 Aktueller st.session_state Inhalt:")
-for key in st.session_state:
-    st.write(f"{key}: {st.session_state[key]}")
-
 # Mapping von Kriterien-Item-Fragen zu den 11 Cluster-Variablen
 # WICHTIG: Die Liste der Fragen muss exakt der 'frage'-Eigenschaft in den Kriterien-Dictionaries entsprechen.
 # Falls eine Variable nur durch ein einziges Item repräsentiert wird, ist die Liste trotzdem notwendig.
@@ -817,9 +813,9 @@ elif current_tab in mtok_structure:
 
             # Bestimme Default-Wert für st.radio
             try:
-                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else 0
+                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else None
             except ValueError:
-                default_index = 0
+                default_index = None
 
             score = st.radio(
                 "Bitte bewerten:",
