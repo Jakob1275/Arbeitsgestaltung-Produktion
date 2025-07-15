@@ -631,6 +631,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
     # 2. Berechne die Werte für die 11 spezifischen Cluster-Variablen des Nutzers
     nutzer_cluster_variable_werte = {}
 
+    # --- NEU: Diese Liste wird jetzt VOR Verwendung definiert ---
     direct_input_keys = {
         "Anzahl CNC-Werkzeugmaschinen": "anzahl_cnc_werkzeugmaschinen_categorized",
         "Automatisierungsgrad": "automatisierungsgrad_categorized",
@@ -638,6 +639,8 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
         "Durchlaufzeit": "durchlaufzeit_categorized",
         "Laufzeit": "laufzeit_categorized"
     }
+    direct_input_vars = list(direct_input_keys.keys())  # <- NEU: Verhindert NameError später
+
     for var_name, session_key in direct_input_keys.items():
         if session_key in st.session_state:
             value = st.session_state[session_key]
@@ -651,25 +654,22 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
     # Behandlung der restlichen Variablen, die aus Kriterien-Items gemappt werden
     # Nur noch die Variablen, die NICHT direkt abgefragt werden, müssen hier behandelt werden.
     for cluster_var_name, associated_item_questions in kriterien_item_to_cluster_variable_mapping.items():
-        # Diese Variablen wurden oben nicht direkt als input_vars behandelt
-        if cluster_var_name not in direct_input_vars: 
+        if cluster_var_name not in direct_input_vars:  # <- funktioniert jetzt korrekt
             scores_for_variable = []
             for q_text in associated_item_questions:
                 if q_text in all_item_scores_flat:
                     scores_for_variable.append(all_item_scores_flat[q_text])
-            
+        
             if scores_for_variable:
                 calculated_score = np.mean(scores_for_variable)
-                
-                # Skalen-Invertierung für "Aufwand" und "Prozessinstabilität" (höherer Score in Frage bedeutet besser/weniger Problem)
-                # Im Clusterprofil bedeuten hohe Werte für diese Variablen einen hohen Aufwand/Instabilität.
-                # Daher muss der Nutzer-Score invertiert werden, um Konsistenz zu schaffen.
+
+                # Skalen-Invertierung für bestimmte Variablen
                 if cluster_var_name in ["Aufwand Zeit", "Aufwand Mobil", "Prozessinstabilität"]:
-                    nutzer_cluster_variable_werte[cluster_var_name] = (5 - calculated_score) 
+                    nutzer_cluster_variable_werte[cluster_var_name] = (5 - calculated_score)
                 else:
                     nutzer_cluster_variable_werte[cluster_var_name] = calculated_score
             else:
-                nutzer_cluster_variable_werte[cluster_var_name] = float('nan') 
+                nutzer_cluster_variable_werte[cluster_var_name] = float('nan')
 
     # Filtere NaN-Werte heraus, da sie nicht in die Distanzberechnung einfließen sollen
     nutzer_cluster_variable_werte_filtered = {k: v for k, v in nutzer_cluster_variable_werte.items() if not np.isnan(v)}
