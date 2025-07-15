@@ -440,8 +440,8 @@ def categorize_cnc_machines(num_machines_raw):
         return np.nan
     mapping = {
         "< 5": 1,
-        "5 - 10": 2,
-        "11 - 24": 3,
+        "5-10": 2,
+        "11-24": 3,
         "≥ 25": 4
     }
     return mapping.get(num_machines_raw, np.nan)
@@ -451,8 +451,8 @@ def categorize_automation_percentage(percentage_str):
         return np.nan
     mapping = {
         "0%": 1,
-        "1 - 25%": 2,
-        "26 - 49%": 3,
+        "1-25%": 2,
+        "26-49%": 3,
         "≥ 50%": 4
     }
     return mapping.get(percentage_str, np.nan)
@@ -679,6 +679,12 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 
     if not nutzer_cluster_variable_werte_filtered:
         return "Bitte bewerten Sie genügend Kriterien für die Clusterzuordnung (einschließlich der direkten Abfragen).", {}
+
+     # --- Debug: Visualisierung der gesetzten Cluster-Variablen ---
+    st.subheader("Debug: Bewertete Cluster-Variablen")
+    for kriterium in Kriterien:
+        status = st.session_state.get(kriterium, "❌ Nicht gesetzt")
+        st.write(f"{kriterium}: {status}")
     
     # Optional: Eine Mindestanzahl an bewerteten Cluster-Variablen sicherstellen
     MIN_CLUSTER_VARS_SCORED = 7  # Mindestanzahl bewerteter Variablen
@@ -725,8 +731,8 @@ if "num_cnc_machines_categorized" not in st.session_state:
 # Automatisierungsgrad
 if "automation_range" not in st.session_state:
     st.session_state.automation_range = None
-if "num_auto_machines_categorized" not in st.session_state:
-    st.session_state.num_auto_machines_categorized = np.nan
+if "automatisierungsgrad_categorized" not in st.session_state:
+    st.session_state.automatisierungsgrad_categorized = np.nan
 
 # Losgröße
 if "losgroesse_range" not in st.session_state:
@@ -874,8 +880,12 @@ elif current_tab == "Abschließende Fragen":
 
    # Anzahl CNC-Werkzeugmaschinen
     cnc_options = ["< 5", "5 - 10", "11 - 24", "≥ 25"]
-    selected_cnc_range = st.radio("Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?", cnc_options, key="cnc_range")
-    st.session_state["anzahl_cnc_werkzeugmaschinen_categorized"] = categorize_cnc_machines(selected_cnc_range)
+    st.session_state.cnc_range = st.radio(
+    "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
+    cnc_options,
+    key="cnc_range"
+    )
+    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.cnc_range)
    
 
     # Automatisierungsgrad
@@ -885,9 +895,9 @@ elif current_tab == "Abschließende Fragen":
     
 
     # Losgröße
-    losgroesse_options = ["<5", "5–50", "51–99", "≥ 100"]
+    losgroesse_options = ["< 5", "5–50", "51–99", "≥ 100"]
     selected_losgroesse = st.radio("Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?", losgroesse_options, key="losgroesse_range")
-    st.session_state["losgröße_categorized"] = categorize_losgroesse(selected_losgroesse)
+    st.session_state["losgroeße_categorized"] = categorize_losgroesse(selected_losgroesse)
     
 
     # Durchlaufzeit
