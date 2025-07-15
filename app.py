@@ -981,6 +981,73 @@ elif current_tab == "Auswertung":
                 
                 # Hier muss die Funktion generate_evaluation_pdf die tatsächlichen Mittelwerte der HF übergeben bekommen
                 # die gpt_output_text, den cluster_result und das radar_chart_fig
+
+                class PDF(FPDF):
+                    def header(self):
+                        self.set_font("Arial", "B", 12)
+                        self.cell(0, 10, "Readiness-Check Auswertung", ln=True, align="C")
+
+                    def footer(self):
+                        self.set_y(-15)
+                        self.set_font("Arial", "I", 8)
+                        self.cell(0, 10, f"Seite {self.page_no()}", align="C")
+
+                def generate_evaluation_pdf(mittelwerte_dict, cluster_name, gpt_text, radar_chart_fig, mtok_structure):
+    
+                    buffer = io.BytesIO()
+                    pdf = PDF()
+                    pdf.add_page()
+                    pdf.set_auto_page_break(auto=True, margin=15)
+
+                   # Titel
+                    pdf.set_font("Arial", "B", 14)
+                    pdf.cell(0, 10, "Ergebnis: Cluster-Zuordnung", ln=True)
+
+                    # Clustername
+                    pdf.set_font("Arial", "", 12)
+                    pdf.multi_cell(0, 10, f"Ihr Unternehmen wurde dem Cluster '{cluster_name}' zugeordnet.")
+
+                    # GPT-Text
+                    pdf.ln(5)
+                    pdf.set_font("Arial", "B", 12)
+                    pdf.cell(0, 10, "Interpretation und Handlungsempfehlungen:", ln=True)
+                    pdf.set_font("Arial", "", 11)
+                    for paragraph in gpt_text.split("\n"):
+                        pdf.multi_cell(0, 8, paragraph.strip())
+                        pdf.ln(1)
+
+                    # Mittelwerte-Tabelle
+                    pdf.ln(5)
+                    pdf.set_font("Arial", "B", 12)
+                    pdf.cell(0, 10, "Mittelwerte der Handlungsfelder:", ln=True)
+                    pdf.set_font("Arial", "", 11)
+
+                    for dimension, felder in mtok_structure.items():
+                        pdf.set_font("Arial", "B", 11)
+                        pdf.cell(0, 8, f"{dimension}:", ln=True)
+                        pdf.set_font("Arial", "", 11)
+                        for feld in felder:
+                            wert = mittelwerte_dict.get(feld, "–")
+                            pdf.cell(100, 8, feld)
+                            pdf.cell(0, 8, f"{wert:.2f}" if isinstance(wert, (float, int)) else str(wert), ln=True)
+                        pdf.ln(2)
+
+                    # Radar-Chart als Bild
+                    if radar_chart_fig:
+                        import tempfile
+                        import matplotlib.pyplot as plt
+
+                        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
+                            radar_chart_fig.savefig(tmpfile.name, bbox_inches="tight")
+                            pdf.ln(5)
+                            pdf.set_font("Arial", "B", 12)
+                            pdf.cell(0, 10, "Radar-Chart:", ln=True)
+                            pdf.image(tmpfile.name, w=170)  # Optional: anpassen
+
+                        # Rückgabe als BytesIO
+                        pdf.output(buffer)
+                        buffer.seek(0)
+                        return buffer
                 
                 pdf_output_buffer = generate_evaluation_pdf(
                     st.session_state.ergebnisse,
