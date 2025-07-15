@@ -874,7 +874,7 @@ elif current_tab == "Abschließende Fragen":
 
     # Initialisierung, falls noch nicht vorhanden
     if "num_cnc_machines_input" not in st.session_state:
-    st.session_state["num_cnc_machines_input"] = 0
+        st.session_state["num_cnc_machines_input"] = 0
 
     # Eingabefeld anzeigen (ohne value=...)
     st.number_input(
