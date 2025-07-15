@@ -871,14 +871,19 @@ elif current_tab == "Abschließende Fragen":
     
     st.subheader("Spezifische technische und prozessuale Angaben")
 
-    # Abfrage Anzahl CNC-Werkzeugmaschinen
-    st.session_state.num_cnc_machines_raw_input = st.number_input(
-        "Anzahl der CNC-Werkzeugmaschinen", 
-        min_value=0, 
-        value=st.session_state.num_cnc_machines_raw_input, 
-        key="num_cnc_machines_input" # Eindeutiger Key für das number_input
+    # Initialisierung, falls noch nicht vorhanden
+    if "num_cnc_machines_input" not in st.session_state:
+    st.session_state["num_cnc_machines_input"] = 0
+
+    # Eingabefeld anzeigen (ohne value=...)
+    st.number_input(
+    "Anzahl der CNC-Werkzeugmaschinen", 
+    min_value=0, 
+    key="num_cnc_machines_input"
     )
-    # Kategorisierung wird automatisch aktualisiert, wenn der number_input Wert sich ändert
+
+    # Weiterverarbeitung
+    st.session_state.num_cnc_machines_raw_input = st.session_state["num_cnc_machines_input"]
     st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.num_cnc_machines_raw_input)
 
     # Abfrage Automatisierungsgrad Prozent
