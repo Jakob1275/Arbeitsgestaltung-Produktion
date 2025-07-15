@@ -683,7 +683,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
     # Optional: Eine Mindestanzahl an bewerteten Cluster-Variablen sicherstellen
     MIN_CLUSTER_VARS_SCORED = 7  # Mindestanzahl bewerteter Variablen
     if len(nutzer_cluster_variable_werte_filtered) < MIN_CLUSTER_VARS_SCORED:
-    return f"Bitte bewerten Sie mindestens {MIN_CLUSTER_VARS_SCORED} relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {len(nutzer_cluster_variable_werte_filtered)} bewertet.", {}
+        return f"Bitte bewerten Sie mindestens {MIN_CLUSTER_VARS_SCORED} relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {len(nutzer_cluster_variable_werte_filtered)} bewertet.", {}
 
 
     # 3. Berechne die Abweichung des Nutzerprofils von jedem Clusterprofil
