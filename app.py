@@ -724,33 +724,29 @@ if "ergebnisse" not in st.session_state:
 
 # CNC-Maschinen (feste Kategorien via st.radio)
 if "cnc_range" not in st.session_state:
-    st.session_state.cnc_range = None
-if "num_cnc_machines_categorized" not in st.session_state:
-    st.session_state.num_cnc_machines_categorized = np.nan
+    st.session_state.cnc_range = "< 5"
+if "anzahl_cnc_werkzeugmaschinen_categorized" not in st.session_state:
+    st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(st.session_state.cnc_range)
 
-# Automatisierungsgrad
 if "automation_range" not in st.session_state:
-    st.session_state.automation_range = None
+    st.session_state.automation_range = "0%"
 if "automatisierungsgrad_categorized" not in st.session_state:
-    st.session_state.automatisierungsgrad_categorized = np.nan
+    st.session_state.automatisierungsgrad_categorized = categorize_automation_percentage(st.session_state.automation_range)
 
-# Losgröße
 if "losgroesse_range" not in st.session_state:
-    st.session_state.losgroesse_range = None
+    st.session_state.losgroesse_range = "<5"
 if "losgroesse_categorized" not in st.session_state:
-    st.session_state.losgroesse_categorized = np.nan
+    st.session_state.losgroesse_categorized = categorize_losgroesse(st.session_state.losgroesse_range)
 
-# Durchlaufzeit
 if "durchlaufzeit_range" not in st.session_state:
-    st.session_state.durchlaufzeit_range = None
+    st.session_state.durchlaufzeit_range = "< 10 min"
 if "durchlaufzeit_categorized" not in st.session_state:
-    st.session_state.durchlaufzeit_categorized = np.nan
+    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(st.session_state.durchlaufzeit_range)
 
-# Laufzeit
 if "laufzeit_range" not in st.session_state:
-    st.session_state.laufzeit_range = None
+    st.session_state.laufzeit_range = "< 1 Tag"
 if "laufzeit_categorized" not in st.session_state:
-    st.session_state.laufzeit_categorized = np.nan
+    st.session_state.laufzeit_categorized = categorize_laufzeit(st.session_state.laufzeit_range)
 
 # Allgemeine Angaben
 if 'branche_input' not in st.session_state:
@@ -878,38 +874,50 @@ elif current_tab == "Abschließende Fragen":
     
     st.subheader("Spezifische technische und prozessuale Angaben")
 
-   # Anzahl CNC-Werkzeugmaschinen
+   # CNC-Maschinen
     cnc_options = ["< 5", "5 - 10", "11 - 24", "≥ 25"]
-    st.session_state.cnc_range = st.radio(
-    "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
-    cnc_options,
-    key="cnc_range"
+    selected_cnc_range = st.radio(
+        "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
+        cnc_options,
+        key="cnc_range"
     )
-    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.cnc_range)
-   
+    st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc_range)
 
     # Automatisierungsgrad
     automation_percentage_options = ["0%", "1 - 25%", "26 - 49%", "≥ 50%"]
-    selected_automation_range = st.radio("Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?", automation_percentage_options, key="automation_range")
-    st.session_state["automatisierungsgrad_categorized"] = categorize_automation_percentage(selected_automation_range)
-    
+    selected_automation_range = st.radio(
+        "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?",
+        automation_percentage_options,
+        key="automation_range"
+    )
+    st.session_state.automatisierungsgrad_categorized = categorize_automation_percentage(selected_automation_range)
 
     # Losgröße
-    losgroesse_options = ["< 5", "5–50", "51–99", "≥ 100"]
-    selected_losgroesse = st.radio("Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?", losgroesse_options, key="losgroesse_range")
-    st.session_state["losgroesse_categorized"] = categorize_losgroesse(selected_losgroesse)
-    
+    losgroesse_options = ["<5", "5–50", "51–99", "≥ 100"]
+    selected_losgroesse = st.radio(
+        "Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?",
+        losgroesse_options,
+        key="losgroesse_range"
+    )
+    st.session_state.losgroesse_categorized = categorize_losgroesse(selected_losgroesse)
 
     # Durchlaufzeit
     durchlaufzeit_options = ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"]
-    selected_durchlaufzeit = st.radio("Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?", durchlaufzeit_options, key="durchlaufzeit_range")
-    st.session_state["durchlaufzeit_categorized"] = categorize_durchlaufzeit(selected_durchlaufzeit)
-    
+    selected_durchlaufzeit = st.radio(
+        "Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?",
+        durchlaufzeit_options,
+        key="durchlaufzeit_range"
+    )
+    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(selected_durchlaufzeit)
 
     # Laufzeit
     laufzeit_options = ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"]
-    selected_laufzeit = st.radio("Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?", laufzeit_options, key="laufzeit_range")
-    st.session_state["laufzeit_categorized"] = categorize_laufzeit(selected_laufzeit)
+    selected_laufzeit = st.radio(
+        "Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?",
+        laufzeit_options,
+        key="laufzeit_range"
+    )
+    st.session_state.laufzeit_categorized = categorize_laufzeit(selected_laufzeit)
    
     st.text_input("PLZ (optional)", key="plz_input") # Eindeutiger Key
     st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
