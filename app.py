@@ -460,8 +460,8 @@ def categorize_automation_percentage(percentage_str):
 def categorize_losgroesse(losgroesse_str):
     mapping = {
         "< 5": 1,
-        "5–50": 2,
-        "51–99": 3,
+        "5-50": 2,
+        "51-99": 3,
         "≥ 100": 4
     }
     return mapping.get(losgroesse_str, np.nan)
@@ -631,19 +631,16 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
     # 2. Berechne die Werte für die 11 spezifischen Cluster-Variablen des Nutzers
     nutzer_cluster_variable_werte = {}
 
-    # Sonderbehandlung für die 5 direkt abgefragten Cluster-Variablen
-    # Diese werden direkt aus st.session_state geholt, da sie separat kategorisiert wurden.
-    direct_input_vars = [
-        "Anzahl CNC-Werkzeugmaschinen", 
-        "Automatisierungsgrad", 
-        "Losgröße", 
-        "Durchlaufzeit", 
-        "Laufzeit"
-    ]
-    for var_name in direct_input_vars:
-        session_key_categorized = var_name.lower().replace(" ", "_") + "_categorized" # Erzeugt z.B. "losgroesse_categorized"
-        if session_key_categorized in st.session_state:
-            value = st.session_state[session_key_categorized]
+    direct_input_keys = {
+        "Anzahl CNC-Werkzeugmaschinen": "anzahl_cnc_werkzeugmaschinen_categorized",
+        "Automatisierungsgrad": "automatisierungsgrad_categorized",
+        "Losgröße": "losgroesse_categorized",
+        "Durchlaufzeit": "durchlaufzeit_categorized",
+        "Laufzeit": "laufzeit_categorized"
+    }
+    for var_name, session_key in direct_input_keys.items():
+        if session_key in st.session_state:
+            value = st.session_state[session_key]
             if isinstance(value, (int, float)) and not np.isnan(value):
                 nutzer_cluster_variable_werte[var_name] = value
             else:
@@ -681,10 +678,9 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
         return "Bitte bewerten Sie genügend Kriterien für die Clusterzuordnung (einschließlich der direkten Abfragen).", {}
 
      # --- Debug: Visualisierung der gesetzten Cluster-Variablen ---
-    st.subheader("Debug: Bewertete Cluster-Variablen")
-    for kriterium in Kriterien:
-        status = st.session_state.get(kriterium, "❌ Nicht gesetzt")
-        st.write(f"{kriterium}: {status}")
+    st.write("Bewertete Cluster-Variablen (Debug):")
+        for var, val in nutzer_cluster_variable_werte.items():
+        st.write(f"🔹 {var}: {val if not np.isnan(val) else '❌ Nicht bewertet'}")
     
     # Optional: Eine Mindestanzahl an bewerteten Cluster-Variablen sicherstellen
     MIN_CLUSTER_VARS_SCORED = 7  # Mindestanzahl bewerteter Variablen
@@ -875,7 +871,7 @@ elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
    # CNC-Maschinen
-    cnc_options = ["< 5", "5 - 10", "11 - 24", "≥ 25"]
+    cnc_options = ["< 5", "5-10", "11-24", "≥ 25"]
     selected_cnc_range = st.radio(
         "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
         cnc_options,
@@ -884,7 +880,7 @@ elif current_tab == "Abschließende Fragen":
     st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc_range)
 
     # Automatisierungsgrad
-    automation_percentage_options = ["0%", "1 - 25%", "26 - 49%", "≥ 50%"]
+    automation_percentage_options = ["0%", "1-25%", "26-49%", "≥ 50%"]
     selected_automation_range = st.radio(
         "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?",
         automation_percentage_options,
@@ -893,7 +889,7 @@ elif current_tab == "Abschließende Fragen":
     st.session_state.automatisierungsgrad_categorized = categorize_automation_percentage(selected_automation_range)
 
     # Losgröße
-    losgroesse_options = ["<5", "5–50", "51–99", "≥ 100"]
+    losgroesse_options = ["< 5", "5-50", "51-99", "≥ 100"]
     selected_losgroesse = st.radio(
         "Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?",
         losgroesse_options,
@@ -902,7 +898,7 @@ elif current_tab == "Abschließende Fragen":
     st.session_state.losgroesse_categorized = categorize_losgroesse(selected_losgroesse)
 
     # Durchlaufzeit
-    durchlaufzeit_options = ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"]
+    durchlaufzeit_options = ["< 10 min", "11-30 min", "31-89 min", "≥ 90 min"]
     selected_durchlaufzeit = st.radio(
         "Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?",
         durchlaufzeit_options,
@@ -911,7 +907,7 @@ elif current_tab == "Abschließende Fragen":
     st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(selected_durchlaufzeit)
 
     # Laufzeit
-    laufzeit_options = ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"]
+    laufzeit_options = ["< 1 Tag", "1-3 Tage", "4-6 Tage", "≥ 7 Tage"]
     selected_laufzeit = st.radio(
         "Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?",
         laufzeit_options,
@@ -997,8 +993,6 @@ elif current_tab == "Auswertung":
             else:
                 st.warning("Nicht alle Daten für die PDF-Generierung verfügbar. Bitte füllen Sie alle Schritte aus.")
 
-# --- Hier kommt der Rest des Streamlit Codes ---
-# (Das gehört nicht zum Auswertungs-Tab, ist aber Teil der kompletten App)
 
 # Trenner
 st.markdown("---")
