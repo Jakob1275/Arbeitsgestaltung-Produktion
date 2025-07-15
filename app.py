@@ -814,48 +814,55 @@ elif current_tab in mtok_structure:
     dimension = current_tab
     for feld in mtok_structure[dimension]:
         st.subheader(f"Handlungsfeld: {feld}")
-        scores_for_this_hf = [] # Temporäre Liste für die Bewertungen der Fragen in diesem Handlungsfeld
+        scores_for_this_hf = []
+
         for idx, item in enumerate(Kriterien.get(feld, [])):
-            item_full_question_text = item['frage'] # Der volle Fragetext ist der Schlüssel für das Item-Mapping
-            
-            st.markdown(f"**{item_full_question_text}**")
-            st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
-            
-            # Eindeutiger Schlüssel für das individuelle Radio-Button-Element
-            radio_key = f"{dimension}_{feld}_{idx}" 
-            
-            # Hole den gespeicherten Wert, falls vorhanden, sonst None
-            initial_value = st.session_state.get(radio_key, None)
-            
-            # Finde den Index des initialen Wertes für st.radio
+            frage_text = item["frage"]
+            begruendung = item["begründung"]
+elif current_tab in mtok_structure:
+    dimension = current_tab
+    for feld in mtok_structure[dimension]:
+        st.subheader(f"Handlungsfeld: {feld}")
+        scores_for_this_hf = []
+
+        for item in Kriterien.get(feld, []):
+            frage_text = item["frage"]
+            begruendung = item["begründung"]
+
+            # Extrahiere ID aus Fragetext, z. B. "K1.6"
+            frage_id = frage_text.split(" ")[0]
+            radio_key = f"{dimension}_{feld}_{frage_id}"
+
+            st.markdown(f"**{frage_text}**")
+            st.markdown(f"<span style='color:gray; font-size:0.9em'>{begruendung}</span>", unsafe_allow_html=True)
+
+            # Lade gespeicherten Score aus Session, falls vorhanden
+            initial_value = st.session_state.get(f"{radio_key}_score", None)
+
             try:
-                # np.nan muss als None behandelt werden, da index() dies nicht verarbeiten kann
                 default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else 0
             except ValueError:
-                default_index = 0 # Fallback, wenn initial_value nicht in der Liste ist
-                
+                default_index = 0
+
             score = st.radio(
                 "Bitte bewerten:",
                 [1, 2, 3, 4],
                 horizontal=True,
                 key=radio_key,
-                index=default_index # Setze den initialen Wert
+                index=default_index
             )
-            
+
             if score is not None:
-                # Speichere die individuelle Bewertung im session_state
-                score_key = f"{radio_key}_score"
-                st.session_state[score_key] = score
+                st.session_state[f"{radio_key}_score"] = score
                 scores_for_this_hf.append(score)
             else:
-                scores_for_this_hf.append(np.nan) # Füge NaN hinzu, wenn nicht bewertet
+                scores_for_this_hf.append(np.nan)
 
-        # Berechne den Mittelwert für das aktuelle Handlungsfeld (nur aus tatsächlich bewerteten Scores)
-        # und speichere ihn in st.session_state.ergebnisse
+        # Mittelwert berechnen (nur bewertete Scores)
         if any(~np.isnan(scores_for_this_hf)):
             st.session_state.ergebnisse[feld] = np.nanmean(scores_for_this_hf)
-        elif feld in st.session_state.ergebnisse: # Wenn keine bewerteten Scores und Handlungsfeld schon da war
-            del st.session_state.ergebnisse[feld] # Entferne es, um Konsistenz zu gewährleisten
+        elif feld in st.session_state.ergebnisse:
+            del st.session_state.ergebnisse[feld]
 
 
 elif current_tab == "Abschließende Fragen":
