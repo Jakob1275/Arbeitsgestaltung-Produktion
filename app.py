@@ -441,8 +441,8 @@ def categorize_cnc_machines(num_machines_raw):
     mapping = {
         "< 5": 1,
         "5 - 10": 2,
-        "11 - 25": 3,
-        "> 25": 4
+        "11 - 24": 3,
+        "≥25": 4
     }
     return mapping.get(num_machines_raw, np.nan)
     
@@ -452,8 +452,8 @@ def categorize_automation_percentage(percentage_str):
     mapping = {
         "0%": 1,
         "1 - 25%": 2,
-        "26 - 50%": 3,
-        "> 50%": 4
+        "26 - 49%": 3,
+        "≥50%": 4
     }
     return mapping.get(percentage_str, np.nan)
 
@@ -461,8 +461,8 @@ def categorize_losgroesse(losgroesse_str):
     mapping = {
         "<5": 1,
         "5–50": 2,
-        "51–100": 3,
-        ">100": 4
+        "51–99": 3,
+        "≥100": 4
     }
     return mapping.get(losgroesse_str, np.nan)
 
@@ -470,8 +470,8 @@ def categorize_durchlaufzeit(durchlaufzeit_str):
     mapping = {
         "<10 min": 1,
         "11–30 min": 2,
-        "31–90 min": 3,
-        ">90 min": 4
+        "31–89 min": 3,
+        "≥90 min": 4
     }
     return mapping.get(durchlaufzeit_str, np.nan)
 
@@ -479,8 +479,8 @@ def categorize_laufzeit(laufzeit_str):
     mapping = {
         "<1 Tag": 1,
         "1–3 Tage": 2,
-        "4–7 Tage": 3,
-        ">7 Tage": 4
+        "4–6 Tage": 3,
+        "≥7 Tage": 4
     }
     return mapping.get(laufzeit_str, np.nan)
 
@@ -855,7 +855,7 @@ elif current_tab == "Abschließende Fragen":
     st.text_input("Branche", key="branche_input") 
     st.radio(
     "Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
-    ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"],
+    ["1-9", "10-49", "50-199", "200-499", "500-1999", "≥2000"],
     index=None,
     key="mitarbeitende_radio_input"
     )
@@ -869,31 +869,31 @@ elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
    # Anzahl CNC-Werkzeugmaschinen
-    cnc_options = ["< 5", "5 - 10", "11 - 25", "> 25"]
+    cnc_options = ["<5", "5 - 10", "11 - 24", "≥25"]
     selected_cnc_range = st.radio("Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?", cnc_options, key="cnc_range")
     st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(selected_cnc_range)
    
 
     # Automatisierungsgrad
-    automation_percentage_options = ["0%", "1 - 25%", "26 - 50%", "> 50%"]
+    automation_percentage_options = ["0%", "1 - 25%", "26 - 49%", "≥50%"]
     selected_automation_range = st.radio("Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?", automation_percentage_options, key="automation_range")
     st.session_state.num_auto_machines_categorized = categorize_automation_percentage(selected_automation_range)
     
 
     # Losgröße
-    losgroesse_options = ["<5", "5–50", "51–100", ">100"]
+    losgroesse_options = ["<5", "5–50", "51–99", "≥100"]
     selected_losgroesse = st.radio("Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?", losgroesse_options, key="losgroesse_range")
     st.session_state.losgroesse_categorized = categorize_losgroesse(selected_losgroesse)
     
 
     # Durchlaufzeit
-    durchlaufzeit_options = ["<10 min", "11–30 min", "31–90 min", ">90 min"]
+    durchlaufzeit_options = ["<10 min", "11–30 min", "31–89 min", "≥90 min"]
     selected_durchlaufzeit = st.radio("Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?", durchlaufzeit_options, key="durchlaufzeit_range")
     st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(selected_durchlaufzeit)
     
 
     # Laufzeit
-    laufzeit_options = ["<1 Tag", "1–3 Tage", "4–7 Tage", ">7 Tage"]
+    laufzeit_options = ["<1 Tag", "1–3 Tage", "4–6 Tage", "≥7 Tage"]
     selected_laufzeit = st.radio("Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?", laufzeit_options, key="laufzeit_range")
     st.session_state.laufzeit_categorized = categorize_laufzeit(selected_laufzeit)
    
@@ -933,7 +933,7 @@ elif current_tab == "Auswertung":
             st.pyplot(radar_chart_fig) # Zeige das Diagramm an
 
         # Cluster-Zuordnung anzeigen
-        cluster_result, abweichungen_detail = berechne_clusterzuordnung(st.session_state.ergebnisse, Kriterien)
+        cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
         
         display_cluster_result = ""
         if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
