@@ -837,7 +837,8 @@ elif current_tab in mtok_structure:
             
             if score is not None:
                 # Speichere die individuelle Bewertung im session_state
-                st.session_state[radio_key] = score
+                score_key = f"{radio_key}_score"
+                st.session_state[score_key] = score
                 scores_for_this_hf.append(score)
             else:
                 scores_for_this_hf.append(np.nan) # Füge NaN hinzu, wenn nicht bewertet
