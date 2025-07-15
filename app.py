@@ -3,9 +3,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import openai # type: ignore
-import io # Für das Speichern von Bildern/PDFs im Speicher
-import FPDF # Für die PDF-Generierung
-import tempfile
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -975,63 +972,6 @@ elif current_tab == "Auswertung":
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
             st.markdown(gpt_output_text)
-
-            def generate_evaluation_pdf(mittelwerte_dict, cluster_name, gpt_text, radar_chart_fig, mtok_structure):
-                pdf = FPDF()
-                pdf.add_page()
-
-                # Unicode-fähiger Font (z. B. DejaVuSans)
-                font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"  # Pfad ggf. anpassen
-                pdf.add_font("DejaVu", "", font_path, uni=True)
-                pdf.set_font("DejaVu", "", 12)
-
-                # Titel
-                pdf.set_font("DejaVu", "B", 14)
-                pdf.cell(0, 10, "Ergebnis: Cluster-Zuordnung", ln=True)
-
-                # Cluster
-                pdf.set_font("DejaVu", "", 12)
-                pdf.multi_cell(0, 10, f"Ihr Unternehmen wurde dem Cluster '{cluster_name}' zugeordnet.")
-
-                # GPT-Text
-                pdf.ln(5)
-                pdf.set_font("DejaVu", "B", 12)
-                pdf.cell(0, 10, "Interpretation und Handlungsempfehlungen:", ln=True)
-                pdf.set_font("DejaVu", "", 11)
-                for paragraph in gpt_text.split("\n"):
-                    pdf.multi_cell(0, 8, paragraph.strip())
-                    pdf.ln(1)
-
-                 # Mittelwerte-Tabelle
-                pdf.ln(5)
-                pdf.set_font("DejaVu", "B", 12)
-                pdf.cell(0, 10, "Mittelwerte der Handlungsfelder:", ln=True)
-                pdf.set_font("DejaVu", "", 11)
-
-                for dimension, felder in mtok_structure.items():
-                    pdf.set_font("DejaVu", "B", 11)
-                    pdf.cell(0, 8, f"{dimension}:", ln=True)
-                    pdf.set_font("DejaVu", "", 11)
-                    for feld in felder:
-                        wert = mittelwerte_dict.get(feld, "–")
-                        pdf.cell(100, 8, feld)
-                        pdf.cell(0, 8, f"{wert:.2f}" if isinstance(wert, (float, int)) else str(wert), ln=True)
-                    pdf.ln(2)
-
-                # Radar-Chart einbinden
-                if radar_chart_fig:
-                    with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmpfile:
-                        radar_chart_fig.savefig(tmpfile.name, bbox_inches="tight")
-                        pdf.ln(5)
-                        pdf.set_font("DejaVu", "B", 12)
-                        pdf.cell(0, 10, "Radar-Chart:", ln=True)
-                        pdf.image(tmpfile.name, w=170)
-
-                # BytesIO-Rückgabe
-                buffer = io.BytesIO()
-                pdf.output(buffer)
-                buffer.seek(0)
-                return buffer
 
 # Trenner
 st.markdown("---")
