@@ -852,14 +852,24 @@ elif current_tab in mtok_structure:
 
 elif current_tab == "Abschließende Fragen":
     st.text_input("Branche", key="branche_input") 
-    st.radio("Mitarbeitende", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende_radio_input") # Eindeutiger Key
-    st.radio("Funktion", ["Geschäftsführung", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion_radio_input") # Eindeutiger Key
+    st.radio(
+    "Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
+    ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"],
+    index=None,
+    key="mitarbeitende_radio_input"
+    )
+    st.radio(
+    "In welcher Funktion sind Sie in Ihrem Unternehmen tätig?",
+    ["Geschäftsführer", "Produktions-/ Fertigungsleitung", "Arbeitsvorbereitung", "Teamleitung", "Planungsabteilung (IE, Lean etc.)", "Weitere"],
+    index=None,
+    key="funktion_radio_input"
+    )
     
     st.subheader("Spezifische technische und prozessuale Angaben")
 
    # Anzahl CNC-Werkzeugmaschinen
     cnc_options = ["< 5", "5 - 10", "11 - 25", "> 25"]
-    selected_cnc_range = st.radio("Wie viele CNC-Werkzeugmaschinen sind in Ihrem Betrieb vorhanden?", cnc_options, key="cnc_range")
+    selected_cnc_range = st.radio("Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?", cnc_options, key="cnc_range")
     st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(selected_cnc_range)
    
 
@@ -871,23 +881,21 @@ elif current_tab == "Abschließende Fragen":
 
     # Losgröße
     losgroesse_options = ["<5", "5–50", "51–100", ">100"]
-    selected_losgroesse = st.radio("Typische Fertigungslosgröße", losgroesse_options, key="losgroesse_range")
+    selected_losgroesse = st.radio("Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?", losgroesse_options, key="losgroesse_range")
     st.session_state.losgroesse_categorized = categorize_losgroesse(selected_losgroesse)
     
 
     # Durchlaufzeit
     durchlaufzeit_options = ["<10 min", "11–30 min", "31–90 min", ">90 min"]
-    selected_durchlaufzeit = st.radio("Zeitspanne vom Auftragsstart bis unentgratetem Fertigteil", durchlaufzeit_options, key="durchlaufzeit_range")
+    selected_durchlaufzeit = st.radio("Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?", durchlaufzeit_options, key="durchlaufzeit_range")
     st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(selected_durchlaufzeit)
     
 
     # Laufzeit
     laufzeit_options = ["<1 Tag", "1–3 Tage", "4–7 Tage", ">7 Tage"]
-    selected_laufzeit = st.radio("Durchschnittliche Maschinenlaufzeit je Auftrag", laufzeit_options, key="laufzeit_range")
+    selected_laufzeit = st.radio("Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?", laufzeit_options, key="laufzeit_range")
     st.session_state.laufzeit_categorized = categorize_laufzeit(selected_laufzeit)
    
-
-
     st.text_input("PLZ (optional)", key="plz_input") # Eindeutiger Key
     st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
