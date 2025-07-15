@@ -679,7 +679,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 
      # --- Debug: Visualisierung der gesetzten Cluster-Variablen ---
     st.write("Bewertete Cluster-Variablen (Debug):")
-        for var, val in nutzer_cluster_variable_werte.items():
+    for var, val in nutzer_cluster_variable_werte.items():
         st.write(f"🔹 {var}: {val if not np.isnan(val) else '❌ Nicht bewertet'}")
     
     # Optional: Eine Mindestanzahl an bewerteten Cluster-Variablen sicherstellen
