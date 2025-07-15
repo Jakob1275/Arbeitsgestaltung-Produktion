@@ -714,41 +714,41 @@ if "ergebnisse" not in st.session_state:
 
 # CNC-Maschinen (feste Kategorien via st.radio)
 if "cnc_range" not in st.session_state:
-    st.session_state.cnc_range = "< 5"
+    st.session_state.cnc_range = None
 if "num_cnc_machines_categorized" not in st.session_state:
-    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.cnc_range)
+    st.session_state.num_cnc_machines_categorized = np.nan
 
 # Automatisierungsgrad
 if "automation_range" not in st.session_state:
-    st.session_state.automation_range = "0%"
+    st.session_state.automation_range = None
 if "num_auto_machines_categorized" not in st.session_state:
-    st.session_state.num_auto_machines_categorized = categorize_automation_percentage(st.session_state.automation_range)
+    st.session_state.num_auto_machines_categorized = np.nan
 
 # Losgröße
 if "losgroesse_range" not in st.session_state:
-    st.session_state.losgroesse_range = "<5"
+    st.session_state.losgroesse_range = None
 if "losgroesse_categorized" not in st.session_state:
-    st.session_state.losgroesse_categorized = categorize_losgroesse(st.session_state.losgroesse_range)
+    st.session_state.losgroesse_categorized = np.nan
 
 # Durchlaufzeit
 if "durchlaufzeit_range" not in st.session_state:
-    st.session_state.durchlaufzeit_range = "<10 min"
+    st.session_state.durchlaufzeit_range = None
 if "durchlaufzeit_categorized" not in st.session_state:
-    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(st.session_state.durchlaufzeit_range)
+    st.session_state.durchlaufzeit_categorized = np.nan
 
 # Laufzeit
 if "laufzeit_range" not in st.session_state:
-    st.session_state.laufzeit_range = "<1 Tag"
+    st.session_state.laufzeit_range = None
 if "laufzeit_categorized" not in st.session_state:
-    st.session_state.laufzeit_categorized = categorize_laufzeit(st.session_state.laufzeit_range)
+    st.session_state.laufzeit_categorized = np.nan
 
 # Allgemeine Angaben
 if 'branche_input' not in st.session_state:
     st.session_state.branche_input = ""
 if 'mitarbeitende_radio' not in st.session_state:
-    st.session_state.mitarbeitende_radio = "1-9"
+    st.session_state.mitarbeitende_radio = None
 if 'funktion_radio' not in st.session_state:
-    st.session_state.funktion_radio = "Geschäftsführung"
+    st.session_state.funktion_radio = None
 if 'plz_input' not in st.session_state:
     st.session_state.plz_input = ""
 if 'email_input' not in st.session_state:
