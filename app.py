@@ -624,15 +624,6 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
     for frage_text, session_key in item_to_radio_key_map.items():
         if session_key in st.session_state and st.session_state[session_key] is not None:
             all_item_scores_flat[frage_text] = st.session_state[session_key]
-
-    # DEBUG: Zeige, welche Fragen gemappt sind und welche bewertet wurden
-    bewertete_items = set(all_item_scores_flat.keys())
-    gemappte_items = set()
-    for varname, fragenliste in kriterien_item_to_cluster_variable_mapping.items():
-        gemappte_items.update(fragenliste)
-
-    st.write("✅ Bewertete gemappte Fragen:", bewertete_items.intersection(gemappte_items))
-    st.write("❌ Nicht bewertete gemappte Fragen:", gemappte_items - bewertete_items)
     
     # 2. Berechne die Werte für die 11 spezifischen Cluster-Variablen des Nutzers
     nutzer_cluster_variable_werte = {}
@@ -682,11 +673,6 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 
     if not nutzer_cluster_variable_werte_filtered:
         return "Bitte bewerten Sie genügend Kriterien für die Clusterzuordnung (einschließlich der direkten Abfragen).", {}
-
-    # Debug-Ausgabe
-    st.write("Bewertete Cluster-Variablen (Debug):")
-    for var, val in nutzer_cluster_variable_werte.items():
-        st.write(f"🔹 {var}: {val if not np.isnan(val) else '❌ Nicht bewertet'}")
 
     # Mindestanzahl an bewerteten Variablen
     MIN_CLUSTER_VARS_SCORED = 7
