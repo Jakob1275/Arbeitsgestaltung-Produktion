@@ -3,40 +3,51 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import openai # type: ignore
+import io # Für das Speichern von Bildern/PDFs im Speicher
+from fpdf import FPDF # Für die PDF-Generierung
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-def frage_chatgpt_auswertung(ergebnisse):
+def frage_chatgpt_auswertung(ergebnisse, cluster_bezeichnung):
     try:
         response = client.chat.completions.create(
             model="gpt-4o",
+            temperature=0.4,
             messages=[
                 {
                     "role": "system",
-                    "content": "Du bist ein arbeitswissenschaftlicher Experte für flexible Arbeit in der zerspanenden Fertigung. Analysiere Mittelwerte neun betrieblicher Handlungsfelder, leite eine Clusterzuordnung gemäß dem MTOK-Modell ab und gib differenzierte, priorisierte Handlungsempfehlungen aus."
+                    "content": (
+                        "Du bist arbeitswissenschaftlicher Experte für flexible Arbeit in der zerspanenden Fertigung. "
+                        "Dir liegen Mittelwerte zu neun betrieblichen Handlungsfeldern sowie eine Clusterzuordnung auf Basis "
+                        "einer empirischen Distanzberechnung vor. "
+                        "Analysiere die Werte, erkläre das Profil des Clusters und gib priorisierte Handlungsempfehlungen.\n\n"
+                        "Clusterprofile:\n"
+                        "Cluster 1 – Traditionell und reaktiv: geringe Technik, hohe Unsicherheit, geringe Offenheit\n"
+                        "Cluster 2 – Produktionsstark, aber mobilitätsfern: hohe Technik, geringe Offenheit und Akzeptanz\n"
+                        "Cluster 3 – Digital-affin und akzeptanzstark: hohe Technik, hohe Akzeptanz, niedrige Hindernisse\n"
+                        "Cluster 4 – Effizient, aber strukturell gehemmt: solide Technik, hohe Laufzeit und Komplexität, geringe Umsetzung\n\n"
+                        "Deine Aufgabe:\n"
+                        "1. Erkläre, warum der Fall zu dem übergebenen Cluster passt\n"
+                        "2. Nenne je MTOK-Dimension (Technik, Organisation, Kultur, Mensch) 2–3 zentrale Handlungsempfehlungen\n"
+                        "3. Ordne die Empfehlungen nach Relevanz (Technik zuerst, dann Organisation, Kultur, Mensch)\n\n"
+                        "Formuliere kurz, prägnant und praxisnah. Verweise auf typische Merkmale des Clusters."
+                    )
                 },
                 {
                     "role": "user",
                     "content": (
-                        f"Die Mittelwerte der neun Handlungsfelder lauten:\n\n{ergebnisse}\n\n"
-                        "Bitte führe folgende Schritte durch:\n"
-                        "1. Gib eine kurze Bewertung des betrieblichen Reifegrads.\n"
-                        "2. Ordne den Betrieb einem der folgenden Cluster zu:\n"
-                        "   - Cluster 1: Traditionell und reaktiv\n"
-                        "   - Cluster 2: Produktionsstark, aber mobilitätsfern\n"
-                        "   - Cluster 3: Digital-affin und akzeptanzstark\n"
-                        "   - Cluster 4: Effizient, aber strukturell gehemmt\n"
-                        "3. Gib mindestens fünf priorisierte, praxisnahe Handlungsempfehlungen – gegliedert nach den vier MTOK-Dimensionen (Mensch, Technik, Organisation, Kultur)."
+                        f"Die Mittelwerte der neun Handlungsfelder lauten:\n{ergebnisse}\n\n"
+                        f"Der Fall wurde dem folgenden Cluster zugeordnet:\n{cluster_bezeichnung}\n\n"
+                        "Bitte erkläre die Zuordnung und gib priorisierte Handlungsempfehlungen entlang des MTOK-Modells."
                     )
                 }
-            ],
-            temperature=0.4
+            ]
         )
         return response.choices[0].message.content
     except Exception as e:
         return f"Fehler bei der GPT-Abfrage: {e}"
-
+        
 # Struktur der Anwendung
 st.set_page_config(page_title="Readiness-Check", layout="wide")
 st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
@@ -49,6 +60,7 @@ mtok_structure = {
     "Kultur": ["Unternehmenskultur", "Soziale Beziehungen und Interaktion"]
 }
 
+# Kriterienliste
 Kriterien = {
   "Produktivität und Motivation": [
     {
@@ -178,7 +190,7 @@ Kriterien = {
       "begründung": "Flexibles Arbeiten erfordert sicheren Zugang zu zentralen Anwendungen von außerhalb der Fertigung."
     },
     {
-      "frage": "T2.3 Digitale Kommunikations- und Kollaborationstools (z. B. MS Teams, Slack) sind standardisiert verfügbar.",
+      "frage": "T2.3 Digitale Kommunikations- und Kollaborationstools (z.B. MS Teams, Slack) sind standardisiert verfügbar.",
       "begründung": "Digitale Tools ermöglichen dezentrale Abstimmung, Informationsaustausch und Teamkommunikation."
     },
     {
@@ -226,7 +238,7 @@ Kriterien = {
     {
       "frage": "O1.5 Hybride Besprechungen (Präsenz und Remote) sind etabliert und technisch unterstützt.",
       "begründung": "Hybride Formate ermöglichen ortsunabhängige Teilhabe und stärken die Integration mobiler Beschäftigter."
-     },
+    },
     {
       "frage": "O1.6 Neue Beschäftigte werden strukturiert in Kommunikations- und Kooperationsprozesse eingeführt.",
       "begründung": "Eine systematische Einarbeitung unterstützt die Integration in digitale und flexible Arbeitsabläufe."
@@ -308,27 +320,27 @@ Kriterien = {
     ],
     "Produktionsorganisation": [
     {
-     "frage": "O3.1 Die Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und systematisch aufteilbar.",
+    "frage": "O3.1 Die Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und systematisch aufteilbar.",
       "begründung": "Eine differenzierte Analyse präsenzpflichtiger und mobil bearbeitbarer Tätigkeiten ist Grundlage für jede flexible Arbeitsgestaltung."
     },
     {
-      "frage": "O3.2 Die durchschnittliche Losgröße erlaubt kurzfristige Umplanungen.",
+    "frage": "O3.2 Die durchschnittliche Losgröße erlaubt kurzfristige Umplanungen.",
       "begründung": "Kleinere Losgrößen erhöhen die Dispositionsfreiheit und ermöglichen flexiblere Einsatzzeiten – empirisch als förderlich identifiziert."
     },
     {
-      "frage": "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
+    "frage": "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
       "begründung": "Stabile Prozesszeiten schaffen Handlungssicherheit für mobile oder zeitlich entkoppelte Einsätze."
     },
     {
-      "frage": "O3.4 Die Produktionsplanung ist mit flexiblen Arbeitszeitmodellen kompatibel.",
+    "frage": "O3.4 Die Produktionsplanung ist mit flexiblen Arbeitszeitmodellen kompatibel.",
       "begründung": "Eine Planung, die unterschiedliche Anwesenheitszeiten berücksichtigt, ist Voraussetzung für flexible Arbeitsgestaltung."
     },
     {
-      "frage": "O3.5 Die Schicht- und Einsatzplanung ist dynamisch anpassbar.",
+    "frage": "O3.5 Die Schicht- und Einsatzplanung ist dynamisch anpassbar.",
       "begründung": "Starre Schichtsysteme schränken Flexibilität ein. Dynamik ermöglicht individuelle Gestaltungsspielräume."
     },
     {
-      "frage": "O3.6 Personelle Puffer zur Kompensation von Engpässen sind eingeplant.",
+    "frage": "O3.6 Personelle Puffer zur Kompensation von Engpässen sind eingeplant.",
       "begründung": "Ausweichkapazitäten sind essenziell, um individuelle Flexibilität ohne Produktivitätsverlust zu ermöglichen."
     },
     {
@@ -358,19 +370,19 @@ Kriterien = {
     ],
     "Unternehmenskultur": [
     {
-     "frage": "K1.1 Im Unternehmen wird Vertrauen als Grundlage der Zusammenarbeit gelebt.",
+    "frage": "K1.1 Im Unternehmen wird Vertrauen als Grundlage der Zusammenarbeit gelebt.",
       "begründung": "Vertrauen ist elementar für mobile und zeitflexible Arbeit, da Kontrolle nicht über physische Präsenz erfolgen kann."
     },
     {
-      "frage": "K1.2 Beschäftigte erhalten Handlungsfreiräume zur Gestaltung ihrer Arbeit.",
+    "frage": "K1.2 Beschäftigte erhalten Handlungsfreiräume zur Gestaltung ihrer Arbeit.",
       "begründung": "Handlungsspielräume fördern Motivation, Eigenverantwortung und Innovationspotenzial – zentrale Voraussetzungen für flexible Arbeit."
     },
     {
-      "frage": "K1.3 Zielerreichung hat Vorrang vor physischer Anwesenheit.",
+    "frage": "K1.3 Zielerreichung hat Vorrang vor physischer Anwesenheit.",
       "begründung": "Ergebnisorientierung statt Präsenzkultur stärkt Flexibilisierung und Leistungsfokus."
     },
     {
-      "frage": "K1.4 Es herrscht ein positives Verständnis für neue Arbeitsformen.",
+    "frage": "K1.4 Es herrscht ein positives Verständnis für neue Arbeitsformen.",
       "begründung": "Akzeptanz und Offenheit gegenüber Veränderung sind kulturelle Grundlagen flexibler Arbeitsgestaltung."
     },
     {
@@ -458,23 +470,328 @@ Kriterien = {
   ]
 }
 
-# Mappings vorbereiten
-dim_map = {feld: dim for dim, felder in mtok_structure.items() for feld in felder}
+# Hilfsfunktion zur Kategorisierung der Anzahl CNC-Maschinen (Annahme der Kategorien)
+def categorize_cnc_machines(num_machines_raw):
+    if num_machines_raw is None:
+        return np.nan
+    # Beispielhafte Kategorien, müssen empirisch validiert werden
+    if num_machines_raw < 5: # "< 5" -> 1
+        return 1
+    elif num_machines_raw <= 10: # "5 - 10" -> 2
+        return 2
+    elif num_machines_raw <= 25: # "11 - 25" -> 3
+        return 3
+    else: # "> 25" -> 4
+        return 4
+    
+# Hilfsfunktion zur Kategorisierung des Automatisierungsgrades in Prozent
+def categorize_automation_percentage(percentage_str):
+    if percentage_str is None:
+        return np.nan
+    if percentage_str == "0%":
+        return 1
+    elif percentage_str == "1 - 25%":
+        return 2
+    elif percentage_str == "26 - 50%":
+        return 3
+    elif percentage_str == "> 50%":
+        return 4
+    return np.nan # Fallback für unerwartete Strings
 
-def frage_chatgpt_auswertung(ergebnisse):
-    return "→ Beispielausgabe: Handlungsempfehlungen individuell angepasst."
+# Hilfsfunktion zur Kategorisierung der Losgröße
+def categorize_losgroesse(losgroesse_str):
+    if losgroesse_str is None:
+        return np.nan
+    if losgroesse_str == "<5":
+        return 1
+    elif losgroesse_str == "5–50":
+        return 2
+    elif losgroesse_str == "51–100":
+        return 3
+    elif losgroesse_str == ">100":
+        return 4
+    return np.nan
 
-# Tabs definieren
-tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+# Hilfsfunktion zur Kategorisierung der Durchlaufzeit
+def categorize_durchlaufzeit(durchlaufzeit_str):
+    if durchlaufzeit_str is None:
+        return np.nan
+    if durchlaufzeit_str == "<10 min":
+        return 1
+    elif durchlaufzeit_str == "11–30 min":
+        return 2
+    elif durchlaufzeit_str == "31–90 min":
+        return 3
+    elif durchlaufzeit_str == ">90 min":
+        return 4
+    return np.nan
 
-# Session-Variablen initialisieren
+# Hilfsfunktion zur Kategorisierung der Laufzeit
+def categorize_laufzeit(laufzeit_str):
+    if laufzeit_str is None:
+        return np.nan
+    if laufzeit_str == "<1 Tag":
+        return 1
+    elif laufzeit_str == "1–3 Tage":
+        return 2
+    elif laufzeit_str == "4–7 Tage":
+        return 3
+    elif laufzeit_str == ">7 Tage":
+        return 4
+    return np.nan
+
+
+# Mapping von Kriterien-Item-Fragen zu den 11 Cluster-Variablen
+# WICHTIG: Die Liste der Fragen muss exakt der 'frage'-Eigenschaft in den Kriterien-Dictionaries entsprechen.
+# Falls eine Variable nur durch ein einziges Item repräsentiert wird, ist die Liste trotzdem notwendig.
+# Falls eine Variable durch mehrere Items repräsentiert wird, wird ihr Wert als Mittelwert dieser Items berechnet.
+kriterien_item_to_cluster_variable_mapping = {
+    # Cluster Variable : [Liste von Fragen-Strings aus dem Kriterien-Dictionary]
+    
+    # 1. Automatisierungsgrad (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
+    # 2. Anzahl CNC-Werkzeugmaschinen (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
+    # 3. Losgröße (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
+    # 4. Durchlaufzeit (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
+    # 5. Laufzeit (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
+
+    # Diese 5 Variablen werden direkt abgefragt und müssen hier NICHT gemappt werden.
+    # Ihre Werte werden in berechne_clusterzuordnung separat verarbeitet.
+
+    # 6. Digitalisierungsgrad
+    "Digitalisierungsgrad": [
+        "T1.11 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden (z. B. ERP, MES, BDE).",
+        "T2.6 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
+        "M2.8 Beschäftigte verstehen digitale Produktionssysteme in ihren Grundfunktionen.",
+        "T2.7 Die IT-Systeme ermöglichen ortsunabhängige Einsicht in produktionsrelevante Echtzeitdaten (z. B. Maschinenstatus, Auftragsfortschritt).",
+        "T2.8 Beschäftigte können über mobile Endgeräte sicher Rückmeldungen und Produktionsdaten erfassen (z. B. Störgründe, Fortschritt).",
+        "T2.9 Simulationen oder digitale Zwillinge werden zur Produktionsplanung und -steuerung eingesetzt.",
+        "O2.6 Arbeitszeitmodelle sind in Planungs- und Steuerungssysteme integriert (z. B. MES, ERP).",
+        "O3.11 Die Auftragssteuerung ist digital unterstützt und dynamisch anpassbar."
+    ],
+    
+    # 7. Prozessinstabilität
+    "Prozessinstabilität": [
+        "T1.6 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
+        "O1.7 Beschäftigte wissen, welche Kommunikationskanäle im Störungsfall zu nutzen sind.", # Wissen um Notfallkanäle reduziert wahrgenommene Instabilität
+        "O3.9 Maschinenstillstände führen nicht unmittelbar zu kritischen Produktivitätsverlusten.", # Toleranz gegenüber Stillständen reduziert Instabilität
+        "O1.11 Bei Problemen in der Zielerreichung oder Koordination werden die Kommunikationsstrukturen gezielt angepasst." # Adaptive Reaktion auf Instabilität
+    ],
+    
+    # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
+    "Nutzen": [
+        "T1.12 Die Auswirkungen flexibler Arbeit auf Produktivität, Qualität und Maschinenauslastung werden regelmäßig erfasst.",
+        "K1.3 Zielerreichung hat Vorrang vor physischer Anwesenheit.",
+        "K1.7 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.", # Impliziert wahrgenommenen Nutzen
+        "K2.4 Führung erfolgt ergebnisorientiert statt anwesenheitsorientiert."
+    ],
+    
+    # 9. Akzeptanz
+    "Akzeptanz": [
+        "M2.1 Beschäftigte stehen mobiler Arbeit aufgeschlossen gegenüber.",
+        "M2.2 Beschäftigte stehen zeitflexibler Arbeit offen gegenüber.",
+        "K1.4 Es herrscht ein positives Verständnis für neue Arbeitsformen.",
+        "K1.7 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.",
+        "O2.3 Es bestehen verbindliche Betriebsvereinbarungen zur Regelung mobiler und zeitflexibler Arbeit.",
+        "O2.10 Rückmeldungen zur Umsetzung flexibler Arbeit werden regelmäßig eingeholt und genutzt."
+    ],
+    
+    # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
+    # HINWEIS: Bei der Berechnung dieser Variablen wird der Score der zugewiesenen Fragen INVERTIERT,
+    # da ein HOHEr Score in der Frage ("können mitgestalten") einen NIEDRIGEN "Aufwand Zeit" für das Cluster bedeutet.
+    "Aufwand Zeit": [
+        "O2.11 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
+        "O1.10 Die Kommunikationsstrukturen ermöglichen auch asynchrone Zusammenarbeit (z.B. Aufgabenboards, Kommentarfunktionen).",
+        "O1.12 Die Organisation reflektiert regelmäßig die Wirkung von Zeitautonomie auf die Zusammenarbeit und Kommunikation."
+    ],
+    
+    # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
+    # HINWEIS: Bei der Berechnung dieser Variablen wird der Score der zugewiesenen Fragen INVERTIERT,
+    # da ein HOHEr Score in der Frage ("Arbeitsumgebung ermöglicht") einen NIEDRIGEN "Aufwand Mobil" für das Cluster bedeutet.
+    "Aufwand Mobil": [
+        "M1.6 Die Arbeitsumgebung ermöglicht produktives Arbeiten außerhalb der Fertigung.",
+        "M2.6 Beschäftigte verfügen über stabile externe Bedingungen für mobiles Arbeiten.",
+        "T2.4 Der IT-Support ist auch bei mobiler Arbeit verlässlich erreichbar.",
+        "T2.5 Zugriffskonzepte sind sicher, rollenbasiert und klar geregelt.",
+        "T1.7 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert (z. B. Kameras, Monitoring-Apps, Maschinenzugriff)."
+    ]
+}
+
+
+# Clusterprofile aus empirischer Clustertabelle (WERTE GENAU ÜBERNEHMEN!)
+# Die 'Variable' Namen aus der Tabelle des Nutzers sind hier die Keys
+cluster_item_values = {
+    "Cluster 1 – Traditionell und reaktiv": {
+        "Automatisierungsgrad": 2,
+        "Anzahl CNC-Werkzeugmaschinen": 2,
+        "Losgröße": 2,
+        "Durchlaufzeit": 2,
+        "Laufzeit": 2,
+        "Digitalisierungsgrad": 2,
+        "Prozessinstabilität": 3, # Hohe Instabilität
+        "Nutzen": 2,
+        "Akzeptanz": 2,
+        "Aufwand Zeit": 3, # Hoher Aufwand (im Clusterprofil)
+        "Aufwand Mobil": 4 # Hoher Aufwand (im Clusterprofil)
+    },
+    "Cluster 2 – Effizient, aber nicht flexibel": {
+        "Automatisierungsgrad": 3,
+        "Anzahl CNC-Werkzeugmaschinen": 3,
+        "Losgröße": 4,
+        "Durchlaufzeit": 3,
+        "Laufzeit": 1, # Niedrige Laufzeit (geringe unbeaufsichtigte Zeit)
+        "Digitalisierungsgrad": 2,
+        "Prozessinstabilität": 2,
+        "Nutzen": 2,
+        "Akzeptanz": 2,
+        "Aufwand Zeit": 3,
+        "Aufwand Mobil": 4
+    },
+    "Cluster 3 – Digital-affin und akzeptanzstark": {
+        "Automatisierungsgrad": 4,
+        "Anzahl CNC-Werkzeugmaschinen": 2, # Beispielwert; hier wird nun der Wert aus der st.number_input Kategorisierung landen
+        "Losgröße": 2,
+        "Durchlaufzeit": 2,
+        "Laufzeit": 2,
+        "Digitalisierungsgrad": 3,
+        "Prozessinstabilität": 2,
+        "Nutzen": 3,
+        "Akzeptanz": 3,
+        "Aufwand Zeit": 2,
+        "Aufwand Mobil": 3
+    },
+    "Cluster 4 – Effizient, aber strukturell gehemmt": {
+        "Automatisierungsgrad": 2,
+        "Anzahl CNC-Werkzeugmaschinen": 3, # Beispielwert; hier wird nun der Wert aus der st.number_input Kategorisierung landen
+        "Losgröße": 2,
+        "Durchlaufzeit": 4, # Hohe Durchlaufzeit
+        "Laufzeit": 3, # Hohe Laufzeit
+        "Digitalisierungsgrad": 2,
+        "Prozessinstabilität": 2,
+        "Nutzen": 2,
+        "Akzeptanz": 2,
+        "Aufwand Zeit": 3,
+        "Aufwand Mobil": 3
+    }
+}
+
+
+# Clusterermittlung (angepasst, um die 11 spezifischen Cluster-Variablen zu berechnen und dann zu vergleichen)
+def berechne_clusterzuordnung(kriterien_all_items_dict):
+    # 1. Sammle alle individuellen Item-Bewertungen aus der Streamlit Session State
+    all_item_scores_flat = {}
+    for dim_name, handlungsfelder_in_dim in mtok_structure.items():
+        for hf_name in handlungsfelder_in_dim:
+            if hf_name in kriterien_all_items_dict:
+                for idx, item_info in enumerate(kriterien_all_items_dict[hf_name]):
+                    item_key_in_session = f"{dim_name}_{hf_name}_{idx}"
+                    if item_key_in_session in st.session_state and st.session_state[item_key_in_session] is not None:
+                        all_item_scores_flat[item_info['frage']] = st.session_state[item_key_in_session]
+
+    # 2. Berechne die Werte für die 11 spezifischen Cluster-Variablen des Nutzers
+    nutzer_cluster_variable_werte = {}
+
+    # Sonderbehandlung für die 5 direkt abgefragten Cluster-Variablen
+    # Diese werden direkt aus st.session_state geholt, da sie separat kategorisiert wurden.
+    direct_input_vars = [
+        "Anzahl CNC-Werkzeugmaschinen", 
+        "Automatisierungsgrad", 
+        "Losgröße", 
+        "Durchlaufzeit", 
+        "Laufzeit"
+    ]
+    for var_name in direct_input_vars:
+        session_key_categorized = var_name.lower().replace(" ", "_") + "_categorized" # Erzeugt z.B. "losgröße_categorized"
+        if session_key_categorized in st.session_state and not np.isnan(st.session_state[session_key_categorized]):
+            nutzer_cluster_variable_werte[var_name] = st.session_state[session_key_categorized]
+        else:
+            nutzer_cluster_variable_werte[var_name] = float('nan') 
+
+    # Behandlung der restlichen Variablen, die aus Kriterien-Items gemappt werden
+    # Nur noch die Variablen, die NICHT direkt abgefragt werden, müssen hier behandelt werden.
+    for cluster_var_name, associated_item_questions in kriterien_item_to_cluster_variable_mapping.items():
+        # Diese Variablen wurden oben nicht direkt als input_vars behandelt
+        if cluster_var_name not in direct_input_vars: 
+            scores_for_variable = []
+            for q_text in associated_item_questions:
+                if q_text in all_item_scores_flat:
+                    scores_for_variable.append(all_item_scores_flat[q_text])
+            
+            if scores_for_variable:
+                calculated_score = np.mean(scores_for_variable)
+                
+                # Skalen-Invertierung für "Aufwand" und "Prozessinstabilität" (höherer Score in Frage bedeutet besser/weniger Problem)
+                # Im Clusterprofil bedeuten hohe Werte für diese Variablen einen hohen Aufwand/Instabilität.
+                # Daher muss der Nutzer-Score invertiert werden, um Konsistenz zu schaffen.
+                if cluster_var_name in ["Aufwand Zeit", "Aufwand Mobil", "Prozessinstabilität"]:
+                    nutzer_cluster_variable_werte[cluster_var_name] = (5 - calculated_score) 
+                else:
+                    nutzer_cluster_variable_werte[cluster_var_name] = calculated_score
+            else:
+                nutzer_cluster_variable_werte[cluster_var_name] = float('nan') 
+
+    # Filtere NaN-Werte heraus, da sie nicht in die Distanzberechnung einfließen sollen
+    nutzer_cluster_variable_werte_filtered = {k: v for k, v in nutzer_cluster_variable_werte.items() if not np.isnan(v)}
+
+    if not nutzer_cluster_variable_werte_filtered:
+        return "Bitte bewerten Sie genügend Kriterien für die Clusterzuordnung (einschließlich der direkten Abfragen).", {}
+    
+    # Optional: Eine Mindestanzahl an bewerteten Cluster-Variablen sicherstellen
+    MIN_CLUSTER_VARS_SCORED = 7 # z.B. mindestens 7 der 11 Cluster-Variablen müssen bewertet sein
+    if len(nutzer_cluster_variable_werte_filtered) < MIN_CLUSTER_VARS_SCORED:
+        return f"Bitte bewerten Sie mindestens {MIN_CLUSTER_VARS_SCORED} relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {len(nutzer_cluster_variable_werte_filtered)} bewertet.", {}
+
+
+    # 3. Berechne die Abweichung des Nutzerprofils von jedem Clusterprofil
+    abweichungen = {}
+    for cluster_name, cluster_profil_werte in cluster_item_values.items():
+        diffs = []
+        for cluster_var_name, nutzer_wert in nutzer_cluster_variable_werte_filtered.items():
+            if cluster_var_name in cluster_profil_werte: # Sicherstellen, dass die Variable auch im Cluster-Profil vorhanden ist
+                diffs.append(abs(nutzer_wert - cluster_profil_werte[cluster_var_name]))
+        
+        if diffs:
+            abweichungen[cluster_name] = np.mean(diffs)
+        else:
+            # Falls für ein Cluster keine vergleichbaren Variablen bewertet wurden, ist die Abweichung unendlich
+            abweichungen[cluster_name] = float('inf') 
+
+    if not abweichungen or all(v == float('inf') for v in abweichungen.values()):
+        return "Keine passende Clusterzuordnung möglich, bitte mehr Kriterien in relevanten Bereichen bewerten.", {}
+
+    bestes_cluster = min(abweichungen, key=abweichungen.get)
+    return bestes_cluster, abweichungen
+
+# --- Ende der Berechnungslogik ---
+
+# --- Start des Streamlit UI Codes ---
+# Initialisierung der Session State Variablen vor der UI-Logik
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
-if "ergebnisse" not in st.session_state:
+if "ergebnisse" not in st.session_state: # Speichert Mittelwerte pro Handlungsfeld für Radar-Diagramm
     st.session_state.ergebnisse = {}
+# Für die individuellen Item-Scores (für Clusterzuordnung) werden die Keys dynamisch erstellt.
+# Initialisiere auch die neuen Eingabefelder im Session State, um Fehler bei erstem Laden zu vermeiden
+if 'num_cnc_machines_raw' not in st.session_state:
+    st.session_state.num_cnc_machines_raw = 0
+if 'num_cnc_machines_categorized' not in st.session_state:
+    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(0) # Standardwert
+if 'automation_percentage_raw' not in st.session_state:
+    st.session_state.automation_percentage_raw = "0%" # Radio Button Initialwert
+if 'num_auto_machines_categorized' not in st.session_state:
+    st.session_state.num_auto_machines_categorized = categorize_automation_percentage("0%") # Standardwert
+if 'losgroesse_raw' not in st.session_state:
+    st.session_state.losgroesse_raw = "<5"
+if 'losgroesse_categorized' not in st.session_state:
+    st.session_state.losgroesse_categorized = categorize_losgroesse("<5")
+if 'durchlaufzeit_raw' not in st.session_state:
+    st.session_state.durchlaufzeit_raw = "<10 min"
+if 'durchlaufzeit_categorized' not in st.session_state:
+    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit("<10 min")
+if 'laufzeit_raw' not in st.session_state:
+    st.session_state.laufzeit_raw = "<1 Tag"
+if 'laufzeit_categorized' not in st.session_state:
+    st.session_state.laufzeit_categorized = categorize_laufzeit("<1 Tag")
 
-# Scroll-Anker oben
-st.markdown("<div id='top'></div>", unsafe_allow_html=True)
 
 # Navigationsbuttons
 def nav_buttons(position):
@@ -489,6 +806,12 @@ def nav_buttons(position):
             if st.button("Weiter →", key=f"next_{position}"):
                 st.session_state.current_tab_index += 1
                 st.rerun()
+
+# Tabs definieren
+tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+
+# Scroll-Anker oben
+st.markdown("<div id='top'></div>", unsafe_allow_html=True)
 
 # Oben: Navigation anzeigen
 nav_buttons("top")
@@ -510,10 +833,10 @@ if current_tab == "Start":
 
     Für jedes Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
 
-    - **1 = niedrig** – aktuell nicht erfüllt  
-    - **2 = mittel** – in Ansätzen erfüllt  
-    - **3 = hoch** – weitgehend umgesetzt  
-    - **4 = sehr hoch** – vollständig umgesetzt und etabliert  
+    - **1 = niedrig** – aktuell nicht erfüllt 
+    - **2 = mittel** – in Ansätzen erfüllt 
+    - **3 = hoch** – weitgehend umgesetzt 
+    - **4 = sehr hoch** – vollständig umgesetzt und etabliert 
 
     Nach der Eingabe erhalten Sie ein grafisches Readiness-Profil sowie individuelle Handlungsempfehlungen auf Basis Ihrer Angaben.
     """)
@@ -522,68 +845,198 @@ elif current_tab in mtok_structure:
     dimension = current_tab
     for feld in mtok_structure[dimension]:
         st.subheader(f"Handlungsfeld: {feld}")
-        scores = []
+        scores_for_this_hf = [] # Temporäre Liste für die Bewertungen der Fragen in diesem Handlungsfeld
         for idx, item in enumerate(Kriterien.get(feld, [])):
-            st.markdown(f"**{item['frage']}**")
+            item_full_question_text = item['frage'] # Der volle Fragetext ist der Schlüssel für das Item-Mapping
+            
+            st.markdown(f"**{item_full_question_text}**")
             st.markdown(f"<span style='color:gray; font-size:0.9em'>{item['begründung']}</span>", unsafe_allow_html=True)
+            
+            # Eindeutiger Schlüssel für das individuelle Radio-Button-Element
+            radio_key = f"{dimension}_{feld}_{idx}" 
+            
+            # Hole den gespeicherten Wert, falls vorhanden, sonst None
+            initial_value = st.session_state.get(radio_key, None)
+            
+            # Finde den Index des initialen Wertes für st.radio
+            try:
+                # np.nan muss als None behandelt werden, da index() dies nicht verarbeiten kann
+                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else None
+            except ValueError:
+                default_index = None # Fallback, wenn initial_value nicht in der Liste ist
+                
             score = st.radio(
                 "Bitte bewerten:",
                 [1, 2, 3, 4],
                 horizontal=True,
-                key=f"{dimension}_{feld}_{idx}"
+                key=radio_key,
+                index=default_index # Setze den initialen Wert
             )
-            scores.append(score)
-        if scores:
-            st.session_state.ergebnisse[feld] = np.mean(scores)
+            
+            if score is not None:
+                # Speichere die individuelle Bewertung im session_state
+                st.session_state[radio_key] = score
+                scores_for_this_hf.append(score)
+            else:
+                scores_for_this_hf.append(np.nan) # Füge NaN hinzu, wenn nicht bewertet
+
+        # Berechne den Mittelwert für das aktuelle Handlungsfeld (nur aus tatsächlich bewerteten Scores)
+        # und speichere ihn in st.session_state.ergebnisse
+        if any(~np.isnan(scores_for_this_hf)):
+            st.session_state.ergebnisse[feld] = np.nanmean(scores_for_this_hf)
+        elif feld in st.session_state.ergebnisse: # Wenn keine bewerteten Scores und Handlungsfeld schon da war
+            del st.session_state.ergebnisse[feld] # Entferne es, um Konsistenz zu gewährleisten
+
 
 elif current_tab == "Abschließende Fragen":
-    st.text_input("Branche", key="branche")
-    st.radio("Mitarbeitende", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende")
-    st.radio("Funktion", ["Geschäftsführung", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion")
-    st.text_input("PLZ (optional)", key="plz")
-    st.text_input("E-Mail (optional)", key="email")
+    st.text_input("Branche", key="branche_input") # Eindeutiger Key
+    st.radio("Mitarbeitende", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende_radio") # Eindeutiger Key
+    st.radio("Funktion", ["Geschäftsführung", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion_radio") # Eindeutiger Key
+    
+    st.subheader("Spezifische technische und prozessuale Angaben")
+
+    # Abfrage Anzahl CNC-Werkzeugmaschinen
+    st.session_state.num_cnc_machines_raw = st.number_input(
+        "Anzahl der CNC-Werkzeugmaschinen", 
+        min_value=0, 
+        value=st.session_state.num_cnc_machines_raw, 
+        key="num_cnc_machines_raw_input" # Eindeutiger Key
+    )
+    # Kategorisierung wird automatisch aktualisiert durch den num_cnc_machines_raw_input
+    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.num_cnc_machines_raw)
+
+    # Abfrage Automatisierungsgrad Prozent
+    automation_percentage_options = ["0%", "1 - 25%", "26 - 50%", "> 50%"]
+    # Sicherstellen, dass der Initialwert in den Optionen ist
+    initial_automation_index = automation_percentage_options.index(st.session_state.automation_percentage_raw) \
+                                if st.session_state.automation_percentage_raw in automation_percentage_options else 0
+    
+    st.session_state.automation_percentage_raw = st.radio(
+        "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?", 
+        automation_percentage_options,
+        index=initial_automation_index, # Setze Initialwert
+        key="automation_percentage_radio_input" # Eindeutiger Key
+    )
+    st.session_state.num_auto_machines_categorized = categorize_automation_percentage(st.session_state.automation_percentage_raw) 
+
+    # Abfrage Losgröße
+    losgroesse_options = ["<5", "5–50", "51–100", ">100"]
+    initial_losgroesse_index = losgroesse_options.index(st.session_state.losgroesse_raw) \
+                               if st.session_state.losgroesse_raw in losgroesse_options else 0
+    st.session_state.losgroesse_raw = st.radio(
+        "Typische Fertigungslosgröße",
+        losgroesse_options,
+        index=initial_losgroesse_index,
+        key="losgroesse_radio_input"
+    )
+    st.session_state.losgroesse_categorized = categorize_losgroesse(st.session_state.losgroesse_raw)
+
+    # Abfrage Durchlaufzeit
+    durchlaufzeit_options = ["<10 min", "11–30 min", "31–90 min", ">90 min"]
+    initial_durchlaufzeit_index = durchlaufzeit_options.index(st.session_state.durchlaufzeit_raw) \
+                                   if st.session_state.durchlaufzeit_raw in durchlaufzeit_options else 0
+    st.session_state.durchlaufzeit_raw = st.radio(
+        "Zeitspanne vom Auftragsstart bis unentgratetem Fertigteil",
+        durchlaufzeit_options,
+        index=initial_durchlaufzeit_index,
+        key="durchlaufzeit_radio_input"
+    )
+    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(st.session_state.durchlaufzeit_raw)
+
+    # Abfrage Laufzeit
+    laufzeit_options = ["<1 Tag", "1–3 Tage", "4–7 Tage", ">7 Tage"]
+    initial_laufzeit_index = laufzeit_options.index(st.session_state.laufzeit_raw) \
+                              if st.session_state.laufzeit_raw in laufzeit_options else 0
+    st.session_state.laufzeit_raw = st.radio(
+        "Durchschnittliche Maschinenlaufzeit je Auftrag",
+        laufzeit_options,
+        index=initial_laufzeit_index,
+        key="laufzeit_radio_input"
+    )
+    st.session_state.laufzeit_categorized = categorize_laufzeit(st.session_state.laufzeit_raw)
+
+
+    st.text_input("PLZ (optional)", key="plz_input") # Eindeutiger Key
+    st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
-elif current_tab == "Auswertung":
-    if st.button("Radar-Diagramm anzeigen"):
-        labels = [f"{feld}\n({dim_map.get(feld, '')})" for feld in st.session_state.ergebnisse]
-        values = list(st.session_state.ergebnisse.values())
 
-        if not values:
-            st.warning("Bitte zuerst alle Bewertungen ausfüllen.")
-        else:
+# Auswertungs-Tab
+elif current_tab == "Auswertung":
+    # Sicherstellen, dass alle benötigten Daten verfügbar sind, bevor der Knopf angezeigt wird
+    if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
+        # Hier die Logik zum Anzeigen des Radar-Diagramms und der Cluster-Zuordnung
+        # (Dies ist der Teil, der ausgeführt wird, sobald der Benutzer auf den Reiter "Auswertung" wechselt)
+
+        labels = []
+        values = []
+        for dim_name, handlungsfelder_in_dim in mtok_structure.items():
+            for hf_name in handlungsfelder_in_dim:
+                if hf_name in st.session_state.ergebnisse and st.session_state.ergebnisse[hf_name] is not None:
+                    labels.append(f"{hf_name}\n({dim_name})")
+                    values.append(st.session_state.ergebnisse[hf_name])
+
+        radar_chart_fig = None
+        if values:
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
 
-            fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1 = niedrig', '2', '3', '4 = sehr hoch'], fontsize=8)
+            ax.set_yticklabels(['1 = Niedrig', '2 = Mittel', '3 = Hoch', '4 = Sehr hoch'], fontsize=8)
             ax.set_xticks(angles)
             ax.set_xticklabels(labels, fontsize=9)
             ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=14, pad=20)
-            st.pyplot(fig)
+            st.pyplot(radar_chart_fig) # Zeige das Diagramm an
 
-            # Clusterzuordnung
-            avg = np.mean(values)
-            st.subheader("Clusterzuordnung")
-            if avg >= 3.5:
-                cluster = "Cluster 3 – Digital-affin und akzeptanzstark"
-            elif avg >= 2.8:
-                cluster = "Cluster 4 – Effizient, aber strukturell gehemmt"
-            elif avg >= 2.0:
-                cluster = "Cluster 2 – Produktionsstark, aber mobilitätsfern"
-            else:
-                cluster = "Cluster 1 – Traditionell und reaktiv"
-            st.info(f"Der Betrieb gehört vermutlich zu {cluster}.")
+        # Cluster-Zuordnung anzeigen
+        cluster_result, abweichungen_detail = berechne_clusterzuordnung(st.session_state.ergebnisse, Kriterien)
+        
+        display_cluster_result = ""
+        if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
+            st.warning(cluster_result)
+            display_cluster_result = cluster_result # Speichere Fehlermeldung
+            # Hier keine weitere Auswertung, wenn Clusterzuordnung fehlschlägt
+        else:
+            st.subheader("Automatische Clusterzuordnung")
+            st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
+            display_cluster_result = cluster_result # Speichere erfolgreichen Cluster-Namen
 
-            # GPT-Auswertung
+            # GPT-Auswertung anzeigen
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
-                antwort = frage_chatgpt_auswertung(st.session_state.ergebnisse)
-            st.markdown(antwort)
+                gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
+            st.markdown(gpt_output_text)
+
+            # --- PDF-Generierung und Download-Button ---
+            # Sicherstellen, dass alle Teile für die PDF-Generierung verfügbar sind
+            if radar_chart_fig and gpt_output_text and display_cluster_result:
+                
+                # Hier muss die Funktion generate_evaluation_pdf die tatsächlichen Mittelwerte der HF übergeben bekommen
+                # die gpt_output_text, den cluster_result und das radar_chart_fig
+                
+                pdf_output_buffer = generate_evaluation_pdf(
+                    st.session_state.ergebnisse,
+                    display_cluster_result,
+                    gpt_output_text,
+                    radar_chart_fig,
+                    mtok_structure # Struktur für die Tabelle der Mittelwerte
+                )
+                
+                st.download_button(
+                    label="Auswertung als PDF herunterladen",
+                    data=pdf_output_buffer,
+                    file_name="Readiness_Check_Auswertung.pdf",
+                    mime="application/pdf"
+                )
+            else:
+                st.warning("Nicht alle Daten für die PDF-Generierung verfügbar. Bitte füllen Sie alle Schritte aus.")
+
+# --- Hier kommt der Rest des Streamlit Codes ---
+# (Das gehört nicht zum Auswertungs-Tab, ist aber Teil der kompletten App)
 
 # Trenner
 st.markdown("---")
@@ -598,8 +1051,8 @@ st.markdown(
         <div style='position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);
                     z-index: 9999;'>
             <button style='background-color: #1f77b4; color: white; border: none;
-                           padding: 10px 16px; border-radius: 6px; font-size: 16px;
-                           box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer;'>
+                            padding: 10px 16px; border-radius: 6px; font-size: 16px;
+                            box-shadow: 0 2px 6px rgba(0,0,0,0.2); cursor: pointer;'>
                 ⬆ Nach oben
             </button>
         </div>
