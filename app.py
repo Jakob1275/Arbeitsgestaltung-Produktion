@@ -434,75 +434,55 @@ Kriterien = {
   ]
     }
 
-# Hilfsfunktion zur Kategorisierung der Anzahl CNC-Maschinen (Annahme der Kategorien)
+# --- Hilfsfunktionen ---
 def categorize_cnc_machines(num_machines_raw):
     if num_machines_raw is None:
         return np.nan
-    # Beispielhafte Kategorien, müssen empirisch validiert werden
-    if num_machines_raw < 5: # "< 5" -> 1
-        return 1
-    elif num_machines_raw <= 10: # "5 - 10" -> 2
-        return 2
-    elif num_machines_raw <= 25: # "11 - 25" -> 3
-        return 3
-    else: # "> 25" -> 4
-        return 4
+    mapping = {
+        "< 5": 1,
+        "5 - 10": 2,
+        "11 - 25": 3,
+        "> 25": 4
+    }
+    return mapping.get(num_machines_raw, np.nan)
     
-# Hilfsfunktion zur Kategorisierung des Automatisierungsgrades in Prozent
 def categorize_automation_percentage(percentage_str):
     if percentage_str is None:
         return np.nan
-    if percentage_str == "0%":
-        return 1
-    elif percentage_str == "1 - 25%":
-        return 2
-    elif percentage_str == "26 - 50%":
-        return 3
-    elif percentage_str == "> 50%":
-        return 4
-    return np.nan # Fallback für unerwartete Strings
+    mapping = {
+        "0%": 1,
+        "1 - 25%": 2,
+        "26 - 50%": 3,
+        "> 50%": 4
+    }
+    return mapping.get(percentage_str, np.nan)
 
-# Hilfsfunktion zur Kategorisierung der Losgröße
 def categorize_losgroesse(losgroesse_str):
-    if losgroesse_str is None:
-        return np.nan
-    if losgroesse_str == "<5":
-        return 1
-    elif losgroesse_str == "5–50":
-        return 2
-    elif losgroesse_str == "51–100":
-        return 3
-    elif losgroesse_str == ">100":
-        return 4
-    return np.nan
+    mapping = {
+        "<5": 1,
+        "5–50": 2,
+        "51–100": 3,
+        ">100": 4
+    }
+    return mapping.get(losgroesse_str, np.nan)
 
-# Hilfsfunktion zur Kategorisierung der Durchlaufzeit
 def categorize_durchlaufzeit(durchlaufzeit_str):
-    if durchlaufzeit_str is None:
-        return np.nan
-    if durchlaufzeit_str == "<10 min":
-        return 1
-    elif durchlaufzeit_str == "11–30 min":
-        return 2
-    elif durchlaufzeit_str == "31–90 min":
-        return 3
-    elif durchlaufzeit_str == ">90 min":
-        return 4
-    return np.nan
+    mapping = {
+        "<10 min": 1,
+        "11–30 min": 2,
+        "31–90 min": 3,
+        ">90 min": 4
+    }
+    return mapping.get(durchlaufzeit_str, np.nan)
 
-# Hilfsfunktion zur Kategorisierung der Laufzeit
 def categorize_laufzeit(laufzeit_str):
-    if laufzeit_str is None:
-        return np.nan
-    if laufzeit_str == "<1 Tag":
-        return 1
-    elif laufzeit_str == "1–3 Tage":
-        return 2
-    elif laufzeit_str == "4–7 Tage":
-        return 3
-    elif laufzeit_str == ">7 Tage":
-        return 4
-    return np.nan
+    mapping = {
+        "<1 Tag": 1,
+        "1–3 Tage": 2,
+        "4–7 Tage": 3,
+        ">7 Tage": 4
+    }
+    return mapping.get(laufzeit_str, np.nan)
 
 
 # Mapping von Kriterien-Item-Fragen zu den 11 Cluster-Variablen
@@ -728,42 +708,47 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 # Initialisierung der Session State Variablen vor der UI-Logik
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
-if "ergebnisse" not in st.session_state: # Speichert Mittelwerte pro Handlungsfeld für Radar-Diagramm
+
+if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
-# Für die individuellen Item-Scores (für Clusterzuordnung) werden die Keys dynamisch erstellt.
-# Initialisiere auch die neuen Eingabefelder im Session State, um Fehler bei erstem Laden zu vermeiden
-# WICHTIG: Die Schlüssel hier müssen den keys in den Widgets im UI-Code entsprechen
-if 'num_cnc_machines_raw_input' not in st.session_state: # Der Key des st.number_input
-    st.session_state.num_cnc_machines_raw_input = 0
-if 'num_cnc_machines_categorized' not in st.session_state:
-    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(0) # Standardwert
-if 'automation_percentage_radio_input' not in st.session_state: # Der Key des st.radio
-    st.session_state.automation_percentage_radio_input = "0%" # Radio Button Initialwert (als String)
-if 'num_auto_machines_categorized' not in st.session_state:
-    st.session_state.num_auto_machines_categorized = categorize_automation_percentage("0%") # Standardwert
 
-if 'losgroesse_radio_input' not in st.session_state:
-    st.session_state.losgroesse_radio_input = "<5"
-if 'losgroesse_categorized' not in st.session_state:
-    st.session_state.losgroesse_categorized = categorize_losgroesse("<5")
+# CNC-Maschinen (feste Kategorien via st.radio)
+if "cnc_range" not in st.session_state:
+    st.session_state.cnc_range = "< 5"
+if "num_cnc_machines_categorized" not in st.session_state:
+    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.cnc_range)
 
-if 'durchlaufzeit_radio_input' not in st.session_state:
-    st.session_state.durchlaufzeit_radio_input = "<10 min"
-if 'durchlaufzeit_categorized' not in st.session_state:
-    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit("<10 min")
+# Automatisierungsgrad
+if "automation_range" not in st.session_state:
+    st.session_state.automation_range = "0%"
+if "num_auto_machines_categorized" not in st.session_state:
+    st.session_state.num_auto_machines_categorized = categorize_automation_percentage(st.session_state.automation_range)
 
-if 'laufzeit_radio_input' not in st.session_state:
-    st.session_state.laufzeit_radio_input = "<1 Tag"
-if 'laufzeit_categorized' not in st.session_state:
-    st.session_state.laufzeit_categorized = categorize_laufzeit("<1 Tag")
+# Losgröße
+if "losgroesse_range" not in st.session_state:
+    st.session_state.losgroesse_range = "<5"
+if "losgroesse_categorized" not in st.session_state:
+    st.session_state.losgroesse_categorized = categorize_losgroesse(st.session_state.losgroesse_range)
 
-# Initialisierung für generische Text/Radio-Inputs, die nicht direkt kategorisiert werden
+# Durchlaufzeit
+if "durchlaufzeit_range" not in st.session_state:
+    st.session_state.durchlaufzeit_range = "<10 min"
+if "durchlaufzeit_categorized" not in st.session_state:
+    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(st.session_state.durchlaufzeit_range)
+
+# Laufzeit
+if "laufzeit_range" not in st.session_state:
+    st.session_state.laufzeit_range = "<1 Tag"
+if "laufzeit_categorized" not in st.session_state:
+    st.session_state.laufzeit_categorized = categorize_laufzeit(st.session_state.laufzeit_range)
+
+# Allgemeine Angaben
 if 'branche_input' not in st.session_state:
     st.session_state.branche_input = ""
 if 'mitarbeitende_radio' not in st.session_state:
-    st.session_state.mitarbeitende_radio = "1-9" # Default-Wert für radio, falls nötig
+    st.session_state.mitarbeitende_radio = "1-9"
 if 'funktion_radio' not in st.session_state:
-    st.session_state.funktion_radio = "Geschäftsführung" # Default-Wert für radio, falls nötig
+    st.session_state.funktion_radio = "Geschäftsführung"
 if 'plz_input' not in st.session_state:
     st.session_state.plz_input = ""
 if 'email_input' not in st.session_state:
@@ -872,69 +857,35 @@ elif current_tab == "Abschließende Fragen":
     
     st.subheader("Spezifische technische und prozessuale Angaben")
 
-    # Initialisierung, falls noch nicht vorhanden
-    if "num_cnc_machines_input" not in st.session_state:
-        st.session_state["num_cnc_machines_input"] = 0
+   # Anzahl CNC-Werkzeugmaschinen
+    cnc_options = ["< 5", "5 - 10", "11 - 25", "> 25"]
+    selected_cnc_range = st.radio("Wie viele CNC-Werkzeugmaschinen sind in Ihrem Betrieb vorhanden?", cnc_options, key="cnc_range")
+    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(selected_cnc_range)
+    st.write(f"Kategorisierter Wert (CNC-Maschinen): {st.session_state.num_cnc_machines_categorized}")
 
-    # Eingabefeld anzeigen (ohne value=...)
-    st.number_input(
-    "Anzahl der CNC-Werkzeugmaschinen", 
-    min_value=0, 
-    key="num_cnc_machines_input"
-    )
-
-    # Weiterverarbeitung
-    st.session_state.num_cnc_machines_raw_input = st.session_state["num_cnc_machines_input"]
-    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.num_cnc_machines_raw_input)
-
-    # Abfrage Automatisierungsgrad Prozent
+    # Automatisierungsgrad
     automation_percentage_options = ["0%", "1 - 25%", "26 - 50%", "> 50%"]
-    initial_automation_index = automation_percentage_options.index(st.session_state.automation_percentage_raw) \
-                                if st.session_state.automation_percentage_raw in automation_percentage_options else 0
-    
-    st.session_state.automation_percentage_raw = st.radio(
-        "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?", 
-        automation_percentage_options,
-        index=initial_automation_index, # Setze Initialwert
-        key="automation_percentage_radio" # Eindeutiger Key
-    )
-    st.session_state.num_auto_machines_categorized = categorize_automation_percentage(st.session_state.automation_percentage_raw) 
+    selected_automation_range = st.radio("Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?", automation_percentage_options, key="automation_range")
+    st.session_state.num_auto_machines_categorized = categorize_automation_percentage(selected_automation_range)
+    st.write(f"Kategorisierter Wert (Automatisierung): {st.session_state.num_auto_machines_categorized}")
 
-    # Abfrage Losgröße
+    # Losgröße
     losgroesse_options = ["<5", "5–50", "51–100", ">100"]
-    initial_losgroesse_index = losgroesse_options.index(st.session_state.losgroesse_raw) \
-                               if st.session_state.losgroesse_raw in losgroesse_options else 0
-    st.session_state.losgroesse_raw = st.radio(
-        "Typische Fertigungslosgröße",
-        losgroesse_options,
-        index=initial_losgroesse_index,
-        key="losgroesse_radio" # Eindeutiger Key
-    )
-    st.session_state.losgroesse_categorized = categorize_losgroesse(st.session_state.losgroesse_raw)
+    selected_losgroesse = st.radio("Typische Fertigungslosgröße", losgroesse_options, key="losgroesse_range")
+    st.session_state.losgroesse_categorized = categorize_losgroesse(selected_losgroesse)
+    st.write(f"Kategorisierter Wert (Losgröße): {st.session_state.losgroesse_categorized}")
 
-    # Abfrage Durchlaufzeit
+    # Durchlaufzeit
     durchlaufzeit_options = ["<10 min", "11–30 min", "31–90 min", ">90 min"]
-    initial_durchlaufzeit_index = durchlaufzeit_options.index(st.session_state.durchlaufzeit_raw) \
-                                   if st.session_state.durchlaufzeit_raw in durchlaufzeit_options else 0
-    st.session_state.durchlaufzeit_raw = st.radio(
-        "Zeitspanne vom Auftragsstart bis unentgratetem Fertigteil",
-        durchlaufzeit_options,
-        index=initial_durchlaufzeit_index,
-        key="durchlaufzeit_radio" # Eindeutiger Key
-    )
-    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(st.session_state.durchlaufzeit_raw)
+    selected_durchlaufzeit = st.radio("Zeitspanne vom Auftragsstart bis unentgratetem Fertigteil", durchlaufzeit_options, key="durchlaufzeit_range")
+    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(selected_durchlaufzeit)
+    st.write(f"Kategorisierter Wert (Durchlaufzeit): {st.session_state.durchlaufzeit_categorized}")
 
-    # Abfrage Laufzeit
+    # Laufzeit
     laufzeit_options = ["<1 Tag", "1–3 Tage", "4–7 Tage", ">7 Tage"]
-    initial_laufzeit_index = laufzeit_options.index(st.session_state.laufzeit_raw) \
-                              if st.session_state.laufzeit_raw in laufzeit_options else 0
-    st.session_state.laufzeit_raw = st.radio(
-        "Durchschnittliche Maschinenlaufzeit je Auftrag",
-        laufzeit_options,
-        index=initial_laufzeit_index,
-        key="laufzeit_radio" # Eindeutiger Key
-    )
-    st.session_state.laufzeit_categorized = categorize_laufzeit(st.session_state.laufzeit_raw)
+    selected_laufzeit = st.radio("Durchschnittliche Maschinenlaufzeit je Auftrag", laufzeit_options, key="laufzeit_range")
+    st.session_state.laufzeit_categorized = categorize_laufzeit(selected_laufzeit)
+    st.write(f"Kategorisierter Wert (Laufzeit): {st.session_state.laufzeit_categorized}")
 
 
     st.text_input("PLZ (optional)", key="plz_input") # Eindeutiger Key
