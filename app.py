@@ -234,7 +234,8 @@ Kriterien = {
     {
       "frage": "O1.8 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
       "begründung": "Klare Rollen und eine partizipative Einbindung relevanter Akteure fördern die Akzeptanz, gewährleisten die Einhaltung rechtlicher Rahmenbedingungen und stärken die Governance-Struktur."
-    },
+    }
+    ],
     "Soziokulturelle und organisatorische Umwelt": [
     {
       "frage": "O2.1 Der Betrieb verfügt über ausreichend qualifizierte Fachkräfte in der zerspanenden Fertigung.",
