@@ -459,7 +459,7 @@ def categorize_automation_percentage(percentage_str):
 
 def categorize_losgroesse(losgroesse_str):
     mapping = {
-        "<5": 1,
+        "< 5": 1,
         "5–50": 2,
         "51–99": 3,
         "≥ 100": 4
@@ -468,7 +468,7 @@ def categorize_losgroesse(losgroesse_str):
 
 def categorize_durchlaufzeit(durchlaufzeit_str):
     mapping = {
-        "<10 min": 1,
+        "< 10 min": 1,
         "11–30 min": 2,
         "31–89 min": 3,
         "≥ 90 min": 4
@@ -477,7 +477,7 @@ def categorize_durchlaufzeit(durchlaufzeit_str):
 
 def categorize_laufzeit(laufzeit_str):
     mapping = {
-        "<1 Tag": 1,
+        "< 1 Tag": 1,
         "1–3 Tage": 2,
         "4–6 Tage": 3,
         "≥ 7 Tage": 4
@@ -681,9 +681,9 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
         return "Bitte bewerten Sie genügend Kriterien für die Clusterzuordnung (einschließlich der direkten Abfragen).", {}
     
     # Optional: Eine Mindestanzahl an bewerteten Cluster-Variablen sicherstellen
-    MIN_CLUSTER_VARS_SCORED = 7 # z.B. mindestens 7 der 11 Cluster-Variablen müssen bewertet sein
+    MIN_CLUSTER_VARS_SCORED = 7  # Mindestanzahl bewerteter Variablen
     if len(nutzer_cluster_variable_werte_filtered) < MIN_CLUSTER_VARS_SCORED:
-        return f"Bitte bewerten Sie mindestens {MIN_CLUSTER_VARS_SCORED} relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {len(nutzer_cluster_variable_werte_filtered)} bewertet.", {}
+    return f"Bitte bewerten Sie mindestens {MIN_CLUSTER_VARS_SCORED} relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {len(nutzer_cluster_variable_werte_filtered)} bewertet.", {}
 
 
     # 3. Berechne die Abweichung des Nutzerprofils von jedem Clusterprofil
@@ -875,7 +875,7 @@ elif current_tab == "Abschließende Fragen":
    # Anzahl CNC-Werkzeugmaschinen
     cnc_options = ["< 5", "5 - 10", "11 - 24", "≥ 25"]
     selected_cnc_range = st.radio("Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?", cnc_options, key="cnc_range")
-    st.session_state["anzahl_cnc-werkzeugmaschinen_categorized"] = categorize_cnc_machines(selected_cnc_range)
+    st.session_state["anzahl_cnc_werkzeugmaschinen_categorized"] = categorize_cnc_machines(selected_cnc_range)
    
 
     # Automatisierungsgrad
