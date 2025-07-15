@@ -641,7 +641,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
         "Laufzeit"
     ]
     for var_name in direct_input_vars:
-        session_key_categorized = var_name.lower().replace(" ", "_") + "_categorized" # Erzeugt z.B. "losgröße_categorized"
+        session_key_categorized = var_name.lower().replace(" ", "_") + "_categorized" # Erzeugt z.B. "losgroeße_categorized"
         if session_key_categorized in st.session_state:
             value = st.session_state[session_key_categorized]
             if isinstance(value, (int, float)) and not np.isnan(value):
