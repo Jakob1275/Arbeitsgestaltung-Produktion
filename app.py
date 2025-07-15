@@ -713,7 +713,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 # --- Start des Streamlit UI Codes ---
 # Initialisierung der Session State Variablen vor der UI-Logik
 if "current_tab_index" not in st.session_state:
-    st.session_state.current_tab_index = 1
+    st.session_state.current_tab_index = 0
 
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
@@ -825,7 +825,7 @@ elif current_tab in mtok_structure:
             # Finde den Index des initialen Wertes für st.radio
             try:
                 # np.nan muss als None behandelt werden, da index() dies nicht verarbeiten kann
-                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else None
+                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not 1 else 1
             except ValueError:
                 default_index = None # Fallback, wenn initial_value nicht in der Liste ist
                 
