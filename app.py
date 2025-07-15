@@ -861,31 +861,31 @@ elif current_tab == "Abschließende Fragen":
     cnc_options = ["< 5", "5 - 10", "11 - 25", "> 25"]
     selected_cnc_range = st.radio("Wie viele CNC-Werkzeugmaschinen sind in Ihrem Betrieb vorhanden?", cnc_options, key="cnc_range")
     st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(selected_cnc_range)
-    st.write(f"Kategorisierter Wert (CNC-Maschinen): {st.session_state.num_cnc_machines_categorized}")
+   
 
     # Automatisierungsgrad
     automation_percentage_options = ["0%", "1 - 25%", "26 - 50%", "> 50%"]
     selected_automation_range = st.radio("Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?", automation_percentage_options, key="automation_range")
     st.session_state.num_auto_machines_categorized = categorize_automation_percentage(selected_automation_range)
-    st.write(f"Kategorisierter Wert (Automatisierung): {st.session_state.num_auto_machines_categorized}")
+    
 
     # Losgröße
     losgroesse_options = ["<5", "5–50", "51–100", ">100"]
     selected_losgroesse = st.radio("Typische Fertigungslosgröße", losgroesse_options, key="losgroesse_range")
     st.session_state.losgroesse_categorized = categorize_losgroesse(selected_losgroesse)
-    st.write(f"Kategorisierter Wert (Losgröße): {st.session_state.losgroesse_categorized}")
+    
 
     # Durchlaufzeit
     durchlaufzeit_options = ["<10 min", "11–30 min", "31–90 min", ">90 min"]
     selected_durchlaufzeit = st.radio("Zeitspanne vom Auftragsstart bis unentgratetem Fertigteil", durchlaufzeit_options, key="durchlaufzeit_range")
     st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(selected_durchlaufzeit)
-    st.write(f"Kategorisierter Wert (Durchlaufzeit): {st.session_state.durchlaufzeit_categorized}")
+    
 
     # Laufzeit
     laufzeit_options = ["<1 Tag", "1–3 Tage", "4–7 Tage", ">7 Tage"]
     selected_laufzeit = st.radio("Durchschnittliche Maschinenlaufzeit je Auftrag", laufzeit_options, key="laufzeit_range")
     st.session_state.laufzeit_categorized = categorize_laufzeit(selected_laufzeit)
-    st.write(f"Kategorisierter Wert (Laufzeit): {st.session_state.laufzeit_categorized}")
+   
 
 
     st.text_input("PLZ (optional)", key="plz_input") # Eindeutiger Key
