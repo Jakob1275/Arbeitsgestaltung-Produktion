@@ -620,15 +620,13 @@ cluster_item_values = {
 
 #Berechnung
 def berechne_clusterzuordnung(kriterien_all_items_dict):
-    # 1. Sammle alle individuellen Item-Bewertungen aus der Streamlit Session State
+    # 1. Sammle alle individuellen Item-Bewertungen aus dem item_to_radio_key_map
     all_item_scores_flat = {}
-    for dim_name, handlungsfelder_in_dim in mtok_structure.items():
-        for hf_name in handlungsfelder_in_dim:
-            if hf_name in kriterien_all_items_dict:
-                for idx, item_info in enumerate(kriterien_all_items_dict[hf_name]):
-                    item_key_in_session = f"{dim_name}_{hf_name}_{idx}"
-                    if item_key_in_session in st.session_state and st.session_state[item_key_in_session] is not None:
-                        all_item_scores_flat[item_info['frage']] = st.session_state[item_key_in_session]
+    item_to_radio_key_map = st.session_state.get("item_to_radio_key_map", {})
+
+    for frage_text, session_key in item_to_radio_key_map.items():
+        if session_key in st.session_state and st.session_state[session_key] is not None:
+            all_item_scores_flat[frage_text] = st.session_state[session_key]
 
     # DEBUG: Zeige, welche Fragen gemappt sind und welche bewertet wurden
     bewertete_items = set(all_item_scores_flat.keys())
@@ -825,6 +823,10 @@ elif current_tab in mtok_structure:
 
             # Nutze indexbasierten Schlüssel (idx), damit die Zuordnung mit Kriterien stabil bleibt
             radio_key = f"{dimension}_{feld}_{idx}"
+            # Mapping zur späteren Auswertung
+            if "item_to_radio_key_map" not in st.session_state:
+                st.session_state["item_to_radio_key_map"] = {}
+            st.session_state["item_to_radio_key_map"][item['frage']] = f"{radio_key}_score"
             score_key = f"{radio_key}_score"
 
             # Hole ggf. vorhandenen Wert
