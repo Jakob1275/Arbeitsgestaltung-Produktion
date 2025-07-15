@@ -1,1 +1,6 @@
-streamlitnumpymatplotlibopenaipython-docx
+streamlit
+numpy
+matplotlib
+openai
+python-docx
+fpdf
