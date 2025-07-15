@@ -484,6 +484,9 @@ def categorize_laufzeit(laufzeit_str):
     }
     return mapping.get(laufzeit_str, np.nan)
 
+st.write("📦 Aktueller st.session_state Inhalt:")
+for key in st.session_state:
+    st.write(f"{key}: {st.session_state[key]}")
 
 # Mapping von Kriterien-Item-Fragen zu den 11 Cluster-Variablen
 # WICHTIG: Die Liste der Fragen muss exakt der 'frage'-Eigenschaft in den Kriterien-Dictionaries entsprechen.
