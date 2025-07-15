@@ -431,7 +431,7 @@ Kriterien = {
       "begründung": "Eine faire Berücksichtigung individueller Anforderungen (z. B. Schichtsystem, Pflegeverantwortung) fördert Akzeptanz und Zusammenhalt im Team."
     }
   ]
-}
+    }
 
 # Hilfsfunktion zur Kategorisierung der Anzahl CNC-Maschinen (Annahme der Kategorien)
 def categorize_cnc_machines(num_machines_raw):
