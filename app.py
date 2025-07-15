@@ -819,26 +819,18 @@ elif current_tab in mtok_structure:
         for idx, item in enumerate(Kriterien.get(feld, [])):
             frage_text = item["frage"]
             begruendung = item["begründung"]
-elif current_tab in mtok_structure:
-    dimension = current_tab
-    for feld in mtok_structure[dimension]:
-        st.subheader(f"Handlungsfeld: {feld}")
-        scores_for_this_hf = []
-
-        for item in Kriterien.get(feld, []):
-            frage_text = item["frage"]
-            begruendung = item["begründung"]
-
-            # Extrahiere ID aus Fragetext, z. B. "K1.6"
-            frage_id = frage_text.split(" ")[0]
-            radio_key = f"{dimension}_{feld}_{frage_id}"
 
             st.markdown(f"**{frage_text}**")
             st.markdown(f"<span style='color:gray; font-size:0.9em'>{begruendung}</span>", unsafe_allow_html=True)
 
-            # Lade gespeicherten Score aus Session, falls vorhanden
-            initial_value = st.session_state.get(f"{radio_key}_score", None)
+            # Nutze indexbasierten Schlüssel (idx), damit die Zuordnung mit Kriterien stabil bleibt
+            radio_key = f"{dimension}_{feld}_{idx}"
+            score_key = f"{radio_key}_score"
 
+            # Hole ggf. vorhandenen Wert
+            initial_value = st.session_state.get(score_key, None)
+
+            # Bestimme Default-Wert für st.radio
             try:
                 default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else 0
             except ValueError:
@@ -852,18 +844,18 @@ elif current_tab in mtok_structure:
                 index=default_index
             )
 
+            # Speichere Score separat (mit _score-Endung)
             if score is not None:
-                st.session_state[f"{radio_key}_score"] = score
+                st.session_state[score_key] = score
                 scores_for_this_hf.append(score)
             else:
                 scores_for_this_hf.append(np.nan)
 
-        # Mittelwert berechnen (nur bewertete Scores)
+        # Mittelwert für dieses Handlungsfeld speichern
         if any(~np.isnan(scores_for_this_hf)):
             st.session_state.ergebnisse[feld] = np.nanmean(scores_for_this_hf)
         elif feld in st.session_state.ergebnisse:
             del st.session_state.ergebnisse[feld]
-
 
 elif current_tab == "Abschließende Fragen":
     st.text_input("Branche", key="branche_input") 
