@@ -516,7 +516,6 @@ kriterien_item_to_cluster_variable_mapping = {
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
         "T1.5 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
-        "O3.9 Maschinenstillstände führen nicht unmittelbar zu kritischen Produktivitätsverlusten." # Toleranz gegenüber Stillständen reduziert Instabilität
     ],
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
