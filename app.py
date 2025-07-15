@@ -825,9 +825,9 @@ elif current_tab in mtok_structure:
             # Finde den Index des initialen Wertes für st.radio
             try:
                 # np.nan muss als None behandelt werden, da index() dies nicht verarbeiten kann
-                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not 1 else 1
+                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else 0
             except ValueError:
-                default_index = None # Fallback, wenn initial_value nicht in der Liste ist
+                default_index = 0 # Fallback, wenn initial_value nicht in der Liste ist
                 
             score = st.radio(
                 "Bitte bewerten:",
