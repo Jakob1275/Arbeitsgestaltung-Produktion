@@ -615,7 +615,7 @@ cluster_item_values = {
     }
 }
 
-
+#Berechnung
 def berechne_clusterzuordnung(kriterien_all_items_dict):
     # 1. Sammle alle individuellen Item-Bewertungen aus der Streamlit Session State
     all_item_scores_flat = {}
@@ -627,6 +627,15 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
                     if item_key_in_session in st.session_state and st.session_state[item_key_in_session] is not None:
                         all_item_scores_flat[item_info['frage']] = st.session_state[item_key_in_session]
 
+    # DEBUG: Zeige, welche Fragen gemappt sind und welche bewertet wurden
+    bewertete_items = set(all_item_scores_flat.keys())
+    gemappte_items = set()
+    for varname, fragenliste in kriterien_item_to_cluster_variable_mapping.items():
+        gemappte_items.update(fragenliste)
+
+    st.write("✅ Bewertete gemappte Fragen:", bewertete_items.intersection(gemappte_items))
+    st.write("❌ Nicht bewertete gemappte Fragen:", gemappte_items - bewertete_items)
+    
     # 2. Berechne die Werte für die 11 spezifischen Cluster-Variablen des Nutzers
     nutzer_cluster_variable_werte = {}
 
