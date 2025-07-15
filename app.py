@@ -641,7 +641,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
         "Laufzeit"
     ]
     for var_name in direct_input_vars:
-        session_key_categorized = var_name.lower().replace(" ", "_") + "_categorized" # Erzeugt z.B. "losgroeße_categorized"
+        session_key_categorized = var_name.lower().replace(" ", "_") + "_categorized" # Erzeugt z.B. "losgroesse_categorized"
         if session_key_categorized in st.session_state:
             value = st.session_state[session_key_categorized]
             if isinstance(value, (int, float)) and not np.isnan(value):
@@ -897,7 +897,7 @@ elif current_tab == "Abschließende Fragen":
     # Losgröße
     losgroesse_options = ["< 5", "5–50", "51–99", "≥ 100"]
     selected_losgroesse = st.radio("Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?", losgroesse_options, key="losgroesse_range")
-    st.session_state["losgroeße_categorized"] = categorize_losgroesse(selected_losgroesse)
+    st.session_state["losgroesse_categorized"] = categorize_losgroesse(selected_losgroesse)
     
 
     # Durchlaufzeit
