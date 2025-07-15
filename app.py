@@ -77,22 +77,18 @@ Kriterien = {
     },
     {
       "frage": "M1.4 Beschäftigte übernehmen Aufgaben, die ortsunabhängig erledigt werden können.",
-      "begründung": "Ein breites Aufgabenverständnis fördert Eigenverantwortung und unterstützt mobile Arbeitsformen."
+      "begründung": "Ein breites Aufgabengebiet (z. B. Programmierung von CNC-Werkzeugmaschinen, Fertigungsdokumentationen) fördert Eigenverantwortung und unterstützt mobile Arbeitsformen."
     },
     {
-      "frage": "M1.5 Beschäftigte lösen Störungen eigenständig.",
+      "frage": "M1.5 Beschäftigte können Störungen eigenständig lösen.",
       "begründung": "Flexibles Arbeiten erfordert Handlungssicherheit bei Prozessabweichungen ohne direkte Unterstützung."
     },
     {
       "frage": "M1.6 Die Arbeitsumgebung ermöglicht produktives Arbeiten außerhalb der Fertigung.",
-      "begründung": "Ergonomische, digitale und akustische Bedingungen sichern Leistung auch bei räumlicher Entkopplung."
+      "begründung": "Ergonomische, digitale und akustische Bedingungen sichern Leistung zwischen Beschäftigten auch bei räumlicher Entkopplung."
     },
     {
-      "frage": "M1.7 Erfahrungswissen wird dokumentiert und weitergegeben.",
-      "begründung": "Wissenstransfer sichert Qualität und Anschlussfähigkeit bei wechselnden Präsenzzeiten."
-    },
-    {
-      "frage": "M1.8 Beschäftigte erhalten gezielte Qualifizierungen zu mobilen und zeitflexiblen Arbeitsformen.",
+      "frage": "M1.7 Beschäftigte erhalten gezielte Qualifizierungen zu mobilen und zeitflexiblen Arbeitsformen.",
       "begründung": "Kompetenzaufbau fördert Motivation und langfristige Bindung an flexible Arbeitsmodelle."
     }
   ],
@@ -115,159 +111,130 @@ Kriterien = {
     },
     {
       "frage": "M2.5 Beschäftigte beherrschen digitale Standardtools.",
-      "begründung": "Digitale Anwendungskompetenz ist grundlegend für effektive Kollaboration."
+      "begründung": "Digitale Anwendungskompetenz ist grundlegend für effektive Kollaboration (z. B. ERP-Software, Mailprogramm, Programmierungsoftware)."
     },
     {
       "frage": "M2.6 Beschäftigte verfügen über stabile externe Bedingungen für mobiles Arbeiten.",
       "begründung": "Rückzugsorte und unterstützendes Umfeld sind entscheidend für die Umsetzbarkeit."
     },
     {
-      "frage": "M2.7 Beschäftigte bringen aktiv Verbesserungsvorschläge ein.",
-      "begründung": "Beteiligung fördert die Passung und Akzeptanz flexibler Konzepte."
+      "frage": "M2.7 Beschäftigte können aktiv Verbesserungsvorschläge einbringen.",
+      "begründung": "Beteiligung fördert die Passung und Akzeptanz flexibler Konzepte (z. B. KVP-Prozess)."
     },
     {
-      "frage": "M2.8 Beschäftigte verstehen digitale Produktionssysteme in ihren Grundfunktionen.",
+      "frage": "M2.8 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren Grundfunktionen.",
       "begründung": "Systemverständnis erhöht Handlungssicherheit und reduziert Fehlbedienungen."
     }
   ],
    "Arbeitsplatzgestaltung und Automatisierung": [
     {
-    "frage": "T1.1 Die Werkzeugmaschine kann ohne ständige Anwesenheit betrieben werden (z. B. durch lange Laufzeiten oder automatisierte Routinetätigkeiten wie Werkstückhandling).",
-    "begründung": "Ein hoher Automatisierungsgrad oder lange unbeaufsichtigte Laufzeiten ermöglichen zeitliche Entkopplung und reduzieren Präsenzzwänge im Schichtbetrieb."
+    "frage": "T1.1 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
+    "begründung": "Ein hoher Automatisierungsgrad oder lange unbeaufsichtigte Laufzeiten ermöglichen zeitliche Entkopplung und reduzieren Präsenzzwänge."
     },
     {
-    "frage": "T1.2 Aufgaben entlang der Prozesskette sind hinsichtlich ihrer Präsenzbindung analysiert (z. B. Trennung von Vorbereitung, Rüsten, Fertigen, Prüfen).",
-    "begründung": "Eine systematische Analyse der Tätigkeiten ermöglicht die gezielte Aggregation präsenzkritischer und mobiler Anteile – Grundlage flexibler Gestaltungsmöglichkeiten."
-    },
-    {
-    "frage": "T1.3 Präsenzgebundene Aufgaben (z. B. Maschineneinrichtung) können gebündelt und zeitlich verdichtet ausgeführt werden.",
+    "frage": "T1.2 Präsenzgebundene Aufgaben (z. B. Maschineneinrichtung) können gebündelt und zeitlich verdichtet ausgeführt werden.",
     "begründung": "Planbare Präsenzphasen reduzieren Unterbrechungen und erleichtern mobile Arbeitsanteile außerhalb dieser Kernzeiten."
     },
     {
-    "frage": "T1.4 Tätigkeiten an Maschinenarbeitsplätzen sind flexibel zwischen Beschäftigten übertragbar (z. B. bei Vertretung, Mehrmaschinenbedienung).",
-    "begründung": "Aufgabenübertragbarkeit schafft Spielräume bei Personalengpässen, fördert Vertretungsfähigkeit und wurde in Cluster 3 als förderlicher Faktor identifiziert."
+    "frage": "T1.3 Tätigkeiten an Maschinenarbeitsplätzen sind flexibel zwischen Beschäftigten übertragbar.",
+    "begründung": "Aufgabenübertragbarkeit schafft Spielräume bei Personalengpässen, fördert Vertretungsfähigkeit und ermöglicht die Mehrmaschinenbedienung."
     },
     {
-    "frage": "T1.5 Maschinenbedienung erfolgt auf Basis standardisierter und dokumentierter Abläufe.",
+    "frage": "T1.4 Maschinenbedienung erfolgt auf Basis standardisierter und dokumentierter Abläufe.",
     "begründung": "Standardisierung ermöglicht Übergaben, unterstützt mobile Anteile und erleichtert Schulung sowie Fernbedienung."
     },
     {
-    "frage": "T1.6 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.",
+    "frage": "T1.5 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.",
     "begründung": "Prozessstabilität ist Voraussetzung für entkoppelte Arbeitsformen und reduziert unvorhergesehene Eingriffe bei physischer Abwesenheit."
     },
     {
-    "frage": "T1.7 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert (z. B. Kameras, Monitoring-Apps, Maschinenzugriff).",
-    "begründung": "Sensorische oder visuelle Fernkontrolle reduziert Präsenznotwendigkeit und erlaubt situatives Eingreifen."
+    "frage": "T1.6 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert.",
+    "begründung": "Sensorische oder visuelle Fernkontrolle (z. B. Kameras, Monitoring-Apps, Maschinenzugriff) reduziert Präsenznotwendigkeit und erlaubt situatives Eingreifen."
     },
     {
-    "frage": "T1.8 Prüf- und Qualitätssicherungsprozesse sind automatisiert oder organisatorisch entkoppelt.",
+    "frage": "T1.7 Prüf- und Qualitätssicherungsprozesse sind automatisiert oder organisatorisch entkoppelt.",
     "begründung": "Entkoppelte Qualitätssicherung reduziert feste Rückmeldepunkte im Prozess und ermöglicht flexiblere Zeiteinteilung."
     },
     {
-    "frage": "T1.9 Wartungsbedarfe und Eingriffsprotokolle sind digital dokumentiert und zentral zugänglich.",
+    "frage": "T1.8 Wartungsbedarfe und Eingriffsprotokolle sind digital dokumentiert und zentral zugänglich.",
     "begründung": "Digitale Transparenz unterstützt Eigenverantwortung, Übergaben und hybride Zuständigkeiten."
     },
     {
-    "frage": "T1.10 Echtzeitdaten zur Maschinenauslastung sind digital verfügbar (z. B. OEE-Analyse, Laufzeitanalyse).",
-    "begründung": "Prozessdaten ermöglichen situationsabhängige Steuerung und Optimierung – auch bei variabler Anwesenheit."
+    "frage": "T1.9 Echtzeitdaten zur Maschinenauslastung sind digital verfügbar.",
+    "begründung": "Prozessdaten (z. B. OEE-Analyse, Laufzeitanalyse) ermöglichen auch bei variabler Anwesenheit situationsabhängige Steuerung und Optimierung."
     },
     {
-    "frage": "T1.11 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden (z. B. ERP, MES, BDE).",
-    "begründung": "Vernetzte Systeme sind Voraussetzung für ortsunabhängige Steuerung, Planung und Dokumentation."
+    "frage": "T1.10 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
+    "begründung": "Vernetzte Systeme (z. B. ERP, MES, BDE) sind Voraussetzung für ortsunabhängige Steuerung, Planung und Dokumentation."
     },
     {
-    "frage": "T1.12 Die Auswirkungen flexibler Arbeit auf Produktivität, Qualität und Maschinenauslastung werden regelmäßig erfasst.",
-    "begründung": "Systematische Erfolgskontrolle unterstützt kontinuierliche Verbesserung und Legitimation flexibler Arbeitsmodelle im Produktionskontext."
+    "frage": "T1.11 Die Auswirkungen flexibler Arbeit auf Produktivität, Qualität und Maschinenauslastung werden regelmäßig erfasst.",
+    "begründung": "Systematische Erfolgskontrolle unterstützt kontinuierliche Verbesserung und Legitimation flexibler Arbeitsmodelle im Produktionsbereich."
     }
    ],
    "IT-Systemlandschaft und digital vernetzte Infrastruktur": [
     {
-      "frage": "T2.1 Die IT-Infrastruktur stellt geeignete mobile Endgeräte zur Verfügung (z. B. Laptops, Tablets).",
-      "begründung": "Mobile Endgeräte bilden die technische Basis für ortsunabhängiges Arbeiten in produktionsnahen Tätigkeiten."
+      "frage": "T2.1 Die IT-Infrastruktur stellt geeignete mobile Endgeräte zur Verfügung.",
+      "begründung": "Mobile Endgeräte (z. B. Laptops, Tablets) bilden die technische Basis für ortsunabhängiges Arbeiten in produktionsnahen Tätigkeiten."
     },
     {
-      "frage": "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich (z. B. über VPN oder cloudbasierte Plattformen).",
-      "begründung": "Flexibles Arbeiten erfordert sicheren Zugang zu zentralen Anwendungen von außerhalb der Fertigung."
+      "frage": "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
+      "begründung": "Flexibles Arbeiten erfordert sicheren Zugang (z. B. über VPN-Verbindungen) zu zentralen Anwendungen von außerhalb der Fertigung."
     },
     {
-      "frage": "T2.3 Digitale Kommunikations- und Kollaborationstools (z.B. MS Teams, Slack) sind standardisiert verfügbar.",
-      "begründung": "Digitale Tools ermöglichen dezentrale Abstimmung, Informationsaustausch und Teamkommunikation."
+      "frage": "T2.3 Digitale Kommunikations- und Kollaborationstools sind standardisiert verfügbar.",
+      "begründung": "Digitale Tools (z. B. MS Teams, Slack) ermöglichen dezentrale Abstimmung, Informationsaustausch und Teamkommunikation."
     },
     {
       "frage": "T2.4 Der IT-Support ist auch bei mobiler Arbeit verlässlich erreichbar.",
       "begründung": "Zuverlässiger IT-Support sichert technische Funktionsfähigkeit und reduziert Akzeptanzbarrieren."
     },
     {
-      "frage": "T2.5 Zugriffskonzepte sind sicher, rollenbasiert und klar geregelt.",
-      "begründung": "Rollenklarheit und Zugriffsschutz sind zentrale Voraussetzungen für digitale Zusammenarbeit."
-    },
-    {
-      "frage": "T2.6 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
+      "frage": "T2.5 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
       "begründung": "Vernetzung fördert bereichsübergreifende Koordination und reduziert Medienbrüche in Echtzeitprozessen."
     },
     {
-      "frage": "T2.7 Die IT-Systeme ermöglichen ortsunabhängige Einsicht in produktionsrelevante Echtzeitdaten (z. B. Maschinenstatus, Auftragsfortschritt).",
-      "begründung": "Transparenz in Echtzeit erhöht Steuerungsfähigkeit und Flexibilität im Produktionsumfeld."
+      "frage": "T2.6 Die IT-Systeme ermöglichen ortsunabhängige Einsicht und Rückmeldungen in produktionsrelevante Echtzeitdaten.",
+      "begründung": "Transparenz in Echtzeit (z. B. in Maschinenstatus, Auftragsfortschritt, Störgründe) erhöht Steuerungsfähigkeit und Flexibilität im Produktionsumfeld."
     },
     {
-      "frage": "T2.8 Beschäftigte können über mobile Endgeräte sicher Rückmeldungen und Produktionsdaten erfassen (z. B. Störgründe, Fortschritt).",
-      "begründung": "Digitale Rückmeldung ermöglicht dezentrale Steuerung, reduziert Medienbrüche und fördert Eigenverantwortung."
-    },
-    {
-      "frage": "T2.9 Simulationen oder digitale Zwillinge werden zur Produktionsplanung und -steuerung eingesetzt.",
+      "frage": "T2.7 Simulationen oder digitale Zwillinge werden zur Produktionsplanung und -steuerung eingesetzt.",
       "begründung": "Vorausschauende Modellierung verbessert Planbarkeit und Reaktionsfähigkeit im flexiblen Umfeld."
     }
     ],
     "Kommunikation, Kooperation und Zusammenarbeit": [
     {
-      "frage": "O1.1 Zwischen den Arbeitsbereichen bestehen strukturierte Kanäle für den Wissenstransfer.",
-      "begründung": "Ein stabiler Wissenstransfer erhöht die Resilienz und kompensiert personelle Ausfälle bei mobil-flexiblen Arbeitsformen."
+      "frage": "O1.1 Informationen für Planung, Wissenstransfer, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
+      "begründung": "Ein effektiver und transparenter Informationsfluss ist die Grundlage für dezentrale Koordination, schnelle Reaktionsfähigkeit und den Ausgleich personeller Ausfälle."
     },
     {
-      "frage": "O1.2 Relevante Informationen werden zeitnah, digital und adressatengerecht weitergegeben.",
-      "begründung": "Eine effektive Kommunikation ist die Grundlage für dezentrale Koordination und schnelle Reaktionsfähigkeit."
+      "frage": "O1.2 Digitale Kommunikations- und Kollaborationstools (inkl. asynchrone Formate und hybride Besprechungen) sind standardisiert verfügbar, technisch unterstützt und sicher nutzbar.",
+      "begründung": "Standardisierte digitale Tools ermöglichen orts- und zeitunabhängige Abstimmung, Teamkommunikation und flexible Teilhabe an Besprechungen."
     },
     {
-      "frage": "O1.3 Kommunikationskanäle sind auch bei Schichtübergaben und Vertretungssituationen verlässlich nutzbar.",
-      "begründung": "Gerade in der zerspanenden Fertigung mit häufigem Personalwechsel sichern zuverlässige Kanäle die Prozesskontinuität."
+      "frage": "O1.3 Die digitale Kommunikationskompetenz der Beschäftigten wird systematisch gefördert und neue strukturiert in den digitale Kooperationsprozesse eingeführt.",
+      "begründung": "Mediensouveränität und eine fundierte Einarbeitung sind Voraussetzungen für eine funktionierende digitale Zusammenarbeit und Akzeptanz in verteilten Teams."
     },
     {
-      "frage": "O1.4 Verbindliche Regeln zur Nutzung digitaler Kommunikationswege (z. B. VPN, Remote-Zugriffe) sind etabliert und bekannt.",
-      "begründung": "Klar definierte Regeln stärken die Sicherheit, erhöhen die Verlässlichkeit und fördern die Akzeptanz digitaler Kommunikationsformen."
+      "frage": "O1.4 Die Organisation reflektiert und passt ihre Kommunikationsstrukturen regelmäßig an, um Zielerreichung und Zusammenarbeit kontinuierlich zu optimieren.",
+      "begründung": "Eine lernende Organisation passt ihre Kommunikationsprozesse an neue Arbeitsformen an, um Passung zu stärken und Konflikte bei zeitlicher Flexibilität zu vermeiden."
     },
     {
-      "frage": "O1.5 Hybride Besprechungen (Präsenz und Remote) sind etabliert und technisch unterstützt.",
-      "begründung": "Hybride Formate ermöglichen ortsunabhängige Teilhabe und stärken die Integration mobiler Beschäftigter."
+      "frage": "O1.5 Erfahrungswissen wird systematisch dokumentiert, digital zugänglich gemacht und aktiv weitergegeben.",
+      "begründung": "Strukturierter Wissenstransfer (z.B. Best Practices, Lernmaterialien) sichert Qualität, fördert kontinuierliches Lernen und reduziert Abhängigkeiten von einzelnen Personen bei flexiblen Arbeitsmodellen."
     },
     {
-      "frage": "O1.6 Neue Beschäftigte werden strukturiert in Kommunikations- und Kooperationsprozesse eingeführt.",
-      "begründung": "Eine systematische Einarbeitung unterstützt die Integration in digitale und flexible Arbeitsabläufe."
+      "frage": "O1.6 Es existieren umfassende Datenschutzrichtlinien und klare Regeln für den Umgang mit allen Daten, insbesondere personenbezogenen.",
+      "begründung": "Transparente und verbindliche Datenschutzregelungen schaffen Vertrauen, sichern Rechtssicherheit und verhindern missbräuchliche Datennutzung im Kontext mobiler Arbeit."
     },
     {
-      "frage": "O1.7 Beschäftigte wissen, welche Kommunikationskanäle im Störungsfall zu nutzen sind.",
-      "begründung": "Klare Kommunikationswege sind essenziell für eine schnelle Reaktion auf Abweichungen in der Produktion."
+      "frage": "O1.7 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
+      "begründung": "Robuste IT-Sicherheitsmaßnahmen (z. B. VPN-Verbindungen) sind fundamental für den Schutz sensibler Produktions- und Unternehmensdaten und zur Aufrechterhaltung der Betriebskontinuität bei flexibler Arbeit."
     },
     {
-      "frage": "O1.8 Die digitale Kommunikationskompetenz der Beschäftigten wird systematisch gefördert.",
-      "begründung": "Mediensouveränität ist Voraussetzung für eine funktionierende digitale Zusammenarbeit in verteilten Teams."
+      "frage": "O1.8 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
+      "begründung": "Klare Rollen und eine partizipative Einbindung relevanter Akteure fördern die Akzeptanz, gewährleisten die Einhaltung rechtlicher Rahmenbedingungen und stärken die Governance-Struktur."
     },
-    {
-      "frage": "O1.9 Die eingesetzten digitalen Tools unterstützen die Zusammenarbeit (z. B. durch gemeinsame Plattformen oder Schnittstellen).",
-      "begründung": "Technologische Unterstützung erleichtert den Informationsaustausch und ermöglicht reibungslose Teamarbeit."
-    },
-    {
-      "frage": "O1.10 Die Kommunikationsstrukturen ermöglichen auch asynchrone Zusammenarbeit (z. B. Aufgabenboards, Kommentarfunktionen).",
-      "begründung": "Asynchrone Kommunikation schafft Flexibilität bei der zeitlichen Abstimmung und stärkt die Selbstorganisation."
-    },
-    {
-      "frage": "O1.11 Bei Problemen in der Zielerreichung oder Koordination werden die Kommunikationsstrukturen gezielt angepasst.",
-      "begründung": "Eine lernende Organisation reflektiert und verbessert regelmäßig ihre Kommunikationsprozesse zur Sicherstellung der Zielerreichung."
-    },
-    {
-      "frage": "O1.12 Die Organisation reflektiert regelmäßig die Wirkung von Zeitautonomie auf die Zusammenarbeit und Kommunikation.",
-      "begründung": "Zeitliche Flexibilität verändert Abstimmungsprozesse, deren Passung kontinuierlich überprüft werden muss."
-    }
-    ],
     "Soziokulturelle und organisatorische Umwelt": [
     {
       "frage": "O2.1 Der Betrieb verfügt über ausreichend qualifizierte Fachkräfte in der zerspanenden Fertigung.",
@@ -275,27 +242,27 @@ Kriterien = {
     },
     {
       "frage": "O2.2 Die Personalplanung berücksichtigt den flexiblen Einsatz über unterschiedliche Zeiten und Orte hinweg.",
-      "begründung": "Eine vorausschauende Planung schafft Handlungsspielräume für orts- und zeitflexible Einsätze, insbesondere im Schichtsystem oder bei wechselnden Anforderungen."
+      "begründung": "Eine vorausschauende Planung schafft Handlungsspielräume für mobile und zeitflexible Einsätze, insbesondere im Schichtsystem oder bei wechselnden Anforderungen."
     },
     {
       "frage": "O2.3 Es bestehen verbindliche Betriebsvereinbarungen zur Regelung mobiler und zeitflexibler Arbeit.",
-      "begründung": "Klare Regelungen schaffen Rechtssicherheit und Orientierung – empirisch insbesondere in Cluster 3 als förderlich beschrieben."
+      "begründung": "Klare Regelungen schaffen Rechtssicherheit und Orientierung."
     },
     {
       "frage": "O2.4 Externe Anforderungen von Kunden, Lieferanten oder Partnern werden in der Flexibilitätsstrategie berücksichtigt.",
       "begründung": "Schnittstellen zu externen Akteuren müssen abgestimmt sein, damit flexible Arbeitsformen betrieblich und marktseitig umsetzbar sind."
     },
     {
-      "frage": "O2.5 Rechtliche Rahmenbedingungen (z. B. Arbeitszeitgesetz, Datenschutz) sind bekannt und werden beachtet.",
-      "begründung": "Rechtskonformität erhöht die Akzeptanz flexibler Arbeit und verhindert Unsicherheiten oder Fehlentwicklungen."
+      "frage": "O2.5 Rechtliche Rahmenbedingungen sind bekannt und werden beachtet.",
+      "begründung": "Rechtskonformität (z. B. Arbeitszeitgesetz, Datenschutz) erhöht die Akzeptanz flexibler Arbeit und verhindert Unsicherheiten oder Fehlentwicklungen."
     },
     {
-      "frage": "O2.6 Arbeitszeitmodelle sind in Planungs- und Steuerungssysteme integriert (z. B. MES, ERP).",
-      "begründung": "Nur durch die Integration in digitale Systeme können flexible Modelle zuverlässig geplant, dokumentiert und gesteuert werden."
+      "frage": "O2.6 Arbeitszeitmodelle sind in Planungs- und Steuerungssysteme integriert.",
+      "begründung": "Nur durch die Integration in digitale Systeme (z. B. MES, ERP) können flexible Modelle zuverlässig geplant, dokumentiert und gesteuert werden."
     },
     {
-      "frage": "O2.7 Die Aufbau- und Ablauforganisation ist anpassungsfähig (z. B. bei Sonderaufträgen oder kurzfristigen Vertretungen).",
-      "begründung": "Strukturelle Anpassungsfähigkeit ist Voraussetzung für spontane Reaktion und produktive Umsetzung von Flexibilität – insbesondere in Cluster 2 und 4 als Schwachstelle identifiziert."
+      "frage": "O2.7 Die Aufbau- und Ablauforganisation ist anpassungsfähig.",
+      "begründung": "Strukturelle Anpassungsfähigkeit (z. B. bei Sonderaufträgen oder kurzfristigen Vertretungen) ist Voraussetzung für spontane Reaktion und produktive Umsetzung von Flexibilität."
     },
     {
       "frage": "O2.8 Die Verantwortung der Führungskräfte für die Umsetzung flexibler Arbeit ist eindeutig definiert.",
@@ -303,7 +270,7 @@ Kriterien = {
     },
     {
       "frage": "O2.9 Zuständigkeiten und Vertretungsregelungen sind auch bei mobiler Arbeit klar definiert.",
-      "begründung": "Eindeutige Verantwortlichkeiten sichern die Prozessstabilität bei ortsflexibler Arbeit und entlasten das Team."
+      "begründung": "Eindeutige Verantwortlichkeiten sichern die Prozessstabilität bei mobiler Arbeit und entlasten das Team."
     },
     {
       "frage": "O2.10 Rückmeldungen zur Umsetzung flexibler Arbeit werden regelmäßig eingeholt und genutzt.",
@@ -321,7 +288,7 @@ Kriterien = {
     "Produktionsorganisation": [
     {
     "frage": "O3.1 Die Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und systematisch aufteilbar.",
-      "begründung": "Eine differenzierte Analyse präsenzpflichtiger und mobil bearbeitbarer Tätigkeiten ist Grundlage für jede flexible Arbeitsgestaltung."
+      "begründung": "Eine differenzierte Analyse präsenzpflichtiger und mobil bearbeitbarer Tätigkeiten ist Grundlage für jede flexible Arbeitsgestaltung (z. B. Trennung von Vorbereitung, Rüsten, Fertigen, Prüfen)."
     },
     {
     "frage": "O3.2 Die durchschnittliche Losgröße erlaubt kurzfristige Umplanungen.",
@@ -390,37 +357,33 @@ Kriterien = {
       "begründung": "Eine konstruktive Fehlerkultur fördert Anpassungsfähigkeit, Lernprozesse und Innovationskraft bei der Einführung flexibler Modelle."
     },
     {
-      "frage": "K1.6 Die Unternehmensführung lebt Flexibilität sichtbar vor.",
-      "begründung": "Vorbildverhalten auf Leitungsebene beeinflusst kulturelle Normen und senkt Umsetzungsbarrieren."
-    },
-    {
-      "frage": "K1.7 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.",
+      "frage": "K1.6 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.",
       "begründung": "Normalisierung von Flexibilität reduziert Widerstände und erhöht die organisatorische Anschlussfähigkeit."
     },
     {
-      "frage": "K1.8 Es bestehen keine verdeckten Erwartungen an ständige Erreichbarkeit.",
+      "frage": "K1.7 Es bestehen keine verdeckten Erwartungen an ständige Erreichbarkeit.",
       "begründung": "Kulturelle Entgrenzung gefährdet Erholung, Selbststeuerung und nachhaltige Nutzung flexibler Arbeitsformen."
     },
     {
-      "frage": "K1.9 Unterschiedliche Arbeitsstile und -rhythmen werden anerkannt und integriert.",
+      "frage": "K1.8 Unterschiedliche Arbeitsstile und -rhythmen werden anerkannt und integriert.",
       "begründung": "Individuelle Unterschiede fördern Anpassungsfähigkeit und stärken das kulturelle Verständnis für Diversität."
     },
     {
-      "frage": "K1.10 Mobile Arbeit wird systematisch in Teamabstimmungen integriert.",
+      "frage": "K1.9 Mobile Arbeit wird systematisch in Teamabstimmungen integriert.",
       "begründung": "Kulturelle Integration erfordert explizite Berücksichtigung dezentraler Arbeit in Kommunikationsprozesse."
     },
     {
-      "frage": "K1.11 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
+      "frage": "K1.10 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
       "begründung": "Transparente Diskussion über Zielkonflikte stärkt Vertrauen und vermeidet dysfunktionale Idealisierungen."
     },
     {
-      "frage": "K1.12 Kulturelle Barrieren bei der Einführung flexibler Arbeit werden systematisch erfasst und reflektiert.",
+      "frage": "K1.11 Kulturelle Barrieren bei der Einführung flexibler Arbeit werden systematisch erfasst und reflektiert.",
       "begründung": "Nur durch strukturiertes Feedback lassen sich kulturelle Hürden identifizieren und gezielt adressieren."
     }
     ],
    "Soziale Beziehungen und Interaktion": [
     {
-      "frage": "K2.1 Die Unternehmensführung positioniert sich aktiv und sichtbar zugunsten flexibler Arbeitsformen.",
+      "frage": "K2.1 Die Unternehmensführung positioniert sich aktiv und lebt Flexibilität sichtbar vor.",
       "begründung": "Ein strategisch sichtbares Commitment erhöht die Legitimität flexibler Arbeit und schafft Orientierung für nachgelagerte Führungsebenen."
     },
     {
@@ -440,8 +403,8 @@ Kriterien = {
       "begründung": "Hybride Arbeit stellt neue Anforderungen an Führung, insbesondere im Umgang mit virtueller Kommunikation und dezentraler Koordination."
     },
     {
-      "frage": "K2.6 Es existieren verbindliche Kommunikationsstandards im Team (z. B. Regeltermine, Reaktionszeiten).",
-      "begründung": "Verlässliche Kommunikationsprozesse kompensieren informelle Interaktionen bei physischer Distanz."
+      "frage": "K2.6 Es existieren verbindliche Kommunikationsstandards im Team.",
+      "begründung": "Verlässliche Kommunikationsprozesse (z. B. Regeltermine, Reaktionszeiten) kompensieren informelle Interaktionen bei physischer Distanz."
     },
     {
       "frage": "K2.7 Die Teamkultur ist durch gegenseitige Unterstützung und Kooperation geprägt.",
@@ -464,8 +427,8 @@ Kriterien = {
       "begründung": "Konstruktiver Umgang mit Konflikten ist in asynchronen oder hybriden Teams besonders relevant."
     },
     {
-      "frage": "K2.12 Unterschiedliche Bedürfnisse (z. B. Schichtsystem, Pflegeverantwortung) werden teamintern berücksichtigt.",
-      "begründung": "Eine faire Berücksichtigung individueller Anforderungen fördert Akzeptanz und Zusammenhalt im Team."
+      "frage": "K2.12 Unterschiedliche Bedürfnisse werden teamintern berücksichtigt.",
+      "begründung": "Eine faire Berücksichtigung individueller Anforderungen (z. B. Schichtsystem, Pflegeverantwortung) fördert Akzeptanz und Zusammenhalt im Team."
     }
   ]
 }
@@ -559,29 +522,26 @@ kriterien_item_to_cluster_variable_mapping = {
 
     # 6. Digitalisierungsgrad
     "Digitalisierungsgrad": [
-        "T1.11 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden (z. B. ERP, MES, BDE).",
-        "T2.6 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
-        "M2.8 Beschäftigte verstehen digitale Produktionssysteme in ihren Grundfunktionen.",
-        "T2.7 Die IT-Systeme ermöglichen ortsunabhängige Einsicht in produktionsrelevante Echtzeitdaten (z. B. Maschinenstatus, Auftragsfortschritt).",
-        "T2.8 Beschäftigte können über mobile Endgeräte sicher Rückmeldungen und Produktionsdaten erfassen (z. B. Störgründe, Fortschritt).",
-        "T2.9 Simulationen oder digitale Zwillinge werden zur Produktionsplanung und -steuerung eingesetzt.",
-        "O2.6 Arbeitszeitmodelle sind in Planungs- und Steuerungssysteme integriert (z. B. MES, ERP).",
+        "T1.10 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
+        "T2.5 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
+        "M2.8 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren Grundfunktionen.",
+        "T2.6 Die IT-Systeme ermöglichen ortsunabhängige Einsicht und Rückmeldungen in produktionsrelevante Echtzeitdaten.",
+        "T2.7 Simulationen oder digitale Zwillinge werden zur Produktionsplanung und -steuerung eingesetzt.",
+        "O2.6 Arbeitszeitmodelle sind in Planungs- und Steuerungssysteme integriert.",
         "O3.11 Die Auftragssteuerung ist digital unterstützt und dynamisch anpassbar."
     ],
     
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
-        "T1.6 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
-        "O1.7 Beschäftigte wissen, welche Kommunikationskanäle im Störungsfall zu nutzen sind.", # Wissen um Notfallkanäle reduziert wahrgenommene Instabilität
-        "O3.9 Maschinenstillstände führen nicht unmittelbar zu kritischen Produktivitätsverlusten.", # Toleranz gegenüber Stillständen reduziert Instabilität
-        "O1.11 Bei Problemen in der Zielerreichung oder Koordination werden die Kommunikationsstrukturen gezielt angepasst." # Adaptive Reaktion auf Instabilität
+        "T1.5 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
+        "O3.9 Maschinenstillstände führen nicht unmittelbar zu kritischen Produktivitätsverlusten." # Toleranz gegenüber Stillständen reduziert Instabilität
     ],
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
-        "T1.12 Die Auswirkungen flexibler Arbeit auf Produktivität, Qualität und Maschinenauslastung werden regelmäßig erfasst.",
+        "T1.11 Die Auswirkungen flexibler Arbeit auf Produktivität, Qualität und Maschinenauslastung werden regelmäßig erfasst.",
         "K1.3 Zielerreichung hat Vorrang vor physischer Anwesenheit.",
-        "K1.7 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.", # Impliziert wahrgenommenen Nutzen
+        "K1.6 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.", # Impliziert wahrgenommenen Nutzen
         "K2.4 Führung erfolgt ergebnisorientiert statt anwesenheitsorientiert."
     ],
     
@@ -590,7 +550,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "M2.1 Beschäftigte stehen mobiler Arbeit aufgeschlossen gegenüber.",
         "M2.2 Beschäftigte stehen zeitflexibler Arbeit offen gegenüber.",
         "K1.4 Es herrscht ein positives Verständnis für neue Arbeitsformen.",
-        "K1.7 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.",
+        "K1.6 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.",
         "O2.3 Es bestehen verbindliche Betriebsvereinbarungen zur Regelung mobiler und zeitflexibler Arbeit.",
         "O2.10 Rückmeldungen zur Umsetzung flexibler Arbeit werden regelmäßig eingeholt und genutzt."
     ],
@@ -600,8 +560,8 @@ kriterien_item_to_cluster_variable_mapping = {
     # da ein HOHEr Score in der Frage ("können mitgestalten") einen NIEDRIGEN "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
         "O2.11 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
-        "O1.10 Die Kommunikationsstrukturen ermöglichen auch asynchrone Zusammenarbeit (z.B. Aufgabenboards, Kommentarfunktionen).",
-        "O1.12 Die Organisation reflektiert regelmäßig die Wirkung von Zeitautonomie auf die Zusammenarbeit und Kommunikation."
+        "O1.2 Digitale Kommunikations- und Kollaborationstools (inkl. asynchrone Formate und hybride Besprechungen) sind standardisiert verfügbar, technisch unterstützt und sicher nutzbar.",
+        "O1.4 Die Organisation reflektiert und passt ihre Kommunikationsstrukturen regelmäßig an, um Zielerreichung und Zusammenarbeit kontinuierlich zu optimieren."
     ],
     
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
@@ -611,8 +571,8 @@ kriterien_item_to_cluster_variable_mapping = {
         "M1.6 Die Arbeitsumgebung ermöglicht produktives Arbeiten außerhalb der Fertigung.",
         "M2.6 Beschäftigte verfügen über stabile externe Bedingungen für mobiles Arbeiten.",
         "T2.4 Der IT-Support ist auch bei mobiler Arbeit verlässlich erreichbar.",
-        "T2.5 Zugriffskonzepte sind sicher, rollenbasiert und klar geregelt.",
-        "T1.7 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert (z. B. Kameras, Monitoring-Apps, Maschinenzugriff)."
+        "O1.8 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
+        "T1.6 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert."
     ]
 }
 
@@ -771,26 +731,42 @@ if "ergebnisse" not in st.session_state: # Speichert Mittelwerte pro Handlungsfe
     st.session_state.ergebnisse = {}
 # Für die individuellen Item-Scores (für Clusterzuordnung) werden die Keys dynamisch erstellt.
 # Initialisiere auch die neuen Eingabefelder im Session State, um Fehler bei erstem Laden zu vermeiden
-if 'num_cnc_machines_raw' not in st.session_state:
-    st.session_state.num_cnc_machines_raw = 0
+# WICHTIG: Die Schlüssel hier müssen den keys in den Widgets im UI-Code entsprechen
+if 'num_cnc_machines_raw_input' not in st.session_state: # Der Key des st.number_input
+    st.session_state.num_cnc_machines_raw_input = 0
 if 'num_cnc_machines_categorized' not in st.session_state:
     st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(0) # Standardwert
-if 'automation_percentage_raw' not in st.session_state:
-    st.session_state.automation_percentage_raw = "0%" # Radio Button Initialwert
+if 'automation_percentage_radio_input' not in st.session_state: # Der Key des st.radio
+    st.session_state.automation_percentage_radio_input = "0%" # Radio Button Initialwert (als String)
 if 'num_auto_machines_categorized' not in st.session_state:
     st.session_state.num_auto_machines_categorized = categorize_automation_percentage("0%") # Standardwert
-if 'losgroesse_raw' not in st.session_state:
-    st.session_state.losgroesse_raw = "<5"
+
+if 'losgroesse_radio_input' not in st.session_state:
+    st.session_state.losgroesse_radio_input = "<5"
 if 'losgroesse_categorized' not in st.session_state:
     st.session_state.losgroesse_categorized = categorize_losgroesse("<5")
-if 'durchlaufzeit_raw' not in st.session_state:
-    st.session_state.durchlaufzeit_raw = "<10 min"
+
+if 'durchlaufzeit_radio_input' not in st.session_state:
+    st.session_state.durchlaufzeit_radio_input = "<10 min"
 if 'durchlaufzeit_categorized' not in st.session_state:
     st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit("<10 min")
-if 'laufzeit_raw' not in st.session_state:
-    st.session_state.laufzeit_raw = "<1 Tag"
+
+if 'laufzeit_radio_input' not in st.session_state:
+    st.session_state.laufzeit_radio_input = "<1 Tag"
 if 'laufzeit_categorized' not in st.session_state:
     st.session_state.laufzeit_categorized = categorize_laufzeit("<1 Tag")
+
+# Initialisierung für generische Text/Radio-Inputs, die nicht direkt kategorisiert werden
+if 'branche_input' not in st.session_state:
+    st.session_state.branche_input = ""
+if 'mitarbeitende_radio' not in st.session_state:
+    st.session_state.mitarbeitende_radio = "1-9" # Default-Wert für radio, falls nötig
+if 'funktion_radio' not in st.session_state:
+    st.session_state.funktion_radio = "Geschäftsführung" # Default-Wert für radio, falls nötig
+if 'plz_input' not in st.session_state:
+    st.session_state.plz_input = ""
+if 'email_input' not in st.session_state:
+    st.session_state.email_input = ""
 
 
 # Navigationsbuttons
@@ -889,25 +865,24 @@ elif current_tab in mtok_structure:
 
 
 elif current_tab == "Abschließende Fragen":
-    st.text_input("Branche", key="branche_input") # Eindeutiger Key
-    st.radio("Mitarbeitende", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende_radio") # Eindeutiger Key
-    st.radio("Funktion", ["Geschäftsführung", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion_radio") # Eindeutiger Key
+    st.text_input("Branche", key="branche_input") 
+    st.radio("Mitarbeitende", ["1-9", "10-49", "50-199", "200-499", "500-1999", ">2000"], key="mitarbeitende_radio_input") # Eindeutiger Key
+    st.radio("Funktion", ["Geschäftsführung", "Leitung", "Fachkraft", "Produktion", "Sonstige"], key="funktion_radio_input") # Eindeutiger Key
     
     st.subheader("Spezifische technische und prozessuale Angaben")
 
     # Abfrage Anzahl CNC-Werkzeugmaschinen
-    st.session_state.num_cnc_machines_raw = st.number_input(
+    st.session_state.num_cnc_machines_raw_input = st.number_input(
         "Anzahl der CNC-Werkzeugmaschinen", 
         min_value=0, 
-        value=st.session_state.num_cnc_machines_raw, 
-        key="num_cnc_machines_raw_input" # Eindeutiger Key
+        value=st.session_state.num_cnc_machines_raw_input, 
+        key="num_cnc_machines_input" # Eindeutiger Key für das number_input
     )
-    # Kategorisierung wird automatisch aktualisiert durch den num_cnc_machines_raw_input
-    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.num_cnc_machines_raw)
+    # Kategorisierung wird automatisch aktualisiert, wenn der number_input Wert sich ändert
+    st.session_state.num_cnc_machines_categorized = categorize_cnc_machines(st.session_state.num_cnc_machines_raw_input)
 
     # Abfrage Automatisierungsgrad Prozent
     automation_percentage_options = ["0%", "1 - 25%", "26 - 50%", "> 50%"]
-    # Sicherstellen, dass der Initialwert in den Optionen ist
     initial_automation_index = automation_percentage_options.index(st.session_state.automation_percentage_raw) \
                                 if st.session_state.automation_percentage_raw in automation_percentage_options else 0
     
@@ -915,7 +890,7 @@ elif current_tab == "Abschließende Fragen":
         "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?", 
         automation_percentage_options,
         index=initial_automation_index, # Setze Initialwert
-        key="automation_percentage_radio_input" # Eindeutiger Key
+        key="automation_percentage_radio" # Eindeutiger Key
     )
     st.session_state.num_auto_machines_categorized = categorize_automation_percentage(st.session_state.automation_percentage_raw) 
 
@@ -927,7 +902,7 @@ elif current_tab == "Abschließende Fragen":
         "Typische Fertigungslosgröße",
         losgroesse_options,
         index=initial_losgroesse_index,
-        key="losgroesse_radio_input"
+        key="losgroesse_radio" # Eindeutiger Key
     )
     st.session_state.losgroesse_categorized = categorize_losgroesse(st.session_state.losgroesse_raw)
 
@@ -939,7 +914,7 @@ elif current_tab == "Abschließende Fragen":
         "Zeitspanne vom Auftragsstart bis unentgratetem Fertigteil",
         durchlaufzeit_options,
         index=initial_durchlaufzeit_index,
-        key="durchlaufzeit_radio_input"
+        key="durchlaufzeit_radio" # Eindeutiger Key
     )
     st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(st.session_state.durchlaufzeit_raw)
 
@@ -951,7 +926,7 @@ elif current_tab == "Abschließende Fragen":
         "Durchschnittliche Maschinenlaufzeit je Auftrag",
         laufzeit_options,
         index=initial_laufzeit_index,
-        key="laufzeit_radio_input"
+        key="laufzeit_radio" # Eindeutiger Key
     )
     st.session_state.laufzeit_categorized = categorize_laufzeit(st.session_state.laufzeit_raw)
 
@@ -959,7 +934,6 @@ elif current_tab == "Abschließende Fragen":
     st.text_input("PLZ (optional)", key="plz_input") # Eindeutiger Key
     st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
-
 
 # Auswertungs-Tab
 elif current_tab == "Auswertung":
