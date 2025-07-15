@@ -442,7 +442,7 @@ def categorize_cnc_machines(num_machines_raw):
         "< 5": 1,
         "5 - 10": 2,
         "11 - 24": 3,
-        "≥25": 4
+        "≥ 25": 4
     }
     return mapping.get(num_machines_raw, np.nan)
     
@@ -453,7 +453,7 @@ def categorize_automation_percentage(percentage_str):
         "0%": 1,
         "1 - 25%": 2,
         "26 - 49%": 3,
-        "≥50%": 4
+        "≥ 50%": 4
     }
     return mapping.get(percentage_str, np.nan)
 
@@ -462,7 +462,7 @@ def categorize_losgroesse(losgroesse_str):
         "<5": 1,
         "5–50": 2,
         "51–99": 3,
-        "≥100": 4
+        "≥ 100": 4
     }
     return mapping.get(losgroesse_str, np.nan)
 
@@ -471,7 +471,7 @@ def categorize_durchlaufzeit(durchlaufzeit_str):
         "<10 min": 1,
         "11–30 min": 2,
         "31–89 min": 3,
-        "≥90 min": 4
+        "≥ 90 min": 4
     }
     return mapping.get(durchlaufzeit_str, np.nan)
 
@@ -480,7 +480,7 @@ def categorize_laufzeit(laufzeit_str):
         "<1 Tag": 1,
         "1–3 Tage": 2,
         "4–6 Tage": 3,
-        "≥7 Tage": 4
+        "≥ 7 Tage": 4
     }
     return mapping.get(laufzeit_str, np.nan)
 
@@ -642,10 +642,14 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
     ]
     for var_name in direct_input_vars:
         session_key_categorized = var_name.lower().replace(" ", "_") + "_categorized" # Erzeugt z.B. "losgröße_categorized"
-        if session_key_categorized in st.session_state and not np.isnan(st.session_state[session_key_categorized]):
-            nutzer_cluster_variable_werte[var_name] = st.session_state[session_key_categorized]
+        if session_key_categorized in st.session_state:
+            value = st.session_state[session_key_categorized]
+            if isinstance(value, (int, float)) and not np.isnan(value):
+                nutzer_cluster_variable_werte[var_name] = value
+            else:
+                nutzer_cluster_variable_werte[var_name] = float('nan')
         else:
-            nutzer_cluster_variable_werte[var_name] = float('nan') 
+            nutzer_cluster_variable_werte[var_name] = float('nan')
 
     # Behandlung der restlichen Variablen, die aus Kriterien-Items gemappt werden
     # Nur noch die Variablen, die NICHT direkt abgefragt werden, müssen hier behandelt werden.
@@ -869,31 +873,31 @@ elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
    # Anzahl CNC-Werkzeugmaschinen
-    cnc_options = ["<5", "5 - 10", "11 - 24", "≥25"]
+    cnc_options = ["< 5", "5 - 10", "11 - 24", "≥ 25"]
     selected_cnc_range = st.radio("Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?", cnc_options, key="cnc_range")
     st.session_state["anzahl_cnc-werkzeugmaschinen_categorized"] = categorize_cnc_machines(selected_cnc_range)
    
 
     # Automatisierungsgrad
-    automation_percentage_options = ["0%", "1 - 25%", "26 - 49%", "≥50%"]
+    automation_percentage_options = ["0%", "1 - 25%", "26 - 49%", "≥ 50%"]
     selected_automation_range = st.radio("Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?", automation_percentage_options, key="automation_range")
     st.session_state["automatisierungsgrad_categorized"] = categorize_automation_percentage(selected_automation_range)
     
 
     # Losgröße
-    losgroesse_options = ["<5", "5–50", "51–99", "≥100"]
+    losgroesse_options = ["<5", "5–50", "51–99", "≥ 100"]
     selected_losgroesse = st.radio("Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?", losgroesse_options, key="losgroesse_range")
     st.session_state["losgröße_categorized"] = categorize_losgroesse(selected_losgroesse)
     
 
     # Durchlaufzeit
-    durchlaufzeit_options = ["<10 min", "11–30 min", "31–89 min", "≥90 min"]
+    durchlaufzeit_options = ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"]
     selected_durchlaufzeit = st.radio("Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?", durchlaufzeit_options, key="durchlaufzeit_range")
     st.session_state["durchlaufzeit_categorized"] = categorize_durchlaufzeit(selected_durchlaufzeit)
     
 
     # Laufzeit
-    laufzeit_options = ["<1 Tag", "1–3 Tage", "4–6 Tage", "≥7 Tage"]
+    laufzeit_options = ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"]
     selected_laufzeit = st.radio("Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?", laufzeit_options, key="laufzeit_range")
     st.session_state["laufzeit_categorized"] = categorize_laufzeit(selected_laufzeit)
    
