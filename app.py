@@ -713,7 +713,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 # --- Start des Streamlit UI Codes ---
 # Initialisierung der Session State Variablen vor der UI-Logik
 if "current_tab_index" not in st.session_state:
-    st.session_state.current_tab_index = 0
+    st.session_state.current_tab_index = 1
 
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
