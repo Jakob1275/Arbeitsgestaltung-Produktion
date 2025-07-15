@@ -616,7 +616,6 @@ cluster_item_values = {
 }
 
 
-# Clusterermittlung (angepasst, um die 11 spezifischen Cluster-Variablen zu berechnen und dann zu vergleichen)
 def berechne_clusterzuordnung(kriterien_all_items_dict):
     # 1. Sammle alle individuellen Item-Bewertungen aus der Streamlit Session State
     all_item_scores_flat = {}
@@ -631,76 +630,70 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
     # 2. Berechne die Werte für die 11 spezifischen Cluster-Variablen des Nutzers
     nutzer_cluster_variable_werte = {}
 
-    # --- NEU: Diese Liste wird jetzt VOR Verwendung definiert ---
     direct_input_keys = {
-        "Anzahl CNC-Werkzeugmaschinen": "anzahl_cnc_werkzeugmaschinen_categorized",
-        "Automatisierungsgrad": "automatisierungsgrad_categorized",
-        "Losgröße": "losgroesse_categorized",
-        "Durchlaufzeit": "durchlaufzeit_categorized",
-        "Laufzeit": "laufzeit_categorized"
+        "Anzahl CNC-Werkzeugmaschinen": ("cnc_range", "anzahl_cnc_werkzeugmaschinen_categorized", categorize_cnc_machines),
+        "Automatisierungsgrad": ("automation_range", "automatisierungsgrad_categorized", categorize_automation_percentage),
+        "Losgröße": ("losgroesse_range", "losgroesse_categorized", categorize_losgroesse),
+        "Durchlaufzeit": ("durchlaufzeit_range", "durchlaufzeit_categorized", categorize_durchlaufzeit),
+        "Laufzeit": ("laufzeit_range", "laufzeit_categorized", categorize_laufzeit)
     }
-    direct_input_vars = list(direct_input_keys.keys())  # <- NEU: Verhindert NameError später
 
-    for var_name, session_key in direct_input_keys.items():
-        if session_key in st.session_state:
-            value = st.session_state[session_key]
-            if isinstance(value, (int, float)) and not np.isnan(value):
-                nutzer_cluster_variable_werte[var_name] = value
-            else:
-                nutzer_cluster_variable_werte[var_name] = float('nan')
+    direct_input_vars = list(direct_input_keys.keys())
+
+    for var_name, (range_key, categorized_key, categorize_func) in direct_input_keys.items():
+        # Falls noch nicht kategorisiert: nachträglich kategorisieren
+        if categorized_key not in st.session_state:
+            st.session_state[categorized_key] = categorize_func(st.session_state.get(range_key))
+
+        value = st.session_state.get(categorized_key, float('nan'))
+        if isinstance(value, (int, float)) and not np.isnan(value):
+            nutzer_cluster_variable_werte[var_name] = value
         else:
             nutzer_cluster_variable_werte[var_name] = float('nan')
 
     # Behandlung der restlichen Variablen, die aus Kriterien-Items gemappt werden
-    # Nur noch die Variablen, die NICHT direkt abgefragt werden, müssen hier behandelt werden.
     for cluster_var_name, associated_item_questions in kriterien_item_to_cluster_variable_mapping.items():
-        if cluster_var_name not in direct_input_vars:  # <- funktioniert jetzt korrekt
+        if cluster_var_name not in direct_input_vars:
             scores_for_variable = []
             for q_text in associated_item_questions:
                 if q_text in all_item_scores_flat:
                     scores_for_variable.append(all_item_scores_flat[q_text])
-        
+
             if scores_for_variable:
                 calculated_score = np.mean(scores_for_variable)
 
-                # Skalen-Invertierung für bestimmte Variablen
+                # Invertierung
                 if cluster_var_name in ["Aufwand Zeit", "Aufwand Mobil", "Prozessinstabilität"]:
-                    nutzer_cluster_variable_werte[cluster_var_name] = (5 - calculated_score)
+                    nutzer_cluster_variable_werte[cluster_var_name] = 5 - calculated_score
                 else:
                     nutzer_cluster_variable_werte[cluster_var_name] = calculated_score
             else:
                 nutzer_cluster_variable_werte[cluster_var_name] = float('nan')
 
-    # Filtere NaN-Werte heraus, da sie nicht in die Distanzberechnung einfließen sollen
+    # Filter NaN-Werte
     nutzer_cluster_variable_werte_filtered = {k: v for k, v in nutzer_cluster_variable_werte.items() if not np.isnan(v)}
 
     if not nutzer_cluster_variable_werte_filtered:
         return "Bitte bewerten Sie genügend Kriterien für die Clusterzuordnung (einschließlich der direkten Abfragen).", {}
 
-     # --- Debug: Visualisierung der gesetzten Cluster-Variablen ---
+    # Debug-Ausgabe
     st.write("Bewertete Cluster-Variablen (Debug):")
     for var, val in nutzer_cluster_variable_werte.items():
         st.write(f"🔹 {var}: {val if not np.isnan(val) else '❌ Nicht bewertet'}")
-    
-    # Optional: Eine Mindestanzahl an bewerteten Cluster-Variablen sicherstellen
-    MIN_CLUSTER_VARS_SCORED = 7  # Mindestanzahl bewerteter Variablen
+
+    # Mindestanzahl an bewerteten Variablen
+    MIN_CLUSTER_VARS_SCORED = 7
     if len(nutzer_cluster_variable_werte_filtered) < MIN_CLUSTER_VARS_SCORED:
         return f"Bitte bewerten Sie mindestens {MIN_CLUSTER_VARS_SCORED} relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {len(nutzer_cluster_variable_werte_filtered)} bewertet.", {}
 
-
-    # 3. Berechne die Abweichung des Nutzerprofils von jedem Clusterprofil
+    # Abweichungen berechnen
     abweichungen = {}
     for cluster_name, cluster_profil_werte in cluster_item_values.items():
         diffs = []
         for cluster_var_name, nutzer_wert in nutzer_cluster_variable_werte_filtered.items():
-            if cluster_var_name in cluster_profil_werte: # Sicherstellen, dass die Variable auch im Cluster-Profil vorhanden ist
+            if cluster_var_name in cluster_profil_werte:
                 diffs.append(abs(nutzer_wert - cluster_profil_werte[cluster_var_name]))
-        
-        if diffs:
-            abweichungen[cluster_name] = np.mean(diffs)
-        else:
-            # Falls für ein Cluster keine vergleichbaren Variablen bewertet wurden, ist die Abweichung unendlich
-            abweichungen[cluster_name] = float('inf') 
+        abweichungen[cluster_name] = np.mean(diffs) if diffs else float('inf')
 
     if not abweichungen or all(v == float('inf') for v in abweichungen.values()):
         return "Keine passende Clusterzuordnung möglich, bitte mehr Kriterien in relevanten Bereichen bewerten.", {}
