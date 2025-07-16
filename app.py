@@ -11,6 +11,20 @@ import re
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
+def markdown_to_html(text: str) -> str:
+    text = re.sub(r"### (.*?)\n", r"<h2>\1</h2>\n", text)
+    text = re.sub(r"#### (.*?)\n", r"<h3>\1</h3>\n", text)
+    blocks = re.split(r"\n(?=\s*- )", text)
+    html_blocks = []
+    for block in blocks:
+        if block.strip().startswith("- "):
+            lines = [line.strip()[2:] for line in block.strip().split("\n") if line.strip().startswith("- ")]
+            items = "".join([f"<li>{line}</li>" for line in lines])
+            html_blocks.append(f"<ul>{items}</ul>")
+        else:
+            html_blocks.append(f"<p>{block.strip()}</p>")
+    return "\n".join(html_blocks)
+
 def frage_chatgpt_auswertung(ergebnisse, cluster_bezeichnung):
     try:
         response = client.chat.completions.create(
@@ -960,12 +974,12 @@ elif current_tab == "Auswertung":
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
-
+            
             # GPT-Antwort in HTML-geeignete Struktur umwandeln
             gpt_text_html_ready = markdown_to_html(gpt_output_text)
             st.markdown(gpt_text_html_ready, unsafe_allow_html=True)
 
-        gpt_text_safe = gpt_text_html_ready
+        gpt_text_safe = gpt_text_html_ready if "gpt_text_html_ready" in locals() else "<p>Keine Empfehlung generiert.</p>"
 
         # Radar-Bild für HTML-Export vorbereiten
         if radar_chart_fig:
