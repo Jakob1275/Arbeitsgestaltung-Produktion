@@ -143,7 +143,7 @@ Kriterien = {
     },
     {
       "frage": "T1.4 Produktionsprozesse sind standardisiert dokumentiert und übertragbar.",
-      "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate.""
+      "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate."
     },
     {
     "frage": "T1.5 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.",
