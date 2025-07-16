@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import openai  # type: ignore
-import pdfkit
+from weasyprint import HTML
 import base64
 from io import BytesIO
 
@@ -985,7 +985,7 @@ elif current_tab == "Auswertung":
         {img_tag}
         """
 
-        pdf = pdfkit.from_string(html_content, False)
+        pdf = HTML(string=html_content).write_pdf()
         
         st.download_button(
             label="📄 PDF herunterladen",
