@@ -924,16 +924,16 @@ elif current_tab == "Auswertung":
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
 
-            wrapped_labels = [textwrap.fill(label, 18) for label in labels]
+            wrapped_labels = [textwrap.fill(label, width=22, break_long_words=False) for label in labels]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(3, 3), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(1, 1), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=6)
+            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=1)
             ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=6)
-            ax.set_title("Readiness-Profil", fontsize=9, pad=8)
+            ax.set_xticklabels(wrapped_labels, fontsize=3)
+            ax.set_title("Readiness-Profil", fontsize=6, pad=4)
             plt.tight_layout()
             st.pyplot(radar_chart_fig)
 
@@ -954,64 +954,124 @@ elif current_tab == "Auswertung":
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
             st.markdown(gpt_output_text)
 
-        # HTML-Grafik vorbereiten
         gpt_text_safe = gpt_output_text if "gpt_output_text" in locals() else "<p>Keine Empfehlung generiert.</p>"
 
+        # Bild vorbereiten
         if radar_chart_fig:
             buf = BytesIO()
-            radar_chart_fig.savefig(buf, format="png", bbox_inches="tight")
+            radar_chart_fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="max-width: 100%; height: auto; margin-top: 20px;">'
+            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 800px; height: auto; margin-top: 20px;">'
         else:
             img_tag = ""
 
-        # Finales HTML mit Struktur & Stil
+        # Tabelle der Handlungsfelder vorbereiten
+        table_rows = ""
+        for dim_name, handlungsfelder_in_dim in mtok_structure.items():
+            for hf_name in handlungsfelder_in_dim:
+                value = st.session_state.ergebnisse.get(hf_name)
+                if value is not None:
+                    table_rows += f"""
+                    <tr>
+                        <td>{hf_name}</td>
+                        <td>{dim_name}</td>
+                        <td style="text-align: center;">{value:.1f}</td>
+                    </tr>
+                    """
+
+        table_html = f"""
+        <h2>Bewertung der Handlungsfelder</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Handlungsfeld</th>
+                    <th>MTOK-Dimension</th>
+                    <th>Mittelwert</th>
+                </tr>
+            </thead>
+            <tbody>
+                {table_rows}
+            </tbody>
+        </table>
+        """
+
+        # Gesamtes HTML mit eingebetteter Grafik und Tabelle
         html_content = f"""
         <!DOCTYPE html>
-        <html>
+        <html lang="de">
         <head>
-          <meta charset="utf-8">
-          <title>Auswertung Readiness-Check</title>
-          <style>
-            body {{
-              font-family: Arial, sans-serif;
-              padding: 40px;
-              line-height: 1.6;
-              color: #222;
-            }}
-            h1 {{
-              color: #003366;
-              font-size: 24px;
-            }}
-            h2 {{
-              color: #005599;
-              margin-top: 30px;
-            }}
-            p {{
-              margin: 10px 0;
-            }}
-            .box {{
-              background-color: #f1f1f1;
-              padding: 15px;
-              border-radius: 8px;
-              margin: 10px 0;
-            }}
-            img {{
-              max-width: 100%;
-              height: auto;
-            }}
-          </style>
+            <meta charset="utf-8">
+            <title>Readiness-Auswertung</title>
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    padding: 40px;
+                    line-height: 1.6;
+                    color: #222;
+                    max-width: 800px;
+                    margin: auto;
+                }}
+                h1 {{
+                    color: #003366;
+                    font-size: 26px;
+                }}
+                h2 {{
+                    color: #005599;
+                    font-size: 20px;
+                    margin-top: 30px;
+                }}
+                .box {{
+                    background-color: #f8f9fa;
+                    padding: 15px;
+                    border-left: 5px solid #005599;
+                    margin-bottom: 25px;
+                    border-radius: 5px;
+                }}
+                .gpt-box {{
+                    background-color: #eef7ff;
+                    border-left: 5px solid #0099cc;
+                }}
+                img {{
+                    display: block;
+                    margin: 20px auto;
+                }}
+                table {{
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }}
+                th, td {{
+                    border: 1px solid #ccc;
+                    padding: 8px;
+                    font-size: 13px;
+                }}
+                th {{
+                    background-color: #e1e9f0;
+                    text-align: left;
+                }}
+                td:nth-child(3) {{
+                    text-align: center;
+                }}
+            </style>
         </head>
         <body>
-          <h1>Ergebnisse des Readiness-Checks</h1>
-          <div class="box">
-            <strong>Clusterzuordnung:</strong> {display_cluster_result}
-          </div>
-          <h2>Individuelle Handlungsempfehlungen</h2>
-          <div class="box">{gpt_text_safe}</div>
-          <h2>Readiness-Profil (Radar-Diagramm)</h2>
-          {img_tag}
+            <h1>Ergebnisse des Readiness-Checks</h1>
+
+            <div class="box">
+                <strong>Clusterzuordnung:</strong><br>
+                {display_cluster_result}
+            </div>
+
+            <h2>Individuelle Handlungsempfehlungen</h2>
+            <div class="box gpt-box">
+                {gpt_text_safe}
+            </div>
+
+            <h2>Readiness-Profil</h2>
+            {img_tag}
+
+            {table_html}
         </body>
         </html>
         """
