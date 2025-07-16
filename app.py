@@ -6,6 +6,7 @@ import openai  # type: ignore
 import base64
 from io import BytesIO
 import textwrap  # wichtig für Zeilenumbruch
+import re
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -926,16 +927,21 @@ elif current_tab == "Auswertung":
 
             wrapped_labels = [textwrap.fill(label, width=22, break_long_words=False) for label in labels]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(1, 1), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(2.5, 2.5), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=1)
+            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=6)
             ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=3)
-            ax.set_title("Readiness-Profil", fontsize=6, pad=4)
+            ax.set_xticklabels(wrapped_labels, fontsize=6)
+            ax.set_title("Readiness-Profil", fontsize=8, pad=6)
             plt.tight_layout()
-            st.pyplot(radar_chart_fig)
+
+            # Statt st.pyplot -> als PNG anzeigen für Schärfe
+            buf_streamlit = BytesIO()
+            radar_chart_fig.savefig(buf_streamlit, format="png", dpi=200, bbox_inches="tight")
+            buf_streamlit.seek(0)
+            st.image(buf_streamlit, caption="Readiness-Profil", use_column_width=False)
 
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
@@ -952,17 +958,19 @@ elif current_tab == "Auswertung":
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
-            st.markdown(gpt_output_text)
+            # Entferne ### oder #### aus GPT-Ausgabe
+            gpt_text_clean = re.sub(r"###*\s*", "", gpt_output_text)
+            st.markdown(gpt_text_clean)
 
-        gpt_text_safe = gpt_output_text if "gpt_output_text" in locals() else "<p>Keine Empfehlung generiert.</p>"
+        gpt_text_safe = gpt_text_clean if "gpt_text_clean" in locals() else "<p>Keine Empfehlung generiert.</p>"
 
-        # Bild vorbereiten
+        # Radarbild für HTML speichern
         if radar_chart_fig:
             buf = BytesIO()
             radar_chart_fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 800px; height: auto; margin-top: 20px;">'
+            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 240px; height: auto; margin-top: 20px;">'
         else:
             img_tag = ""
 
@@ -1082,7 +1090,6 @@ elif current_tab == "Auswertung":
             file_name="auswertung.html",
             mime="text/html"
         )
-
 # Trenner
 st.markdown("---")
 
