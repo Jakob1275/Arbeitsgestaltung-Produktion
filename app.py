@@ -142,8 +142,8 @@ Kriterien = {
     "begründung": "Aufgabenübertragbarkeit schafft Spielräume bei Personalengpässen, fördert Vertretungsfähigkeit und ermöglicht die Mehrmaschinenbedienung."
     },
     {
-    "frage": "T1.4 Maschinenbedienung erfolgt auf Basis standardisierter und dokumentierter Abläufe.",
-    "begründung": "Standardisierung ermöglicht Übergaben, unterstützt mobile Anteile und erleichtert Schulung sowie Fernbedienung."
+      "frage": "T1.4 Produktionsprozesse sind standardisiert dokumentiert und übertragbar.",
+      "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate.""
     },
     {
     "frage": "T1.5 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.",
@@ -158,19 +158,15 @@ Kriterien = {
     "begründung": "Entkoppelte Qualitätssicherung reduziert feste Rückmeldepunkte im Prozess und ermöglicht flexiblere Zeiteinteilung."
     },
     {
-    "frage": "T1.8 Wartungsbedarfe und Eingriffsprotokolle sind digital dokumentiert und zentral zugänglich.",
-    "begründung": "Digitale Transparenz unterstützt Eigenverantwortung, Übergaben und hybride Zuständigkeiten."
-    },
-    {
-    "frage": "T1.9 Echtzeitdaten zur Maschinenauslastung sind digital verfügbar.",
+    "frage": "T1.8 Echtzeitdaten zur Maschinenauslastung sind digital verfügbar.",
     "begründung": "Prozessdaten (z. B. OEE-Analyse, Laufzeitanalyse) ermöglichen auch bei variabler Anwesenheit situationsabhängige Steuerung und Optimierung."
     },
     {
-    "frage": "T1.10 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
+    "frage": "T1.9 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
     "begründung": "Vernetzte Systeme (z. B. ERP, MES, BDE) sind Voraussetzung für ortsunabhängige Steuerung, Planung und Dokumentation."
     },
     {
-    "frage": "T1.11 Die Auswirkungen flexibler Arbeit auf Produktivität, Qualität und Maschinenauslastung werden regelmäßig erfasst.",
+    "frage": "T1.10 Methoden zur regelmäßigen Erfassung potenzieller Auswirkungen flexibler Arbeit (z. B. auf Produktivität, Qualität, Maschinenauslastung) existieren.",
     "begründung": "Systematische Erfolgskontrolle unterstützt kontinuierliche Verbesserung und Legitimation flexibler Arbeitsmodelle im Produktionsbereich."
     }
    ],
@@ -210,31 +206,23 @@ Kriterien = {
       "begründung": "Ein effektiver und transparenter Informationsfluss ist die Grundlage für dezentrale Koordination, schnelle Reaktionsfähigkeit und den Ausgleich personeller Ausfälle."
     },
     {
-      "frage": "O1.2 Digitale Kommunikations- und Kollaborationstools (inkl. asynchrone Formate und hybride Besprechungen) sind standardisiert verfügbar, technisch unterstützt und sicher nutzbar.",
-      "begründung": "Standardisierte digitale Tools ermöglichen orts- und zeitunabhängige Abstimmung, Teamkommunikation und flexible Teilhabe an Besprechungen."
+      "frage": "O1.2 Digitale Kommunikations- und Kollaborationstools sind standardisiert verfügbar, technisch unterstützt und sicher nutzbar.",
+      "begründung": "Standardisierte digitale Tools ermöglichen mobile und zeitunabhängige Abstimmung, Teamkommunikation und flexible Teilhabe an Besprechungen."
     },
     {
-      "frage": "O1.3 Die digitale Kommunikationskompetenz der Beschäftigten wird systematisch gefördert und neue strukturiert in den digitale Kooperationsprozesse eingeführt.",
+      "frage": "O1.3 Konzepte zur systematischen Förderung digitaler Kommunikationskompetenzen und zur strukturierten Einführung neuer Beschäftigter in digitale Kooperationsprozesse existieren.",
       "begründung": "Mediensouveränität und eine fundierte Einarbeitung sind Voraussetzungen für eine funktionierende digitale Zusammenarbeit und Akzeptanz in verteilten Teams."
     },
     {
-      "frage": "O1.4 Die Organisation reflektiert und passt ihre Kommunikationsstrukturen regelmäßig an, um Zielerreichung und Zusammenarbeit kontinuierlich zu optimieren.",
-      "begründung": "Eine lernende Organisation passt ihre Kommunikationsprozesse an neue Arbeitsformen an, um Passung zu stärken und Konflikte bei zeitlicher Flexibilität zu vermeiden."
-    },
-    {
-      "frage": "O1.5 Erfahrungswissen wird systematisch dokumentiert, digital zugänglich gemacht und aktiv weitergegeben.",
+      "frage": "O1.4 Erfahrungswissen wird systematisch dokumentiert, digital zugänglich gemacht und aktiv weitergegeben.",
       "begründung": "Strukturierter Wissenstransfer (z.B. Best Practices, Lernmaterialien) sichert Qualität, fördert kontinuierliches Lernen und reduziert Abhängigkeiten von einzelnen Personen bei flexiblen Arbeitsmodellen."
     },
     {
-      "frage": "O1.6 Es existieren umfassende Datenschutzrichtlinien und klare Regeln für den Umgang mit allen Daten, insbesondere personenbezogenen.",
-      "begründung": "Transparente und verbindliche Datenschutzregelungen schaffen Vertrauen, sichern Rechtssicherheit und verhindern missbräuchliche Datennutzung im Kontext mobiler Arbeit."
-    },
-    {
-      "frage": "O1.7 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
+      "frage": "O1.5 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
       "begründung": "Robuste IT-Sicherheitsmaßnahmen (z. B. VPN-Verbindungen) sind fundamental für den Schutz sensibler Produktions- und Unternehmensdaten und zur Aufrechterhaltung der Betriebskontinuität bei flexibler Arbeit."
     },
     {
-      "frage": "O1.8 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
+      "frage": "O1.6 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
       "begründung": "Klare Rollen und eine partizipative Einbindung relevanter Akteure fördern die Akzeptanz, gewährleisten die Einhaltung rechtlicher Rahmenbedingungen und stärken die Governance-Struktur."
     }
     ],
@@ -244,7 +232,7 @@ Kriterien = {
       "begründung": "Fachkräftesicherung ist die Grundlage produktiver Flexibilisierung. Ohne entsprechende Qualifikation scheitern mobile und zeitflexible Modelle bereits in der Umsetzung."
     },
     {
-      "frage": "O2.2 Die Personalplanung berücksichtigt den flexiblen Einsatz über unterschiedliche Zeiten und Orte hinweg.",
+      "frage": "O2.2 Die Personalplanung kann den flexiblen Einsatz über unterschiedliche Zeiten und Orte hinweg berücksichtigen.",
       "begründung": "Eine vorausschauende Planung schafft Handlungsspielräume für mobile und zeitflexible Einsätze, insbesondere im Schichtsystem oder bei wechselnden Anforderungen."
     },
     {
@@ -252,15 +240,15 @@ Kriterien = {
       "begründung": "Klare Regelungen schaffen Rechtssicherheit und Orientierung."
     },
     {
-      "frage": "O2.4 Externe Anforderungen von Kunden, Lieferanten oder Partnern werden in der Flexibilitätsstrategie berücksichtigt.",
+      "frage": "O2.4 Potenzielle externe Anforderungen von Kunden, Lieferanten oder Partnern können in eine Flexibilitätsstrategie einbezogen werden.",
       "begründung": "Schnittstellen zu externen Akteuren müssen abgestimmt sein, damit flexible Arbeitsformen betrieblich und marktseitig umsetzbar sind."
     },
     {
-      "frage": "O2.5 Rechtliche Rahmenbedingungen sind bekannt und werden beachtet.",
+      "frage": "O2.5 Kenntnisse über relevante rechtliche Rahmenbedingungen sind vorhanden und können in die Planung flexibler Arbeitsformen einfließen.",
       "begründung": "Rechtskonformität (z. B. Arbeitszeitgesetz, Datenschutz) erhöht die Akzeptanz flexibler Arbeit und verhindert Unsicherheiten oder Fehlentwicklungen."
     },
     {
-      "frage": "O2.6 Arbeitszeitmodelle sind in Planungs- und Steuerungssysteme integriert.",
+      "frage": "O2.6 Die Integration von flexiblen Arbeitszeitmodellen in Planungs- und Steuerungssysteme ist technisch möglich.",
       "begründung": "Nur durch die Integration in digitale Systeme (z. B. MES, ERP) können flexible Modelle zuverlässig geplant, dokumentiert und gesteuert werden."
     },
     {
@@ -268,15 +256,15 @@ Kriterien = {
       "begründung": "Strukturelle Anpassungsfähigkeit (z. B. bei Sonderaufträgen oder kurzfristigen Vertretungen) ist Voraussetzung für spontane Reaktion und produktive Umsetzung von Flexibilität."
     },
     {
-      "frage": "O2.8 Die Verantwortung der Führungskräfte für die Umsetzung flexibler Arbeit ist eindeutig definiert.",
+      "frage": "O2.8 Verantwortlichkeiten für die Gestaltung und Einführung flexibler Arbeit können eindeutig definiert werden.",
       "begründung": "Unklare Rollen behindern Fortschritt. Führungskräfte sind entscheidend für die Gestaltung, Steuerung und Akzeptanz flexibler Arbeitsformen."
     },
     {
-      "frage": "O2.9 Zuständigkeiten und Vertretungsregelungen sind auch bei mobiler Arbeit klar definiert.",
+      "frage": "O2.9 Zuständigkeiten und Vertretungsregelungen können für mobile Arbeitsformen klar definiert werden.",
       "begründung": "Eindeutige Verantwortlichkeiten sichern die Prozessstabilität bei mobiler Arbeit und entlasten das Team."
     },
     {
-      "frage": "O2.10 Rückmeldungen zur Umsetzung flexibler Arbeit werden regelmäßig eingeholt und genutzt.",
+      "frage": "O2.10 Prozesse zur regelmäßigen Erfassung und Nutzung von Rückmeldungen zur flexiblen Arbeitsgestaltung existieren oder können etabliert werden.",
       "begründung": "Systematisches Feedback stärkt die Passung und ermöglicht lernorientierte Anpassungen der Flexibilisierungsstrategie."
     },
     {
@@ -310,7 +298,7 @@ Kriterien = {
       "begründung": "Starre Schichtsysteme schränken Flexibilität ein. Dynamik ermöglicht individuelle Gestaltungsspielräume."
     },
     {
-    "frage": "O3.6 Personelle Puffer zur Kompensation von Engpässen sind eingeplant.",
+    "frage": "O3.6 Die Planung von personellen Puffern zur Kompensation von Engpässen ist möglich.",
       "begründung": "Ausweichkapazitäten sind essenziell, um individuelle Flexibilität ohne Produktivitätsverlust zu ermöglichen."
     },
     {
@@ -332,10 +320,6 @@ Kriterien = {
     {
       "frage": "O3.11 Die Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
       "begründung": "Digitale Vernetzung und Flexibilität der Steuerung ermöglichen schnelle Reaktionen auf sich ändernde Rahmenbedingungen."
-    },
-    {
-      "frage": "O3.12 Produktionsprozesse sind standardisiert dokumentiert und übertragbar.",
-      "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate."
     }
     ],
     "Unternehmenskultur": [
@@ -360,7 +344,7 @@ Kriterien = {
       "begründung": "Eine konstruktive Fehlerkultur fördert Anpassungsfähigkeit, Lernprozesse und Innovationskraft bei der Einführung flexibler Modelle."
     },
     {
-      "frage": "K1.6 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.",
+      "frage": "K1.6 Ein Verständnis dafür, dass flexible Arbeit ein selbstverständlicher Bestandteil der zukünftigen betrieblichen Praxis sein kann, existiert.",
       "begründung": "Normalisierung von Flexibilität reduziert Widerstände und erhöht die organisatorische Anschlussfähigkeit."
     },
     {
@@ -372,7 +356,7 @@ Kriterien = {
       "begründung": "Individuelle Unterschiede fördern Anpassungsfähigkeit und stärken das kulturelle Verständnis für Diversität."
     },
     {
-      "frage": "K1.9 Mobile Arbeit wird systematisch in Teamabstimmungen integriert.",
+      "frage": "K1.9 Möglichkeiten zur systematischen Integration mobiler Arbeit in Teamabstimmungen existieren oder können geschaffen werden.",
       "begründung": "Kulturelle Integration erfordert explizite Berücksichtigung dezentraler Arbeit in Kommunikationsprozesse."
     },
     {
@@ -380,7 +364,7 @@ Kriterien = {
       "begründung": "Transparente Diskussion über Zielkonflikte stärkt Vertrauen und vermeidet dysfunktionale Idealisierungen."
     },
     {
-      "frage": "K1.11 Kulturelle Barrieren bei der Einführung flexibler Arbeit werden systematisch erfasst und reflektiert.",
+      "frage": "K1.11 Prozesse zur systematischen Erfassung und Reflexion potenzieller kultureller Barrieren bei der Einführung flexibler Arbeit existieren oder sind planbar.",
       "begründung": "Nur durch strukturiertes Feedback lassen sich kulturelle Hürden identifizieren und gezielt adressieren."
     }
     ],
@@ -406,31 +390,27 @@ Kriterien = {
       "begründung": "Hybride Arbeit stellt neue Anforderungen an Führung, insbesondere im Umgang mit virtueller Kommunikation und dezentraler Koordination."
     },
     {
-      "frage": "K2.6 Es existieren verbindliche Kommunikationsstandards im Team.",
-      "begründung": "Verlässliche Kommunikationsprozesse (z. B. Regeltermine, Reaktionszeiten) kompensieren informelle Interaktionen bei physischer Distanz."
-    },
-    {
-      "frage": "K2.7 Die Teamkultur ist durch gegenseitige Unterstützung und Kooperation geprägt.",
+      "frage": "K2.6 Die Teamkultur ist durch gegenseitige Unterstützung und Kooperation geprägt.",
       "begründung": "Soziale Unterstützung erhöht Resilienz – ein zentraler Erfolgsfaktor bei reduzierter Präsenz."
     },
     {
-      "frage": "K2.8 Es bestehen etablierte Formate für den informellen Austausch im Team.",
+      "frage": "K2.7 Es bestehen etablierte Formate für den informellen Austausch im Team.",
       "begründung": "Informelle Kommunikation fördert Vertrauen und Zusammenhalt – auch bei räumlicher Trennung."
     },
     {
-      "frage": "K2.9 Teamziele und die Qualität der Zusammenarbeit werden regelmäßig reflektiert und angepasst.",
+      "frage": "K2.8 Teamziele und die Qualität der Zusammenarbeit werden regelmäßig reflektiert und angepasst.",
       "begründung": "Gemeinsame Reflexion stärkt Selbststeuerung und fördert kontinuierliche Weiterentwicklung."
     },
     {
-      "frage": "K2.10 Teammitglieder kennen ihre Rollen und Verantwortlichkeiten im flexiblen Arbeitskontext.",
+      "frage": "K2.9 Teammitglieder kennen ihre Rollen und Verantwortlichkeiten.",
       "begründung": "Klare Rollenklarheit erhöht Handlungssicherheit und reduziert Koordinationsaufwand."
     },
     {
-      "frage": "K2.11 Konflikte im Team werden frühzeitig erkannt und konstruktiv moderiert.",
+      "frage": "K2.10 Konflikte im Team werden frühzeitig erkannt und konstruktiv moderiert.",
       "begründung": "Konstruktiver Umgang mit Konflikten ist in asynchronen oder hybriden Teams besonders relevant."
     },
     {
-      "frage": "K2.12 Unterschiedliche Bedürfnisse werden teamintern berücksichtigt.",
+      "frage": "K2.11 Unterschiedliche Bedürfnisse werden teamintern berücksichtigt.",
       "begründung": "Eine faire Berücksichtigung individueller Anforderungen (z. B. Schichtsystem, Pflegeverantwortung) fördert Akzeptanz und Zusammenhalt im Team."
     }
   ]
@@ -504,23 +484,26 @@ kriterien_item_to_cluster_variable_mapping = {
 
     # 6. Digitalisierungsgrad
     "Digitalisierungsgrad": [
-        "T1.10 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
+        "T1.9 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
         "T2.5 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
         "M2.8 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren Grundfunktionen.",
         "T2.6 Die IT-Systeme ermöglichen ortsunabhängige Einsicht und Rückmeldungen in produktionsrelevante Echtzeitdaten.",
         "T2.7 Simulationen oder digitale Zwillinge werden zur Produktionsplanung und -steuerung eingesetzt.",
-        "O2.6 Arbeitszeitmodelle sind in Planungs- und Steuerungssysteme integriert.",
+        "O2.6 Die Integration von flexiblen Arbeitszeitmodellen in Planungs- und Steuerungssysteme ist technisch möglich.",
         "O3.11 Die Auftragssteuerung ist digital unterstützt und dynamisch anpassbar."
     ],
     
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
         "T1.5 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
+        "O1.1 Informationen für Planung, Wissenstransfer, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
+        "O3.9 Maschinenstillstände führen nicht unmittelbar zu kritischen Produktivitätsverlusten.",
+        "O1.4 Die Organisation reflektiert und passt ihre Kommunikationsstrukturen regelmäßig an, um Zielerreichung und Zusammenarbeit kontinuierlich zu optimieren."
     ],
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
-        "T1.11 Die Auswirkungen flexibler Arbeit auf Produktivität, Qualität und Maschinenauslastung werden regelmäßig erfasst.",
+        "T1.10 Methoden zur regelmäßigen Erfassung potenzieller Auswirkungen flexibler Arbeit (z. B. auf Produktivität, Qualität, Maschinenauslastung) existieren.",
         "K1.3 Zielerreichung hat Vorrang vor physischer Anwesenheit.",
         "K1.6 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.", # Impliziert wahrgenommenen Nutzen
         "K2.4 Führung erfolgt ergebnisorientiert statt anwesenheitsorientiert."
@@ -533,7 +516,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "K1.4 Es herrscht ein positives Verständnis für neue Arbeitsformen.",
         "K1.6 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.",
         "O2.3 Es bestehen verbindliche Betriebsvereinbarungen zur Regelung mobiler und zeitflexibler Arbeit.",
-        "O2.10 Rückmeldungen zur Umsetzung flexibler Arbeit werden regelmäßig eingeholt und genutzt."
+        "O2.10 Prozesse zur regelmäßigen Erfassung und Nutzung von Rückmeldungen zur flexiblen Arbeitsgestaltung existieren oder können etabliert werden."
     ],
     
     # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
@@ -542,7 +525,9 @@ kriterien_item_to_cluster_variable_mapping = {
     "Aufwand Zeit": [
         "O2.11 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
         "O1.2 Digitale Kommunikations- und Kollaborationstools (inkl. asynchrone Formate und hybride Besprechungen) sind standardisiert verfügbar, technisch unterstützt und sicher nutzbar.",
-        "O1.4 Die Organisation reflektiert und passt ihre Kommunikationsstrukturen regelmäßig an, um Zielerreichung und Zusammenarbeit kontinuierlich zu optimieren."
+        "O1.4 Die Organisation reflektiert und passt ihre Kommunikationsstrukturen regelmäßig an, um Zielerreichung und Zusammenarbeit kontinuierlich zu optimieren.",
+        "O3.4 Die Produktionsplanung ist mit flexiblen Arbeitszeitmodellen kompatibel.",
+        "O3.5 Die Schicht- und Einsatzplanung ist dynamisch anpassbar."
     ],
     
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
@@ -552,7 +537,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "M1.6 Die Arbeitsumgebung ermöglicht produktives Arbeiten außerhalb der Fertigung.",
         "M2.6 Beschäftigte verfügen über stabile externe Bedingungen für mobiles Arbeiten.",
         "T2.4 Der IT-Support ist auch bei mobiler Arbeit verlässlich erreichbar.",
-        "O1.8 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
+        "O1.6 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
         "T1.6 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert."
     ]
 }
@@ -777,18 +762,20 @@ st.markdown(" ➤ ".join([
 # Inhalt der Tabs
 if current_tab == "Start":
     st.markdown("""
-    Dieser Readiness-Check dient der systematischen Erfassung des betrieblichen Reifegrads zur Einführung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung.
+    Dieser **Readiness-Check** wurde konzipiert, um Unternehmen der **zerspanenden Fertigung** einen systematischen Weg zur Bewertung ihres aktuellen Reifegrads für die Einführung und erfolgreiche Implementierung **mobiler und zeitflexibler Arbeitsgestaltungen** aufzuzeigen.
 
-    Er basiert auf den vier arbeitswissenschaftlichen Gestaltungsdimensionen des MTOK-Modells – **Mensch**, **Technik**, **Organisation** und **Kultur** – und differenziert diese in insgesamt neun empirisch fundierte Handlungsfelder.
+    In einer Zeit beschleunigter Digitalisierung und sich wandelnder Arbeitsmodelle stellt sich die Frage nach der optimalen Gestaltung von Präsenz und Flexibilität. Dieses Tool bietet Ihnen eine präzise Standortbestimmung und leitet Sie durch die komplexen Anforderungen dieser Transformation.
 
-    Für jedes Handlungsfeld beantworten Sie eine Reihe von Bewertungskriterien anhand einer standardisierten 4-Punkte-Skala:
+    Dieses Modell basiert auf den vier integralen arbeitswissenschaftlichen Gestaltungsdimensionen des **MTOK-Modells** – **Mensch**, **Technik**, **Organisation** und **Kultur**. Es differenziert diese in **neun empirisch fundierte Handlungsfelder**, deren Kriterien speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.
 
-    - **1 = niedrig** – aktuell nicht erfüllt 
-    - **2 = mittel** – in Ansätzen erfüllt 
-    - **3 = hoch** – weitgehend umgesetzt 
-    - **4 = sehr hoch** – vollständig umgesetzt und etabliert 
+    Für jedes Kriterium bewerten Sie den aktuellen Zustand Ihres Betriebs auf einer standardisierten **4-Punkte-Skala**:
 
-    Nach der Eingabe erhalten Sie ein grafisches Readiness-Profil sowie individuelle Handlungsempfehlungen auf Basis Ihrer Angaben.
+    * **1 = Niedrig:** Das Kriterium ist aktuell nicht erfüllt.
+    * **2 = Mittel:** Erste Ansätze sind erkennbar, aber das Kriterium ist nur in Ansätzen erfüllt.
+    * **3 = Hoch:** Das Kriterium ist weitgehend umgesetzt und eine solide Grundlage ist vorhanden.
+    * **4 = Sehr hoch:** Das Kriterium ist vollständig umgesetzt und fest im Betrieb etabliert.
+
+    Nach Abschluss der Bewertung erhalten Sie ein **individuelles grafisches Readiness-Profil**, das Ihre Stärken und Potenziale aufzeigt. Darauf aufbauend generiert das System **maßgeschneiderte Handlungsempfehlungen**, die Ihnen konkrete Schritte zur Weiterentwicklung Ihrer flexiblen Arbeitsgestaltung auf Basis empirisch hergeleiteter Clusters aufzeigen.
     """)
 
 elif current_tab in mtok_structure:
