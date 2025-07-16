@@ -11,20 +11,6 @@ import re
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-def markdown_to_html(text: str) -> str:
-    text = re.sub(r"### (.*?)\n", r"<h2>\1</h2>\n", text)
-    text = re.sub(r"#### (.*?)\n", r"<h3>\1</h3>\n", text)
-    blocks = re.split(r"\n(?=\s*- )", text)
-    html_blocks = []
-    for block in blocks:
-        if block.strip().startswith("- "):
-            lines = [line.strip()[2:] for line in block.strip().split("\n") if line.strip().startswith("- ")]
-            items = "".join([f"<li>{line}</li>" for line in lines])
-            html_blocks.append(f"<ul>{items}</ul>")
-        else:
-            html_blocks.append(f"<p>{block.strip()}</p>")
-    return "\n".join(html_blocks)
-
 def frage_chatgpt_auswertung(ergebnisse, cluster_bezeichnung):
     try:
         response = client.chat.completions.create(
@@ -924,7 +910,7 @@ elif current_tab == "Abschließende Fragen":
 
 elif current_tab == "Auswertung":
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
-      
+        
         # Labels & Werte sammeln
         labels, values = [], []
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
@@ -934,7 +920,7 @@ elif current_tab == "Auswertung":
                     labels.append(f"{hf_name} ({dim_name})")
                     values.append(val)
 
-        # Radar-Diagramm erzeugen
+        # Radar-Chart erzeugen
         radar_chart_fig = None
         if values:
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
@@ -949,79 +935,68 @@ elif current_tab == "Auswertung":
             ax.set_yticklabels(['1', '2', '3', '4'], fontsize=3)
             ax.set_xticks(angles)
             ax.set_xticklabels(wrapped_labels, fontsize=4)
-            ax.set_title("Readiness-Profil", fontsize=10, pad=8)
+            ax.set_title("Readiness-Profil", fontsize=12, pad=10)
             plt.tight_layout()
 
-            # Streamlit: als PNG (scharf) anzeigen
             buf_streamlit = BytesIO()
             radar_chart_fig.savefig(buf_streamlit, format="png", dpi=300, bbox_inches="tight")
             buf_streamlit.seek(0)
-            st.image(buf_streamlit, caption="Readiness-Profil", width=800)
+            st.image(buf_streamlit, caption="Readiness-Profil", width=700)
 
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
-        display_cluster_result = ""
+        display_cluster_result = cluster_result
 
         if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
             st.warning(cluster_result)
-            display_cluster_result = cluster_result
         else:
             st.subheader("Automatische Clusterzuordnung")
             st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
-            display_cluster_result = cluster_result
 
             # GPT-Auswertung
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
-            
-            # GPT-Antwort in HTML-geeignete Struktur umwandeln
+
+            def markdown_to_html(text):
+                text = re.sub(r"^### (.*)$", r"<h2>\1</h2>", text, flags=re.MULTILINE)
+                text = re.sub(r"^#### (.*)$", r"<h3>\1</h3>", text, flags=re.MULTILINE)
+                text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", text)
+                text = re.sub(r"\*(.*?)\*", r"<em>\1</em>", text)
+                text = re.sub(r"^- (.*?)$", r"<li>\1</li>", text, flags=re.MULTILINE)
+                text = re.sub(r"(<li>.*?</li>)", r"<ul>\1</ul>", text, flags=re.DOTALL)
+                return text
+
             gpt_text_html_ready = markdown_to_html(gpt_output_text)
             st.markdown(gpt_text_html_ready, unsafe_allow_html=True)
 
-        gpt_text_safe = gpt_text_html_ready if "gpt_text_html_ready" in locals() else "<p>Keine Empfehlung generiert.</p>"
-
-        # Radar-Bild für HTML-Export vorbereiten
+        # Radar-Grafik für HTML
         if radar_chart_fig:
             buf = BytesIO()
             radar_chart_fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 650px; height: auto; margin-top: 20px;">'
+            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 600px; height: auto; margin-top: 20px;">'
         else:
             img_tag = ""
 
-        # Ergebnistabelle vorbereiten
+        # Tabelle
         table_rows = ""
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
             for hf_name in handlungsfelder_in_dim:
-                value = st.session_state.ergebnisse.get(hf_name)
-                if value is not None:
-                    table_rows += f"""
-                    <tr>
-                        <td>{hf_name}</td>
-                        <td>{dim_name}</td>
-                        <td style="text-align: center;">{value:.1f}</td>
-                    </tr>
-                    """
+                val = st.session_state.ergebnisse.get(hf_name)
+                if val is not None:
+                    table_rows += f"<tr><td>{hf_name}</td><td>{dim_name}</td><td style='text-align: center;'>{val:.1f}</td></tr>"
 
         table_html = f"""
         <h2>Bewertung der Handlungsfelder</h2>
         <table>
-            <thead>
-                <tr>
-                    <th>Handlungsfeld</th>
-                    <th>MTOK-Dimension</th>
-                    <th>Mittelwert</th>
-                </tr>
-            </thead>
-            <tbody>
-                {table_rows}
-            </tbody>
+            <thead><tr><th>Handlungsfeld</th><th>MTOK-Dimension</th><th>Mittelwert</th></tr></thead>
+            <tbody>{table_rows}</tbody>
         </table>
         """
 
-        # HTML-Inhalt für Download
+        # HTML-Komplettausgabe
         html_content = f"""
         <!DOCTYPE html>
         <html lang="de">
@@ -1029,85 +1004,36 @@ elif current_tab == "Auswertung":
             <meta charset="utf-8">
             <title>Readiness-Auswertung</title>
             <style>
-                body {{
-                    font-family: Arial, sans-serif;
-                    padding: 40px;
-                    line-height: 1.6;
-                    color: #222;
-                    max-width: 800px;
-                    margin: auto;
-                }}
-                h1 {{
-                    color: #003366;
-                    font-size: 26px;
-                }}
-                h2 {{
-                    color: #005599;
-                    font-size: 20px;
-                    margin-top: 30px;
-                }}
-                .box {{
-                    background-color: #f8f9fa;
-                    padding: 15px;
-                    border-left: 5px solid #005599;
-                    margin-bottom: 25px;
-                    border-radius: 5px;
-                }}
-                .gpt-box {{
-                    background-color: #eef7ff;
-                    border-left: 5px solid #0099cc;
-                }}
-                img {{
-                    display: block;
-                    margin: 20px auto;
-                }}
-                table {{
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-top: 20px;
-                }}
-                th, td {{
-                    border: 1px solid #ccc;
-                    padding: 8px;
-                    font-size: 13px;
-                }}
-                th {{
-                    background-color: #e1e9f0;
-                    text-align: left;
-                }}
-                td:nth-child(3) {{
-                    text-align: center;
-                }}
+                body {{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}
+                h1 {{ font-size: 26px; color: #003366; }}
+                h2 {{ font-size: 20px; color: #005599; margin-top: 30px; }}
+                .box {{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}
+                .gpt-box {{ background-color: #eef7ff; border-left: 5px solid #0099cc; }}
+                img {{ display: block; margin: 20px auto; }}
+                table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
+                th, td {{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}
+                th {{ background-color: #e1e9f0; text-align: left; }}
+                td:nth-child(3) {{ text-align: center; }}
             </style>
         </head>
         <body>
             <h1>Ergebnisse des Readiness-Checks</h1>
-
-            <div class="box">
-                <strong>Clusterzuordnung:</strong><br>
-                {display_cluster_result}
-            </div>
-
+            <div class="box"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
             <h2>Individuelle Handlungsempfehlungen</h2>
-            <div class="box gpt-box">
-                {gpt_text_safe}
-            </div>
-
-            <h2>Readiness-Profil</h2>
-            {img_tag}
-
+            <div class="box gpt-box">{gpt_text_html_ready}</div>
+            <h2>Readiness-Profil</h2>{img_tag}
             {table_html}
         </body>
         </html>
         """
 
-        # Download-Button anzeigen
         st.download_button(
             label="📄 Ergebnisse als HTML herunterladen",
             data=html_content,
             file_name="auswertung.html",
             mime="text/html"
         )
+        
 # Trenner
 st.markdown("---")
 
