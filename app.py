@@ -804,9 +804,9 @@ elif current_tab in mtok_structure:
 
             # Bestimme Default-Wert für st.radio
             try:
-                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else 0
+                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else None
             except ValueError:
-                default_index = 0
+                default_index = None
 
             score = st.radio(
                 "Bitte bewerten:",
