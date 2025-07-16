@@ -909,7 +909,7 @@ elif current_tab == "Abschließende Fragen":
 
 elif current_tab == "Auswertung":
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
-
+        
         labels = []
         values = []
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
@@ -926,18 +926,18 @@ elif current_tab == "Auswertung":
 
             wrapped_labels = [textwrap.fill(label, 18) for label in labels]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(3.5, 3.5), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(3, 3), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.set_yticks([1, 2, 3, 4])
             ax.set_yticklabels(['1', '2', '3', '4'], fontsize=6)
             ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=7)
-            ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=10, pad=10)
+            ax.set_xticklabels(wrapped_labels, fontsize=6)
+            ax.set_title("Readiness-Profil", fontsize=9, pad=8)
             plt.tight_layout()
             st.pyplot(radar_chart_fig)
 
-        # Cluster-Zuordnung anzeigen
+        # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = ""
 
@@ -954,7 +954,7 @@ elif current_tab == "Auswertung":
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
             st.markdown(gpt_output_text)
 
-        # HTML zusammenbauen (auch wenn gpt_output_text evtl. nicht gesetzt ist)
+        # HTML-Grafik vorbereiten
         gpt_text_safe = gpt_output_text if "gpt_output_text" in locals() else "<p>Keine Empfehlung generiert.</p>"
 
         if radar_chart_fig:
@@ -962,16 +962,58 @@ elif current_tab == "Auswertung":
             radar_chart_fig.savefig(buf, format="png", bbox_inches="tight")
             buf.seek(0)
             img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            img_tag = f'<img src="data:image/png;base64,{img_base64}" width="400">'
+            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="max-width: 100%; height: auto; margin-top: 20px;">'
         else:
             img_tag = ""
 
+        # Finales HTML mit Struktur & Stil
         html_content = f"""
-        <h1>Ergebnisse des Readiness-Checks</h1>
-        <p><strong>Clusterzuordnung:</strong> {display_cluster_result}</p>
-        <h2>Individuelle Handlungsempfehlungen</h2>
-        <p>{gpt_text_safe}</p>
-        {img_tag}
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <title>Auswertung Readiness-Check</title>
+          <style>
+            body {{
+              font-family: Arial, sans-serif;
+              padding: 40px;
+              line-height: 1.6;
+              color: #222;
+            }}
+            h1 {{
+              color: #003366;
+              font-size: 24px;
+            }}
+            h2 {{
+              color: #005599;
+              margin-top: 30px;
+            }}
+            p {{
+              margin: 10px 0;
+            }}
+            .box {{
+              background-color: #f1f1f1;
+              padding: 15px;
+              border-radius: 8px;
+              margin: 10px 0;
+            }}
+            img {{
+              max-width: 100%;
+              height: auto;
+            }}
+          </style>
+        </head>
+        <body>
+          <h1>Ergebnisse des Readiness-Checks</h1>
+          <div class="box">
+            <strong>Clusterzuordnung:</strong> {display_cluster_result}
+          </div>
+          <h2>Individuelle Handlungsempfehlungen</h2>
+          <div class="box">{gpt_text_safe}</div>
+          <h2>Readiness-Profil (Radar-Diagramm)</h2>
+          {img_tag}
+        </body>
+        </html>
         """
 
         st.download_button(
