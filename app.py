@@ -910,38 +910,39 @@ elif current_tab == "Abschließende Fragen":
 
 elif current_tab == "Auswertung":
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
-        
-        labels = []
-        values = []
+      
+        # Labels & Werte sammeln
+        labels, values = [], []
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
             for hf_name in handlungsfelder_in_dim:
-                if hf_name in st.session_state.ergebnisse and st.session_state.ergebnisse[hf_name] is not None:
+                val = st.session_state.ergebnisse.get(hf_name)
+                if val is not None:
                     labels.append(f"{hf_name} ({dim_name})")
-                    values.append(st.session_state.ergebnisse[hf_name])
+                    values.append(val)
 
+        # Radar-Diagramm erzeugen
         radar_chart_fig = None
         if values:
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
+            wrapped_labels = [textwrap.fill(label, 20, break_long_words=False) for label in labels]
 
-            wrapped_labels = [textwrap.fill(label, width=22, break_long_words=False) for label in labels]
-
-            radar_chart_fig, ax = plt.subplots(figsize=(2.5, 2.5), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(3.5, 3.5), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=6)
+            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7)
             ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=6)
-            ax.set_title("Readiness-Profil", fontsize=8, pad=6)
+            ax.set_xticklabels(wrapped_labels, fontsize=7)
+            ax.set_title("Readiness-Profil", fontsize=10, pad=8)
             plt.tight_layout()
 
-            # Statt st.pyplot -> als PNG anzeigen für Schärfe
+            # Streamlit: als PNG (scharf) anzeigen
             buf_streamlit = BytesIO()
-            radar_chart_fig.savefig(buf_streamlit, format="png", dpi=200, bbox_inches="tight")
+            radar_chart_fig.savefig(buf_streamlit, format="png", dpi=300, bbox_inches="tight")
             buf_streamlit.seek(0)
-            st.image(buf_streamlit, caption="Readiness-Profil", use_column_width=False)
+            st.image(buf_streamlit, caption="Readiness-Profil", use_container_width=True)
 
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
@@ -955,26 +956,29 @@ elif current_tab == "Auswertung":
             st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
             display_cluster_result = cluster_result
 
+            # GPT-Auswertung
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
-            # Entferne ### oder #### aus GPT-Ausgabe
+
+            # Entferne Markdown: ###, ####, **, ***
             gpt_text_clean = re.sub(r"###*\s*", "", gpt_output_text)
+            gpt_text_clean = re.sub(r"\*+", "", gpt_text_clean)
             st.markdown(gpt_text_clean)
 
         gpt_text_safe = gpt_text_clean if "gpt_text_clean" in locals() else "<p>Keine Empfehlung generiert.</p>"
 
-        # Radarbild für HTML speichern
+        # Radar-Bild für HTML-Export vorbereiten
         if radar_chart_fig:
             buf = BytesIO()
             radar_chart_fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 240px; height: auto; margin-top: 20px;">'
+            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 500px; height: auto; margin-top: 20px;">'
         else:
             img_tag = ""
 
-        # Tabelle der Handlungsfelder vorbereiten
+        # Ergebnistabelle vorbereiten
         table_rows = ""
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
             for hf_name in handlungsfelder_in_dim:
@@ -1004,7 +1008,7 @@ elif current_tab == "Auswertung":
         </table>
         """
 
-        # Gesamtes HTML mit eingebetteter Grafik und Tabelle
+        # HTML-Inhalt für Download
         html_content = f"""
         <!DOCTYPE html>
         <html lang="de">
@@ -1084,6 +1088,7 @@ elif current_tab == "Auswertung":
         </html>
         """
 
+        # Download-Button anzeigen
         st.download_button(
             label="📄 Ergebnisse als HTML herunterladen",
             data=html_content,
