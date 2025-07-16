@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import openai  # type: ignore
 import base64
-
+from io import BytesIO
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -927,14 +927,18 @@ elif current_tab == "Auswertung":
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(4, 3), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(3.5, 3.5), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.set_yticks([1, 2, 3, 4])
             ax.set_yticklabels(['1 = Niedrig', '2 = Mittel', '3 = Hoch', '4 = Sehr hoch'], fontsize=8)
+           
+            wrapped_labels = [label.replace(" ", "\n", 1) for label in labels]  # Einfacher Zeilenumbruch
             ax.set_xticks(angles)
-            ax.set_xticklabels(labels, fontsize=9)
-            ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=14, pad=20)
+            ax.set_xticklabels(labels, fontsize=7)
+            
+            ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=10, pad=10)
+            plt.tight_layout()
             st.pyplot(radar_chart_fig) # Zeige das Diagramm an
 
         # Cluster-Zuordnung anzeigen
