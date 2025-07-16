@@ -995,7 +995,11 @@ elif current_tab == "Auswertung":
             <tbody>{table_rows}</tbody>
         </table>
         """
-
+        
+        # Fallback, falls GPT-Text nicht generiert wurde
+        if "gpt_text_html_ready" not in locals():
+            gpt_text_html_ready = "<p>Keine Empfehlung generiert.</p>"
+        
         # HTML-Komplettausgabe
         html_content = f"""
         <!DOCTYPE html>
