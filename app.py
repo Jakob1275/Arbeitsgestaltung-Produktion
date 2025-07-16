@@ -942,7 +942,7 @@ elif current_tab == "Auswertung":
             buf_streamlit = BytesIO()
             radar_chart_fig.savefig(buf_streamlit, format="png", dpi=300, bbox_inches="tight")
             buf_streamlit.seek(0)
-            st.image(buf_streamlit, caption="Readiness-Profil", width=420)
+            st.image(buf_streamlit, caption="Readiness-Profil", width=800)
 
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
