@@ -1,11 +1,11 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
-import openai # type: ignore
+import matplotlib.pyplot as plt
+import openai  # type: ignore
 import pdfkit
-import BytesIO
 import base64
+from io import BytesIO
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
