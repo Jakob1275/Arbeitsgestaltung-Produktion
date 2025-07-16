@@ -928,13 +928,13 @@ elif current_tab == "Auswertung":
             angles_cycle = angles + angles[:1]
             wrapped_labels = [textwrap.fill(label, 20, break_long_words=False) for label in labels]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(3.5, 3.5), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(3, 3), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
-            ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
+            ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=1)
             ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7)
+            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=3)
             ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=7)
+            ax.set_xticklabels(wrapped_labels, fontsize=4)
             ax.set_title("Readiness-Profil", fontsize=10, pad=8)
             plt.tight_layout()
 
@@ -974,7 +974,7 @@ elif current_tab == "Auswertung":
             radar_chart_fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 500px; height: auto; margin-top: 20px;">'
+            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 650px; height: auto; margin-top: 20px;">'
         else:
             img_tag = ""
 
