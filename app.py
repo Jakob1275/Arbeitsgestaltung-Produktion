@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import openai  # type: ignore
 import base64
 from io import BytesIO
+import textwrap  # wichtig für Zeilenumbruch
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -906,19 +907,15 @@ elif current_tab == "Abschließende Fragen":
     st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
-# Auswertungs-Tab
 elif current_tab == "Auswertung":
-    # Sicherstellen, dass alle benötigten Daten verfügbar sind, bevor der Knopf angezeigt wird
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
-        # Hier die Logik zum Anzeigen des Radar-Diagramms und der Cluster-Zuordnung
-        # (Dies ist der Teil, der ausgeführt wird, sobald der Benutzer auf den Reiter "Auswertung" wechselt)
 
         labels = []
         values = []
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
             for hf_name in handlungsfelder_in_dim:
                 if hf_name in st.session_state.ergebnisse and st.session_state.ergebnisse[hf_name] is not None:
-                    labels.append(f"{hf_name}\n({dim_name})")
+                    labels.append(f"{hf_name} ({dim_name})")
                     values.append(st.session_state.ergebnisse[hf_name])
 
         radar_chart_fig = None
@@ -927,48 +924,38 @@ elif current_tab == "Auswertung":
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
 
+            wrapped_labels = [textwrap.fill(label, 18) for label in labels]
+
             radar_chart_fig, ax = plt.subplots(figsize=(3.5, 3.5), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1 = Niedrig', '2 = Mittel', '3 = Hoch', '4 = Sehr hoch'], fontsize=8)
-           
-            wrapped_labels = [label.replace(" ", "\n", 1) for label in labels]  # Einfacher Zeilenumbruch
+            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=6)
             ax.set_xticks(angles)
-            ax.set_xticklabels(labels, fontsize=7)
-            
+            ax.set_xticklabels(wrapped_labels, fontsize=7)
             ax.set_title("Readiness-Profil – Mittelwerte nach Handlungsfeld", fontsize=10, pad=10)
             plt.tight_layout()
-            st.pyplot(radar_chart_fig) # Zeige das Diagramm an
+            st.pyplot(radar_chart_fig)
 
         # Cluster-Zuordnung anzeigen
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
-        
         display_cluster_result = ""
+
         if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
             st.warning(cluster_result)
-            display_cluster_result = cluster_result # Speichere Fehlermeldung
-            # Hier keine weitere Auswertung, wenn Clusterzuordnung fehlschlägt
+            display_cluster_result = cluster_result
         else:
             st.subheader("Automatische Clusterzuordnung")
             st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
-            display_cluster_result = cluster_result # Speichere erfolgreichen Cluster-Namen
+            display_cluster_result = cluster_result
 
-            # GPT-Auswertung anzeigen
             st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
             st.markdown(gpt_output_text)
 
-        html_content = """
-        <h1>Ergebnisse des Readiness-Checks</h1>
-        <p>Clusterzuordnung: <strong>Cluster 2 – Produktionsstark, aber mobilitätsfern</strong></p>
-        <p>Handlungsempfehlungen:</p>
-        <ul>
-        <li>Optimierung der Arbeitsplatzgestaltung</li>
-        <li>Einführung transparenter KPIs</li>
-        </ul>
-        """
+        # HTML zusammenbauen (auch wenn gpt_output_text evtl. nicht gesetzt ist)
+        gpt_text_safe = gpt_output_text if "gpt_output_text" in locals() else "<p>Keine Empfehlung generiert.</p>"
 
         if radar_chart_fig:
             buf = BytesIO()
@@ -979,21 +966,20 @@ elif current_tab == "Auswertung":
         else:
             img_tag = ""
 
-        # Jetzt alles zusammenfügen
         html_content = f"""
         <h1>Ergebnisse des Readiness-Checks</h1>
         <p><strong>Clusterzuordnung:</strong> {display_cluster_result}</p>
-        <h2>Handlungsempfehlungen</h2>
-        <p>{gpt_output_text}</p>
+        <h2>Individuelle Handlungsempfehlungen</h2>
+        <p>{gpt_text_safe}</p>
         {img_tag}
         """
-        
+
         st.download_button(
             label="📄 Ergebnisse als HTML herunterladen",
             data=html_content,
             file_name="auswertung.html",
             mime="text/html"
-)
+        )
 
 # Trenner
 st.markdown("---")
