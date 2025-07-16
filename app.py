@@ -942,7 +942,7 @@ elif current_tab == "Auswertung":
             buf_streamlit = BytesIO()
             radar_chart_fig.savefig(buf_streamlit, format="png", dpi=300, bbox_inches="tight")
             buf_streamlit.seek(0)
-            st.image(buf_streamlit, caption="Readiness-Profil", use_container_width=True)
+            st.image(buf_streamlit, caption="Readiness-Profil", width=420)
 
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
@@ -961,12 +961,11 @@ elif current_tab == "Auswertung":
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
 
-            # Entferne Markdown: ###, ####, **, ***
-            gpt_text_clean = re.sub(r"###*\s*", "", gpt_output_text)
-            gpt_text_clean = re.sub(r"\*+", "", gpt_text_clean)
-            st.markdown(gpt_text_clean)
+            # GPT-Antwort in HTML-geeignete Struktur umwandeln
+            gpt_text_html_ready = markdown_to_html(gpt_output_text)
+            st.markdown(gpt_text_html_ready, unsafe_allow_html=True)
 
-        gpt_text_safe = gpt_text_clean if "gpt_text_clean" in locals() else "<p>Keine Empfehlung generiert.</p>"
+        gpt_text_safe = gpt_text_html_ready
 
         # Radar-Bild für HTML-Export vorbereiten
         if radar_chart_fig:
