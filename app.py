@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import openai  # type: ignore
-from weasyprint import HTML
 import base64
-from io import BytesIO
+
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -984,14 +983,12 @@ elif current_tab == "Auswertung":
         <p>{gpt_output_text}</p>
         {img_tag}
         """
-
-        pdf = HTML(string=html_content).write_pdf()
         
         st.download_button(
-            label="📄 PDF herunterladen",
-            data=pdf,
-            file_name="auswertung.pdf",
-            mime="application/pdf"
+            label="📄 Ergebnisse als HTML herunterladen",
+            data=html_content,
+            file_name="auswertung.html",
+            mime="text/html"
 )
 
 # Trenner
