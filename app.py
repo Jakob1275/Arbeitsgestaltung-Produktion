@@ -3,6 +3,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import openai # type: ignore
+import pdfkit
+import BytesIO
+import base64
 
 # API-Key aus Umgebungsvariable
 client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -925,7 +928,7 @@ elif current_tab == "Auswertung":
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(9, 9), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(4, 3), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.set_yticks([1, 2, 3, 4])
@@ -953,6 +956,43 @@ elif current_tab == "Auswertung":
             with st.spinner("Die Handlungsempfehlungen werden generiert..."):
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
             st.markdown(gpt_output_text)
+
+        html_content = """
+        <h1>Ergebnisse des Readiness-Checks</h1>
+        <p>Clusterzuordnung: <strong>Cluster 2 – Produktionsstark, aber mobilitätsfern</strong></p>
+        <p>Handlungsempfehlungen:</p>
+        <ul>
+        <li>Optimierung der Arbeitsplatzgestaltung</li>
+        <li>Einführung transparenter KPIs</li>
+        </ul>
+        """
+
+        if radar_chart_fig:
+            buf = BytesIO()
+            radar_chart_fig.savefig(buf, format="png", bbox_inches="tight")
+            buf.seek(0)
+            img_base64 = base64.b64encode(buf.read()).decode("utf-8")
+            img_tag = f'<img src="data:image/png;base64,{img_base64}" width="400">'
+        else:
+            img_tag = ""
+
+        # Jetzt alles zusammenfügen
+        html_content = f"""
+        <h1>Ergebnisse des Readiness-Checks</h1>
+        <p><strong>Clusterzuordnung:</strong> {display_cluster_result}</p>
+        <h2>Handlungsempfehlungen</h2>
+        <p>{gpt_output_text}</p>
+        {img_tag}
+        """
+
+        pdf = pdfkit.from_string(html_content, False)
+        
+        st.download_button(
+            label="📄 PDF herunterladen",
+            data=pdf,
+            file_name="auswertung.pdf",
+            mime="application/pdf"
+)
 
 # Trenner
 st.markdown("---")
