@@ -762,21 +762,21 @@ st.markdown(" ➤ ".join([
 # Inhalt der Tabs
 if current_tab == "Start":
     st.markdown("""
-    Dieser **Readiness-Check** wurde konzipiert, um Unternehmen der **zerspanenden Fertigung** einen systematischen Weg zur Bewertung ihres aktuellen Reifegrads für die Einführung und erfolgreiche Implementierung **mobiler und zeitflexibler Arbeitsgestaltungen** aufzuzeigen.
+        Dieser **Readiness-Check** wurde konzipiert, um Unternehmen der **zerspanenden Fertigung** einen systematischen Weg zur Bewertung ihres aktuellen Reifegrads für die Einführung und erfolgreiche Implementierung **mobiler und zeitflexibler Arbeitsgestaltungen** aufzuzeigen.
 
-    In einer Zeit beschleunigter Digitalisierung und sich wandelnder Arbeitsmodelle stellt sich die Frage nach der optimalen Gestaltung von Präsenz und Flexibilität. Dieses Tool bietet Ihnen eine präzise Standortbestimmung und leitet Sie durch die komplexen Anforderungen dieser Transformation.
+        In einer Zeit beschleunigter Digitalisierung und sich wandelnder Arbeitsmodelle stellt sich die Frage nach der optimalen Gestaltung von Präsenz und Flexibilität. Dieses Tool bietet Ihnen eine präzise Standortbestimmung und leitet Sie durch die komplexen Anforderungen dieser Transformation.
 
-    Dieses Modell basiert auf den vier integralen arbeitswissenschaftlichen Gestaltungsdimensionen des **MTOK-Modells** – **Mensch**, **Technik**, **Organisation** und **Kultur**. Es differenziert diese in **neun empirisch fundierte Handlungsfelder**, deren Kriterien speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.
+        Dieses Modell basiert auf den vier integralen arbeitswissenschaftlichen Gestaltungsdimensionen des **MTOK-Modells** – **Mensch**, **Technik**, **Organisation** und **Kultur**. Es differenziert diese in **neun empirisch fundierte Handlungsfelder**, deren Kriterien speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.
 
-    Für jedes Kriterium bewerten Sie den aktuellen Zustand Ihres Betriebs auf einer standardisierten **4-Punkte-Skala**:
+        Für jedes Kriterium bewerten Sie den aktuellen Zustand Ihres Betriebs auf einer standardisierten **4-Punkte-Skala**:
 
-    * **1 = Niedrig:** Das Kriterium ist aktuell nicht erfüllt.
-    * **2 = Mittel:** Erste Ansätze sind erkennbar, aber das Kriterium ist nur in Ansätzen erfüllt.
-    * **3 = Hoch:** Das Kriterium ist weitgehend umgesetzt und eine solide Grundlage ist vorhanden.
-    * **4 = Sehr hoch:** Das Kriterium ist vollständig umgesetzt und fest im Betrieb etabliert.
+        * **1 = Niedrig:** Das Kriterium ist aktuell nicht erfüllt.
+        * **2 = Mittel:** Erste Ansätze sind erkennbar, aber das Kriterium ist nur in Ansätzen erfüllt.
+        * **3 = Hoch:** Das Kriterium ist weitgehend umgesetzt und eine solide Grundlage ist vorhanden.
+        * **4 = Sehr hoch:** Das Kriterium ist vollständig umgesetzt und fest im Betrieb etabliert.
 
-    Nach Abschluss der Bewertung erhalten Sie ein **individuelles grafisches Readiness-Profil**, das Ihre Stärken und Potenziale aufzeigt. Darauf aufbauend generiert das System **maßgeschneiderte Handlungsempfehlungen**, die Ihnen konkrete Schritte zur Weiterentwicklung Ihrer flexiblen Arbeitsgestaltung auf Basis empirisch hergeleiteter Clusters aufzeigen.
-    """)
+        Nach Abschluss der Bewertung erhalten Sie ein **individuelles grafisches Readiness-Profil**, das Ihre Stärken und Potenziale aufzeigt. Darauf aufbauend generiert das System **maßgeschneiderte Handlungsempfehlungen**, die Ihnen konkrete Schritte zur Weiterentwicklung Ihrer flexiblen Arbeitsgestaltung auf Basis empirisch hergeleiteter Clusters aufzeigen.
+        """)
 
 elif current_tab in mtok_structure:
     dimension = current_tab
