@@ -78,7 +78,7 @@ Kriterien = {
       "begründung": "Produktive flexible Arbeit erfordert eigenständige Prozesskontrolle und Informationsverarbeitung."
     },
     {
-      "frage": "M1.4 Beschäftigte übernehmen Aufgaben, die ortsunabhängig erledigt werden können.",
+      "frage": "M1.4 Beschäftigte können Aufgaben übernehmen, die ortsunabhängig erledigt werden können.",
       "begründung": "Ein breites Aufgabengebiet (z. B. Programmierung von CNC-Werkzeugmaschinen, Fertigungsdokumentationen) fördert Eigenverantwortung und unterstützt mobile Arbeitsformen."
     },
     {
@@ -202,15 +202,19 @@ Kriterien = {
       "begründung": "Mediensouveränität und eine fundierte Einarbeitung sind Voraussetzungen für eine funktionierende digitale Zusammenarbeit und Akzeptanz in verteilten Teams."
     },
     {
-      "frage": "O1.3 Erfahrungswissen wird systematisch dokumentiert, digital zugänglich gemacht und aktiv weitergegeben.",
+      "frage": "O1.3 Es können digitale und hybride Formate zum sozialen Austausch und Teambuilding eingeführt werden.",
+      "begründung": "Die Qualität des informellen Austauschs (z.B. virtuelle Kaffeepausen, regelmäßige Team-Events) ist entscheidend für den Teamzusammenhalt und die Vermeidung von Isolation bei mobiler Arbeit."
+    },
+    {
+      "frage": "O1.4 Erfahrungswissen wird systematisch dokumentiert, digital zugänglich gemacht und aktiv weitergegeben.",
       "begründung": "Strukturierter Wissenstransfer (z.B. Best Practices, Lernmaterialien) sichert Qualität, fördert kontinuierliches Lernen und reduziert Abhängigkeiten von einzelnen Personen bei flexiblen Arbeitsmodellen."
     },
     {
-      "frage": "O1.4 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
+      "frage": "O1.5 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
       "begründung": "Robuste IT-Sicherheitsmaßnahmen (z. B. VPN-Verbindungen) sind fundamental für den Schutz sensibler Produktions- und Unternehmensdaten und zur Aufrechterhaltung der Betriebskontinuität bei flexibler Arbeit."
     },
     {
-      "frage": "O1.5 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
+      "frage": "O1.6 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
       "begründung": "Klare Rollen und eine partizipative Einbindung relevanter Akteure fördern die Akzeptanz, gewährleisten die Einhaltung rechtlicher Rahmenbedingungen und stärken die Governance-Struktur."
     }
     ],
@@ -248,11 +252,15 @@ Kriterien = {
       "begründung": "Systematisches Feedback stärkt die Passung und ermöglicht lernorientierte Anpassungen der Flexibilisierungsstrategie."
     },
     {
-      "frage": "O2.9 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
+      "frage": "O2.9 Die wirtschaftlichen Auswirkungen flexibler Arbeitsformen werden im Unternehmen systematisch bewertet.",
+      "begründung": "Eine fundierte ökonomische Analyse, etwa zu Investitionen, Prozessoptimierungen und Folgekosten, ist entscheidend für die strategische Legitimation und nachhaltige Einführung flexibler Arbeitsmodelle."
+    }
+    {
+      "frage": "O2.10 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
       "begründung": "Die Möglichkeit zur Mitgestaltung ist empirisch als signifikanter Einflussfaktor für erfolgreiche Flexibilisierung belegt."
     },
     {
-      "frage": "O2.10 Pausen können im Rahmen betrieblicher Vorgaben flexibel genommen werden.",
+      "frage": "O2.11 Pausen können im Rahmen betrieblicher Vorgaben flexibel genommen werden.",
       "begründung": "Zeitliche Autonomie bei Pausen erhöht Erholungseffekte, unterstützt eigenverantwortliche Taktung und stärkt die Selbstbestimmung im Arbeitsprozess."
     }
     ],
@@ -346,43 +354,35 @@ Kriterien = {
       "begründung": "Ein strategisch sichtbares Commitment erhöht die Legitimität flexibler Arbeit und schafft Orientierung für nachgelagerte Führungsebenen."
     },
     {
-      "frage": "K2.2 Die direkte Führungskraft unterstützt aktiv mobile und zeitflexible Arbeitsformen.",
-      "begründung": "Unmittelbare Vorgesetzte sind entscheidend für die praktische Umsetzung flexibler Arbeit im Alltag."
+      "frage": "K2.2 Führungskräfte unterstützen aktiv flexible Arbeitsformen und fördern Eigenverantwortung im Team.",
+      "begründung": "Erfolgreiche flexible Arbeit erfordert sowohl strukturelle Unterstützung durch die Führung als auch eine gezielte Förderung von Selbstorganisation und Eigenverantwortung im Team."
     },
     {
-      "frage": "K2.3 Führungskräfte fördern gezielt Eigenverantwortung und Selbstorganisation im Team.",
-      "begründung": "Selbststeuerung ist eine zentrale Voraussetzung flexibler Arbeit und muss durch Führung aktiv gestärkt werden."
-    },
-    {
-      "frage": "K2.4 Führung erfolgt ergebnisorientiert statt anwesenheitsorientiert.",
-      "begründung": "Flexibles Arbeiten erfordert eine Bewertung auf Grundlage von Zielerreichung, nicht physischer Präsenz."
-    },
-    {
-      "frage": "K2.5 Führungskräfte verfügen über Kompetenzen zur Steuerung hybrider Teams.",
+      "frage": "K2.3 Führungskräfte verfügen über Kompetenzen zur Steuerung hybrider Teams.",
       "begründung": "Hybride Arbeit stellt neue Anforderungen an Führung, insbesondere im Umgang mit virtueller Kommunikation und dezentraler Koordination."
     },
     {
-      "frage": "K2.6 Die Teamkultur ist durch gegenseitige Unterstützung und Kooperation geprägt.",
+      "frage": "K2.4 Die Teamkultur ist durch gegenseitige Unterstützung und Kooperation geprägt.",
       "begründung": "Soziale Unterstützung erhöht Resilienz, welches ein zentraler Erfolgsfaktor bei reduzierter Präsenz ist."
     },
     {
-      "frage": "K2.7 Es bestehen etablierte Formate für den informellen Austausch im Team.",
+      "frage": "K2.5 Es bestehen etablierte Formate für den informellen Austausch im Team.",
       "begründung": "Informelle Kommunikation fördert Vertrauen und Zusammenhalt."
     },
     {
-      "frage": "K2.8 Teamziele und die Qualität der Zusammenarbeit werden regelmäßig reflektiert und angepasst.",
+      "frage": "K2.6 Teamziele und die Qualität der Zusammenarbeit werden regelmäßig reflektiert und angepasst.",
       "begründung": "Gemeinsame Reflexion stärkt Selbststeuerung und fördert kontinuierliche Weiterentwicklung."
     },
     {
-      "frage": "K2.9 Teammitglieder kennen ihre Rollen und Verantwortlichkeiten.",
+      "frage": "K2.7 Teammitglieder kennen ihre Rollen und Verantwortlichkeiten.",
       "begründung": "Klare Rollenklarheit erhöht Handlungssicherheit und reduziert Koordinationsaufwand."
     },
     {
-      "frage": "K2.10 Konflikte im Team werden frühzeitig erkannt und konstruktiv moderiert.",
+      "frage": "K2.8 Konflikte im Team werden frühzeitig erkannt und konstruktiv moderiert.",
       "begründung": "Konstruktiver Umgang mit Konflikten ist in asynchronen oder hybriden Teams besonders relevant."
     },
     {
-      "frage": "K2.11 Unterschiedliche Arbeitsstile und -rhythmen werden anerkannt und integriert.",
+      "frage": "K2.9 Unterschiedliche Arbeitsstile und -rhythmen werden anerkannt und integriert.",
       "begründung": "Individuelle Arbeitsstile zu integrieren, erhöht die Flexibilität und fördert effektive Teamarbeit."
     }
   ]
