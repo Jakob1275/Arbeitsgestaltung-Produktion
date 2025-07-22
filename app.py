@@ -166,6 +166,7 @@ Kriterien = {
     {
       "frage": "T2.1 Die IT-Infrastruktur stellt geeignete mobile Endgeräte zur Verfügung.",
       "begründung": "Mobile Endgeräte (z. B. Laptops, Tablets) bilden die technische Basis für ortsunabhängiges Arbeiten in produktionsnahen Tätigkeiten."
+      "einschraenkung": "1_und_4"
     },
     {
       "frage": "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
@@ -765,24 +766,33 @@ elif current_tab in mtok_structure:
 
             # Nutze indexbasierten Schlüssel (idx), damit die Zuordnung mit Kriterien stabil bleibt
             radio_key = f"{dimension}_{feld}_{idx}"
+
             # Mapping zur späteren Auswertung
             if "item_to_radio_key_map" not in st.session_state:
                 st.session_state["item_to_radio_key_map"] = {}
             st.session_state["item_to_radio_key_map"][item['frage']] = f"{radio_key}_score"
             score_key = f"{radio_key}_score"
 
+            # Bewertungsoptionen abhängig von Einschränkung
+            einschraenkung = item.get("einschraenkung", None)
+            if einschraenkung == "1_und_4":
+                options = [1, 4]
+            else:
+                options = [1, 2, 3, 4]
+
             # Hole ggf. vorhandenen Wert
             initial_value = st.session_state.get(score_key, None)
 
-            # Bestimme Default-Wert für st.radio
+            # Bestimme Default-Wert, wenn vorhanden
             try:
-                default_index = [1, 2, 3, 4].index(initial_value) if initial_value is not None else None
+                default_index = options.index(initial_value) if initial_value is not None else None
             except ValueError:
                 default_index = None
 
+            # Bewertungsauswahl anzeigen
             score = st.radio(
                 "Bitte bewerten:",
-                [1, 2, 3, 4],
+                options,
                 horizontal=True,
                 key=radio_key,
                 index=default_index
