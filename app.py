@@ -494,7 +494,7 @@ kriterien_item_to_cluster_variable_mapping = {
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
         "T1.1 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
-        "O1.1 Informationen für Planung, Wissenstransfer, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
+        "O1.1 Informationen für Planung, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
         "O1.2 Konzepte zur systematischen Förderung digitaler Kommunikationskompetenzen und zur strukturierten Einführung neuer Beschäftigter in digitale Kooperationsprozesse existieren.",
         "O3.10 Maschinenstillstände führen nicht unmittelbar zu kritischen Produktivitätsverlusten.",
     ],
@@ -524,7 +524,8 @@ kriterien_item_to_cluster_variable_mapping = {
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Score der zugewiesenen Fragen INVERTIERT,
     # da ein HOHEr Score in der Frage ("können mitgestalten") einen NIEDRIGEN "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
-        "O1.1 Informationen für Planung, Wissenstransfer, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
+        "M2.2 Beschäftigte stehen zeitflexibler Arbeit offen gegenüber.",
+        "O1.1 Informationen für Planung, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
         "O1.4 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
         "O2.10 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
         "O3.4 Die Produktionsplanung ist mit flexiblen Arbeitszeitmodellen kompatibel.",
