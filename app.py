@@ -90,7 +90,7 @@ Kriterien = {
       "begründung": "Ergonomische, digitale und akustische Bedingungen sichern Leistung zwischen Beschäftigten auch bei räumlicher Entkopplung."
     },
     {
-      "frage": "M1.7 Beschäftigte erhalten gezielte Qualifizierungen zu mobilen und zeitflexiblen Arbeitsformen.",
+      "frage": "M1.7 Beschäftigte können gezielte Qualifizierungen zu mobilen und zeitflexiblen Arbeitsformen erhalten.",
       "begründung": "Kompetenzaufbau fördert Motivation und langfristige Bindung an flexible Arbeitsmodelle."
     }
   ],
@@ -116,15 +116,11 @@ Kriterien = {
       "begründung": "Digitale Anwendungskompetenz ist grundlegend für effektive Kollaboration (z. B. ERP-Software, Mailprogramm, Programmierungssoftware)."
     },
     {
-      "frage": "M2.6 Beschäftigte verfügen über stabile externe Bedingungen für mobiles Arbeiten.",
-      "begründung": "Rückzugsorte und unterstützendes Umfeld sind entscheidend für die Umsetzbarkeit."
-    },
-    {
-      "frage": "M2.7 Beschäftigte können aktiv Verbesserungsvorschläge einbringen.",
+      "frage": "M2.6 Beschäftigte können aktiv Verbesserungsvorschläge einbringen.",
       "begründung": "Beteiligung fördert die Passung und Akzeptanz flexibler Konzepte (z. B. KVP-Prozess)."
     },
     {
-      "frage": "M2.8 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren Grundfunktionen.",
+      "frage": "M2.7 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren Grundfunktionen.",
       "begründung": "Systemverständnis erhöht Handlungssicherheit und reduziert Fehlbedienungen."
     }
   ],
@@ -198,27 +194,23 @@ Kriterien = {
     ],
     "Kommunikation, Kooperation und Zusammenarbeit": [
     {
-      "frage": "O1.1 Informationen für Planung, Wissenstransfer, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
+      "frage": "O1.1 Informationen für Planung, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
       "begründung": "Ein effektiver und transparenter Informationsfluss ist die Grundlage für dezentrale Koordination, schnelle Reaktionsfähigkeit und den Ausgleich personeller Ausfälle."
     },
     {
-      "frage": "O1.2 Digitale Kommunikations- und Kollaborationstools sind standardisiert verfügbar, technisch unterstützt und sicher nutzbar.",
-      "begründung": "Standardisierte digitale Tools ermöglichen mobile und zeitunabhängige Abstimmung, Teamkommunikation und flexible Teilhabe an Besprechungen."
-    },
-    {
-      "frage": "O1.3 Konzepte zur systematischen Förderung digitaler Kommunikationskompetenzen und zur strukturierten Einführung neuer Beschäftigter in digitale Kooperationsprozesse existieren.",
+      "frage": "O1.2 Konzepte zur systematischen Förderung digitaler Kommunikationskompetenzen und zur strukturierten Einführung neuer Beschäftigter in digitale Kooperationsprozesse existieren.",
       "begründung": "Mediensouveränität und eine fundierte Einarbeitung sind Voraussetzungen für eine funktionierende digitale Zusammenarbeit und Akzeptanz in verteilten Teams."
     },
     {
-      "frage": "O1.4 Erfahrungswissen wird systematisch dokumentiert, digital zugänglich gemacht und aktiv weitergegeben.",
+      "frage": "O1.3 Erfahrungswissen wird systematisch dokumentiert, digital zugänglich gemacht und aktiv weitergegeben.",
       "begründung": "Strukturierter Wissenstransfer (z.B. Best Practices, Lernmaterialien) sichert Qualität, fördert kontinuierliches Lernen und reduziert Abhängigkeiten von einzelnen Personen bei flexiblen Arbeitsmodellen."
     },
     {
-      "frage": "O1.5 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
+      "frage": "O1.4 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
       "begründung": "Robuste IT-Sicherheitsmaßnahmen (z. B. VPN-Verbindungen) sind fundamental für den Schutz sensibler Produktions- und Unternehmensdaten und zur Aufrechterhaltung der Betriebskontinuität bei flexibler Arbeit."
     },
     {
-      "frage": "O1.6 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
+      "frage": "O1.5 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
       "begründung": "Klare Rollen und eine partizipative Einbindung relevanter Akteure fördern die Akzeptanz, gewährleisten die Einhaltung rechtlicher Rahmenbedingungen und stärken die Governance-Struktur."
     }
     ],
@@ -228,8 +220,8 @@ Kriterien = {
       "begründung": "Fachkräftesicherung ist die Grundlage produktiver Flexibilisierung. Ohne entsprechende Qualifikation scheitern mobile und zeitflexible Modelle bereits in der Umsetzung."
     },
     {
-      "frage": "O2.2 Die Personalplanung kann den flexiblen Einsatz über unterschiedliche Zeiten und Orte hinweg berücksichtigen.",
-      "begründung": "Eine vorausschauende Planung schafft Handlungsspielräume für mobile und zeitflexible Einsätze, insbesondere im Schichtsystem oder bei wechselnden Anforderungen."
+      "frage": "O2.2 Die Personalplanung berücksichtigt flexible Zeiten und -orte und ist technisch im Planungssystem abbildbar.",
+      "begründung": "Flexible Arbeitsmodelle erfordern sowohl organisatorische Offenheit als auch die technische Integration in Systeme wie MES oder ERP. Nur wenn beides gegeben ist, können Einsätze verlässlich geplant, gesteuert und dokumentiert werden."
     },
     {
       "frage": "O2.3 Es bestehen verbindliche Betriebsvereinbarungen zur Regelung mobiler und zeitflexibler Arbeit.",
@@ -244,31 +236,23 @@ Kriterien = {
       "begründung": "Rechtskonformität (z. B. Arbeitszeitgesetz, Datenschutz) erhöht die Akzeptanz flexibler Arbeit und verhindert Unsicherheiten oder Fehlentwicklungen."
     },
     {
-      "frage": "O2.6 Die Integration von flexiblen Arbeitszeitmodellen in Planungs- und Steuerungssysteme ist technisch möglich.",
-      "begründung": "Nur durch die Integration in digitale Systeme (z. B. MES, ERP) können flexible Modelle zuverlässig geplant, dokumentiert und gesteuert werden."
-    },
-    {
-      "frage": "O2.7 Die Aufbau- und Ablauforganisation ist anpassungsfähig.",
+      "frage": "O2.6 Die Aufbau- und Ablauforganisation ist anpassungsfähig.",
       "begründung": "Strukturelle Anpassungsfähigkeit (z. B. bei Sonderaufträgen oder kurzfristigen Vertretungen) ist Voraussetzung für spontane Reaktion und produktive Umsetzung von Flexibilität."
     },
     {
-      "frage": "O2.8 Verantwortlichkeiten für die Gestaltung und Einführung flexibler Arbeit können eindeutig definiert werden.",
-      "begründung": "Unklare Rollen behindern Fortschritt. Führungskräfte sind entscheidend für die Gestaltung, Steuerung und Akzeptanz flexibler Arbeitsformen."
-    },
+      "frage": "O2.7 Verantwortlichkeiten für die Einführung und den operativen Alltag flexibler Arbeitsformen können klar geregelt werden.",
+      "begründung": "Sowohl strategische Verantwortlichkeiten zur Einführung als auch klare operative Zuständigkeiten und Vertretungsregelungen sind notwendig, um flexible Arbeit erfolgreich und stabil umzusetzen."
+    }
     {
-      "frage": "O2.9 Zuständigkeiten und Vertretungsregelungen können für mobile Arbeitsformen klar definiert werden.",
-      "begründung": "Eindeutige Verantwortlichkeiten sichern die Prozessstabilität bei mobiler Arbeit und entlasten das Team."
-    },
-    {
-      "frage": "O2.10 Prozesse zur regelmäßigen Erfassung und Nutzung von Rückmeldungen zur flexiblen Arbeitsgestaltung existieren oder können etabliert werden.",
+      "frage": "O2.8 Prozesse zur regelmäßigen Erfassung und Nutzung von Rückmeldungen zur flexiblen Arbeitsgestaltung existieren oder können etabliert werden.",
       "begründung": "Systematisches Feedback stärkt die Passung und ermöglicht lernorientierte Anpassungen der Flexibilisierungsstrategie."
     },
     {
-      "frage": "O2.11 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
+      "frage": "O2.9 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
       "begründung": "Die Möglichkeit zur Mitgestaltung ist empirisch als signifikanter Einflussfaktor für erfolgreiche Flexibilisierung belegt."
     },
     {
-      "frage": "O2.12 Pausen können im Rahmen betrieblicher Vorgaben flexibel genommen werden.",
+      "frage": "O2.10 Pausen können im Rahmen betrieblicher Vorgaben flexibel genommen werden.",
       "begründung": "Zeitliche Autonomie bei Pausen erhöht Erholungseffekte, unterstützt eigenverantwortliche Taktung und stärkt die Selbstbestimmung im Arbeitsprozess."
     }
     ],
@@ -340,23 +324,19 @@ Kriterien = {
       "begründung": "Eine konstruktive Fehlerkultur fördert Anpassungsfähigkeit, Lernprozesse und Innovationskraft bei der Einführung flexibler Modelle."
     },
     {
-      "frage": "K1.6 Ein Verständnis dafür, dass flexible Arbeit ein selbstverständlicher Bestandteil der zukünftigen betrieblichen Praxis sein kann, existiert.",
-      "begründung": "Normalisierung von Flexibilität reduziert Widerstände und erhöht die organisatorische Anschlussfähigkeit."
-    },
-    {
-      "frage": "K1.7 Es bestehen keine verdeckten Erwartungen an ständige Erreichbarkeit.",
+      "frage": "K1.6 Es bestehen keine verdeckten Erwartungen an ständige Erreichbarkeit.",
       "begründung": "Kulturelle Entgrenzung gefährdet Erholung, Selbststeuerung und nachhaltige Nutzung flexibler Arbeitsformen."
     },
     {
-      "frage": "K1.8 Möglichkeiten zur systematischen Integration mobiler Arbeit in Teamabstimmungen existieren oder können geschaffen werden.",
+      "frage": "K1.7 Möglichkeiten zur systematischen Integration mobiler Arbeit in Teamabstimmungen existieren oder können geschaffen werden.",
       "begründung": "Kulturelle Integration erfordert explizite Berücksichtigung dezentraler Arbeit in Kommunikationsprozesse."
     },
     {
-      "frage": "K1.9 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
+      "frage": "K1.8 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
       "begründung": "Transparente Diskussion über Zielkonflikte stärkt Vertrauen und vermeidet dysfunktionale Idealisierungen."
     },
     {
-      "frage": "K1.10 Prozesse zur systematischen Erfassung und Reflexion potenzieller kultureller Barrieren bei der Einführung flexibler Arbeit existieren oder sind planbar.",
+      "frage": "K1.9 Prozesse zur systematischen Erfassung und Reflexion potenzieller kultureller Barrieren bei der Einführung flexibler Arbeit existieren oder sind planbar.",
       "begründung": "Nur durch strukturiertes Feedback lassen sich kulturelle Hürden identifizieren und gezielt adressieren."
     }
     ],
