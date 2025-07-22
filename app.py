@@ -928,7 +928,7 @@ elif current_tab == "Auswertung":
             angles_cycle = angles + angles[:1]
             wrapped_labels = [label.replace(" und ", "\nund ").replace("(", "\n(") for label in labels]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(4, 4), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=1)
             ax.set_yticks([1, 2, 3, 4])
