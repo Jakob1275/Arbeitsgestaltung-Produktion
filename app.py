@@ -921,9 +921,13 @@ elif current_tab == "Auswertung":
                     labels.append(f"{hf_name} ({dim_name})")
                     values.append(val)
 
-        # Radar-Chart erzeugen
-        radar_chart_fig = None
-        if values:
+        # Debug-Ausgabe
+        st.write("📊 Gesammelte Werte für Radar-Chart")
+        st.write("Labels:", labels)
+        st.write("Values:", values)
+
+        # Radar-Chart erzeugen, falls Werte vorhanden
+        if values and all(isinstance(v, (int, float)) for v in values):
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
@@ -933,18 +937,31 @@ elif current_tab == "Auswertung":
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=1)
             ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=3)
+            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=6)
             ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=4)
+            ax.set_xticklabels(wrapped_labels, fontsize=5)
             ax.set_title("Readiness-Profil", fontsize=12, pad=10)
             plt.tight_layout()
 
-            buf_streamlit = BytesIO()
-            radar_chart_fig.savefig(buf_streamlit, format="png", dpi=300, bbox_inches="tight")
-            buf_streamlit.seek(0)
-            st.image(buf_streamlit, caption="Readiness-Profil", width=700)
+            # Versuche zuerst als PNG über BytesIO (schärfer)
+            try:
+                buf_streamlit = BytesIO()
+                radar_chart_fig.savefig(buf_streamlit, format="png", dpi=300, bbox_inches="tight")
+                buf_streamlit.seek(0)
 
-        # Cluster-Zuordnung
+                if buf_streamlit.getbuffer().nbytes > 0:
+                    st.image(buf_streamlit, caption="Readiness-Profil", width=700)
+                else:
+                    st.warning("🛑 Bild-Buffer ist leer – zeige Fallback-Chart mit st.pyplot()")
+                    st.pyplot(radar_chart_fig)
+        
+            except Exception as e:
+                st.error(f"Fehler beim Anzeigen des Diagramms: {e}")
+                st.pyplot(radar_chart_fig)
+        else:
+            st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
+
+         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
 
