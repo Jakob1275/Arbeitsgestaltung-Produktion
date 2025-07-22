@@ -265,8 +265,8 @@ Kriterien = {
       "begründung": "Zeitliche Autonomie bei Pausen erhöht Erholungseffekte, unterstützt eigenverantwortliche Taktung und stärkt die Selbstbestimmung im Arbeitsprozess."
     },
     {
-      "frage": "O2.12 Arbeitszeitkonten oder ähnliche Steuerungsinstrumente werden im Unternehmen aktiv genutzt.",
-      "begründung": "Eine aktive und bewusste Steuerung flexibler Arbeitszeitmodelle durch geeignete Instrumente ist entscheidend, um die Vorteile für Beschäftigte und Unternehmen gleichermaßen zu realisieren und der Entstehung von "Schattenkonten" vorzubeugen."
+      "frage": "O2.12 Arbeitszeitkonten oder vergleichbare Instrumente werden aktiv zur Steuerung flexibler Arbeitszeiten genutzt.",
+      "begründung": "Geeignete Systeme sichern Transparenz, vermeiden inoffizielle Konten und fördern eine faire Nutzung flexibler Arbeitsmodelle."
     }
     ],
     "Produktionsorganisation": [
