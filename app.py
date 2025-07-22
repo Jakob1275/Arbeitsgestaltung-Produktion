@@ -255,7 +255,7 @@ Kriterien = {
     {
       "frage": "O2.9 Die wirtschaftlichen Auswirkungen flexibler Arbeitsformen werden im Unternehmen systematisch bewertet.",
       "begründung": "Eine fundierte ökonomische Analyse, etwa zu Investitionen, Prozessoptimierungen und Folgekosten, ist entscheidend für die strategische Legitimation und nachhaltige Einführung flexibler Arbeitsmodelle."
-    }
+    },
     {
       "frage": "O2.10 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten.",
       "begründung": "Die Möglichkeit zur Mitgestaltung ist empirisch als signifikanter Einflussfaktor für erfolgreiche Flexibilisierung belegt."
