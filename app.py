@@ -247,7 +247,7 @@ Kriterien = {
     {
       "frage": "O2.7 Verantwortlichkeiten für die Einführung und den operativen Alltag flexibler Arbeitsformen können klar geregelt werden.",
       "begründung": "Sowohl strategische Verantwortlichkeiten zur Einführung als auch klare operative Zuständigkeiten und Vertretungsregelungen sind notwendig, um flexible Arbeit erfolgreich und stabil umzusetzen."
-    }
+    },
     {
       "frage": "O2.8 Prozesse zur regelmäßigen Erfassung und Nutzung von Rückmeldungen zur flexiblen Arbeitsgestaltung existieren oder können etabliert werden.",
       "begründung": "Systematisches Feedback stärkt die Passung und ermöglicht lernorientierte Anpassungen der Flexibilisierungsstrategie."
