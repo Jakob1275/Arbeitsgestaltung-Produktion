@@ -165,7 +165,7 @@ Kriterien = {
    "IT-Systemlandschaft und digital vernetzte Infrastruktur": [
     {
       "frage": "T2.1 Die IT-Infrastruktur stellt geeignete mobile Endgeräte zur Verfügung.",
-      "begründung": "Mobile Endgeräte (z. B. Laptops, Tablets) bilden die technische Basis für ortsunabhängiges Arbeiten in produktionsnahen Tätigkeiten."
+      "begründung": "Mobile Endgeräte (z. B. Laptops, Tablets) bilden die technische Basis für ortsunabhängiges Arbeiten in produktionsnahen Tätigkeiten.",
       "einschraenkung": "1_und_4"
     },
     {
