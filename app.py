@@ -28,7 +28,7 @@ def frage_chatgpt_auswertung(ergebnisse, cluster_bezeichnung):
                         "Cluster 1 – Traditionell und reaktiv: geringe Technik, hohe Unsicherheit, geringe Offenheit\n"
                         "Cluster 2 – Produktionsstark, aber mobilitätsfern: hohe Technik, geringe Offenheit und Akzeptanz\n"
                         "Cluster 3 – Digital-affin und akzeptanzstark: hohe Technik, hohe Akzeptanz, niedrige Hindernisse\n"
-                        "Cluster 4 – Effizient, aber strukturell gehemmt: solide Technik, hohe Laufzeit und Komplexität, geringe Umsetzung\n\n"
+                        "Cluster 4 – Effizient, aber nicht beweglich: solide Technik, hohe Laufzeit und Komplexität, geringe Umsetzung\n\n"
                         "Deine Aufgabe:\n"
                         "1. Erkläre, warum der Fall zu dem übergebenen Cluster passt\n"
                         "2. Nenne je MTOK-Dimension (Technik, Organisation, Kultur, Mensch) 2–3 zentrale Handlungsempfehlungen\n"
@@ -591,7 +591,7 @@ cluster_item_values = {
         "Aufwand Zeit": 2,
         "Aufwand Mobil": 3
     },
-    "Cluster 4 – Effizient, aber strukturell gehemmt": {
+    "Cluster 4 – Effizient, aber nicht beweglich": {
         "Automatisierungsgrad": 2,
         "Anzahl CNC-Werkzeugmaschinen": 3, # Beispielwert; hier wird nun der Wert aus der st.number_input Kategorisierung landen
         "Losgröße": 2,
