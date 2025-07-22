@@ -256,7 +256,7 @@ Kriterien = {
       "begründung": "Schnittstellen zu externen Akteuren müssen abgestimmt sein, damit flexible Arbeitsformen betrieblich und marktseitig umsetzbar sind."
     },
     {
-      "frage": "O2.5 Die Personalplanung berücksichtigt flexible Zeiten und -orte und ist technisch im Planungssystem abbildbar.",
+      "frage": "O2.5 Die Personalplanung berücksichtigt flexible Arbeitszeiten und -orte und ist technisch im Planungssystem abbildbar.",
       "begründung": "Flexible Arbeitsmodelle erfordern sowohl organisatorische Offenheit als auch die technische Integration in Systeme wie MES oder ERP. Nur wenn beides gegeben ist, können Einsätze verlässlich geplant, gesteuert und dokumentiert werden.",
       "einschraenkung": "1_und_4"
     },
@@ -928,7 +928,7 @@ elif current_tab == "Auswertung":
             angles_cycle = angles + angles[:1]
             wrapped_labels = [label.replace(" und ", "\nund ").replace("(", "\n(") for label in labels]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(5, 5), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(4, 4), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=1)
             ax.set_yticks([1, 2, 3, 4])
@@ -972,12 +972,24 @@ elif current_tab == "Auswertung":
                 gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
 
             def markdown_to_html(text):
+                # Überschriften
                 text = re.sub(r"^### (.*)$", r"<h2>\1</h2>", text, flags=re.MULTILINE)
                 text = re.sub(r"^#### (.*)$", r"<h3>\1</h3>", text, flags=re.MULTILINE)
+
+                # Fett & kursiv
                 text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", text)
                 text = re.sub(r"\*(.*?)\*", r"<em>\1</em>", text)
+
+                # Bullet-Listen
                 text = re.sub(r"^- (.*?)$", r"<li>\1</li>", text, flags=re.MULTILINE)
-                text = re.sub(r"(<li>.*?</li>)", r"<ul>\1</ul>", text, flags=re.DOTALL)
+                if "<li>" in text:
+                    text = re.sub(r"((<li>.*?</li>\s*)+)", r"<ul>\1</ul>", text, flags=re.DOTALL)
+
+                # Nummerierte Listen (z. B. 1. Punkt)
+                text = re.sub(r"^\d+\.\s+(.*?)$", r"<li>\1</li>", text, flags=re.MULTILINE)
+                if "<li>" in text:
+                    text = re.sub(r"((<li>.*?</li>\s*)+)", r"<ol>\1</ol>", text, flags=re.DOTALL)
+
                 return text
 
             gpt_text_html_ready = markdown_to_html(gpt_output_text)
