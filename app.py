@@ -931,9 +931,9 @@ elif current_tab == "Auswertung":
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
             angles_cycle = angles + angles[:1]
-            wrapped_labels = [textwrap.fill(label, 20, break_long_words=False) for label in labels]
+            wrapped_labels = [label.replace(" und ", "\nund ").replace("(", "\n(") for label in labels]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(3, 3), subplot_kw=dict(polar=True))
+            radar_chart_fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(polar=True))
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=1)
             ax.set_yticks([1, 2, 3, 4])
@@ -946,7 +946,7 @@ elif current_tab == "Auswertung":
             # Versuche zuerst als PNG über BytesIO (schärfer)
             try:
                 buf_streamlit = BytesIO()
-                radar_chart_fig.savefig(buf_streamlit, format="png", dpi=300, bbox_inches="tight")
+                radar_chart_fig.savefig(buf_streamlit, format="png", dpi=150, bbox_inches="tight")
                 buf_streamlit.seek(0)
 
                 if buf_streamlit.getbuffer().nbytes > 0:
