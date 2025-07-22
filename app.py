@@ -817,9 +817,9 @@ elif current_tab in mtok_structure:
 
             # Bestimme Default-Wert, wenn vorhanden
             try:
-                default_index = options.index(initial_value) if initial_value is not None else None
+                default_index = options.index(initial_value) if initial_value is not None else 0
             except ValueError:
-                default_index = None
+                default_index = 0
 
             # Bewertungsauswahl anzeigen
             score = st.radio(
