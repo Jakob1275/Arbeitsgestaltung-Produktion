@@ -263,6 +263,10 @@ Kriterien = {
     {
       "frage": "O2.11 Pausen können im Rahmen betrieblicher Vorgaben flexibel genommen werden.",
       "begründung": "Zeitliche Autonomie bei Pausen erhöht Erholungseffekte, unterstützt eigenverantwortliche Taktung und stärkt die Selbstbestimmung im Arbeitsprozess."
+    },
+    {
+      "frage": "O2.12 Arbeitszeitkonten oder ähnliche Steuerungsinstrumente werden im Unternehmen aktiv genutzt.",
+      "begründung": "Eine aktive und bewusste Steuerung flexibler Arbeitszeitmodelle durch geeignete Instrumente ist entscheidend, um die Vorteile für Beschäftigte und Unternehmen gleichermaßen zu realisieren und der Entstehung von "Schattenkonten" vorzubeugen."
     }
     ],
     "Produktionsorganisation": [
