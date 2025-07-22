@@ -67,11 +67,11 @@ Kriterien = {
   "Produktivität und Motivation": [
     {
       "frage": "M1.1 Beschäftigte kennen die Anforderungen an mobile Arbeit.",
-      "begründung": "Kenntnisse über IT-Zugänge, Prozessintegration und Selbstorganisation sind essenziell. Unklarheiten führen zu Produktivitätsverlusten."
+      "begründung": "Damit mobile Arbeit reibungslos funktioniert, müssen Beschäftigte zentrale Anforderungen wie IT-Zugänge, Prozessintegration und Selbstorganisation kennen."
     },
     {
       "frage": "M1.2 Beschäftigte kennen die Anforderungen an zeitflexible Arbeit in der Fertigung.",
-      "begründung": "Zeitliche Flexibilität muss mit technischen Abläufen abgestimmt sein. Nur so ist eine realistische Umsetzung in der Zerspanung möglich."
+      "begründung": "Nur wenn Beschäftigte die Voraussetzungen und Grenzen zeitflexibler Arbeit kennen, kann diese in der Zerspanung realistisch und störungsfrei umgesetzt werden."
     },
     {
       "frage": "M1.3 Beschäftigte verfügen über fachliche und digitale Kompetenzen zur Selbststeuerung.",
@@ -113,7 +113,7 @@ Kriterien = {
     },
     {
       "frage": "M2.5 Beschäftigte beherrschen digitale Standardtools.",
-      "begründung": "Digitale Anwendungskompetenz ist grundlegend für effektive Kollaboration (z. B. ERP-Software, Mailprogramm, Programmierungsoftware)."
+      "begründung": "Digitale Anwendungskompetenz ist grundlegend für effektive Kollaboration (z. B. ERP-Software, Mailprogramm, Programmierungssoftware)."
     },
     {
       "frage": "M2.6 Beschäftigte verfügen über stabile externe Bedingungen für mobiles Arbeiten.",
@@ -138,36 +138,32 @@ Kriterien = {
     "begründung": "Planbare Präsenzphasen reduzieren Unterbrechungen und erleichtern mobile Arbeitsanteile außerhalb dieser Kernzeiten."
     },
     {
-    "frage": "T1.3 Tätigkeiten an Maschinenarbeitsplätzen sind flexibel zwischen Beschäftigten übertragbar.",
-    "begründung": "Aufgabenübertragbarkeit schafft Spielräume bei Personalengpässen, fördert Vertretungsfähigkeit und ermöglicht die Mehrmaschinenbedienung."
+    "frage": "T1.3 Produktionsprozesse sind standardisiert dokumentiert und übertragbar.",
+    "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate."
     },
     {
-      "frage": "T1.4 Produktionsprozesse sind standardisiert dokumentiert und übertragbar.",
-      "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate."
-    },
-    {
-    "frage": "T1.5 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.",
+    "frage": "T1.4 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.",
     "begründung": "Prozessstabilität ist Voraussetzung für entkoppelte Arbeitsformen und reduziert unvorhergesehene Eingriffe bei physischer Abwesenheit."
     },
     {
-    "frage": "T1.6 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert.",
+    "frage": "T1.5 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert.",
     "begründung": "Sensorische oder visuelle Fernkontrolle (z. B. Kameras, Monitoring-Apps, Maschinenzugriff) reduziert Präsenznotwendigkeit und erlaubt situatives Eingreifen."
     },
     {
-    "frage": "T1.7 Prüf- und Qualitätssicherungsprozesse sind automatisiert oder organisatorisch entkoppelt.",
+    "frage": "T1.6 Prüf- und Qualitätssicherungsprozesse sind automatisiert oder organisatorisch entkoppelt.",
     "begründung": "Entkoppelte Qualitätssicherung reduziert feste Rückmeldepunkte im Prozess und ermöglicht flexiblere Zeiteinteilung."
     },
     {
-    "frage": "T1.8 Echtzeitdaten zur Maschinenauslastung sind digital verfügbar.",
+    "frage": "T1.7 Echtzeitdaten zur Maschinenauslastung sind digital verfügbar.",
     "begründung": "Prozessdaten (z. B. OEE-Analyse, Laufzeitanalyse) ermöglichen auch bei variabler Anwesenheit situationsabhängige Steuerung und Optimierung."
     },
     {
-    "frage": "T1.9 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
+    "frage": "T1.8 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
     "begründung": "Vernetzte Systeme (z. B. ERP, MES, BDE) sind Voraussetzung für ortsunabhängige Steuerung, Planung und Dokumentation."
     },
     {
-    "frage": "T1.10 Methoden zur regelmäßigen Erfassung potenzieller Auswirkungen flexibler Arbeit (z. B. auf Produktivität, Qualität, Maschinenauslastung) existieren.",
-    "begründung": "Systematische Erfolgskontrolle unterstützt kontinuierliche Verbesserung und Legitimation flexibler Arbeitsmodelle im Produktionsbereich."
+    "frage": "T1.9 Methoden zur regelmäßigen Erfassung potenzieller Auswirkungen flexibler Arbeit existieren.",
+    "begründung": "Systematische Erfolgskontrolle (z. B. auf Produktivität, Qualität, Maschinenauslastung) unterstützt kontinuierliche Verbesserung und Legitimation flexibler Arbeitsmodelle im Produktionsbereich."
     }
    ],
    "IT-Systemlandschaft und digital vernetzte Infrastruktur": [
@@ -329,7 +325,7 @@ Kriterien = {
     },
     {
     "frage": "K1.2 Beschäftigte erhalten Handlungsfreiräume zur Gestaltung ihrer Arbeit.",
-      "begründung": "Handlungsspielräume fördern Motivation, Eigenverantwortung und Innovationspotenzial – zentrale Voraussetzungen für flexible Arbeit."
+      "begründung": "Handlungsspielräume fördern Motivation, Eigenverantwortung und Innovationspotenzial, welche zentrale Voraussetzungen für flexible Arbeit sind."
     },
     {
     "frage": "K1.3 Zielerreichung hat Vorrang vor physischer Anwesenheit.",
@@ -352,19 +348,15 @@ Kriterien = {
       "begründung": "Kulturelle Entgrenzung gefährdet Erholung, Selbststeuerung und nachhaltige Nutzung flexibler Arbeitsformen."
     },
     {
-      "frage": "K1.8 Unterschiedliche Arbeitsstile und -rhythmen werden anerkannt und integriert.",
-      "begründung": "Individuelle Unterschiede fördern Anpassungsfähigkeit und stärken das kulturelle Verständnis für Diversität."
-    },
-    {
-      "frage": "K1.9 Möglichkeiten zur systematischen Integration mobiler Arbeit in Teamabstimmungen existieren oder können geschaffen werden.",
+      "frage": "K1.8 Möglichkeiten zur systematischen Integration mobiler Arbeit in Teamabstimmungen existieren oder können geschaffen werden.",
       "begründung": "Kulturelle Integration erfordert explizite Berücksichtigung dezentraler Arbeit in Kommunikationsprozesse."
     },
     {
-      "frage": "K1.10 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
+      "frage": "K1.9 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
       "begründung": "Transparente Diskussion über Zielkonflikte stärkt Vertrauen und vermeidet dysfunktionale Idealisierungen."
     },
     {
-      "frage": "K1.11 Prozesse zur systematischen Erfassung und Reflexion potenzieller kultureller Barrieren bei der Einführung flexibler Arbeit existieren oder sind planbar.",
+      "frage": "K1.10 Prozesse zur systematischen Erfassung und Reflexion potenzieller kultureller Barrieren bei der Einführung flexibler Arbeit existieren oder sind planbar.",
       "begründung": "Nur durch strukturiertes Feedback lassen sich kulturelle Hürden identifizieren und gezielt adressieren."
     }
     ],
@@ -391,11 +383,11 @@ Kriterien = {
     },
     {
       "frage": "K2.6 Die Teamkultur ist durch gegenseitige Unterstützung und Kooperation geprägt.",
-      "begründung": "Soziale Unterstützung erhöht Resilienz – ein zentraler Erfolgsfaktor bei reduzierter Präsenz."
+      "begründung": "Soziale Unterstützung erhöht Resilienz, welches ein zentraler Erfolgsfaktor bei reduzierter Präsenz ist."
     },
     {
       "frage": "K2.7 Es bestehen etablierte Formate für den informellen Austausch im Team.",
-      "begründung": "Informelle Kommunikation fördert Vertrauen und Zusammenhalt – auch bei räumlicher Trennung."
+      "begründung": "Informelle Kommunikation fördert Vertrauen und Zusammenhalt."
     },
     {
       "frage": "K2.8 Teamziele und die Qualität der Zusammenarbeit werden regelmäßig reflektiert und angepasst.",
@@ -410,8 +402,8 @@ Kriterien = {
       "begründung": "Konstruktiver Umgang mit Konflikten ist in asynchronen oder hybriden Teams besonders relevant."
     },
     {
-      "frage": "K2.11 Unterschiedliche Bedürfnisse werden teamintern berücksichtigt.",
-      "begründung": "Eine faire Berücksichtigung individueller Anforderungen (z. B. Schichtsystem, Pflegeverantwortung) fördert Akzeptanz und Zusammenhalt im Team."
+      "frage": "K2.11 Unterschiedliche Arbeitsstile und -rhythmen werden anerkannt und integriert.",
+      "begründung": "Individuelle Arbeitsstile zu integrieren, erhöht die Flexibilität und fördert effektive Teamarbeit."
     }
   ]
     }
@@ -484,7 +476,7 @@ kriterien_item_to_cluster_variable_mapping = {
 
     # 6. Digitalisierungsgrad
     "Digitalisierungsgrad": [
-        "T1.9 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
+        "T1.8 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
         "T2.5 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
         "M2.8 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren Grundfunktionen.",
         "T2.6 Die IT-Systeme ermöglichen ortsunabhängige Einsicht und Rückmeldungen in produktionsrelevante Echtzeitdaten.",
@@ -495,7 +487,7 @@ kriterien_item_to_cluster_variable_mapping = {
     
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
-        "T1.5 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
+        "T1.4 Fertigungsprozesse sind stabil, wiederholgenau und störungsarm.", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
         "O1.1 Informationen für Planung, Wissenstransfer, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
         "O3.9 Maschinenstillstände führen nicht unmittelbar zu kritischen Produktivitätsverlusten.",
         "O1.4 Die Organisation reflektiert und passt ihre Kommunikationsstrukturen regelmäßig an, um Zielerreichung und Zusammenarbeit kontinuierlich zu optimieren."
@@ -503,9 +495,9 @@ kriterien_item_to_cluster_variable_mapping = {
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
-        "T1.10 Methoden zur regelmäßigen Erfassung potenzieller Auswirkungen flexibler Arbeit (z. B. auf Produktivität, Qualität, Maschinenauslastung) existieren.",
+        "T1.9 Methoden zur regelmäßigen Erfassung potenzieller Auswirkungen flexibler Arbeit (z. B. auf Produktivität, Qualität, Maschinenauslastung) existieren.",
         "K1.3 Zielerreichung hat Vorrang vor physischer Anwesenheit.",
-        "K1.6 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.", # Impliziert wahrgenommenen Nutzen
+        "K1.6 Ein Verständnis dafür, dass flexible Arbeit ein selbstverständlicher Bestandteil der zukünftigen betrieblichen Praxis sein kann, existiert.", # Impliziert wahrgenommenen Nutzen
         "K2.4 Führung erfolgt ergebnisorientiert statt anwesenheitsorientiert."
     ],
     
@@ -514,7 +506,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "M2.1 Beschäftigte stehen mobiler Arbeit aufgeschlossen gegenüber.",
         "M2.2 Beschäftigte stehen zeitflexibler Arbeit offen gegenüber.",
         "K1.4 Es herrscht ein positives Verständnis für neue Arbeitsformen.",
-        "K1.6 Flexible Arbeit ist als selbstverständlicher Bestandteil der betrieblichen Praxis etabliert.",
+        "K1.6 Ein Verständnis dafür, dass flexible Arbeit ein selbstverständlicher Bestandteil der zukünftigen betrieblichen Praxis sein kann, existiert.",
         "O2.3 Es bestehen verbindliche Betriebsvereinbarungen zur Regelung mobiler und zeitflexibler Arbeit.",
         "O2.10 Prozesse zur regelmäßigen Erfassung und Nutzung von Rückmeldungen zur flexiblen Arbeitsgestaltung existieren oder können etabliert werden."
     ],
@@ -538,7 +530,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "M2.6 Beschäftigte verfügen über stabile externe Bedingungen für mobiles Arbeiten.",
         "T2.4 Der IT-Support ist auch bei mobiler Arbeit verlässlich erreichbar.",
         "O1.6 Verantwortlichkeiten für IT-Sicherheit und Datenschutz sind eindeutig definiert, und relevante Stakeholder (z.B. Betriebsrat, Datenschutzbeauftragte) sind aktiv in die Gestaltung eingebunden.",
-        "T1.6 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert."
+        "T1.5 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert."
     ]
 }
 
