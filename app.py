@@ -845,19 +845,6 @@ elif current_tab in mtok_structure:
             del st.session_state.ergebnisse[feld]
 
 elif current_tab == "Abschließende Fragen":
-    st.text_input("Branche", key="branche_input") 
-    st.radio(
-    "Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
-    ["1-9", "10-49", "50-199", "200-499", "500-1999", "≥2000"],
-    index=None,
-    key="mitarbeitende_radio_input"
-    )
-    st.radio(
-    "In welcher Funktion sind Sie in Ihrem Unternehmen tätig?",
-    ["Geschäftsführer", "Produktions-/ Fertigungsleitung", "Arbeitsvorbereitung", "Teamleitung", "Planungsabteilung (IE, Lean etc.)", "Weitere"],
-    index=None,
-    key="funktion_radio_input"
-    )
     
     st.subheader("Spezifische technische und prozessuale Angaben")
 
@@ -905,7 +892,21 @@ elif current_tab == "Abschließende Fragen":
         key="laufzeit_range"
     )
     st.session_state.laufzeit_categorized = categorize_laufzeit(selected_laufzeit)
-   
+
+    st.subheader("Personen- und unternehmensbezogene Angaben")
+    st.radio(
+    "In welcher Funktion sind Sie in Ihrem Unternehmen tätig?",
+    ["Geschäftsführer", "Produktions-/ Fertigungsleitung", "Arbeitsvorbereitung", "Teamleitung", "Planungsabteilung (IE, Lean etc.)", "Weitere"],
+    index=None,
+    key="funktion_radio_input"
+    )
+    st.radio(
+    "Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
+    ["1-9", "10-49", "50-199", "200-499", "500-1999", "≥2000"],
+    index=None,
+    key="mitarbeitende_radio_input"
+    )
+    st.text_input("Für welche Branche fertigen Sie?", key="branche_input") 
     st.text_input("PLZ (optional)", key="plz_input") # Eindeutiger Key
     st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
