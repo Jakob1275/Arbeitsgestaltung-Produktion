@@ -776,10 +776,10 @@ if current_tab == "Start":
 
         Für jedes Kriterium bewerten Sie den aktuellen Zustand Ihres Betriebs auf einer standardisierten **4-Punkte-Skala**:
 
-        * **1 = Niedrig:** Das Kriterium ist aktuell nicht erfüllt.
-        * **2 = Mittel:** Erste Ansätze sind erkennbar, aber das Kriterium ist nur in Ansätzen erfüllt.
-        * **3 = Hoch:** Das Kriterium ist weitgehend umgesetzt und eine solide Grundlage ist vorhanden.
-        * **4 = Sehr hoch:** Das Kriterium ist vollständig umgesetzt und fest im Betrieb etabliert.
+        * **1 = Nicht erfüllt:** Das Kriterium ist aktuell nicht erfüllt.
+        * **2 = Teilweise erfüllt:** Erste Ansätze sind erkennbar, aber das Kriterium ist nur in Ansätzen erfüllt.
+        * **3 = Weitgehend erfüllt:** Das Kriterium ist umfangreich umgesetzt und eine solide Grundlage ist vorhanden.
+        * **4 = Vollständig erfüllt:** Das Kriterium ist vollständig umgesetzt und fest im Betrieb etabliert.
 
         Nach Abschluss der Bewertung erhalten Sie ein **individuelles grafisches Readiness-Profil**, das Ihre Stärken und Potenziale aufzeigt. Darauf aufbauend generiert das System **maßgeschneiderte Handlungsempfehlungen**, die Ihnen konkrete Schritte zur Weiterentwicklung Ihrer flexiblen Arbeitsgestaltung auf Basis empirisch hergeleiteter Clusters aufzeigen.
         """)
