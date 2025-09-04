@@ -928,10 +928,30 @@ elif current_tab == "Auswertung":
             # Clusterbeschreibung
             st.subheader("Clusterbeschreibung")
             cluster_beschreibungen = {
-                "Cluster 1 – Traditionell und reaktiv": "Dieses Cluster ist geprägt durch geringe Technikaffinität, hohe Prozessunsicherheit und eine geringe Offenheit für neue Arbeitsformen...",
-                "Cluster 2 – Produktionsstark, aber mobilitätsfern": "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung, zeigen jedoch eine geringe Offenheit...",
-                "Cluster 3 – Digital-affin und akzeptanzstark": "Diese Unternehmen zeichnen sich durch hohe Technikreife, gute Prozessstabilität sowie eine hohe Offenheit...",
-                "Cluster 4 – Technisch solide, aber prozessual träge": "In diesem Cluster sind solide technische Grundlagen vorhanden. Gleichzeitig verhindern lange Laufzeiten..."
+                "Cluster 1 – Traditionell und reaktiv": (
+                    "Dieses Cluster ist geprägt durch eine geringe Technikaffinität, hohe Prozessunsicherheit und eine niedrige Offenheit "
+                    "für neue Arbeitsformen. Digitale Systeme sind häufig veraltet oder nur punktuell vorhanden. Mobile oder zeitflexible "
+                    "Arbeitsmodelle werden nicht genutzt oder aktiv abgelehnt. Die Führung agiert überwiegend hierarchisch, Veränderungsbereitschaft "
+                    "ist kaum erkennbar. Die Einführung flexibler Arbeit erfordert grundlegende strukturelle, kulturelle und technische Vorarbeiten."
+                ),
+                "Cluster 2 – Produktionsstark, aber mobilitätsfern": (
+                    "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung und stabile Produktionsprozesse, "
+                    "zeigen jedoch eine geringe Offenheit und Akzeptanz für mobile oder flexible Arbeitsformen. Die Wertschöpfung im Produktionsbereich "
+                    "steht klar im Vordergrund. Kulturelle Barrieren sowie fehlende organisatorische Modelle zur Flexibilisierung hemmen den Wandel. "
+                    "Technisch wäre Flexibilität oft bereits möglich, scheitert jedoch an Einstellung, Struktur oder fehlender Systematik."
+                ),
+                "Cluster 3 – Digital-affin und akzeptanzstark": (
+                    "Diese Unternehmen zeichnen sich durch eine hohe Technikreife, stabile Prozesse sowie eine starke Offenheit für neue Arbeitsformen aus. "
+                    "Mobile und zeitflexible Arbeit wird bereits eingesetzt oder ist in Pilotbereichen etabliert. Die Führungskultur ist dialogorientiert, "
+                    "und Beschäftigte werden aktiv eingebunden. Dieses Cluster hat sehr gute Voraussetzungen, flexible Arbeit systematisch auszurollen "
+                    "und weiterzuentwickeln – sowohl technisch als auch kulturell-organisatorisch."
+                ),
+                "Cluster 4 – Technisch solide, aber prozessual träge": (
+                    "In diesem Cluster sind zwar solide technische Grundlagen vorhanden (z. B. ERP, CAD, IT-Support), doch lange Laufzeiten, hohe Komplexität "
+                    "und eine geringe Umsetzungsgeschwindigkeit behindern die Einführung flexibler Arbeit. Veränderungsprozesse laufen schleppend. "
+                    "Die Belegschaft ist nicht grundsätzlich ablehnend, doch es fehlt an konkreten Umsetzungsstrategien und an kommunikativer Begleitung. "
+                    "Technik und Akzeptanz bilden eine gute Basis – der Fokus muss auf Prozessvereinfachung und klarer Umsetzung liegen."
+                )
             }
             st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
 
@@ -1015,6 +1035,13 @@ elif current_tab == "Auswertung":
             
             cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
 
+            cluster_beschreibung_html = f"""
+            <h2>Clusterbeschreibung</h2>
+            <div class="box">
+                {cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar.")}
+            </div>
+            """
+
             empfehlungen_html = ""
             for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
                 if dimension in cluster_empfehlungen:
@@ -1068,6 +1095,7 @@ elif current_tab == "Auswertung":
             <body>
                 <h1>Ergebnisse des Modells</h1>
                 <div class=\"box\"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
+                {cluster_beschreibung_html}
                 <h2>Clusterspezifische Handlungsempfehlungen</h2>
                 {empfehlungen_html}
                 <h2>Readiness-Profil</h2>
