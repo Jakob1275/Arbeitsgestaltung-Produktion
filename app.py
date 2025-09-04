@@ -870,10 +870,11 @@ elif current_tab == "Abschließende Fragen":
     st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
+# Im Tab "Auswertung"
 elif current_tab == "Auswertung":
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
-        
-        # Labels & Werte sammeln
+
+        # Labels & Werte für Radar-Chart
         labels, values = [], []
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
             for hf_name in handlungsfelder_in_dim:
@@ -882,7 +883,8 @@ elif current_tab == "Auswertung":
                     labels.append(f"{hf_name} ({dim_name})")
                     values.append(val)
 
-        # Radar-Chart erzeugen, falls Werte vorhanden
+        # Radar-Chart
+        radar_chart_fig, img_tag = None, ""
         if values and all(isinstance(v, (int, float)) for v in values):
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
@@ -899,154 +901,14 @@ elif current_tab == "Auswertung":
             ax.set_title("Cluster-Profil", fontsize=12, pad=10)
             plt.tight_layout()
 
-            # Versuche zuerst als PNG über BytesIO (schärfer)
-            try:
-                buf_streamlit = BytesIO()
-                radar_chart_fig.savefig(buf_streamlit, format="png", dpi=150, bbox_inches="tight")
-                buf_streamlit.seek(0)
-
-                if buf_streamlit.getbuffer().nbytes > 0:
-                    st.image(buf_streamlit, caption="Cluster-Profil", width=700)
-                else:
-                    st.warning("🛑 Bild-Buffer ist leer – zeige Fallback-Chart mit st.pyplot()")
-                    st.pyplot(radar_chart_fig)
-        
-            except Exception as e:
-                st.error(f"Fehler beim Anzeigen des Diagramms: {e}")
-                st.pyplot(radar_chart_fig)
-        else:
-            st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
-
-         # Cluster-Zuordnung
-        cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
-        display_cluster_result = cluster_result
-
-        if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
-            st.warning(cluster_result)
-        else:
-            st.subheader("Automatische Clusterzuordnung")
-            st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
-
-      # Clusterbeschreibung
-        st.subheader("Clusterbeschreibung")
-        cluster_beschreibungen = {
-            "Cluster 1 – Traditionell und reaktiv": (
-                "Dieses Cluster ist geprägt durch geringe Technikaffinität, hohe Prozessunsicherheit und eine geringe Offenheit "
-                "für neue Arbeitsformen. Flexible Arbeit wird bislang kaum genutzt und trifft auf strukturelle sowie kulturelle Widerstände."
-            ),
-        "Cluster 2 – Produktionsstark, aber mobilitätsfern": (
-            "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung, zeigen jedoch eine geringe Offenheit und Akzeptanz "
-            "für mobile oder flexible Arbeitsformen. Die Wertschöpfung steht im Vordergrund – strukturelle Hemmnisse dominieren."
-        ),
-        "Cluster 3 – Digital-affin und akzeptanzstark": (
-            "Diese Unternehmen zeichnen sich durch hohe Technikreife, gute Prozessstabilität sowie eine hohe Offenheit und Akzeptanz für neue "
-            "Arbeitsformen aus. Sie sind prädestiniert für die Einführung flexibler Arbeitsgestaltung."
-        ),
-        "Cluster 4 – Technisch solide, aber prozessual träge": (
-            "In diesem Cluster sind solide technische Grundlagen vorhanden. Gleichzeitig verhindern lange Laufzeiten, hohe Komplexität "
-            "und geringe Umsetzungsgeschwindigkeit eine erfolgreiche Einführung flexibler Arbeit."
-        )
-    }
-    st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
-
-    # Handlungsempfehlungen
-    st.subheader("Clusterspezifische Handlungsempfehlungen")
-
-    handlungsempfehlungen = {
-        "Cluster 1 – Traditionell und reaktiv": {
-            "Technik": [
-                "- Prüfen Sie grundlegende digitale Infrastruktur (z. B. WLAN in Büros und Besprechungsräumen).",
-                "- Beginnen Sie mit einfach implementierbaren Tools (z. B. digitale Schichtpläne oder Messenger)."
-            ],
-            "Organisation": [
-                "- Entwickeln Sie Pilotmodelle für Zeitflexibilität (z. B. Gleitzeit in indirekten Bereichen).",
-                "- Führen Sie standardisierte Feedbackprozesse ein, um Veränderungsresistenz zu adressieren."
-            ],
-            "Kultur": [
-                "- Starten Sie mit Führungskräfte-Coachings zur Gestaltung flexibler Arbeit.",
-                "- Etablieren Sie eine positive Fehler- und Lernkultur durch regelmäßige Teambesprechungen."
-            ],
-            "Mensch": [
-                "- Sensibilisieren Sie Mitarbeitende für den Nutzen flexibler Arbeit (z. B. Workshops, Aushänge).",
-                "- Unterstützen Sie betroffene Beschäftigte durch kurze Schulungsmaßnahmen zur Selbstorganisation."
-            ]
-        },
-        "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
-            "Technik": [
-                "- Binden Sie Produktionsdaten gezielt in Dashboard-Lösungen ein (z. B. Power BI).",
-                "- Stellen Sie Remote-Zugriffe für Planer:innen und AV-Bereiche bereit (z. B. VPN, TDM-Clients)."
-            ],
-            "Organisation": [
-                "- Entwickeln Sie Teilzeit- und Schichtmodelle mit Fokus auf bestimmte Berufsgruppen.",
-                "- Schaffen Sie Transparenz über Aufgaben, die auch remote bearbeitbar sind."
-            ],
-            "Kultur": [
-                "- Thematisieren Sie Mobilitätsoptionen in Führungsrunden offen und lösungsorientiert.",
-                "- Heben Sie die Vereinbarkeit von Familie und Beruf in internen Leitbildern stärker hervor."
-            ],
-            "Mensch": [
-                "- Befähigen Sie Fachkräfte in AV, Konstruktion oder QS gezielt zur Nutzung flexibler Tools.",
-                "- Nutzen Sie Erfahrungsberichte von Pilotbereichen als Impuls für weitere Mitarbeitende."
-            ]
-        },
-        "Cluster 3 – Digital-affin und akzeptanzstark": {
-            "Technik": [
-                "- Prüfen Sie fortgeschrittene Tools zur kollaborativen Zusammenarbeit (z. B. MS Teams mit Planner).",
-                "- Nutzen Sie digitale Schichtplanungs- oder Urlaubsantragssysteme zur weiteren Flexibilisierung."
-            ],
-            "Organisation": [
-                "- Etablieren Sie feste Review-Zyklen zur Bewertung und Weiterentwicklung flexibler Arbeit.",
-                "- Schaffen Sie klare Regeln zur Erreichbarkeit und Aufgabentransparenz im mobilen Arbeiten."
-            ],
-            "Kultur": [
-                "- Verstärken Sie Wertschätzung durch autonome Arbeitsgestaltung und Entscheidungsspielräume.",
-                "- Fördern Sie teaminterne Aushandlungsprozesse über Präsenz- und Mobilezeiten."
-            ],
-            "Mensch": [
-                "- Nutzen Sie das Potenzial erfahrener Mitarbeitender für Mentoring im Umgang mit Flexibilität.",
-                "- Stärken Sie Selbstlernkompetenzen durch E-Learning-Angebote oder Selbstcoaching-Inhalte."
-            ]
-        },
-        "Cluster 4 – Technisch solide, aber prozessual träge": {
-            "Technik": [
-                "- Identifizieren Sie technische Engpässe in der Datenverfügbarkeit (z. B. Live-Kennzahlenanzeige).",
-                "- Setzen Sie auf Assistenzsysteme, die Mobilität auch in getakteten Bereichen ermöglichen."
-            ],
-            "Organisation": [
-                "- Reduzieren Sie Durchlaufzeiten und Komplexität in ausgewählten Kernprozessen.",
-                "- Entwickeln Sie Umsetzungsroadmaps für Pilotbereiche mit klaren Meilensteinen."
-            ],
-            "Kultur": [
-                "- Reduzieren Sie Umsetzungsbarrieren durch interne Kommunikation mit Best-Practice-Beispielen.",
-                "- Integrieren Sie betriebliche Interessenvertretungen frühzeitig in Transformationsvorhaben."
-            ],
-            "Mensch": [
-                "- Schaffen Sie Sicherheit durch klare Rollendefinitionen und transparente Arbeitsaufträge.",
-                "- Fördern Sie aktive Beteiligung z. B. durch Befragungen und Change-Botschafter:innen."
-            ]
-        }
-    }
-
-    cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
-
-    for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
-        if dimension in cluster_empfehlungen:
-            st.markdown(f"**{dimension}**")
-            for empfehlung in cluster_empfehlungen[dimension]:
-                st.markdown(f"- {empfehlung}")
-            st.markdown("---")
-
-        # Radar-Grafik für HTML
-        if radar_chart_fig:
+            # PNG to base64
             buf = BytesIO()
             radar_chart_fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             img_base64 = base64.b64encode(buf.read()).decode("utf-8")
             img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 600px; height: auto; margin-top: 20px;">'
-        else:
-            img_tag = ""
 
-        # Tabelle
+        # Tabelle HTML
         table_rows = ""
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
             for hf_name in handlungsfelder_in_dim:
@@ -1061,9 +923,13 @@ elif current_tab == "Auswertung":
             <tbody>{table_rows}</tbody>
         </table>
         """
-        
-        
-        # Handlungsempfehlungen in HTML überführen
+
+        # Cluster-Zuordnung + Empfehlungen (dein bestehender Code)
+        cluster_result, _ = berechne_clusterzuordnung(Kriterien)
+        display_cluster_result = cluster_result
+
+        # Empfehlungen aus dict
+        cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
         empfehlungen_html = ""
         for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
             if dimension in cluster_empfehlungen:
@@ -1073,32 +939,39 @@ elif current_tab == "Auswertung":
                 empfehlungs_block += "</ul>"
                 empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
 
-html_content = """
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="utf-8">
-    <title>Standortbestimmung</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }
-        h1 { font-size: 26px; color: #003366; }
-        h2 { font-size: 20px; color: #005599; margin-top: 30px; }
-    </style>
-</head>
-<body>
-    <h1>Ergebnisse des Modells</h1>
-    <div class="box"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
-    {empfehlungen_html}
-    {img_tag}
-    {table_html}
-</body>
-</html>
-""".format(
-    display_cluster_result=display_cluster_result,
-    empfehlungen_html=empfehlungen_html,
-    img_tag=img_tag,
-    table_html=table_html
-)
+        # HTML-Content final
+        html_content = f"""
+        <!DOCTYPE html>
+        <html lang="de">
+        <head>
+            <meta charset="utf-8">
+            <title>Standortbestimmung</title>
+            <style>
+                body {{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}
+                h1 {{ font-size: 26px; color: #003366; }}
+                h2 {{ font-size: 20px; color: #005599; margin-top: 30px; }}
+                h3 {{ font-size: 16px; color: #333333; margin-top: 20px; }}
+                .box {{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}
+                img {{ display: block; margin: 20px auto; }}
+                table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
+                th, td {{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}
+                th {{ background-color: #e1e9f0; text-align: left; }}
+                td:nth-child(3) {{ text-align: center; }}
+                ul {{ margin-top: 0; }}
+                li {{ margin-bottom: 6px; }}
+            </style>
+        </head>
+        <body>
+            <h1>Ergebnisse des Modells</h1>
+            <div class="box"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
+            <h2>Clusterspezifische Handlungsempfehlungen</h2>
+            {empfehlungen_html}
+            <h2>Readiness-Profil</h2>
+            {img_tag}
+            {table_html}
+        </body>
+        </html>
+        """
 
         # Download-Button
         st.download_button(
