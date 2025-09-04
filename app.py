@@ -1073,41 +1073,40 @@ elif current_tab == "Auswertung":
                 empfehlungs_block += "</ul>"
                 empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
 
-        html_content = f"""
-        <!DOCTYPE html>
-        <html lang="de">
-        <head>
-            <meta charset="utf-8">
-            <title>Standortbestimmung</title>
-            <style>
-                body {{{{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}}}
-                h1 {{{{ font-size: 26px; color: #003366; }}}}
-                h2 {{{{ font-size: 20px; color: #005599; margin-top: 30px; }}}}
-                h3 {{{{ font-size: 16px; color: #333333; margin-top: 20px; }}}}
-                .box {{{{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}}}
-                img {{{{ display: block; margin: 20px auto; }}}}
-                table {{{{ width: 100%; border-collapse: collapse; margin-top: 20px; }}}}
-                th, td {{{{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}}}
-                th {{{{ background-color: #e1e9f0; text-align: left; }}}}
-                td:nth-child(3) {{{{ text-align: center; }}}}
-                ul {{{{ margin-top: 0; }}}}
-                li {{{{ margin-bottom: 6px; }}}}
-            </style>
-        </head>
-        <body>
-            <h1>Ergebnisse des Modells</h1>
-            <div class="box"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
+html_content = f"""<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <title>Standortbestimmung</title>
+    <style>
+        body {{{{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}}}
+        h1 {{{{ font-size: 26px; color: #003366; }}}}
+        h2 {{{{ font-size: 20px; color: #005599; margin-top: 30px; }}}}
+        h3 {{{{ font-size: 16px; color: #333333; margin-top: 20px; }}}}
+        .box {{{{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}}}
+        img {{{{ display: block; margin: 20px auto; }}}}
+        table {{{{ width: 100%; border-collapse: collapse; margin-top: 20px; }}}}
+        th, td {{{{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}}}
+        th {{{{ background-color: #e1e9f0; text-align: left; }}}}
+        td:nth-child(3) {{{{ text-align: center; }}}}
+        ul {{{{ margin-top: 0; }}}}
+        li {{{{ margin-bottom: 6px; }}}}
+    </style>
+</head>
+<body>
+    <h1>Ergebnisse des Modells</h1>
+    <div class="box"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
 
-            <h2>Clusterspezifische Handlungsempfehlungen</h2>
-            {empfehlungen_html}
+    <h2>Clusterspezifische Handlungsempfehlungen</h2>
+    {empfehlungen_html}
 
-            <h2>Cluster-Profil</h2>
-            {img_tag}
+    <h2>Cluster-Profil</h2>
+    {img_tag}
 
-            {table_html}
-        </body>
-        </html>
-        """
+    {table_html}
+</body>
+</html>
+"""
 
         # Download-Button
         st.download_button(
