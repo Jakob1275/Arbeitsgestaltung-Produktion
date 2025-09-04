@@ -9,8 +9,10 @@ import re
 
 # Struktur der Anwendung
 st.set_page_config(page_title="Modell zur betrieblichen Einordnung und Entwicklung flexibler Arbeit", layout="wide")
-st.title("Modell zur betrieblichen Einordnung und Entwicklung flexibler Arbeit
-            Ein empirisch fundierter Ansatz zur Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der Produktion")
+st.title("Modell zur betrieblichen Einordnung und Entwicklung flexibler Arbeit")
+st.markdown(
+    "#### Ein empirisch fundierter Ansatz zur Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der Produktion"
+)
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
