@@ -739,7 +739,7 @@ if current_tab == "Start":
         - **3 = Weitgehend erfüllt**: Das Kriterium ist in weiten Teilen realisiert; eine tragfähige Grundlage ist vorhanden.  
         - **4 = Vollständig erfüllt**: Das Kriterium ist umfassend umgesetzt und fest in den betrieblichen Strukturen verankert.
 
-        Nach Abschluss der Selbsteinschätzung erhalten Sie ein **individuelles grafisches Readiness-Profil**, das Ihre unternehmensspezifischen Stärken, Schwächen und Entwicklungspotenziale visualisiert. Auf Basis dieser Ergebnisse erfolgt eine **automatisierte Clusterzuordnung**, welche Ihr Unternehmen einem von vier empirisch hergeleiteten Typen zuordnet. Darauf aufbauend generiert das Modell **maßgeschneiderte, praxisnahe Handlungsempfehlungen**, die Ihnen konkrete Ansatzpunkte für die Weiterentwicklung Ihrer Arbeitsgestaltung bieten.
+        Nach Abschluss der Selbsteinschätzung erhalten Sie ein **individuelles grafisches Cluster-Profil**, das Ihre unternehmensspezifischen Stärken, Schwächen und Entwicklungspotenziale visualisiert. Auf Basis dieser Ergebnisse erfolgt eine **automatisierte Clusterzuordnung**, welche Ihr Unternehmen einem von vier empirisch hergeleiteten Typen zuordnet. Darauf aufbauend generiert das Modell **maßgeschneiderte, praxisnahe Handlungsempfehlungen**, die Ihnen konkrete Ansatzpunkte für die Weiterentwicklung Ihrer Arbeitsgestaltung bieten.
 
 elif current_tab in mtok_structure:
     dimension = current_tab
@@ -894,7 +894,7 @@ elif current_tab == "Auswertung":
             ax.set_yticklabels(['1', '2', '3', '4'], fontsize=6)
             ax.set_xticks(angles)
             ax.set_xticklabels(wrapped_labels, fontsize=5)
-            ax.set_title("Readiness-Profil", fontsize=12, pad=10)
+            ax.set_title("Cluster-Profil", fontsize=12, pad=10)
             plt.tight_layout()
 
             # Versuche zuerst als PNG über BytesIO (schärfer)
@@ -904,7 +904,7 @@ elif current_tab == "Auswertung":
                 buf_streamlit.seek(0)
 
                 if buf_streamlit.getbuffer().nbytes > 0:
-                    st.image(buf_streamlit, caption="Readiness-Profil", width=700)
+                    st.image(buf_streamlit, caption="Cluster-Profil", width=700)
                 else:
                     st.warning("🛑 Bild-Buffer ist leer – zeige Fallback-Chart mit st.pyplot()")
                     st.pyplot(radar_chart_fig)
@@ -1100,7 +1100,7 @@ elif current_tab == "Auswertung":
             <h2>Clusterspezifische Handlungsempfehlungen</h2>
             {empfehlungen_html}
 
-            <h2>Readiness-Profil</h2>
+            <h2>Cluster-Profil</h2>
             {img_tag}
 
             {table_html}
