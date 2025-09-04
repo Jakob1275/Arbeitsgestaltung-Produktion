@@ -2,57 +2,15 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import openai  # type: ignore
 import base64
 from io import BytesIO
 import textwrap  # wichtig für Zeilenumbruch
 import re
 
-# API-Key aus Umgebungsvariable
-client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-
-def frage_chatgpt_auswertung(ergebnisse, cluster_bezeichnung):
-    try:
-        response = client.chat.completions.create(
-            model="gpt-4o",
-            temperature=0.4,
-            messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "Du bist arbeitswissenschaftlicher Experte für flexible Arbeit in der zerspanenden Fertigung. "
-                        "Dir liegen Mittelwerte zu neun betrieblichen Handlungsfeldern sowie eine Clusterzuordnung auf Basis "
-                        "einer empirischen Distanzberechnung vor. "
-                        "Analysiere die Werte, erkläre das Profil des Clusters und gib priorisierte Handlungsempfehlungen.\n\n"
-                        "Clusterprofile:\n"
-                        "Cluster 1 – Traditionell und reaktiv: geringe Technik, hohe Unsicherheit, geringe Offenheit\n"
-                        "Cluster 2 – Produktionsstark, aber mobilitätsfern: hohe Technik, geringe Offenheit und Akzeptanz\n"
-                        "Cluster 3 – Digital-affin und akzeptanzstark: hohe Technik, hohe Akzeptanz, niedrige Hindernisse\n"
-                        "Cluster 4 – Technisch solide, aner prozessual träge: solide Technik, hohe Laufzeit und Komplexität, geringe Umsetzung\n\n"
-                        "Deine Aufgabe:\n"
-                        "1. Erkläre, warum der Fall zu dem übergebenen Cluster passt\n"
-                        "2. Nenne je MTOK-Dimension (Technik, Organisation, Kultur, Mensch) 2–3 zentrale Handlungsempfehlungen\n"
-                        "3. Ordne die Empfehlungen nach Relevanz (Technik zuerst, dann Organisation, Kultur, Mensch)\n\n"
-                        "Formuliere kurz, prägnant und praxisnah. Verweise auf typische Merkmale des Clusters."
-                    )
-                },
-                {
-                    "role": "user",
-                    "content": (
-                        f"Die Mittelwerte der neun Handlungsfelder lauten:\n{ergebnisse}\n\n"
-                        f"Der Fall wurde dem folgenden Cluster zugeordnet:\n{cluster_bezeichnung}\n\n"
-                        "Bitte erkläre die Zuordnung und gib priorisierte Handlungsempfehlungen entlang des MTOK-Modells."
-                    )
-                }
-            ]
-        )
-        return response.choices[0].message.content
-    except Exception as e:
-        return f"Fehler bei der GPT-Abfrage: {e}"
-        
 # Struktur der Anwendung
-st.set_page_config(page_title="Readiness-Check", layout="wide")
-st.title("Readiness-Check zur Einführung mobiler und zeitflexibler Arbeitsgestaltungen in der zerspanenden Fertigung")
+st.set_page_config(page_title="Modell zur betrieblichen Einordnung und Entwicklung flexibler Arbeit", layout="wide")
+st.title("Modell zur betrieblichen Einordnung und Entwicklung flexibler Arbeit
+            Ein empirisch fundierter Ansatz zur Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der Produktion")
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
@@ -549,7 +507,7 @@ kriterien_item_to_cluster_variable_mapping = {
 }
 
 
-# Clusterprofile aus empirischer Clustertabelle (WERTE GENAU ÜBERNEHMEN!)
+# Clusterprofile aus empirischer Clustertabelle
 # Die 'Variable' Namen aus der Tabelle des Nutzers sind hier die Keys
 cluster_item_values = {
     "Cluster 1 – Traditionell und reaktiv": {
@@ -768,21 +726,20 @@ st.markdown(" ➤ ".join([
 # Inhalt der Tabs
 if current_tab == "Start":
     st.markdown("""
-        Dieser **Readiness-Check** wurde konzipiert, um Unternehmen der **zerspanenden Fertigung** einen systematischen Weg zur Bewertung ihres aktuellen Reifegrads für die Einführung und erfolgreiche Implementierung **mobiler und zeitflexibler Arbeitsgestaltungen** aufzuzeigen.
+        Dieses **Diagnose- und Entwicklungsmodell** wurde speziell für Unternehmen der **zerspanenden Fertigung** konzipiert. Es ermöglicht eine **systematische Standortbestimmung** des betrieblichen Status quo und zeigt zugleich konkrete Wege für die **Einführung und nachhaltige Umsetzung mobiler und zeitflexibler Arbeitsformen** auf.
 
-        In einer Zeit beschleunigter Digitalisierung und sich wandelnder Arbeitsmodelle stellt sich die Frage nach der optimalen Gestaltung von Präsenz und Flexibilität. Dieses Tool bietet Ihnen eine präzise Standortbestimmung und leitet Sie durch die komplexen Anforderungen dieser Transformation.
+        In einer Phase tiefgreifender Digitalisierung und wachsender Anforderungen an Flexibilität stellt sich zunehmend die Frage nach einer ausgewogenen Gestaltung von Präsenz- und Remote-Arbeit. Das vorliegende Tool unterstützt Sie dabei, diese Herausforderung gezielt anzugehen: Es liefert eine differenzierte Einschätzung Ihrer betrieblichen Ausgangslage und begleitet Sie durch die komplexen Gestaltungsanforderungen des Wandels.
 
-        Dieses Modell basiert auf den vier integralen arbeitswissenschaftlichen Gestaltungsdimensionen des **MTOK-Modells** – **Mensch**, **Technik**, **Organisation** und **Kultur**. Es differenziert diese in **neun empirisch fundierte Handlungsfelder**, deren Kriterien speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.
+        Die Grundlage bildet das arbeitswissenschaftlich fundierte **MTOK-Modell**, das vier zentrale Gestaltungsdimensionen unterscheidet: **Mensch**, **Technik**, **Organisation** und **Kultur**. Diese werden in **neun empirisch validierte Handlungsfelder** untergliedert, deren Bewertungskriterien speziell auf die Besonderheiten und Anforderungen der zerspanenden Fertigung zugeschnitten sind.
 
-        Für jedes Kriterium bewerten Sie den aktuellen Zustand Ihres Betriebs auf einer standardisierten **4-Punkte-Skala**:
+        Für jedes Kriterium bewerten Sie den aktuellen Zustand Ihres Unternehmens auf einer **standardisierten 4-Punkte-Skala**:
 
-        * **1 = Nicht erfüllt:** Das Kriterium ist aktuell nicht erfüllt.
-        * **2 = Teilweise erfüllt:** Erste Ansätze sind erkennbar, aber das Kriterium ist nur in Ansätzen erfüllt.
-        * **3 = Weitgehend erfüllt:** Das Kriterium ist umfangreich umgesetzt und eine solide Grundlage ist vorhanden.
-        * **4 = Vollständig erfüllt:** Das Kriterium ist vollständig umgesetzt und fest im Betrieb etabliert.
+        - **1 = Nicht erfüllt**: Das Kriterium ist derzeit nicht umgesetzt.  
+        - **2 = Teilweise erfüllt**: Erste Ansätze bestehen, jedoch ohne umfassende Umsetzung.  
+        - **3 = Weitgehend erfüllt**: Das Kriterium ist in weiten Teilen realisiert; eine tragfähige Grundlage ist vorhanden.  
+        - **4 = Vollständig erfüllt**: Das Kriterium ist umfassend umgesetzt und fest in den betrieblichen Strukturen verankert.
 
-        Nach Abschluss der Bewertung erhalten Sie ein **individuelles grafisches Readiness-Profil**, das Ihre Stärken und Potenziale aufzeigt. Darauf aufbauend generiert das System **maßgeschneiderte Handlungsempfehlungen**, die Ihnen konkrete Schritte zur Weiterentwicklung Ihrer flexiblen Arbeitsgestaltung auf Basis empirisch hergeleiteter Clusters aufzeigen.
-        """)
+        Nach Abschluss der Selbsteinschätzung erhalten Sie ein **individuelles grafisches Readiness-Profil**, das Ihre unternehmensspezifischen Stärken, Schwächen und Entwicklungspotenziale visualisiert. Auf Basis dieser Ergebnisse erfolgt eine **automatisierte Clusterzuordnung**, welche Ihr Unternehmen einem von vier empirisch hergeleiteten Typen zuordnet. Darauf aufbauend generiert das Modell **maßgeschneiderte, praxisnahe Handlungsempfehlungen**, die Ihnen konkrete Ansatzpunkte für die Weiterentwicklung Ihrer Arbeitsgestaltung bieten.
 
 elif current_tab in mtok_structure:
     dimension = current_tab
@@ -968,34 +925,114 @@ elif current_tab == "Auswertung":
             st.subheader("Automatische Clusterzuordnung")
             st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
 
-            # GPT-Auswertung
-            st.subheader("Individuelle, KI-gestützte Handlungsempfehlung")
-            with st.spinner("Die Handlungsempfehlungen werden generiert..."):
-                gpt_output_text = frage_chatgpt_auswertung(st.session_state.ergebnisse, cluster_result)
+      # Clusterbeschreibung
+        st.subheader("Clusterbeschreibung")
+        cluster_beschreibungen = {
+            "Cluster 1 – Traditionell und reaktiv": (
+                "Dieses Cluster ist geprägt durch geringe Technikaffinität, hohe Prozessunsicherheit und eine geringe Offenheit "
+                "für neue Arbeitsformen. Flexible Arbeit wird bislang kaum genutzt und trifft auf strukturelle sowie kulturelle Widerstände."
+            ),
+        "Cluster 2 – Produktionsstark, aber mobilitätsfern": (
+            "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung, zeigen jedoch eine geringe Offenheit und Akzeptanz "
+            "für mobile oder flexible Arbeitsformen. Die Wertschöpfung steht im Vordergrund – strukturelle Hemmnisse dominieren."
+        ),
+        "Cluster 3 – Digital-affin und akzeptanzstark": (
+            "Diese Unternehmen zeichnen sich durch hohe Technikreife, gute Prozessstabilität sowie eine hohe Offenheit und Akzeptanz für neue "
+            "Arbeitsformen aus. Sie sind prädestiniert für die Einführung flexibler Arbeitsgestaltung."
+        ),
+        "Cluster 4 – Technisch solide, aber prozessual träge": (
+            "In diesem Cluster sind solide technische Grundlagen vorhanden. Gleichzeitig verhindern lange Laufzeiten, hohe Komplexität "
+            "und geringe Umsetzungsgeschwindigkeit eine erfolgreiche Einführung flexibler Arbeit."
+        )
+    }
+    st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
 
-            def markdown_to_html(text):
-                # Überschriften
-                text = re.sub(r"^### (.*)$", r"<h2>\1</h2>", text, flags=re.MULTILINE)
-                text = re.sub(r"^#### (.*)$", r"<h3>\1</h3>", text, flags=re.MULTILINE)
+    # Handlungsempfehlungen
+    st.subheader("Clusterspezifische Handlungsempfehlungen")
 
-                # Fett & kursiv
-                text = re.sub(r"\*\*(.*?)\*\*", r"<strong>\1</strong>", text)
-                text = re.sub(r"\*(.*?)\*", r"<em>\1</em>", text)
+    handlungsempfehlungen = {
+        "Cluster 1 – Traditionell und reaktiv": {
+            "Technik": [
+                "- Prüfen Sie grundlegende digitale Infrastruktur (z. B. WLAN in Büros und Besprechungsräumen).",
+                "- Beginnen Sie mit einfach implementierbaren Tools (z. B. digitale Schichtpläne oder Messenger)."
+            ],
+            "Organisation": [
+                "- Entwickeln Sie Pilotmodelle für Zeitflexibilität (z. B. Gleitzeit in indirekten Bereichen).",
+                "- Führen Sie standardisierte Feedbackprozesse ein, um Veränderungsresistenz zu adressieren."
+            ],
+            "Kultur": [
+                "- Starten Sie mit Führungskräfte-Coachings zur Gestaltung flexibler Arbeit.",
+                "- Etablieren Sie eine positive Fehler- und Lernkultur durch regelmäßige Teambesprechungen."
+            ],
+            "Mensch": [
+                "- Sensibilisieren Sie Mitarbeitende für den Nutzen flexibler Arbeit (z. B. Workshops, Aushänge).",
+                "- Unterstützen Sie betroffene Beschäftigte durch kurze Schulungsmaßnahmen zur Selbstorganisation."
+            ]
+        },
+        "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
+            "Technik": [
+                "- Binden Sie Produktionsdaten gezielt in Dashboard-Lösungen ein (z. B. Power BI).",
+                "- Stellen Sie Remote-Zugriffe für Planer:innen und AV-Bereiche bereit (z. B. VPN, TDM-Clients)."
+            ],
+            "Organisation": [
+                "- Entwickeln Sie Teilzeit- und Schichtmodelle mit Fokus auf bestimmte Berufsgruppen.",
+                "- Schaffen Sie Transparenz über Aufgaben, die auch remote bearbeitbar sind."
+            ],
+            "Kultur": [
+                "- Thematisieren Sie Mobilitätsoptionen in Führungsrunden offen und lösungsorientiert.",
+                "- Heben Sie die Vereinbarkeit von Familie und Beruf in internen Leitbildern stärker hervor."
+            ],
+            "Mensch": [
+                "- Befähigen Sie Fachkräfte in AV, Konstruktion oder QS gezielt zur Nutzung flexibler Tools.",
+                "- Nutzen Sie Erfahrungsberichte von Pilotbereichen als Impuls für weitere Mitarbeitende."
+            ]
+        },
+        "Cluster 3 – Digital-affin und akzeptanzstark": {
+            "Technik": [
+                "- Prüfen Sie fortgeschrittene Tools zur kollaborativen Zusammenarbeit (z. B. MS Teams mit Planner).",
+                "- Nutzen Sie digitale Schichtplanungs- oder Urlaubsantragssysteme zur weiteren Flexibilisierung."
+            ],
+            "Organisation": [
+                "- Etablieren Sie feste Review-Zyklen zur Bewertung und Weiterentwicklung flexibler Arbeit.",
+                "- Schaffen Sie klare Regeln zur Erreichbarkeit und Aufgabentransparenz im mobilen Arbeiten."
+            ],
+            "Kultur": [
+                "- Verstärken Sie Wertschätzung durch autonome Arbeitsgestaltung und Entscheidungsspielräume.",
+                "- Fördern Sie teaminterne Aushandlungsprozesse über Präsenz- und Mobilezeiten."
+            ],
+            "Mensch": [
+                "- Nutzen Sie das Potenzial erfahrener Mitarbeitender für Mentoring im Umgang mit Flexibilität.",
+                "- Stärken Sie Selbstlernkompetenzen durch E-Learning-Angebote oder Selbstcoaching-Inhalte."
+            ]
+        },
+        "Cluster 4 – Technisch solide, aber prozessual träge": {
+            "Technik": [
+                "- Identifizieren Sie technische Engpässe in der Datenverfügbarkeit (z. B. Live-Kennzahlenanzeige).",
+                "- Setzen Sie auf Assistenzsysteme, die Mobilität auch in getakteten Bereichen ermöglichen."
+            ],
+            "Organisation": [
+                "- Reduzieren Sie Durchlaufzeiten und Komplexität in ausgewählten Kernprozessen.",
+                "- Entwickeln Sie Umsetzungsroadmaps für Pilotbereiche mit klaren Meilensteinen."
+            ],
+            "Kultur": [
+                "- Reduzieren Sie Umsetzungsbarrieren durch interne Kommunikation mit Best-Practice-Beispielen.",
+                "- Integrieren Sie betriebliche Interessenvertretungen frühzeitig in Transformationsvorhaben."
+            ],
+            "Mensch": [
+                "- Schaffen Sie Sicherheit durch klare Rollendefinitionen und transparente Arbeitsaufträge.",
+                "- Fördern Sie aktive Beteiligung z. B. durch Befragungen und Change-Botschafter:innen."
+            ]
+        }
+    }
 
-                # Bullet-Listen
-                text = re.sub(r"^- (.*?)$", r"<li>\1</li>", text, flags=re.MULTILINE)
-                if "<li>" in text:
-                    text = re.sub(r"((<li>.*?</li>\s*)+)", r"<ul>\1</ul>", text, flags=re.DOTALL)
+    cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
 
-                # Nummerierte Listen (z. B. 1. Punkt)
-                text = re.sub(r"^\d+\.\s+(.*?)$", r"<li>\1</li>", text, flags=re.MULTILINE)
-                if "<li>" in text:
-                    text = re.sub(r"((<li>.*?</li>\s*)+)", r"<ol>\1</ol>", text, flags=re.DOTALL)
-
-                return text
-
-            gpt_text_html_ready = markdown_to_html(gpt_output_text)
-            st.markdown(gpt_text_html_ready, unsafe_allow_html=True)
+    for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
+        if dimension in cluster_empfehlungen:
+            st.markdown(f"**{dimension}**")
+            for empfehlung in cluster_empfehlungen[dimension]:
+                st.markdown(f"- {empfehlung}")
+            st.markdown("---")
 
         # Radar-Grafik für HTML
         if radar_chart_fig:
@@ -1023,41 +1060,55 @@ elif current_tab == "Auswertung":
         </table>
         """
         
-        # Fallback, falls GPT-Text nicht generiert wurde
-        if "gpt_text_html_ready" not in locals():
-            gpt_text_html_ready = "<p>Keine Empfehlung generiert.</p>"
         
+        # Handlungsempfehlungen in HTML überführen
+        empfehlungen_html = ""
+        for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
+            if dimension in cluster_empfehlungen:
+                empfehlungs_block = "<ul>"
+                for empfehlung in cluster_empfehlungen[dimension]:
+                    empfehlungs_block += f"<li>{empfehlung}</li>"
+                empfehlungs_block += "</ul>"
+                empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
+
         # HTML-Komplettausgabe
         html_content = f"""
         <!DOCTYPE html>
         <html lang="de">
         <head>
             <meta charset="utf-8">
-            <title>Readiness-Auswertung</title>
+            <title>Standortbestimmung</title>
             <style>
                 body {{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}
                 h1 {{ font-size: 26px; color: #003366; }}
                 h2 {{ font-size: 20px; color: #005599; margin-top: 30px; }}
+                h3 {{ font-size: 16px; color: #333333; margin-top: 20px; }}
                 .box {{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}
-                .gpt-box {{ background-color: #eef7ff; border-left: 5px solid #0099cc; }}
                 img {{ display: block; margin: 20px auto; }}
                 table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
                 th, td {{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}
                 th {{ background-color: #e1e9f0; text-align: left; }}
                 td:nth-child(3) {{ text-align: center; }}
+                ul {{ margin-top: 0; }}
+                li {{ margin-bottom: 6px; }}
             </style>
         </head>
         <body>
-            <h1>Ergebnisse des Readiness-Checks</h1>
+            <h1>Ergebnisse des Modells</h1>
             <div class="box"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
-            <h2>Individuelle Handlungsempfehlungen</h2>
-            <div class="box gpt-box">{gpt_text_html_ready}</div>
-            <h2>Readiness-Profil</h2>{img_tag}
+
+            <h2>Clusterspezifische Handlungsempfehlungen</h2>
+            {empfehlungen_html}
+
+            <h2>Readiness-Profil</h2>
+            {img_tag}
+
             {table_html}
         </body>
         </html>
         """
 
+        # Download-Button
         st.download_button(
             label="📄 Ergebnisse als HTML herunterladen",
             data=html_content,
