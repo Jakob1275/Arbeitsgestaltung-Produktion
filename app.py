@@ -728,9 +728,9 @@ st.markdown(" ➤ ".join([
 # Inhalt der Tabs
 if current_tab == "Start":
     st.markdown("""
-        Dieses **Diagnose- und Entwicklungsmodell** wurde speziell für Unternehmen der **zerspanenden Fertigung** konzipiert. Es ermöglicht eine **systematische Standortbestimmung** des betrieblichen Status quo und zeigt zugleich konkrete Wege für die **Einführung und nachhaltige Umsetzung mobiler und zeitflexibler Arbeitsformen** auf.
+        Dieses **Diagnose- und Entwicklungsmodell** wurde speziell für Unternehmen der **zerspanenden Fertigung** konzipiert. Es ermöglicht eine **systematische Standortbestimmung** des betrieblichen Status quo und gibt zugleich spezifische Handlungsempfehlungen für die **Einführung und nachhaltige Umsetzung mobiler und zeitflexibler Arbeitsformen**.
 
-        In einer Phase tiefgreifender Digitalisierung und wachsender Anforderungen an Flexibilität stellt sich zunehmend die Frage nach einer ausgewogenen Gestaltung von Präsenz- und Remote-Arbeit. Das vorliegende Tool unterstützt Sie dabei, diese Herausforderung gezielt anzugehen: Es liefert eine differenzierte Einschätzung Ihrer betrieblichen Ausgangslage und begleitet Sie durch die komplexen Gestaltungsanforderungen des Wandels.
+        In einer Phase tiefgreifender Digitalisierung und wachsender Anforderungen an Flexibilität stellt sich zunehmend die Frage nach einer ausgewogenen Gestaltung von Präsenz- und Mobiler-Arbeit. Das vorliegende Tool unterstützt Sie dabei, diese Herausforderung gezielt anzugehen: Es liefert eine differenzierte Einschätzung Ihrer betrieblichen Ausgangslage und begleitet Sie durch die komplexen Gestaltungsanforderungen des Wandels.
 
         Die Grundlage bildet das arbeitswissenschaftlich fundierte **MTOK-Modell**, das vier zentrale Gestaltungsdimensionen unterscheidet: **Mensch**, **Technik**, **Organisation** und **Kultur**. Diese werden in **neun empirisch validierte Handlungsfelder** untergliedert, deren Bewertungskriterien speziell auf die Besonderheiten und Anforderungen der zerspanenden Fertigung zugeschnitten sind.
 
@@ -933,9 +933,84 @@ elif current_tab == "Auswertung":
             }
             st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
 
-            # Handlungsempfehlungen
+ 
+            # Handlungsempfehlungen nach Cluster und MTOK
             st.subheader("Clusterspezifische Handlungsempfehlungen")
-            handlungsempfehlungen = {...}  # Dein bestehendes dict mit Empfehlungen je Cluster + MTOK
+            handlungsempfehlungen = {
+            "Cluster 1 – Traditionell und reaktiv": {
+                "Technik": [
+                    "- Prüfen Sie grundlegende digitale Infrastruktur (z. B. WLAN in Büros und Besprechungsräumen).",
+                    "- Beginnen Sie mit einfach implementierbaren Tools (z. B. digitale Schichtpläne oder Messenger)."
+                ],
+                "Organisation": [
+                    "- Entwickeln Sie Pilotmodelle für Zeitflexibilität (z. B. Gleitzeit in indirekten Bereichen).",
+                    "- Führen Sie standardisierte Feedbackprozesse ein, um Veränderungsresistenz zu adressieren."
+                ],
+                "Kultur": [
+                    "- Starten Sie mit Führungskräfte-Coachings zur Gestaltung flexibler Arbeit.",
+                    "- Etablieren Sie eine positive Fehler- und Lernkultur durch regelmäßige Teambesprechungen."
+                ],
+                "Mensch": [
+                    "- Sensibilisieren Sie Mitarbeitende für den Nutzen flexibler Arbeit (z. B. Workshops, Aushänge).",
+                    "- Unterstützen Sie betroffene Beschäftigte durch kurze Schulungsmaßnahmen zur Selbstorganisation."
+                ]
+            },
+            "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
+                "Technik": [
+                    "- Binden Sie Produktionsdaten gezielt in Dashboard-Lösungen ein (z. B. Power BI).",
+                    "- Stellen Sie Remote-Zugriffe für Planer:innen und AV-Bereiche bereit (z. B. VPN, TDM-Clients)."
+                ],
+                "Organisation": [
+                    "- Entwickeln Sie Teilzeit- und Schichtmodelle mit Fokus auf bestimmte Berufsgruppen.",
+                    "- Schaffen Sie Transparenz über Aufgaben, die auch remote bearbeitbar sind."
+                ],
+                "Kultur": [
+                    "- Thematisieren Sie Mobilitätsoptionen in Führungsrunden offen und lösungsorientiert.",
+                    "- Heben Sie die Vereinbarkeit von Familie und Beruf in internen Leitbildern stärker hervor."
+                ],
+                "Mensch": [
+                    "- Befähigen Sie Fachkräfte in AV, Konstruktion oder QS gezielt zur Nutzung flexibler Tools.",
+                    "- Nutzen Sie Erfahrungsberichte von Pilotbereichen als Impuls für weitere Mitarbeitende."
+                ]
+            },
+            "Cluster 3 – Digital-affin und akzeptanzstark": {
+                "Technik": [
+                    "- Prüfen Sie fortgeschrittene Tools zur kollaborativen Zusammenarbeit (z. B. MS Teams mit Planner).",
+                    "- Nutzen Sie digitale Schichtplanungs- oder Urlaubsantragssysteme zur weiteren Flexibilisierung."
+                ],
+                "Organisation": [
+                    "- Etablieren Sie feste Review-Zyklen zur Bewertung und Weiterentwicklung flexibler Arbeit.",
+                    "- Schaffen Sie klare Regeln zur Erreichbarkeit und Aufgabentransparenz im mobilen Arbeiten."
+                ],
+                "Kultur": [
+                    "- Verstärken Sie Wertschätzung durch autonome Arbeitsgestaltung und Entscheidungsspielräume.",
+                    "- Fördern Sie teaminterne Aushandlungsprozesse über Präsenz- und Mobilezeiten."
+                ],
+                "Mensch": [
+                    "- Nutzen Sie das Potenzial erfahrener Mitarbeitender für Mentoring im Umgang mit Flexibilität.",
+                    "- Stärken Sie Selbstlernkompetenzen durch E-Learning-Angebote oder Selbstcoaching-Inhalte."
+                ]
+            },
+            "Cluster 4 – Technisch solide, aber prozessual träge": {
+                "Technik": [
+                    "- Identifizieren Sie technische Engpässe in der Datenverfügbarkeit (z. B. Live-Kennzahlenanzeige).",
+                    "- Setzen Sie auf Assistenzsysteme, die Mobilität auch in getakteten Bereichen ermöglichen."
+                ],
+                "Organisation": [
+                    "- Reduzieren Sie Durchlaufzeiten und Komplexität in ausgewählten Kernprozessen.",
+                    "- Entwickeln Sie Umsetzungsroadmaps für Pilotbereiche mit klaren Meilensteinen."
+                ],
+                "Kultur": [
+                    "- Reduzieren Sie Umsetzungsbarrieren durch interne Kommunikation mit Best-Practice-Beispielen.",
+                    "- Integrieren Sie betriebliche Interessenvertretungen frühzeitig in Transformationsvorhaben."
+                ],
+                "Mensch": [
+                    "- Schaffen Sie Sicherheit durch klare Rollendefinitionen und transparente Arbeitsaufträge.",
+                    "- Fördern Sie aktive Beteiligung z. B. durch Befragungen und Change-Botschafter:innen."
+                ]
+            }
+        }
+            
             cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
 
             empfehlungen_html = ""
