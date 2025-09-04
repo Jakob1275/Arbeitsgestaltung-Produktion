@@ -874,7 +874,7 @@ elif current_tab == "Abschließende Fragen":
 elif current_tab == "Auswertung":
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
 
-        # Labels & Werte für Radar-Chart
+        # Labels & Werte sammeln
         labels, values = [], []
         for dim_name, handlungsfelder_in_dim in mtok_structure.items():
             for hf_name in handlungsfelder_in_dim:
@@ -883,8 +883,7 @@ elif current_tab == "Auswertung":
                     labels.append(f"{hf_name} ({dim_name})")
                     values.append(val)
 
-        # Radar-Chart
-        radar_chart_fig, img_tag = None, ""
+        # Radar-Chart erzeugen, falls Werte vorhanden
         if values and all(isinstance(v, (int, float)) for v in values):
             angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
             values_cycle = values + values[:1]
@@ -901,85 +900,111 @@ elif current_tab == "Auswertung":
             ax.set_title("Cluster-Profil", fontsize=12, pad=10)
             plt.tight_layout()
 
-            # PNG to base64
             buf = BytesIO()
             radar_chart_fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             img_base64 = base64.b64encode(buf.read()).decode("utf-8")
             img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 600px; height: auto; margin-top: 20px;">'
 
-        # Tabelle HTML
-        table_rows = ""
-        for dim_name, handlungsfelder_in_dim in mtok_structure.items():
-            for hf_name in handlungsfelder_in_dim:
-                val = st.session_state.ergebnisse.get(hf_name)
-                if val is not None:
-                    table_rows += f"<tr><td>{hf_name}</td><td>{dim_name}</td><td style='text-align: center;'>{val:.1f}</td></tr>"
+            st.image(buf, caption="Cluster-Profil", width=700)
 
-        table_html = f"""
-        <h2>Bewertung der Handlungsfelder</h2>
-        <table>
-            <thead><tr><th>Handlungsfeld</th><th>MTOK-Dimension</th><th>Mittelwert</th></tr></thead>
-            <tbody>{table_rows}</tbody>
-        </table>
-        """
+        else:
+            st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
+            img_tag = ""
 
-        # Cluster-Zuordnung + Empfehlungen (dein bestehender Code)
-        cluster_result, _ = berechne_clusterzuordnung(Kriterien)
+        # Cluster-Zuordnung
+        cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
 
-        # Empfehlungen aus dict
-        cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
-        empfehlungen_html = ""
-        for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
-            if dimension in cluster_empfehlungen:
-                empfehlungs_block = "<ul>"
-                for empfehlung in cluster_empfehlungen[dimension]:
-                    empfehlungs_block += f"<li>{empfehlung}</li>"
-                empfehlungs_block += "</ul>"
-                empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
+        if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
+            st.warning(cluster_result)
+        else:
+            st.subheader("Automatische Clusterzuordnung")
+            st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
 
-        # HTML-Content final
-        html_content = f"""
-        <!DOCTYPE html>
-        <html lang="de">
-        <head>
-            <meta charset="utf-8">
-            <title>Standortbestimmung</title>
-            <style>
-                body {{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}
-                h1 {{ font-size: 26px; color: #003366; }}
-                h2 {{ font-size: 20px; color: #005599; margin-top: 30px; }}
-                h3 {{ font-size: 16px; color: #333333; margin-top: 20px; }}
-                .box {{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}
-                img {{ display: block; margin: 20px auto; }}
-                table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
-                th, td {{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}
-                th {{ background-color: #e1e9f0; text-align: left; }}
-                td:nth-child(3) {{ text-align: center; }}
-                ul {{ margin-top: 0; }}
-                li {{ margin-bottom: 6px; }}
-            </style>
-        </head>
-        <body>
-            <h1>Ergebnisse des Modells</h1>
-            <div class="box"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
-            <h2>Clusterspezifische Handlungsempfehlungen</h2>
-            {empfehlungen_html}
-            <h2>Readiness-Profil</h2>
-            {img_tag}
-            {table_html}
-        </body>
-        </html>
-        """
+            # Clusterbeschreibung
+            st.subheader("Clusterbeschreibung")
+            cluster_beschreibungen = {
+                "Cluster 1 – Traditionell und reaktiv": "Dieses Cluster ist geprägt durch geringe Technikaffinität, hohe Prozessunsicherheit und eine geringe Offenheit für neue Arbeitsformen...",
+                "Cluster 2 – Produktionsstark, aber mobilitätsfern": "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung, zeigen jedoch eine geringe Offenheit...",
+                "Cluster 3 – Digital-affin und akzeptanzstark": "Diese Unternehmen zeichnen sich durch hohe Technikreife, gute Prozessstabilität sowie eine hohe Offenheit...",
+                "Cluster 4 – Technisch solide, aber prozessual träge": "In diesem Cluster sind solide technische Grundlagen vorhanden. Gleichzeitig verhindern lange Laufzeiten..."
+            }
+            st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
 
-        # Download-Button
-        st.download_button(
-            label="📄 Ergebnisse als HTML herunterladen",
-            data=html_content,
-            file_name="auswertung.html",
-            mime="text/html"
-        )
+            # Handlungsempfehlungen
+            st.subheader("Clusterspezifische Handlungsempfehlungen")
+            handlungsempfehlungen = {...}  # Dein bestehendes dict mit Empfehlungen je Cluster + MTOK
+            cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
+
+            empfehlungen_html = ""
+            for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
+                if dimension in cluster_empfehlungen:
+                    st.markdown(f"**{dimension}**")
+                    st.markdown("---")
+                    empfehlungs_block = "<ul>"
+                    for empfehlung in cluster_empfehlungen[dimension]:
+                        st.markdown(f"- {empfehlung}")
+                        empfehlungs_block += f"<li>{empfehlung}</li>"
+                    empfehlungs_block += "</ul>"
+                    empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
+
+            # Tabelle erzeugen
+            table_rows = ""
+            for dim_name, handlungsfelder_in_dim in mtok_structure.items():
+                for hf_name in handlungsfelder_in_dim:
+                    val = st.session_state.ergebnisse.get(hf_name)
+                    if val is not None:
+                        table_rows += f"<tr><td>{hf_name}</td><td>{dim_name}</td><td style='text-align: center;'>{val:.1f}</td></tr>"
+
+            table_html = f"""
+            <h2>Bewertung der Handlungsfelder</h2>
+            <table>
+                <thead><tr><th>Handlungsfeld</th><th>MTOK-Dimension</th><th>Mittelwert</th></tr></thead>
+                <tbody>{table_rows}</tbody>
+            </table>
+            """
+
+            # HTML-Komplettausgabe
+            html_content = f"""
+            <!DOCTYPE html>
+            <html lang=\"de\">
+            <head>
+                <meta charset=\"utf-8\">
+                <title>Standortbestimmung</title>
+                <style>
+                    body {{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}
+                    h1 {{ font-size: 26px; color: #003366; }}
+                    h2 {{ font-size: 20px; color: #005599; margin-top: 30px; }}
+                    h3 {{ font-size: 16px; color: #333333; margin-top: 20px; }}
+                    .box {{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}
+                    img {{ display: block; margin: 20px auto; }}
+                    table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
+                    th, td {{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}
+                    th {{ background-color: #e1e9f0; text-align: left; }}
+                    td:nth-child(3) {{ text-align: center; }}
+                    ul {{ margin-top: 0; }}
+                    li {{ margin-bottom: 6px; }}
+                </style>
+            </head>
+            <body>
+                <h1>Ergebnisse des Modells</h1>
+                <div class=\"box\"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
+                <h2>Clusterspezifische Handlungsempfehlungen</h2>
+                {empfehlungen_html}
+                <h2>Readiness-Profil</h2>
+                {img_tag}
+                {table_html}
+            </body>
+            </html>
+            """
+
+            st.download_button(
+                label="📄 Ergebnisse als HTML herunterladen",
+                data=html_content,
+                file_name="auswertung.html",
+                mime="text/html"
+            )
         
 # Trenner
 st.markdown("---")
