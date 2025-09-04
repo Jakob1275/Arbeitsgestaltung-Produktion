@@ -742,7 +742,7 @@ if current_tab == "Start":
         - **4 = Vollständig erfüllt**: Das Kriterium ist umfassend umgesetzt und fest in den betrieblichen Strukturen verankert.
 
         Nach Abschluss der Selbsteinschätzung erhalten Sie ein **individuelles grafisches Cluster-Profil**, das Ihre unternehmensspezifischen Stärken, Schwächen und Entwicklungspotenziale visualisiert. Auf Basis dieser Ergebnisse erfolgt eine **automatisierte Clusterzuordnung**, welche Ihr Unternehmen einem von vier empirisch hergeleiteten Typen zuordnet. Darauf aufbauend generiert das Modell **maßgeschneiderte, praxisnahe Handlungsempfehlungen**, die Ihnen konkrete Ansatzpunkte für die Weiterentwicklung Ihrer Arbeitsgestaltung bieten.
-)
+""")
 
 elif current_tab in mtok_structure:
     dimension = current_tab
