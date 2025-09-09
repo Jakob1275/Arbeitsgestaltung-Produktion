@@ -1045,14 +1045,12 @@ elif current_tab == "Auswertung":
             empfehlungen_html = ""
             for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
                 if dimension in cluster_empfehlungen:
-                    st.markdown(f"### {dimension} ")
-                    for empfehlung in cluster_empfehlungen[dimension]:
-                        st.markdown(f"-  {empfehlung[2:]}")
-                        st.markdown("---")
-                    empfehlungs_block += "</ul>"
-                    empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
-                    st.markdown("---")
-
+                empfehlungs_block = "<ul>"  # Hier beginnt die Liste!
+                for empfehlung in cluster_empfehlungen[dimension]:
+                    empfehlungs_block += f"<li>{empfehlung[2:]}</li>"  # Entferne führendes "- "
+                empfehlungs_block += "</ul>"
+                empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
+        
             # Tabelle erzeugen
             table_rows = ""
             for dim_name, handlungsfelder_in_dim in mtok_structure.items():
