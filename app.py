@@ -955,6 +955,7 @@ elif current_tab == "Auswertung":
             }
             st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
 
+
  
             # Handlungsempfehlungen nach Cluster und MTOK
             st.subheader("Clusterspezifische Handlungsempfehlungen")
@@ -1035,6 +1036,14 @@ elif current_tab == "Auswertung":
             
             cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
 
+            # 1. Darstellung in App
+            for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
+                if dimension in cluster_empfehlungen:
+                    st.markdown(f"### {dimension}")
+                    for empfehlung in cluster_empfehlungen[dimension]:
+                        st.markdown(f"- {empfehlung}")
+                    st.markdown("---")
+            
             cluster_beschreibung_html = f"""
             <h2>Clusterbeschreibung</h2>
             <div class="box">
