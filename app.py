@@ -18,7 +18,7 @@ st.markdown(
 mtok_structure = {
     "Mensch": ["Produktivität und Motivation", "Persönliches Umfeld"],
     "Technik": ["Arbeitsplatzgestaltung und Automatisierung", "IT-Systemlandschaft und digital vernetzte Infrastruktur"],
-    "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Soziokulturelle und organisatorische Umwelt", "Produktionsorganisation"],
+    "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Organisatorische Umwelt", "Produktionsorganisation"],
     "Kultur": ["Unternehmenskultur", "Soziale Beziehungen und Interaktion"]
 }
 
@@ -197,7 +197,7 @@ Kriterien = {
       "begründung": "Die Qualität des informellen Austauschs (z.B. virtuelle Kaffeepausen, regelmäßige Team-Events) ist entscheidend für den Teamzusammenhalt und die Vermeidung von Isolation bei mobiler Arbeit."
     }
     ],
-    "Soziokulturelle und organisatorische Umwelt": [
+    "Organisatorische Umwelt": [
     {
       "frage": "O2.1 Der Betrieb verfügt über ausreichend qualifizierte Fachkräfte in der zerspanenden Fertigung.",
       "begründung": "Fachkräftesicherung ist die Grundlage produktiver Flexibilisierung. Ohne entsprechende Qualifikation scheitern mobile und zeitflexible Modelle bereits in der Umsetzung."
