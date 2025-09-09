@@ -1045,10 +1045,10 @@ elif current_tab == "Auswertung":
             empfehlungen_html = ""
             for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
                 if dimension in cluster_empfehlungen:
-                    st.markdown(f"**{dimension}**")
+                    st.markdown(f"### {dimension} ")
                     for empfehlung in cluster_empfehlungen[dimension]:
-                        st.markdown(f"- {empfehlung}")
-                        empfehlungs_block += f"<li>{empfehlung}</li>"
+                        st.markdown(f"-  {empfehlung[2:]}")
+                        st.markdown("---")
                     empfehlungs_block += "</ul>"
                     empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
                     st.markdown("---")
