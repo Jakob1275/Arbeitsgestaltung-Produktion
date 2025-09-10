@@ -728,9 +728,9 @@ st.markdown(" ➤ ".join([
 # Inhalt der Tabs
 if current_tab == "Start":
     st.markdown("""
-        Dieses **Diagnose- und Entwicklungsmodell** wurde speziell für Unternehmen der **zerspanenden Fertigung** konzipiert. Es ermöglicht eine **systematische Standortbestimmung** des betrieblichen Status quo und gibt zugleich spezifische Handlungsempfehlungen für die **Einführung und nachhaltige Umsetzung mobiler und zeitflexibler Arbeitsformen**.
-
         In einer Phase tiefgreifender Digitalisierung und wachsender Anforderungen an Flexibilität stellt sich zunehmend die Frage nach einer ausgewogenen Gestaltung von Präsenz- und Mobiler-Arbeit. Das vorliegende Tool unterstützt Sie dabei, diese Herausforderung gezielt anzugehen: Es liefert eine differenzierte Einschätzung Ihrer betrieblichen Ausgangslage und begleitet Sie durch die komplexen Gestaltungsanforderungen des Wandels.
+        
+        Dieses **Diagnose- und Entwicklungsmodell** wurde speziell für Unternehmen der **zerspanenden Fertigung** konzipiert. Es ermöglicht eine **systematische Standortbestimmung** des betrieblichen Status quo und gibt zugleich spezifische Handlungsempfehlungen für die **Einführung und nachhaltige Umsetzung mobiler und zeitflexibler Arbeitsformen**.
 
         Die Grundlage bildet das arbeitswissenschaftlich fundierte **MTOK-Modell**, das vier zentrale Gestaltungsdimensionen unterscheidet: **Mensch**, **Technik**, **Organisation** und **Kultur**. Diese werden in **neun empirisch validierte Handlungsfelder** untergliedert, deren Bewertungskriterien speziell auf die Besonderheiten und Anforderungen der zerspanenden Fertigung zugeschnitten sind.
 
@@ -741,7 +741,7 @@ if current_tab == "Start":
         - **3 = Weitgehend erfüllt**: Das Kriterium ist in weiten Teilen realisiert; eine tragfähige Grundlage ist vorhanden.  
         - **4 = Vollständig erfüllt**: Das Kriterium ist umfassend umgesetzt und fest in den betrieblichen Strukturen verankert.
 
-        Nach Abschluss der Selbsteinschätzung erhalten Sie ein **individuelles grafisches Cluster-Profil**, das Ihre unternehmensspezifischen Stärken, Schwächen und Entwicklungspotenziale visualisiert. Auf Basis dieser Ergebnisse erfolgt eine **automatisierte Clusterzuordnung**, welche Ihr Unternehmen einem von vier empirisch hergeleiteten Typen zuordnet. Darauf aufbauend generiert das Modell **maßgeschneiderte, praxisnahe Handlungsempfehlungen**, die Ihnen konkrete Ansatzpunkte für die Weiterentwicklung Ihrer Arbeitsgestaltung bieten.
+        Nach Abschluss der Selbsteinschätzung erhalten Sie ein **individuelles grafisches MTOK-Profil**, das Ihre unternehmensspezifischen Stärken, Schwächen und Entwicklungspotenziale visualisiert. Auf Basis dieser Ergebnisse erfolgt eine **automatisierte Clusterzuordnung**, welche Ihr Unternehmen einem von vier empirisch hergeleiteten Typen zuordnet. Darauf aufbauend werden **maßgeschneiderte, praxisnahe Handlungsempfehlungen** gegeben, die Ihnen konkrete Ansatzpunkte für die Weiterentwicklung Ihrer Arbeitsgestaltung bieten.
 """)
 
 elif current_tab in mtok_structure:
