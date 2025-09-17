@@ -8,10 +8,10 @@ import textwrap  # wichtig für Zeilenumbruch
 import re
 
 # Struktur der Anwendung
-st.set_page_config(page_title="Modell zur betrieblichen Einordnung und Entwicklung flexibler Arbeit", layout="wide")
-st.title("Modell zur betrieblichen Einordnung und Entwicklung flexibler Arbeit")
+st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
+st.title("Modell zur Systematisierung flexibler Arbeit")
 st.markdown(
-    "#### Ein empirisch fundierter Ansatz zur Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der Produktion"
+    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
 )
 
 # MTOK-Dimensionen und Handlungsfelder
