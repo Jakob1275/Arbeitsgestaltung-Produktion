@@ -728,21 +728,15 @@ st.markdown(" ➤ ".join([
 # Inhalt der Tabs
 if current_tab == "Start":
     st.markdown("""
-        In einer Phase tiefgreifender Digitalisierung und wachsender Anforderungen an Flexibilität stellt sich zunehmend die Frage nach einer ausgewogenen Gestaltung von Präsenz- und Mobiler-Arbeit. Das vorliegende Tool unterstützt Sie dabei, diese Herausforderung gezielt anzugehen: Es liefert eine differenzierte Einschätzung Ihrer betrieblichen Ausgangslage und begleitet Sie durch die komplexen Gestaltungsanforderungen des Wandels.
-        
-        Dieses **Diagnose- und Entwicklungsmodell** wurde speziell für Unternehmen der **zerspanenden Fertigung** konzipiert. Es ermöglicht eine **systematische Standortbestimmung** des betrieblichen Status quo und gibt zugleich spezifische Handlungsempfehlungen für die **Einführung und nachhaltige Umsetzung mobiler und zeitflexibler Arbeitsformen**.
-
-        Die Grundlage bildet das arbeitswissenschaftlich fundierte **MTOK-Modell**, das vier zentrale Gestaltungsdimensionen unterscheidet: **Mensch**, **Technik**, **Organisation** und **Kultur**. Diese werden in **neun empirisch validierte Handlungsfelder** untergliedert, deren Bewertungskriterien speziell auf die Besonderheiten und Anforderungen der zerspanenden Fertigung zugeschnitten sind.
-
-        Für jedes Kriterium bewerten Sie den aktuellen Zustand Ihres Unternehmens auf einer **standardisierten 4-Punkte-Skala**:
-
-        - **1 = Nicht erfüllt**: Das Kriterium ist derzeit nicht umgesetzt.  
-        - **2 = Teilweise erfüllt**: Erste Ansätze bestehen, jedoch ohne umfassende Umsetzung.  
-        - **3 = Weitgehend erfüllt**: Das Kriterium ist in weiten Teilen realisiert; eine tragfähige Grundlage ist vorhanden.  
-        - **4 = Vollständig erfüllt**: Das Kriterium ist umfassend umgesetzt und fest in den betrieblichen Strukturen verankert.
-
-        Nach Abschluss der Selbsteinschätzung erhalten Sie ein **individuelles grafisches MTOK-Profil**, das Ihre unternehmensspezifischen Stärken, Schwächen und Entwicklungspotenziale visualisiert. Auf Basis dieser Ergebnisse erfolgt eine **automatisierte Clusterzuordnung**, welche Ihr Unternehmen einem von vier empirisch hergeleiteten Typen zuordnet. Darauf aufbauend werden **maßgeschneiderte, praxisnahe Handlungsempfehlungen** gegeben, die Ihnen konkrete Ansatzpunkte für die Weiterentwicklung Ihrer Arbeitsgestaltung bieten.
-""")
+        Die Digitalisierung und der Wunsch nach flexibleren Arbeitsmodellen stellen produzierende Unternehmen vor neue Herausforderungen. Wie können Homeoffice und flexible Arbeitszeiten in der Produktion umgesetzt werden? Das entwickelte Diagnose- und Entwicklungsmodell hilft Ihnen dabei, diese Frage systematisch anzugehen: Es zeigt Ihnen, wo Ihr Unternehmen heute steht und gibt Ihnen konkrete Handlungsempfehlungen für die Umsetzung flexibler Arbeitsformen an die Hand.
+        Das Modell wurde speziell für Unternehmen der zerspanenden Fertigung entwickelt. Es ermöglicht Ihnen eine strukturierte Bestandsaufnahme Ihres Unternehmens und zeigt gleichzeitig auf, wie Sie die Einführung mobiler und zeitflexibler Arbeit unterstützen können. Dabei berücksichtigt das Modell vier wichtige Bereiche: Ihre Mitarbeiter, die vorhandene Technik, Ihre Organisation und die Unternehmenskultur. Diese vier Bereiche werden in neun konkrete Handlungsfelder unterteilt, die speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.
+        Die Bewertung basiert auf einem vierstufigen System:
+        •	Stufe 1 – Nicht erfüllt: Das Kriterium wird derzeit nicht umgesetzt
+        •	Stufe 2 – Teilweise erfüllt: Erste Ansätze sind vorhanden, aber noch nicht systematisch
+        •	Stufe 3 – Weitgehend erfüllt: Das Kriterium ist größtenteils umgesetzt und funktioniert
+        •	Stufe 4 – Vollständig erfüllt: Das Kriterium ist vollständig umgesetzt und fest etabliert
+        Nach der Selbstbewertung erhalten Sie ein übersichtliches grafisches Profil, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von vier Unternehmenstypen zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typ bekommen Sie maßgeschneiderte, praxisnahe Handlungsempfehlungen, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.
+    """)
 
 elif current_tab in mtok_structure:
     dimension = current_tab
