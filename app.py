@@ -728,13 +728,18 @@ st.markdown(" ➤ ".join([
 # Inhalt der Tabs
 if current_tab == "Start":
     st.markdown("""
+    
         Die Digitalisierung und der Wunsch nach flexibleren Arbeitsmodellen stellen produzierende Unternehmen vor neue Herausforderungen. Wie können Homeoffice und flexible Arbeitszeiten in der Produktion umgesetzt werden? Das entwickelte Diagnose- und Entwicklungsmodell hilft Ihnen dabei, diese Frage systematisch anzugehen: Es zeigt Ihnen, wo Ihr Unternehmen heute steht und gibt Ihnen konkrete Handlungsempfehlungen für die Umsetzung flexibler Arbeitsformen an die Hand.
+       
         Das Modell wurde speziell für Unternehmen der zerspanenden Fertigung entwickelt. Es ermöglicht Ihnen eine strukturierte Bestandsaufnahme Ihres Unternehmens und zeigt gleichzeitig auf, wie Sie die Einführung mobiler und zeitflexibler Arbeit unterstützen können. Dabei berücksichtigt das Modell vier wichtige Bereiche: Ihre Mitarbeiter, die vorhandene Technik, Ihre Organisation und die Unternehmenskultur. Diese vier Bereiche werden in neun konkrete Handlungsfelder unterteilt, die speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.
+        
         Die Bewertung basiert auf einem vierstufigen System:
+       
         •	Stufe 1 – Nicht erfüllt: Das Kriterium wird derzeit nicht umgesetzt
         •	Stufe 2 – Teilweise erfüllt: Erste Ansätze sind vorhanden, aber noch nicht systematisch
         •	Stufe 3 – Weitgehend erfüllt: Das Kriterium ist größtenteils umgesetzt und funktioniert
         •	Stufe 4 – Vollständig erfüllt: Das Kriterium ist vollständig umgesetzt und fest etabliert
+        
         Nach der Selbstbewertung erhalten Sie ein übersichtliches grafisches Profil, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von vier Unternehmenstypen zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typ bekommen Sie maßgeschneiderte, praxisnahe Handlungsempfehlungen, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.
     """)
 
