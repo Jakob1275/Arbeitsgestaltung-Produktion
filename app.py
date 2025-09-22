@@ -736,8 +736,11 @@ if current_tab == "Start":
         Die Bewertung basiert auf einem vierstufigen System:
        
         •	**Stufe 1** – Nicht erfüllt: Das Kriterium wird derzeit nicht umgesetzt
+       
         •	**Stufe 2** – Teilweise erfüllt: Erste Ansätze sind vorhanden, aber noch nicht systematisch
+        
         •	**Stufe 3** Weitgehend erfüllt: Das Kriterium ist größtenteils umgesetzt und funktioniert
+        
         •	**Stufe 4** – Vollständig erfüllt: Das Kriterium ist vollständig umgesetzt und fest etabliert
         
         Nach der Selbstbewertung erhalten Sie ein übersichtliches **grafisches Profil**, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von **vier Unternehmenstypen** zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typ bekommen Sie maßgeschneiderte, praxisnahe Handlungsempfehlungen, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.
