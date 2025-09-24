@@ -3,3 +3,5 @@ numpy
 matplotlib
 openai
 python-docx
+gspread 
+oauth2client
