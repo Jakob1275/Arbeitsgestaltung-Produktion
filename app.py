@@ -21,7 +21,7 @@ credentials = Credentials.from_service_account_info(service_account_info, scopes
 client = gspread.authorize(credentials)
 
 # Spreadsheet öffnen
-sheet = client.open("Modell_Evaluation").worksheet("Tabellenblatt1")
+sheet = client.open_by_key(1pPljjp03HAB7KM_Qk9B4IYnnx0NVuFMxV81qvD67B3g).worksheet("Tabellenblatt1")
 
 # Struktur der Anwendung
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
