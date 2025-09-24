@@ -1200,8 +1200,18 @@ if current_tab == "Evaluation":
         key="evaluation_feedback_text"
     )
 
+    
+    # Funktion zur sicheren Konvertierung
+    def safe_value(val):
+        try:
+            if isinstance(val, float) and np.isnan(val):
+                return ""
+            return str(val)
+        except Exception:
+            return ""
     # Absenden-Button
     if st.button("Absenden und speichern"):
+
         # 1. Evaluation sammeln
         evaluation_data = {
             "Struktur nachvollziehbar": st.session_state.get("verstaendlichkeit_struktur", ""),
@@ -1229,8 +1239,10 @@ if current_tab == "Evaluation":
             "E-Mail": st.session_state.get("email_input", "")
         }
 
+        # daten_gesamt schon vorher zusammengesetzt aus mtok_werte, cluster_scores, evaluation_data
+        daten_gesamt.update(abschlusstexte)
         try:
-            worksheet.append_row(list(daten_gesamt.values()))
+            worksheet.append_row([safe_value(v) for v in daten_gesamt.values()])
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
         except Exception as e:
             st.error(f"Fehler beim Speichern: {e}") 
