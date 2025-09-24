@@ -6,6 +6,19 @@ import base64
 from io import BytesIO
 import textwrap  # wichtig für Zeilenumbruch
 import re
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
+from datetime import datetime
+
+# Authentifizierung mit Streamlit Secrets
+scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
+credentials = ServiceAccountCredentials.from_json_keyfile_dict(
+    st.secrets["gcp_service_account"], scope)
+client = gspread.authorize(credentials)
+
+# Google Sheet öffnen
+spreadsheet = client.open("Modell-Evaluation")
+sheet = spreadsheet.sheet1  # erstes Tabellenblatt
 
 # Struktur der Anwendung
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
