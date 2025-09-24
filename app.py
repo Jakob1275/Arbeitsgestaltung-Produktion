@@ -1228,23 +1228,19 @@ if current_tab == "Evaluation":
     # 2. MTOK-Werte
         mtok_werte = st.session_state.get("ergebnisse", {})
 
-        # Korrekt entpacken:
+    # 3. Cluster-Zuordnung berechnen
         bestes_cluster, abweichungen = berechne_clusterzuordnung(Kriterien)
         cluster_scores = {
             "Zugeordnetes Cluster": bestes_cluster,
             **{f"Abweichung {k}": v for k, v in abweichungen.items()}
-    }
-
-    # 3. Cluster-Variablen berechnen
-        cluster_scores = berechne_clusterzuordnung(Kriterien)
+        }
 
     # 5. Alle Daten zusammenführen
         daten_gesamt = {}
         daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
-        daten_gesamt.update(abschlusstexte)
-
+        
     # Zeitstempel hinzufügen
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
