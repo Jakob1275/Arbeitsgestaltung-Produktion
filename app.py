@@ -1228,20 +1228,27 @@ if current_tab == "Evaluation":
     # 2. MTOK-Werte
         mtok_werte = st.session_state.get("ergebnisse", {})
 
-    # 3. Cluster-Zuordnung berechnen
-        bestes_cluster, abweichungen = berechne_clusterzuordnung(Kriterien)
-        cluster_scores = {
-            "Zugeordnetes Cluster": bestes_cluster,
-            **{f"Abweichung {k}": v for k, v in abweichungen.items()}
-        }
+    # 3. Cluster-Zuordnung berechnen – fehlertolerant
+        cluster_result = berechne_clusterzuordnung(Kriterien)
 
-    # 5. Alle Daten zusammenführen
+        # Prüfen, ob Clusterberechnung erfolgreich war
+        if isinstance(cluster_result, tuple) and len(cluster_result) == 2 and isinstance(cluster_result[1], dict):
+            bestes_cluster, abweichungen = cluster_result
+            cluster_scores = {
+                "Zugeordnetes Cluster": bestes_cluster,
+                **{f"Abweichung {k}": v for k, v in abweichungen.items()}
+            }
+        else:
+            st.warning("Die Clusterzuordnung konnte nicht durchgeführt werden. Bitte überprüfen Sie Ihre Eingaben.")
+            cluster_scores = {"Zugeordnetes Cluster": "Fehlgeschlagen"}
+
+        # 5. Alle Daten zusammenführen
         daten_gesamt = {}
         daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
-        
-    # Zeitstempel hinzufügen
+
+        # Zeitstempel hinzufügen
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
     # 6. In Google Sheet speichern
