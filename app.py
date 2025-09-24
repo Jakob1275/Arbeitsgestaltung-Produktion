@@ -17,7 +17,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict(
 client = gspread.authorize(credentials)
 
 # Google Sheet öffnen
-sheet = client.open("Modell-Evaluation").sheet1
+sheet = client.open("Modell_Evaluation").sheet1
 
 # Struktur der Anwendung
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
