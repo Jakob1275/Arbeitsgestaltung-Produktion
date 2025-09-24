@@ -1198,46 +1198,46 @@ if current_tab == "Evaluation":
 
     # Absenden-Button
     if st.button("Absenden und speichern"):
-    # 1. Evaluation sammeln
-    evaluation_data = {
-        "Struktur nachvollziehbar": st.session_state.get("verstaendlichkeit_struktur", ""),
-        "Kriterien verständlich": st.session_state.get("verstaendlichkeit_kriterien", ""),
-        "Cluster verständlich": st.session_state.get("verstaendlichkeit_cluster", ""),
-        "Relevanz Handlungsfelder": st.session_state.get("relevanz_handlungsfelder", ""),
-        "Relevanz MTOK": st.session_state.get("relevanz_mtok", ""),
-        "Standortbestimmung": st.session_state.get("anwendbarkeit_standort", ""),
-        "Empfehlungen hilfreich": st.session_state.get("anwendbarkeit_empfehlungen", ""),
-        "Feedback": st.session_state.get("evaluation_feedback_text", "")
-    }
+        # 1. Evaluation sammeln
+        evaluation_data = {
+            "Struktur nachvollziehbar": st.session_state.get("verstaendlichkeit_struktur", ""),
+            "Kriterien verständlich": st.session_state.get("verstaendlichkeit_kriterien", ""),
+            "Cluster verständlich": st.session_state.get("verstaendlichkeit_cluster", ""),
+            "Relevanz Handlungsfelder": st.session_state.get("relevanz_handlungsfelder", ""),
+            "Relevanz MTOK": st.session_state.get("relevanz_mtok", ""),
+            "Standortbestimmung": st.session_state.get("anwendbarkeit_standort", ""),
+            "Empfehlungen hilfreich": st.session_state.get("anwendbarkeit_empfehlungen", ""),
+            "Feedback": st.session_state.get("evaluation_feedback_text", "")
+        }
 
-    # 2. MTOK-Werte
-    mtok_werte = st.session_state.get("ergebnisse", {})
+        # 2. MTOK-Werte
+        mtok_werte = st.session_state.get("ergebnisse", {})
 
-    # 3. Cluster-Variablen
-    cluster_scores = berechne_clusterzuordnung(Kriterien)
+        # 3. Cluster-Variablen
+        cluster_scores = berechne_clusterzuordnung(Kriterien)
 
-    # 4. Abschlussfragen
-    abschlusstexte = {
-        "Funktion": st.session_state.get("funktion_radio_input", ""),
-        "Mitarbeitende": st.session_state.get("mitarbeitende_radio_input", ""),
-        "Branche": st.session_state.get("branche_input", ""),
-        "PLZ": st.session_state.get("plz_input", ""),
-        "E-Mail": st.session_state.get("email_input", "")
-    }
+        # 4. Abschlussfragen
+        abschlusstexte = {
+            "Funktion": st.session_state.get("funktion_radio_input", ""),
+            "Mitarbeitende": st.session_state.get("mitarbeitende_radio_input", ""),
+            "Branche": st.session_state.get("branche_input", ""),
+            "PLZ": st.session_state.get("plz_input", ""),
+            "E-Mail": st.session_state.get("email_input", "")
+        }
 
-    # 5. Gesamtdatensatz
-    daten_gesamt = {
-        **mtok_werte,
-        **cluster_scores,
-        **abschlusstexte,
-        **evaluation_data
-    }
+        # 5. Gesamtdatensatz
+        daten_gesamt = {
+            **mtok_werte,
+            **cluster_scores,
+            **abschlusstexte,
+            **evaluation_data
+        }
 
-    try:
-        worksheet.append_row(list(daten_gesamt.values()))
-        st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
-    except Exception as e:
-        st.error(f"Fehler beim Speichern: {e}") 
+        try:
+            worksheet.append_row(list(daten_gesamt.values()))
+            st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
+        except Exception as e:
+            st.error(f"Fehler beim Speichern: {e}") 
 
 # Trenner
 st.markdown("---")
