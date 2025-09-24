@@ -17,8 +17,7 @@ credentials = ServiceAccountCredentials.from_json_keyfile_dict(
 client = gspread.authorize(credentials)
 
 # Google Sheet öffnen
-spreadsheet = client.open("Modell-Evaluation")
-sheet = spreadsheet.sheet1  # erstes Tabellenblatt
+sheet = client.open("Modell-Evaluation").sheet1
 
 # Struktur der Anwendung
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
@@ -722,7 +721,7 @@ def nav_buttons(position):
                 st.rerun()
 
 # Tabs definieren
-tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung"]
+tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung","Evaluation"]
 
 # Scroll-Anker oben
 st.markdown("<div id='top'></div>", unsafe_allow_html=True)
@@ -1132,7 +1131,114 @@ elif current_tab == "Auswertung":
                 file_name="auswertung.html",
                 mime="text/html"
             )
-        
+# Inhalt der Tabs
+if current_tab == "Evaluation":
+    st.markdown("""
+    ## Evaluation des Modells
+
+    Vielen Dank für die Bearbeitung des entwickelten Modells.  
+    Um die Qualität weiter zu verbessern, bitten wir Sie um eine kurze Bewertung.
+    """)
+
+    options = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
+
+    st.subheader("1. Verständlichkeit des Modells")
+
+    st.radio(
+        "Wie gut war die Struktur des Modells für Sie nachvollziehbar?",
+        options,
+        key="verstaendlichkeit_struktur"
+    )
+
+    st.radio(
+        "Wie verständlich waren die Bewertungskriterien formuliert?",
+        options,
+        key="verstaendlichkeit_kriterien"
+    )
+
+    st.radio(
+        "Waren die Clusterbeschreibungen nachvollziehbar?",
+        options,
+        key="verstaendlichkeit_cluster"
+    )
+
+    st.subheader("2. Relevanz des Modells")
+
+    st.radio(
+        "Wie relevant sind die abgefragten Handlungsfelder für Ihren betrieblichen Kontext?",
+        options,
+        key="relevanz_handlungsfelder"
+    )
+
+    st.radio(
+        "Wie sinnvoll ist die MTOK-Systematik (Mensch, Technik, Organisation, Kultur)?",
+        options,
+        key="relevanz_mtok"
+    )
+
+    st.subheader("3. Praktische Anwendbarkeit")
+
+    st.radio(
+        "Wie gut unterstützt das Modell eine betriebliche Standortbestimmung?",
+        options,
+        key="anwendbarkeit_standort"
+    )
+
+    st.radio(
+        "Wie hilfreich sind die abgeleiteten Handlungsempfehlungen?",
+        options,
+        key="anwendbarkeit_empfehlungen"
+    )
+
+    # Optional: Freitextfeld
+    st.text_area(
+        "Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik?",
+        key="evaluation_feedback_text"
+    )
+
+    # Absenden-Button
+    if st.button("Absenden und speichern"):
+    # 1. Evaluation sammeln
+    evaluation_data = {
+        "Struktur nachvollziehbar": st.session_state.get("verstaendlichkeit_struktur", ""),
+        "Kriterien verständlich": st.session_state.get("verstaendlichkeit_kriterien", ""),
+        "Cluster verständlich": st.session_state.get("verstaendlichkeit_cluster", ""),
+        "Relevanz Handlungsfelder": st.session_state.get("relevanz_handlungsfelder", ""),
+        "Relevanz MTOK": st.session_state.get("relevanz_mtok", ""),
+        "Standortbestimmung": st.session_state.get("anwendbarkeit_standort", ""),
+        "Empfehlungen hilfreich": st.session_state.get("anwendbarkeit_empfehlungen", ""),
+        "Feedback": st.session_state.get("evaluation_feedback_text", "")
+    }
+
+    # 2. MTOK-Werte
+    mtok_werte = st.session_state.get("ergebnisse", {})
+
+    # 3. Cluster-Variablen
+    cluster_scores = berechne_clusterzuordnung(Kriterien)
+
+    # 4. Abschlussfragen
+    abschlusstexte = {
+        "Funktion": st.session_state.get("funktion_radio_input", ""),
+        "Mitarbeitende": st.session_state.get("mitarbeitende_radio_input", ""),
+        "Branche": st.session_state.get("branche_input", ""),
+        "PLZ": st.session_state.get("plz_input", ""),
+        "E-Mail": st.session_state.get("email_input", "")
+    }
+
+    # 5. Gesamtdatensatz
+    daten_gesamt = {
+        **mtok_werte,
+        **cluster_scores,
+        **abschlusstexte,
+        **evaluation_data
+    }
+
+    try:
+        worksheet.append_row(list(daten_gesamt.values()))
+        st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
+    except Exception as e:
+        st.error(f"Fehler beim Speichern: {e}") 
+
 # Trenner
 st.markdown("---")
 
