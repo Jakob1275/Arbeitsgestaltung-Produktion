@@ -1238,15 +1238,6 @@ if current_tab == "Evaluation":
     # 3. Cluster-Variablen berechnen
         cluster_scores = berechne_clusterzuordnung(Kriterien)
 
-    # 4. Abschlussfragen sammeln
-        abschlusstexte = {
-            "Funktion": st.session_state.get("funktion_radio_input", ""),
-            "Mitarbeitende": st.session_state.get("mitarbeitende_radio_input", ""),
-            "Branche": st.session_state.get("branche_input", ""),
-            "PLZ": st.session_state.get("plz_input", ""),
-            "E-Mail": st.session_state.get("email_input", "")
-        }
-
     # 5. Alle Daten zusammenführen
         daten_gesamt = {}
         daten_gesamt.update(mtok_werte)
