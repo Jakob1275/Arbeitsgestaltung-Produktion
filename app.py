@@ -1229,14 +1229,6 @@ if current_tab == "Evaluation":
             "E-Mail": st.session_state.get("email_input", "")
         }
 
-        # 5. Gesamtdatensatz
-        daten_gesamt = {
-            **mtok_werte,
-            **cluster_scores,
-            **abschlusstexte,
-            **evaluation_data
-        }
-
         try:
             worksheet.append_row(list(daten_gesamt.values()))
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
