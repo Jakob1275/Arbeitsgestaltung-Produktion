@@ -1201,62 +1201,68 @@ if current_tab == "Evaluation":
     )
 
     
-# Funktion zur sicheren Konvertierung von Werten
-def safe_value(val):
-    try:
-        if isinstance(val, float) and np.isnan(val):
+    # Funktion zur sicheren Konvertierung von Werten
+    def safe_value(val):
+        try:
+            if isinstance(val, float) and np.isnan(val):
+                return ""
+            return str(val)
+        except Exception:
             return ""
-        return str(val)
-    except Exception:
-        return ""
 
-# Absenden-Button
-if st.button("Absenden und speichern"):
+    # Absenden-Button
+    if st.button("Absenden und speichern"):
 
     # 1. Evaluation sammeln
-    evaluation_data = {
-        "Struktur nachvollziehbar": st.session_state.get("verstaendlichkeit_struktur", ""),
-        "Kriterien verständlich": st.session_state.get("verstaendlichkeit_kriterien", ""),
-        "Cluster verständlich": st.session_state.get("verstaendlichkeit_cluster", ""),
-        "Relevanz Handlungsfelder": st.session_state.get("relevanz_handlungsfelder", ""),
-        "Relevanz MTOK": st.session_state.get("relevanz_mtok", ""),
-        "Standortbestimmung": st.session_state.get("anwendbarkeit_standort", ""),
-        "Empfehlungen hilfreich": st.session_state.get("anwendbarkeit_empfehlungen", ""),
-        "Feedback": st.session_state.get("evaluation_feedback_text", "")
-    }
+        evaluation_data = {
+            "Struktur nachvollziehbar": st.session_state.get("verstaendlichkeit_struktur", ""),
+            "Kriterien verständlich": st.session_state.get("verstaendlichkeit_kriterien", ""),
+            "Cluster verständlich": st.session_state.get("verstaendlichkeit_cluster", ""),
+            "Relevanz Handlungsfelder": st.session_state.get("relevanz_handlungsfelder", ""),
+            "Relevanz MTOK": st.session_state.get("relevanz_mtok", ""),
+            "Standortbestimmung": st.session_state.get("anwendbarkeit_standort", ""),
+            "Empfehlungen hilfreich": st.session_state.get("anwendbarkeit_empfehlungen", ""),
+            "Feedback": st.session_state.get("evaluation_feedback_text", "")
+        }
 
     # 2. MTOK-Werte
-    mtok_werte = st.session_state.get("ergebnisse", {})
+        mtok_werte = st.session_state.get("ergebnisse", {})
 
-    # 3. Cluster-Variablen berechnen
-    cluster_scores = berechne_clusterzuordnung(Kriterien)
-
-    # 4. Abschlussfragen sammeln
-    abschlusstexte = {
-        "Funktion": st.session_state.get("funktion_radio_input", ""),
-        "Mitarbeitende": st.session_state.get("mitarbeitende_radio_input", ""),
-        "Branche": st.session_state.get("branche_input", ""),
-        "PLZ": st.session_state.get("plz_input", ""),
-        "E-Mail": st.session_state.get("email_input", "")
+        # Korrekt entpacken:
+        bestes_cluster, abweichungen = berechne_clusterzuordnung(Kriterien)
+        cluster_scores = {
+            "Zugeordnetes Cluster": bestes_cluster,
+            **{f"Abweichung {k}": v for k, v in abweichungen.items()}
     }
 
-    # 5. Alle Daten zusammenführen
-    daten_gesamt = {}
-    daten_gesamt.update(mtok_werte)
-    daten_gesamt.update(cluster_scores)
-    daten_gesamt.update(evaluation_data)
-    daten_gesamt.update(abschlusstexte)
+    # 3. Cluster-Variablen berechnen
+        cluster_scores = berechne_clusterzuordnung(Kriterien)
 
-    # Optional: Zeitstempel hinzufügen
-    from datetime import datetime
-    daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
+    # 4. Abschlussfragen sammeln
+        abschlusstexte = {
+            "Funktion": st.session_state.get("funktion_radio_input", ""),
+            "Mitarbeitende": st.session_state.get("mitarbeitende_radio_input", ""),
+            "Branche": st.session_state.get("branche_input", ""),
+            "PLZ": st.session_state.get("plz_input", ""),
+            "E-Mail": st.session_state.get("email_input", "")
+        }
+
+    # 5. Alle Daten zusammenführen
+        daten_gesamt = {}
+        daten_gesamt.update(mtok_werte)
+        daten_gesamt.update(cluster_scores)
+        daten_gesamt.update(evaluation_data)
+        daten_gesamt.update(abschlusstexte)
+
+    # Zeitstempel hinzufügen
+        daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
     # 6. In Google Sheet speichern
-    try:
-        worksheet.append_row([safe_value(v) for v in daten_gesamt.values()])
-        st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
-    except Exception as e:
-        st.error(f"Fehler beim Speichern: {e}") 
+        try:
+            worksheet.append_row([safe_value(v) for v in daten_gesamt.values()])
+            st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
+        except Exception as e:
+            st.error(f"Fehler beim Speichern: {e}") 
 
 # Trenner
 st.markdown("---")
