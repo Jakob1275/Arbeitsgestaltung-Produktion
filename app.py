@@ -910,17 +910,10 @@ elif current_tab == "Abschließende Fragen":
     cnc_options = ["< 5", "5-10", "11-24", "≥ 25"]
     cnc_key = "cnc_range"
 
-    # Vorauswahl aus Session holen, falls vorhanden
-    cnc_default = st.session_state.get(cnc_key)
-    
-    # Nur index setzen, wenn gültig
-    index_cnc = cnc_options.index(cnc_default) if cnc_default in cnc_options else 0
-
     # Eingabe-Feld
     selected_cnc = st.radio(
         "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
         cnc_options,
-        index=index_cnc,
         key=cnc_key
     )
     st.write("DEBUG: cnc_default:", cnc_default)
