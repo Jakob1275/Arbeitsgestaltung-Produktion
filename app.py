@@ -1310,7 +1310,7 @@ if current_tab == "Evaluation":
         key="evaluation_feedback_text"
     )
 
-   # Hilfsfunktion zur Bewertungskonvertierung
+    # Hilfsfunktion zur Bewertungskonvertierung
     def bewertung_in_zahl(wert):
         mapping = {
             "Niedrig": 1,
@@ -1318,97 +1318,82 @@ if current_tab == "Evaluation":
             "Hoch": 3,
             "Sehr hoch": 4
         }
-        return mapping.get(wert, 9999)
+        return mapping.get(wert, 99999)
 
-# Hilfsfunktion zur sicheren Speicherung
+    # Hilfsfunktion zur sicheren Speicherung
     def safe_value(val):
         try:
             if val is None or (isinstance(val, float) and np.isnan(val)):
-                return 9999
+                return 99999
             if isinstance(val, str) and val.strip() == "":
-                return 9999
+                return 99999
             return val
         except Exception:
-            return 9999
+            return 99999
 
-    # Speichern der Ergebnisse
+    # Funktion zum Zählen bewerteter Cluster-Variablen
+    def zaehle_bewertete_clustervariablen(daten):
+        werte = list(daten.values())[:9]
+        return sum(1 for v in werte if isinstance(v, (int, float)) and v > 0)
+
+    # Absenden und speichern
     if st.button("Absenden und speichern"):
         evaluation_data = {}
-
-        # Fragen durchgehen und speichern
+    
+        # 1. Evaluation speichern
         for i in range(1, 6):
             fragen_count = len(eval(f"fragen_{i}"))
             for j in range(fragen_count):
                 key = f"eval{i}_{j}"
                 antwort = st.session_state.get(f"{key}_score", "")
-                evaluation_data[key] = antwort
+                evaluation_data[key] = bewertung_in_zahl(antwort)
 
-        # Freitextfeld
+        # 2. Freitextfeld
         evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
 
-        st.success("Vielen Dank für Ihre Rückmeldung!")
-        st.write("Ihre Antworten (Debug):", evaluation_data)
-    
-        # 2. MTOK-Werte
+        # 3. MTOK-Werte übernehmen (bleiben float wie 1.0, 2.3 etc.)
         mtok_werte = st.session_state.get("ergebnisse", {})
 
-        # 3. Cluster-Zuordnung berechnen – fehlertolerant
+        # 4. Cluster-Zuordnung berechnen
         cluster_result = berechne_clusterzuordnung(Kriterien)
 
-        if isinstance(cluster_result, tuple) and len(cluster_result) == 2 and isinstance(cluster_result[1], dict):
+        daten_gesamt = {}
+        daten_gesamt.update(mtok_werte)
+
+        bewertete = zaehle_bewertete_clustervariablen(mtok_werte)
+
+        if isinstance(cluster_result, tuple) and len(cluster_result) == 2 and isinstance(cluster_result[1], dict) and bewertete >= 7:
             bestes_cluster, abweichungen = cluster_result
             cluster_scores = {
                 "Zugeordnetes Cluster": bestes_cluster,
                 **{f"Abweichung {k}": v for k, v in abweichungen.items()}
             }
         else:
-            st.warning("Die Clusterzuordnung konnte nicht durchgeführt werden. Bitte überprüfen Sie Ihre Eingaben.")
             cluster_scores = {
-                "Zugeordnetes Cluster": "Fehlgeschlagen",
-                "Abweichung 1": 9999,
-                "Abweichung 2": 9999,
-                "Abweichung 3": 9999
+                "Zugeordnetes Cluster": "Bitte bewerten Sie mindestens 7 relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {} bewertet.".format(bewertete),
+                "Abweichung 1": 99999,
+                "Abweichung 2": 99999,
+                "Abweichung 3": 99999,
+                "Abweichung 4": 99999
             }
 
-        # 5. Alle Daten zusammenführen
-        daten_gesamt = {}
-        daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
-    
-        # Zeitstempel hinzufügen
+
+        # Zeitstempel
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
-        def safe_value(val):
-        # Kein automatischer Typ-Cast!
-            return val
-
-        def zaehle_bewertete_clustervariablen(daten):
-            # Zählt, wie viele der ersten 9 Cluster-Kriterien bewertet wurden (nicht None oder "")
-            werte = list(daten.values())[:9]
-            return sum(1 for v in werte if isinstance(v, (int, float)) and v > 0)
-
+        # Speichern in Google Sheet
         try:
             daten_liste = []
-            bewertete = zaehle_bewertete_clustervariablen(daten_gesamt)
-
             for key, val in daten_gesamt.items():
-                # Spezielle Behandlung für Cluster-Zuordnung
-                if "Cluster" in key:
-                    if bewertete < 7:
-                        daten_liste.append(
-                            f"Bitte bewerten Sie mindestens 7 relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {bewertete} bewertet."
-                        )
-                    else:
-                        daten_liste.append(val)  # Originaler Clusterwert (z. B. Cluster 2 ...)
-                else:
-                    daten_liste.append(safe_value(val))
+                daten_liste.append(safe_value(val))
 
             worksheet.append_row(daten_liste)
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
         except Exception as e:
             st.error(f"Fehler beim Speichern: {e}")
-
+            
 # Trenner
 st.markdown("---")
 
