@@ -923,6 +923,9 @@ elif current_tab == "Abschließende Fragen":
         index=index_cnc,
         key=cnc_key
     )
+    st.write("DEBUG: cnc_default:", cnc_default)
+    st.write("DEBUG: session_state[cnc_key]:", st.session_state.get(cnc_key))
+    st.write("DEBUG: selected_cnc:", selected_cnc)
 
     # Kategorisierung speichern
     st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc)
