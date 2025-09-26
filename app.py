@@ -793,8 +793,21 @@ elif current_tab in mtok_structure:
             frage_text = item["frage"]
             begruendung = item["begründung"]
 
-            st.markdown(f"**{frage_text}**")
-            st.markdown(f"<span style='color:gray; font-size:0.9em'>{begruendung}</span>", unsafe_allow_html=True)
+            st.markdown(f"""
+                <div style='margin-bottom: -0.2rem'>
+                    <strong>{frage_text}</strong><br>
+                    <span style='color:gray; font-size:0.9em'>{begruendung}</span>
+                </div>
+            """, unsafe_allow_html=True)
+
+            # Bewertungsauswahl anzeigen
+            score = st.radio(
+                "", 
+                options,
+                horizontal=True,
+                key=radio_key,
+                index=default_index
+            )
 
             # Nutze indexbasierten Schlüssel (idx), damit die Zuordnung mit Kriterien stabil bleibt
             radio_key = f"{dimension}_{feld}_{idx}"
@@ -823,16 +836,6 @@ elif current_tab in mtok_structure:
                 #default_index = None
                 default_index = 0
 
-            # Bewertungsauswahl anzeigen
-            score = st.radio(
-                "",
-                options,
-                horizontal=True,
-                key=radio_key,
-                index=default_index
-            ) 
-          
-            
             # Speichere Score separat (mit _score-Endung)
             if score is not None:
                 st.session_state[score_key] = score
