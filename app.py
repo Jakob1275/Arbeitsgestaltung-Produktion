@@ -1380,21 +1380,21 @@ if current_tab == "Evaluation":
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
                 # 6. In Google Sheet speichern
+        def safe_value(val):
+            # 9999 oder Texte sollen erhalten bleiben
+            if val == 9999 or isinstance(val, str):
+                return val
+            # Zahlen (auch 1.0 etc.) sollen als float gespeichert werden
+            if isinstance(val, (int, float)):
+                return float(val)
+            return val
+
         try:
-            bewertbare_texte = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
-
-            def transform_wert(v):
-                # Textbewertung (z. B. „Hoch“) → Zahl
-                if isinstance(v, str) and v in bewertbare_texte:
-                    return bewertung_in_zahl(v)
-                # Zahl bleibt Zahl (inkl. float wie 1.0)
-                if isinstance(v, (int, float)):
-                    return v if not np.isnan(v) else 9999
-                # Sonst 9999 (z. B. leere Strings, None)
-                return 9999
-
-            final_row = [transform_wert(v) for v in daten_gesamt.values()]
-            worksheet.append_row(final_row)
+            # Liste zur Speicherung vorbereiten
+            daten_liste = [safe_value(v) for v in daten_gesamt.values()]
+    
+            # Speichern in Google Sheet
+            worksheet.append_row(daten_liste)
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
         except Exception as e:
             st.error(f"Fehler beim Speichern: {e}")
