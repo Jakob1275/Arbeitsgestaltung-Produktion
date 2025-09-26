@@ -875,101 +875,99 @@ elif current_tab in mtok_structure:
         elif feld in st.session_state.ergebnisse:
             del st.session_state.ergebnisse[feld]
             
-# Inahlt Abschließende Fragen-Tab
-
 elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
     if "item_to_radio_key_map" not in st.session_state:
         st.session_state["item_to_radio_key_map"] = {}
 
-    # Hilfsfunktion zur Anzeige von Radios mit gespeicherter Auswahl
-    def render_radio(frage, options, key_base, categorize_func):
-        score_key = f"{key_base}_score"
-        st.session_state["item_to_radio_key_map"][frage] = score_key
-
-        # Vorauswahl aus session_state, falls vorhanden
-        vorwahl = st.session_state.get(key_base)
-        index = options.index(vorwahl) if vorwahl in options else None
-
-        selected = st.radio(frage, options, index=index, key=key_base)
-        if selected:
-            st.session_state[score_key] = categorize_func(selected)
-
     # --- CNC-Maschinen ---
-    render_radio(
-        "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
-        ["< 5", "5-10", "11-24", "≥ 25"],
-        "cnc_range",
-        categorize_cnc_machines
-    )
+    frage = "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?"
+    options = ["< 5", "5-10", "11-24", "≥ 25"]
+    key = "cnc_range"
+    score_key = f"{key}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
+
+    # Nur setzen, wenn noch nicht vorhanden
+    if key not in st.session_state:
+        st.session_state[key] = None
+    selected = st.radio(frage, options, index=options.index(st.session_state[key]) if st.session_state[key] in options else None, key=key)
+    if selected:
+        st.session_state[score_key] = categorize_cnc_machines(selected)
 
     # --- Automatisierungsgrad ---
-    render_radio(
-        "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?",
-        ["0%", "1-25%", "26-49%", "≥ 50%"],
-        "automation_range",
-        categorize_automation_percentage
-    )
+    frage = "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?"
+    options = ["0%", "1-25%", "26-49%", "≥ 50%"]
+    key = "automation_range"
+    score_key = f"{key}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
+
+    if key not in st.session_state:
+        st.session_state[key] = None
+    selected = st.radio(frage, options, index=options.index(st.session_state[key]) if st.session_state[key] in options else None, key=key)
+    if selected:
+        st.session_state[score_key] = categorize_automation_percentage(selected)
 
     # --- Losgröße ---
-    render_radio(
-        "Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?",
-        ["< 5", "5-50", "51-99", "≥ 100"],
-        "losgroesse_range",
-        categorize_losgroesse
-    )
+    frage = "Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?"
+    options = ["< 5", "5-50", "51-99", "≥ 100"]
+    key = "losgroesse_range"
+    score_key = f"{key}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
+
+    if key not in st.session_state:
+        st.session_state[key] = None
+    selected = st.radio(frage, options, index=options.index(st.session_state[key]) if st.session_state[key] in options else None, key=key)
+    if selected:
+        st.session_state[score_key] = categorize_losgroesse(selected)
 
     # --- Durchlaufzeit ---
-    render_radio(
-        "Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?",
-        ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"],
-        "durchlaufzeit_range",
-        categorize_durchlaufzeit
-    )
+    frage = "Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?"
+    options = ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"]
+    key = "durchlaufzeit_range"
+    score_key = f"{key}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
+
+    if key not in st.session_state:
+        st.session_state[key] = None
+    selected = st.radio(frage, options, index=options.index(st.session_state[key]) if st.session_state[key] in options else None, key=key)
+    if selected:
+        st.session_state[score_key] = categorize_durchlaufzeit(selected)
 
     # --- Laufzeit ---
-    render_radio(
-        "Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?",
-        ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"],
-        "laufzeit_range",
-        categorize_laufzeit
-    )
+    frage = "Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?"
+    options = ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"]
+    key = "laufzeit_range"
+    score_key = f"{key}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
+
+    if key not in st.session_state:
+        st.session_state[key] = None
+    selected = st.radio(frage, options, index=options.index(st.session_state[key]) if st.session_state[key] in options else None, key=key)
+    if selected:
+        st.session_state[score_key] = categorize_laufzeit(selected)
 
     # -----------------------------------
     st.subheader("Personen- und unternehmensbezogene Angaben")
 
-    st.radio(
-        "In welcher Funktion sind Sie in Ihrem Unternehmen tätig?",
-        [
-            "Geschäftsführer",
-            "Produktions-/ Fertigungsleitung",
-            "Arbeitsvorbereitung",
-            "Teamleitung",
-            "Planungsabteilung (IE, Lean etc.)",
-            "Weitere"
-        ],
-        index=(
-            ["funktion_radio_input"] if "funktion_radio_input" in st.session_state else None
-        ),
-        key="funktion_radio_input"
-    )
-
+    st.text_input("Für welche Branche fertigen Sie?", key="branche_input")
     st.radio(
         "Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
         ["1-9", "10-49", "50-199", "200-499", "500-1999", "≥2000"],
-        index=(
-            ["mitarbeitende_radio_input"] if "mitarbeitende_radio_input" in st.session_state else None
-        ),
+        index=None,
         key="mitarbeitende_radio_input"
     )
-
-    st.text_input("Für welche Branche fertigen Sie?", key="branche_input")
+    st.radio(
+        "In welcher Funktion sind Sie in Ihrem Unternehmen tätig?",
+        ["Geschäftsführer", "Produktions-/ Fertigungsleitung", "Arbeitsvorbereitung", "Teamleitung", "Planungsabteilung (IE, Lean etc.)", "Weitere"],
+        index=None,
+        key="funktion_radio_input"
+    )
     st.text_input("PLZ (optional)", key="plz_input")
     st.text_input("E-Mail (optional)", key="email_input")
 
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
-
+    
 # Inhalt Auswertungs-Tab
 
 elif current_tab == "Auswertung":
