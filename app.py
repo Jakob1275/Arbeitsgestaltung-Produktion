@@ -904,30 +904,18 @@ elif current_tab in mtok_structure:
 # Inahlt Abschließende Fragen-Tab
 
 elif current_tab == "Abschließende Fragen":
-    
     st.subheader("Spezifische technische und prozessuale Angaben")
 
    # CNC-Maschinen
     cnc_options = ["< 5", "5-10", "11-24", "≥ 25"]
     cnc_key = "cnc_range"
-    default_cnc = st.session_state.get(cnc_key)
-    
-    # Vorauswahl korrekt setzen (nur wenn bereits ein Wert gespeichert ist)
-    if default_cnc in cnc_options:
-        index_cnc = cnc_options.index(default_cnc)
-    else:
-        index_cnc = None  # nichts vorausgewählt
-
-    selected_cnc_range = st.radio(
+    st.session_state[cnc_key] = st.radio(
         "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
         cnc_options,
-        key=cnc_key,
-        index=index_cnc
+        index=cnc_options.index(st.session_state[cnc_key]) if cnc_key in st.session_state and st.session_state[cnc_key] in cnc_options else None,
+        key=cnc_key
     )
-
-# Kategorisierung aktualisieren
-if selected_cnc_range:
-    st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc_range)
+    st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(st.session_state[cnc_key])
    
     # Automatisierungsgrad
     automation_percentage_options = ["0%", "1-25%", "26-49%", "≥ 50%"]
