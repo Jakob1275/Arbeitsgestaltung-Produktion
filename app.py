@@ -60,6 +60,38 @@ st.markdown("""
         .element-container:has([data-baseweb="radio"]) {
             margin-bottom: -5px !important;
         }
+        .evaluation-section {
+            margin-bottom: 2.2rem;
+        }
+
+        .evaluation-question {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 0.4rem;
+            color: #222;
+        }
+
+        .evaluation-container {
+            padding: 1rem 1.5rem;
+            background-color: #f9f9f9;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
+        }
+
+        .evaluation-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: #333;
+        }
+
+        .evaluation-info {
+            font-size: 16px;
+            color: #444;
+            margin-bottom: 1rem;
+        }
     </style>
 """, unsafe_allow_html=True)
 
@@ -1185,55 +1217,45 @@ elif current_tab == "Auswertung":
             )
             
 if current_tab == "Evaluation":
-    st.markdown("""
-        <div class="evaluation-label">
-            Vielen Dank für die Bearbeitung des entwickelten Modells.  
-            Um die Qualität weiter zu verbessern, bitten wir Sie um eine kurze Bewertung.
-        </div>
-    """, unsafe_allow_html=True)
+    st.markdown("<div class='evaluation-info'>Vielen Dank für die Bearbeitung des entwickelten Modells. Um die Qualität weiter zu verbessern, bitten wir Sie um eine kurze Bewertung.</div>", unsafe_allow_html=True)
 
     options = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
 
     def frage(text, key):
-        st.markdown(f"<div class='evaluation-label'>{text}</div>", unsafe_allow_html=True)
-        return st.radio("", options, key=key, horizontal=True)
+        st.markdown(f"<div class='evaluation-container'><div class='evaluation-question'>{text}</div>", unsafe_allow_html=True)
+        st.radio("", options, key=key, horizontal=True)
+        st.markdown("</div>", unsafe_allow_html=True)
 
-    # 1. Verständlichkeit und Transparenz
-    st.subheader("1. Verständlichkeit und Transparenz des Modells")
-    frage("Die **Struktur** des Modells war für mich durchgängig nachvollziehbar.", "verstaendlichkeit_struktur")
-    frage("Die verwendeten **Begriffe und Formulierungen** in den Bewertungskriterien waren klar verständlich.", "verstaendlichkeit_begriffe")
-    frage("Die **Erklärungen zu Handlungsfeldern und Bewertungsskalen** waren verständlich und hilfreich.", "verstaendlichkeit_erklaerungen")
-    frage("Die **Clusterzuordnung** war für mich nachvollziehbar.", "verstaendlichkeit_clusterlogik")
-    frage("Die **grafische Darstellung** der Ergebnisse war verständlich.", "verstaendlichkeit_visualisierung")
+    st.markdown("<div class='evaluation-title'>1. Verständlichkeit und Transparenz des Modells</div>", unsafe_allow_html=True)
+    frage("Die <strong>Struktur</strong> des Modells war für mich durchgängig nachvollziehbar.", "verstaendlichkeit_struktur")
+    frage("Die verwendeten <strong>Begriffe und Formulierungen</strong> in den Bewertungskriterien waren klar verständlich.", "verstaendlichkeit_begriffe")
+    frage("Die <strong>Erklärungen zu Handlungsfeldern und Bewertungsskalen</strong> waren verständlich und hilfreich.", "verstaendlichkeit_erklaerungen")
+    frage("Die <strong>Clusterzuordnung</strong> war für mich nachvollziehbar.", "verstaendlichkeit_clusterlogik")
+    frage("Die <strong>grafische Darstellung</strong> der Ergebnisse war verständlich.", "verstaendlichkeit_visualisierung")
 
-    # 2. Relevanz und betriebliche Passung
-    st.subheader("2. Relevanz und betriebliche Passung")
-    frage("Die im Modell adressierten **Themenfelder** sind für unser Unternehmen relevant.", "relevanz_handlungsfelder")
-    frage("Die **Bewertungskriterien** spiegeln praxisrelevante Herausforderungen in der Produktion wider.", "relevanz_kriterien")
-    frage("Die im Modell hinterlegten **Handlungsempfehlungen** lassen sich auf unseren betrieblichen Alltag übertragen.", "relevanz_empfehlungen")
-    frage("Die **Clusterprofile** bilden typische Ausgangslagen in der industriellen Produktion realistisch ab.", "relevanz_clusterprofile")
-    frage("Die **Branchenspezifika der zerspanenden Fertigung** wurden im Modell angemessen berücksichtigt.", "relevanz_zerspanung")
+    st.markdown("<div class='evaluation-title'>2. Relevanz und betriebliche Passung</div>", unsafe_allow_html=True)
+    frage("Die im Modell adressierten <strong>Themenfelder</strong> sind für unser Unternehmen relevant.", "relevanz_handlungsfelder")
+    frage("Die <strong>Bewertungskriterien</strong> spiegeln praxisrelevante Herausforderungen in der Produktion wider.", "relevanz_kriterien")
+    frage("Die im Modell hinterlegten <strong>Handlungsempfehlungen</strong> lassen sich auf unseren betrieblichen Alltag übertragen.", "relevanz_empfehlungen")
+    frage("Die <strong>Clusterprofile</strong> bilden typische Ausgangslagen in der industriellen Produktion realistisch ab.", "relevanz_clusterprofile")
+    frage("Die <strong>Branchenspezifika der zerspanenden Fertigung</strong> wurden im Modell angemessen berücksichtigt.", "relevanz_zerspanung")
 
-    # 3. Anwendbarkeit und Nutzen
-    st.subheader("3. Anwendbarkeit und betrieblicher Nutzen")
-    frage("Das Modell eignet sich als **Instrument zur Systematisierung flexibler Arbeit**.", "anwendbarkeit_modell")
-    frage("Mit Hilfe des Modells lassen sich **konkrete betriebliche Entwicklungsmaßnahmen** ableiten.", "anwendbarkeit_entwicklung")
-    frage("Die Umsetzung als **digitales Tool** war funktional und benutzerfreundlich.", "anwendbarkeit_tool")
-    frage("Das Modell unterstützt eine **strukturierte Selbstbewertung und Reflexion** im Unternehmen.", "anwendbarkeit_reflexion")
+    st.markdown("<div class='evaluation-title'>3. Anwendbarkeit und betrieblicher Nutzen</div>", unsafe_allow_html=True)
+    frage("Das Modell eignet sich als <strong>Instrument zur Systematisierung flexibler Arbeit</strong>.", "anwendbarkeit_modell")
+    frage("Mit Hilfe des Modells lassen sich <strong>konkrete betriebliche Entwicklungsmaßnahmen</strong> ableiten.", "anwendbarkeit_entwicklung")
+    frage("Die Umsetzung als <strong>digitales Tool</strong> war funktional und benutzerfreundlich.", "anwendbarkeit_tool")
+    frage("Das Modell unterstützt eine <strong>strukturierte Selbstbewertung und Reflexion</strong> im Unternehmen.", "anwendbarkeit_reflexion")
 
-    # 4. Vollständigkeit und Tiefe
-    st.subheader("4. Vollständigkeit und konzeptionelle Tiefe")
-    frage("Das Modell berücksichtigt die **zentralen Erfolgsfaktoren flexibler Arbeit** systematisch.", "tiefe_erfolgsfaktoren")
-    frage("Die **inhaltliche Tiefe und Differenzierung** der Bewertungskriterien war angemessen.", "tiefe_kriterien")
+    st.markdown("<div class='evaluation-title'>4. Vollständigkeit und konzeptionelle Tiefe</div>", unsafe_allow_html=True)
+    frage("Das Modell berücksichtigt die <strong>zentralen Erfolgsfaktoren flexibler Arbeit</strong> systematisch.", "tiefe_erfolgsfaktoren")
+    frage("Die <strong>inhaltliche Tiefe und Differenzierung</strong> der Bewertungskriterien war angemessen.", "tiefe_kriterien")
 
-    # 5. Gesamturteil und Weiterempfehlung
-    st.subheader("5. Gesamturteil und Weiterempfehlung")
-    frage("Das Modell ist insgesamt **logisch aufgebaut und stimmig** konzipiert.", "gesamt_stimmigkeit")
-    frage("Ich würde das Modell **anderen Unternehmen oder Kolleg:innen weiterempfehlen**.", "gesamt_empfehlung")
-    frage("Der **erwartete Nutzen** des Modells überwiegt den Aufwand der Anwendung.", "gesamt_nutzen_aufwand")
+    st.markdown("<div class='evaluation-title'>5. Gesamturteil und Weiterempfehlung</div>", unsafe_allow_html=True)
+    frage("Das Modell ist insgesamt <strong>logisch aufgebaut und stimmig</strong> konzipiert.", "gesamt_stimmigkeit")
+    frage("Ich würde das Modell <strong>anderen Unternehmen oder Kolleg:innen weiterempfehlen</strong>.", "gesamt_empfehlung")
+    frage("Der <strong>erwartete Nutzen</strong> des Modells überwiegt den Aufwand der Anwendung.", "gesamt_nutzen_aufwand")
 
-    # 6. Freitext
-    st.subheader("6. Offene Rückmeldung")
+    st.markdown("<div class='evaluation-title'>6. Offene Rückmeldung</div>", unsafe_allow_html=True)
     st.text_area("Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik zum Modell?", key="evaluation_feedback_text")
     
     # Funktion zur sicheren Konvertierung von Werten
