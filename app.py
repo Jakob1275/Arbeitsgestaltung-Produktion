@@ -909,15 +909,25 @@ elif current_tab == "Abschließende Fragen":
 
    # CNC-Maschinen
     cnc_options = ["< 5", "5-10", "11-24", "≥ 25"]
-    default_cnc = st.session_state.get("cnc_range", None)
+    cnc_key = "cnc_range"
+    default_cnc = st.session_state.get(cnc_key)
+    
+    # Vorauswahl korrekt setzen (nur wenn bereits ein Wert gespeichert ist)
+    if default_cnc in cnc_options:
+        index_cnc = cnc_options.index(default_cnc)
+    else:
+        index_cnc = None  # nichts vorausgewählt
+
     selected_cnc_range = st.radio(
         "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
         cnc_options,
-        index=cnc_options.index(default_cnc) if default_cnc in cnc_options else None,
-        key="cnc_range"
+        key=cnc_key,
+        index=index_cnc
     )
-    if selected_cnc_range:
-        st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc_range)
+
+# Kategorisierung aktualisieren
+if selected_cnc_range:
+    st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc_range)
    
     # Automatisierungsgrad
     automation_percentage_options = ["0%", "1-25%", "26-49%", "≥ 50%"]
