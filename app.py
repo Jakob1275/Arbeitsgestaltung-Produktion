@@ -43,6 +43,26 @@ def get_worksheet():
 # worksheet global verwenden
 worksheet = get_worksheet()
 
+st.markdown("""
+    <style>
+        /* Grundlegende Schriftgröße und Zeilenhöhe */
+        html, body, [class*="css"]  {
+            font-size: 18px !important;
+            line-height: 1.6;
+        }
+
+        /* Reduziere Abstand unter Radio-Buttons */
+        div[data-baseweb="radio"] {
+            margin-bottom: -10px !important;
+        }
+
+        /* Reduziere Abstand unter Text (Hilfstext) vor dem Radio */
+        .element-container:has([data-baseweb="radio"]) {
+            margin-bottom: -5px !important;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Struktur der Anwendung
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
@@ -794,7 +814,7 @@ elif current_tab in mtok_structure:
             begruendung = item["begründung"]
 
             st.markdown(f"""
-                <div style='margin-bottom: -0.2rem'; front-size:1.3em'>
+                <div style='margin-bottom: -0.2rem'>
                     <strong>{frage_text}</strong><br>
                     <span style='color:gray; font-size:0.95em'>{begruendung}</span>
                 </div>
