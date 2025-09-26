@@ -1217,93 +1217,105 @@ elif current_tab == "Auswertung":
             )
             
 if current_tab == "Evaluation":
-    st.markdown("<div class='evaluation-info'>Vielen Dank für die Bearbeitung des entwickelten Modells. Um die Qualität weiter zu verbessern, bitten wir Sie um eine kurze Bewertung.</div>", unsafe_allow_html=True)
 
+    # Einführungstext
+    st.markdown("""
+        <div style='font-size: 1.1rem; margin-bottom: 1rem;'>
+            Vielen Dank für die Bearbeitung des entwickelten Modells.  
+            Um die Qualität weiter zu verbessern, bitten wir Sie um eine kurze Bewertung.
+        </div>
+    """, unsafe_allow_html=True)
+
+    # Bewertungsoptionen
     options = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
 
-    def frage(text, key):
-        st.markdown(f"<div class='evaluation-container'><div class='evaluation-question'>{text}</div>", unsafe_allow_html=True)
-        st.radio("", options, key=key, horizontal=True)
-        st.markdown("</div>", unsafe_allow_html=True)
+    # Funktion zur Anzeige einer Frage (wie bei den Handlungsfeldern)
+    def zeige_fragen(titel, fragen_liste, prefix):
+        st.subheader(titel)
+        for idx, frage in enumerate(fragen_liste):
+            radio_key = f"{prefix}_{idx}"
 
-    st.markdown("<div class='evaluation-title'>1. Verständlichkeit und Transparenz des Modells</div>", unsafe_allow_html=True)
-    frage("Die <strong>Struktur</strong> des Modells war für mich durchgängig nachvollziehbar.", "verstaendlichkeit_struktur")
-    frage("Die verwendeten <strong>Begriffe und Formulierungen</strong> in den Bewertungskriterien waren klar verständlich.", "verstaendlichkeit_begriffe")
-    frage("Die <strong>Erklärungen zu Handlungsfeldern und Bewertungsskalen</strong> waren verständlich und hilfreich.", "verstaendlichkeit_erklaerungen")
-    frage("Die <strong>Clusterzuordnung</strong> war für mich nachvollziehbar.", "verstaendlichkeit_clusterlogik")
-    frage("Die <strong>grafische Darstellung</strong> der Ergebnisse war verständlich.", "verstaendlichkeit_visualisierung")
+            st.markdown(f"""
+                <div style='margin-bottom: -0.2rem; margin-top: 0.7rem'>
+                    <strong>{frage}</strong>
+                </div>
+            """, unsafe_allow_html=True)
 
-    st.markdown("<div class='evaluation-title'>2. Relevanz und betriebliche Passung</div>", unsafe_allow_html=True)
-    frage("Die im Modell adressierten <strong>Themenfelder</strong> sind für unser Unternehmen relevant.", "relevanz_handlungsfelder")
-    frage("Die <strong>Bewertungskriterien</strong> spiegeln praxisrelevante Herausforderungen in der Produktion wider.", "relevanz_kriterien")
-    frage("Die im Modell hinterlegten <strong>Handlungsempfehlungen</strong> lassen sich auf unseren betrieblichen Alltag übertragen.", "relevanz_empfehlungen")
-    frage("Die <strong>Clusterprofile</strong> bilden typische Ausgangslagen in der industriellen Produktion realistisch ab.", "relevanz_clusterprofile")
-    frage("Die <strong>Branchenspezifika der zerspanenden Fertigung</strong> wurden im Modell angemessen berücksichtigt.", "relevanz_zerspanung")
+            score = st.radio(
+                label="",
+                options=options,
+                key=radio_key,
+                horizontal=True,
+                index=0
+            )
 
-    st.markdown("<div class='evaluation-title'>3. Anwendbarkeit und betrieblicher Nutzen</div>", unsafe_allow_html=True)
-    frage("Das Modell eignet sich als <strong>Instrument zur Systematisierung flexibler Arbeit</strong>.", "anwendbarkeit_modell")
-    frage("Mit Hilfe des Modells lassen sich <strong>konkrete betriebliche Entwicklungsmaßnahmen</strong> ableiten.", "anwendbarkeit_entwicklung")
-    frage("Die Umsetzung als <strong>digitales Tool</strong> war funktional und benutzerfreundlich.", "anwendbarkeit_tool")
-    frage("Das Modell unterstützt eine <strong>strukturierte Selbstbewertung und Reflexion</strong> im Unternehmen.", "anwendbarkeit_reflexion")
+            st.session_state[radio_key + "_score"] = score
 
-    st.markdown("<div class='evaluation-title'>4. Vollständigkeit und konzeptionelle Tiefe</div>", unsafe_allow_html=True)
-    frage("Das Modell berücksichtigt die <strong>zentralen Erfolgsfaktoren flexibler Arbeit</strong> systematisch.", "tiefe_erfolgsfaktoren")
-    frage("Die <strong>inhaltliche Tiefe und Differenzierung</strong> der Bewertungskriterien war angemessen.", "tiefe_kriterien")
+    # Bereich 1 – Verständlichkeit
+    fragen_1 = [
+        "Die Struktur des Modells war für mich durchgängig nachvollziehbar.",
+        "Die verwendeten Begriffe und Formulierungen in den Bewertungskriterien waren klar verständlich.",
+        "Die Erklärungen zu Handlungsfeldern und Bewertungsskalen waren verständlich und hilfreich.",
+        "Die Clusterzuordnung war für mich nachvollziehbar.",
+        "Die grafische Darstellung der Ergebnisse war verständlich."
+    ]
+    zeige_fragen("1. Verständlichkeit und Transparenz des Modells", fragen_1, "eval1")
 
-    st.markdown("<div class='evaluation-title'>5. Gesamturteil und Weiterempfehlung</div>", unsafe_allow_html=True)
-    frage("Das Modell ist insgesamt <strong>logisch aufgebaut und stimmig</strong> konzipiert.", "gesamt_stimmigkeit")
-    frage("Ich würde das Modell <strong>anderen Unternehmen oder Kolleg:innen weiterempfehlen</strong>.", "gesamt_empfehlung")
-    frage("Der <strong>erwartete Nutzen</strong> des Modells überwiegt den Aufwand der Anwendung.", "gesamt_nutzen_aufwand")
+    # Bereich 2 – Relevanz
+    fragen_2 = [
+        "Die im Modell adressierten Themenfelder sind für unser Unternehmen relevant.",
+        "Die Bewertungskriterien spiegeln praxisrelevante Herausforderungen in der Produktion wider.",
+        "Die im Modell hinterlegten Handlungsempfehlungen lassen sich auf unseren betrieblichen Alltag übertragen.",
+        "Die Clusterprofile bilden typische Ausgangslagen in der industriellen Produktion realistisch ab.",
+        "Die Branchenspezifika der zerspanenden Fertigung wurden im Modell angemessen berücksichtigt."
+    ]
+    zeige_fragen("2. Relevanz und betriebliche Passung", fragen_2, "eval2")
 
-    st.markdown("<div class='evaluation-title'>6. Offene Rückmeldung</div>", unsafe_allow_html=True)
-    st.text_area("Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik zum Modell?", key="evaluation_feedback_text")
-    
-    # Funktion zur sicheren Konvertierung von Werten
-    def safe_value(val):
-        try:
-            if isinstance(val, float) and np.isnan(val):
-                return ""
-            return str(val)
-        except Exception:
-            return ""
+    # Bereich 3 – Anwendbarkeit
+    fragen_3 = [
+        "Das Modell eignet sich als Instrument zur Systematisierung flexibler Arbeit.",
+        "Mit Hilfe des Modells lassen sich konkrete betriebliche Entwicklungsmaßnahmen ableiten.",
+        "Die Umsetzung als digitales Tool war funktional und benutzerfreundlich.",
+        "Das Modell unterstützt eine strukturierte Selbstbewertung und Reflexion im Unternehmen."
+    ]
+    zeige_fragen("3. Anwendbarkeit und betrieblicher Nutzen", fragen_3, "eval3")
 
-    # Absenden-Button
+    # Bereich 4 – Tiefe
+    fragen_4 = [
+        "Das Modell berücksichtigt die zentralen Erfolgsfaktoren flexibler Arbeit systematisch.",
+        "Die inhaltliche Tiefe und Differenzierung der Bewertungskriterien war angemessen."
+    ]
+    zeige_fragen("4. Vollständigkeit und konzeptionelle Tiefe", fragen_4, "eval4")
+
+    # Bereich 5 – Gesamturteil
+    fragen_5 = [
+        "Das Modell ist insgesamt logisch aufgebaut und stimmig konzipiert.",
+        "Ich würde das Modell anderen Unternehmen oder Kolleg:innen weiterempfehlen.",
+        "Der erwartete Nutzen des Modells überwiegt den Aufwand der Anwendung."
+    ]
+    zeige_fragen("5. Gesamturteil und Weiterempfehlung", fragen_5, "eval5")
+
+    # Bereich 6 – Freitext
+    st.subheader("6. Offene Rückmeldung")
+    st.text_area(
+        "Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik zum Modell?",
+        key="evaluation_feedback_text"
+    )
+
+    # Speichern der Ergebnisse 
     if st.button("Absenden und speichern"):
+        evaluation_data = {}
 
-        # 1. Evaluation sammeln – aktualisierte Struktur mit eindeutigen Keys
-        evaluation_data = {
-            # Verständlichkeit und Transparenz
-            "Struktur nachvollziehbar": st.session_state.get("verstaendlichkeit_struktur", ""),
-            "Begriffe verständlich": st.session_state.get("verstaendlichkeit_begriffe", ""),
-            "Erklärungen verständlich": st.session_state.get("verstaendlichkeit_erklaerungen", ""),
-            "Logik Clusterzuordnung nachvollziehbar": st.session_state.get("verstaendlichkeit_clusterlogik", ""),
-            "Grafik verständlich": st.session_state.get("verstaendlichkeit_visualisierung", ""),
-    
-            # Relevanz und betriebliche Passung
-            "Relevanz Handlungsfelder": st.session_state.get("relevanz_handlungsfelder", ""),
-            "Relevanz Bewertungskriterien": st.session_state.get("relevanz_kriterien", ""),
-            "Übertragbarkeit Empfehlungen": st.session_state.get("relevanz_empfehlungen", ""),
-            "Realitätsnähe Clusterprofile": st.session_state.get("relevanz_clusterprofile", ""),
-            "Berücksichtigung Zerspanung": st.session_state.get("relevanz_zerspanung", ""),
-    
-            # Anwendbarkeit und Nutzen
-            "Anwendbarkeit Modell": st.session_state.get("anwendbarkeit_modell", ""),
-            "Ableitung von Maßnahmen": st.session_state.get("anwendbarkeit_entwicklung", ""),
-            "Benutzerfreundlichkeit Tool": st.session_state.get("anwendbarkeit_tool", ""),
-            "Reflexion unterstützt": st.session_state.get("anwendbarkeit_reflexion", ""),
-    
-            # Vollständigkeit und Tiefe
-            "Erfolgsfaktoren abgedeckt": st.session_state.get("tiefe_erfolgsfaktoren", ""),
-            "Inhaltliche Tiefe angemessen": st.session_state.get("tiefe_kriterien", ""),
-    
-            # Gesamturteil
-            "Gesamtaufbau stimmig": st.session_state.get("gesamt_stimmigkeit", ""),
-            "Weiterempfehlung wahrscheinlich": st.session_state.get("gesamt_empfehlung", ""),
-            "Nutzen überwiegt Aufwand": st.session_state.get("gesamt_nutzen_aufwand", ""),
-    
-            # Freitext
-            "Feedback": st.session_state.get("evaluation_feedback_text", "")
-        }
+        # Fragen durchgehen und speichern
+        for i in range(1, 6):
+            fragen_count = len(eval(f"fragen_{i}"))
+            for j in range(fragen_count):
+                key = f"eval{i}_{j}"
+                evaluation_data[key] = st.session_state.get(f"{key}_score", "")
+
+        evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
+        st.success("Vielen Dank für Ihre Rückmeldung!")
+        st.write("Ihre Antworten (Debug):", evaluation_data)
 
     # 2. MTOK-Werte
         mtok_werte = st.session_state.get("ergebnisse", {})
