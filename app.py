@@ -45,19 +45,25 @@ worksheet = get_worksheet()
 
 st.markdown("""
     <style>
-        /* Grundlegende Schriftgröße für die gesamte App */
+        /* Grundlegende Schriftgröße und Zeilenhöhe */
         html, body, [class*="css"]  {
             font-size: 18px !important;
             line-height: 1.6;
         }
-        /* Entfernt unteren Abstand nach jedem Radio-Block */
+
+        /* Reduziere Abstand unter Radio-Buttons */
         div[data-baseweb="radio"] {
-            margin-bottom: -10px;
+            margin-bottom: -10px !important;
         }
 
-        /* Optional: Zeilenabstand beim Text anpassen */
-        .element-container > div > div > div > p {
-            margin-bottom: 0.3em;
+        /* Reduziere Abstand unter Text (Hilfstext) vor dem Radio */
+        .element-container:has([data-baseweb="radio"]) {
+            margin-bottom: -5px !important;
+        }
+
+        /* Alternativ oder zusätzlich: Container ohne extra Bottom-Margin */
+        .stRadio {
+            margin-bottom: -10px !important;
         }
     </style>
 """, unsafe_allow_html=True)
