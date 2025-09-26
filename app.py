@@ -1349,12 +1349,12 @@ if current_tab == "Evaluation":
                 key = f"eval{i}_{j}"
                 antwort = st.session_state.get(f"{key}_score", "")
                 zahlwert = bewertung_in_zahl(antwort)
-                evaluation_data[key] = bewertung_in_zahl(antwort)
+                evaluation_data[key] = safe_value(zahlwert)
 
         # 2. Freitextfeld
         evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
 
-        # 3. MTOK-Werte auslesen – garantiert vollständig und float-bereinigt
+        # 3. MTOK-Werte auslesen 
         mtok_keys = [
             "Produktivität und Motivation",
             "Persönliches Umfeld",
@@ -1377,19 +1377,17 @@ if current_tab == "Evaluation":
             else:
                 mtok_werte[key] = 99999.0  # wenn leer, Text, None etc.
 
-        # 4. Cluster-Zuordnung berechnen
+        # 4. Cluster-Zuordnung
         bewertete = zaehle_bewertete_clustervariablen(mtok_werte)
-        cluster_result = berechne_clusterzuordnung(Kriterien)
 
-        if isinstance(cluster_result, tuple) and len(cluster_result) == 2 and isinstance(cluster_result[1], dict) and bewertete >= 7:
-            bestes_cluster, abweichungen = cluster_result
+        if isinstance(cluster_result, str) and isinstance(abweichungen_detail, dict) and bewertete >= 7:
             cluster_scores = {
-                "Zugeordnetes Cluster": bestes_cluster,
-                **{f"Abweichung {k}": v for k, v in abweichungen.items()}
+                "Zugeordnetes Cluster": cluster_result,
+                **{f"Abweichung {k}": v for k, v in abweichungen_detail.items()}
             }
         else:
             cluster_scores = {
-                "Zugeordnetes Cluster": "Bitte bewerten Sie mindestens 7 relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {} bewertet.".format(bewertete),
+                "Zugeordnetes Cluster": f"Bitte bewerten Sie mindestens 7 relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {bewertete} bewertet.",
                 "Abweichung 1": 99999,
                 "Abweichung 2": 99999,
                 "Abweichung 3": 99999,
