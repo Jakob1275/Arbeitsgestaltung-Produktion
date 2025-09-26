@@ -742,10 +742,10 @@ if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
 
 # CNC-Maschinen (feste Kategorien via st.radio)
-if "cnc_range" not in st.session_state:
-    st.session_state.cnc_range = None
-if "anzahl_cnc_werkzeugmaschinen_categorized" not in st.session_state:
-    st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(st.session_state.cnc_range)
+#if "cnc_range" not in st.session_state:
+ #   st.session_state.cnc_range = None
+#if "anzahl_cnc_werkzeugmaschinen_categorized" not in st.session_state:
+ #   st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(st.session_state.cnc_range)
 
 if "automation_range" not in st.session_state:
     st.session_state.automation_range = None
@@ -914,7 +914,8 @@ elif current_tab == "Abschließende Fragen":
         cnc_options,
         key="cnc_range"
     )
-    st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc_range)
+    if selected_cnc_range:
+        st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc_range)
    
     # Automatisierungsgrad
     automation_percentage_options = ["0%", "1-25%", "26-49%", "≥ 50%"]
