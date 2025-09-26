@@ -43,6 +43,16 @@ def get_worksheet():
 # worksheet global verwenden
 worksheet = get_worksheet()
 
+st.markdown("""
+    <style>
+        /* Grundlegende Schriftgröße für die gesamte App */
+        html, body, [class*="css"]  {
+            font-size: 18px !important;
+            line-height: 1.6;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
 # Struktur der Anwendung
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
@@ -1164,9 +1174,7 @@ elif current_tab == "Auswertung":
 
 if current_tab == "Evaluation":
     st.markdown("""
-    ## Evaluation des Modells
-
-    Vielen Dank für die Bearbeitung des entwickelten Modells.  
+        Vielen Dank für die Bearbeitung des entwickelten Modells.  
     Um die Qualität weiter zu verbessern, bitten wir Sie um eine kurze Bewertung.
     """)
 
