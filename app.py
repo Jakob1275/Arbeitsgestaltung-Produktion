@@ -1229,14 +1229,14 @@ if current_tab == "Evaluation":
     # Bewertungsoptionen
     options = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
 
-    # Hilfsfunktion zur sicheren Umwandlung von Werten
+    # Hilfsfunktion zur sicheren Umwandlung von Werten (mit Platzhalter für leere Werte)
     def safe_value(val):
         try:
-            if isinstance(val, float) and np.isnan(val):
-                return ""
+            if val in [None, ""] or (isinstance(val, float) and np.isnan(val)):
+                return "99999"
             return str(val)
         except Exception:
-            return ""
+            return "99999"
 
     # Funktion zur Anzeige einer Frage (wie bei den Handlungsfeldern)
     def zeige_fragen(titel, fragen_liste, prefix):
