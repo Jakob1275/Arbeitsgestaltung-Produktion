@@ -1379,17 +1379,21 @@ if current_tab == "Evaluation":
         # Zeitstempel hinzufügen
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
-        # 6. In Google Sheet speichern
+                # 6. In Google Sheet speichern
         try:
-            bewertbare_werte = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
+            bewertbare_texte = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
 
-            final_row = []
-            for v in daten_gesamt.values():
-                if isinstance(v, str) and v in bewertbare_werte:
-                    final_row.append(bewertung_in_zahl(v))
-                else:
-                    final_row.append(safe_value(v))
+            def transform_wert(v):
+                # Textbewertung (z. B. „Hoch“) → Zahl
+                if isinstance(v, str) and v in bewertbare_texte:
+                    return bewertung_in_zahl(v)
+                # Zahl bleibt Zahl (inkl. float wie 1.0)
+                if isinstance(v, (int, float)):
+                    return v if not np.isnan(v) else 9999
+                # Sonst 9999 (z. B. leere Strings, None)
+                return 9999
 
+            final_row = [transform_wert(v) for v in daten_gesamt.values()]
             worksheet.append_row(final_row)
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
         except Exception as e:
