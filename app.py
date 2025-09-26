@@ -879,7 +879,17 @@ elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
     def radio_with_categorization(frage, options, key, categorize_func):
-        auswahl = st.radio(frage, options, key=key)
+        # Hole bisherigen Wert aus dem Session State
+        vorhandene_auswahl = st.session_state.get(key, None)
+    
+        try:
+            default_index = options.index(vorhandene_auswahl) if vorhandene_auswahl in options else 0
+        except ValueError:
+            default_index = 0
+
+        # Radio mit explizitem Index
+        auswahl = st.radio(frage, options, key=key, index=default_index)
+    
         if auswahl:
             st.session_state[f"{key}_score"] = categorize_func(auswahl)
 
