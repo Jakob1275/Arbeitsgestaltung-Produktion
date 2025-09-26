@@ -835,13 +835,13 @@ elif current_tab in mtok_structure:
 
             # Bewertungsauswahl anzeigen
             score = st.radio(
-                "Bitte bewerten:",
                 options,
                 horizontal=True,
                 key=radio_key,
                 index=default_index
-            )
+            ) #"Bitte bewerten:",
 
+            
             # Speichere Score separat (mit _score-Endung)
             if score is not None:
                 st.session_state[score_key] = score
