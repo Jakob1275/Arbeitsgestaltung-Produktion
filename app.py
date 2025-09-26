@@ -43,31 +43,6 @@ def get_worksheet():
 # worksheet global verwenden
 worksheet = get_worksheet()
 
-st.markdown("""
-    <style>
-        /* Grundlegende Schriftgröße und Zeilenhöhe */
-        html, body, [class*="css"]  {
-            font-size: 18px !important;
-            line-height: 1.6;
-        }
-
-        /* Reduziere Abstand unter Radio-Buttons */
-        div[data-baseweb="radio"] {
-            margin-bottom: -10px !important;
-        }
-
-        /* Reduziere Abstand unter Text (Hilfstext) vor dem Radio */
-        .element-container:has([data-baseweb="radio"]) {
-            margin-bottom: -5px !important;
-        }
-
-        /* Alternativ oder zusätzlich: Container ohne extra Bottom-Margin */
-        .stRadio {
-            margin-bottom: -10px !important;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
 # Struktur der Anwendung
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
