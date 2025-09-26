@@ -1322,19 +1322,21 @@ if current_tab == "Evaluation":
 
     # Hilfsfunktion zur sicheren Speicherung
     def safe_value(val):
-        try:
-            if val is None or (isinstance(val, float) and np.isnan(val)):
-                return 99999
-            if isinstance(val, str) and val.strip() == "":
-                return 99999
-            return val
-        except Exception:
+        if val is None:
             return 99999
+        if isinstance(val, float) and np.isnan(val):
+            return 99999
+        if isinstance(val, str):
+            if val.strip() == "":
+                return 99999
+            return val  # Freitext oder Cluster-Text erhalten
+        return val
 
-    # Funktion zum Zählen bewerteter Cluster-Variablen
-    def zaehle_bewertete_clustervariablen(daten):
-        werte = list(daten.values())[:9]
+      # Anzahl bewerteter MTOK-Felder zählen
+    def zaehle_bewertete_clustervariablen(mtok_daten):
+        werte = list(mtok_daten.values())[:9]  # Nur die 9 MTOK-Felder
         return sum(1 for v in werte if isinstance(v, (int, float)) and v > 0)
+
 
     # Absenden und speichern
     if st.button("Absenden und speichern"):
@@ -1355,12 +1357,8 @@ if current_tab == "Evaluation":
         mtok_werte = st.session_state.get("ergebnisse", {})
 
         # 4. Cluster-Zuordnung berechnen
-        cluster_result = berechne_clusterzuordnung(Kriterien)
-
-        daten_gesamt = {}
-        daten_gesamt.update(mtok_werte)
-
         bewertete = zaehle_bewertete_clustervariablen(mtok_werte)
+        cluster_result = berechne_clusterzuordnung(Kriterien)
 
         if isinstance(cluster_result, tuple) and len(cluster_result) == 2 and isinstance(cluster_result[1], dict) and bewertete >= 7:
             bestes_cluster, abweichungen = cluster_result
@@ -1377,18 +1375,15 @@ if current_tab == "Evaluation":
                 "Abweichung 4": 99999
             }
 
+        daten_gesamt = {}
+        daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
-
-        # Zeitstempel
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
         # Speichern in Google Sheet
         try:
-            daten_liste = []
-            for key, val in daten_gesamt.items():
-                daten_liste.append(safe_value(val))
-
+            daten_liste = [safe_value(v) for v in daten_gesamt.values()]
             worksheet.append_row(daten_liste)
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
         except Exception as e:
