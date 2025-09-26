@@ -1379,9 +1379,14 @@ if current_tab == "Evaluation":
             else:
                 mtok_werte[key] = 99999.0  # wenn leer, Text, None etc.
 
-        # 4. Cluster-Zuordnung
+        # 4. Cluster-Zuordnung (aus Session State laden, nicht neu berechnen)
+        cluster_result = st.session_state.get("cluster_result", None)
+        abweichungen_detail = st.session_state.get("abweichungen_detail", {})
+
+        # Anzahl bewerteter MTOK-Felder zählen
         bewertete = zaehle_bewertete_clustervariablen(mtok_werte)
 
+        # Bewertung und Cluster-Scores nur übernehmen, wenn valide
         if isinstance(cluster_result, str) and isinstance(abweichungen_detail, dict) and bewertete >= 7:
             cluster_scores = {
                 "Zugeordnetes Cluster": cluster_result,
