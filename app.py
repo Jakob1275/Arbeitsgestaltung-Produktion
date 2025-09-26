@@ -4,13 +4,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 import base64
 from io import BytesIO
-import textwrap  # wichtig für Zeilenumbruch
+import textwrap  
 import re
 import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 
-# Zugriff auf die Secrets (in secrets.toml oder Streamlit Cloud Secrets)
+#Google Sheet Verbindung
+
+# Zugriff Secrets mit Goofle Verbindungen
 #service_account_info = st.secrets["gcp_service_account"]
 
 # Authentifizierung mit aktuellem Scope
@@ -42,6 +44,7 @@ def get_worksheet():
 worksheet = get_worksheet()
 
 # Struktur der Anwendung
+
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 st.title("Modell zur Systematisierung flexibler Arbeit")
 st.markdown(
@@ -413,7 +416,8 @@ Kriterien = {
   ]
     }
 
-# --- Hilfsfunktionen ---
+# Hilfsfunktionen für Clustervariablen
+
 def categorize_cnc_machines(num_machines_raw):
     if num_machines_raw is None:
         return np.nan
@@ -465,14 +469,13 @@ def categorize_laufzeit(laufzeit_str):
 
 kriterien_item_to_cluster_variable_mapping = {
        
-    # 1. Automatisierungsgrad (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
-    # 2. Anzahl CNC-Werkzeugmaschinen (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
-    # 3. Losgröße (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
-    # 4. Durchlaufzeit (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
-    # 5. Laufzeit (Wert kommt direkt aus der "Abschließende Fragen" Sektion)
+    # 1. Automatisierungsgrad (Wert kommt direkt aus "Abschließende Fragen")
+    # 2. Anzahl CNC-Werkzeugmaschinen (Wert kommt direkt aus "Abschließende Fragen")
+    # 3. Losgröße (Wert kommt direkt aus "Abschließende Fragen")
+    # 4. Durchlaufzeit (Wert kommt direkt aus "Abschließende Fragen")
+    # 5. Laufzeit (Wert kommt direkt aus "Abschließende Fragen")
 
-    # Diese 5 Variablen werden direkt abgefragt und müssen hier NICHT gemappt werden.
-    # Ihre Werte werden in berechne_clusterzuordnung separat verarbeitet.
+    # Diese Variablen werden direkt abgefragt
 
     # 6. Digitalisierungsgrad
     "Digitalisierungsgrad": [
@@ -515,8 +518,7 @@ kriterien_item_to_cluster_variable_mapping = {
     ],
     
     # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
-    # HINWEIS: Bei der Berechnung dieser Variablen wird der Score der zugewiesenen Fragen INVERTIERT,
-    # da ein HOHEr Score in der Frage ("können mitgestalten") einen NIEDRIGEN "Aufwand Zeit" für das Cluster bedeutet.
+    # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
         "M2.2 Beschäftigte stehen zeitflexibler Arbeit offen gegenüber.",
         "O1.1 Informationen für Planung, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
@@ -527,8 +529,7 @@ kriterien_item_to_cluster_variable_mapping = {
     ],
     
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
-    # HINWEIS: Bei der Berechnung dieser Variablen wird der Score der zugewiesenen Fragen INVERTIERT,
-    # da ein HOHEr Score in der Frage ("Arbeitsumgebung ermöglicht") einen NIEDRIGEN "Aufwand Mobil" für das Cluster bedeutet.
+    # HINWEIS: Wird auch invertiert (Siehe Aufwand Zeit)
     "Aufwand Mobil": [
         "M1.8 Die Arbeitsumgebung ermöglicht ein produktives Arbeiten außerhalb der Fertigung.",
         "M2.1 Beschäftigte stehen mobiler Arbeit aufgeschlossen gegenüber.",
@@ -542,9 +543,7 @@ kriterien_item_to_cluster_variable_mapping = {
     ]
 }
 
-
 # Clusterprofile aus empirischer Clustertabelle
-# Die 'Variable' Namen aus der Tabelle des Nutzers sind hier die Keys
 cluster_item_values = {
     "Cluster 1 – Traditionell und reaktiv": {
         "Automatisierungsgrad": 2,
@@ -553,18 +552,18 @@ cluster_item_values = {
         "Durchlaufzeit": 2,
         "Laufzeit": 2,
         "Digitalisierungsgrad": 2,
-        "Prozessinstabilität": 3, # Hohe Instabilität
+        "Prozessinstabilität": 3, 
         "Nutzen": 2,
         "Akzeptanz": 2,
-        "Aufwand Zeit": 3, # Hoher Aufwand (im Clusterprofil)
-        "Aufwand Mobil": 4 # Hoher Aufwand (im Clusterprofil)
+        "Aufwand Zeit": 3, 
+        "Aufwand Mobil": 4 
     },
     "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
         "Automatisierungsgrad": 3,
         "Anzahl CNC-Werkzeugmaschinen": 3,
         "Losgröße": 4,
         "Durchlaufzeit": 3,
-        "Laufzeit": 1, # Niedrige Laufzeit (geringe unbeaufsichtigte Zeit)
+        "Laufzeit": 1, 
         "Digitalisierungsgrad": 2,
         "Prozessinstabilität": 2,
         "Nutzen": 2,
@@ -574,7 +573,7 @@ cluster_item_values = {
     },
     "Cluster 3 – Digital-affin und akzeptanzstark": {
         "Automatisierungsgrad": 4,
-        "Anzahl CNC-Werkzeugmaschinen": 2, # Beispielwert; hier wird nun der Wert aus der st.number_input Kategorisierung landen
+        "Anzahl CNC-Werkzeugmaschinen": 2, 
         "Losgröße": 2,
         "Durchlaufzeit": 2,
         "Laufzeit": 2,
@@ -587,10 +586,10 @@ cluster_item_values = {
     },
     "Cluster 4 – Technisch solide, aber prozessual träge": {
         "Automatisierungsgrad": 2,
-        "Anzahl CNC-Werkzeugmaschinen": 3, # Beispielwert; hier wird nun der Wert aus der st.number_input Kategorisierung landen
+        "Anzahl CNC-Werkzeugmaschinen": 3, 
         "Losgröße": 2,
-        "Durchlaufzeit": 4, # Hohe Durchlaufzeit
-        "Laufzeit": 3, # Hohe Laufzeit
+        "Durchlaufzeit": 4, 
+        "Laufzeit": 3, 
         "Digitalisierungsgrad": 2,
         "Prozessinstabilität": 2,
         "Nutzen": 2,
@@ -600,7 +599,8 @@ cluster_item_values = {
     }
 }
 
-#Berechnung
+#Berechnung der Clusterzuordnung
+
 def berechne_clusterzuordnung(kriterien_all_items_dict):
     # 1. Sammle alle individuellen Item-Bewertungen aus dem item_to_radio_key_map
     all_item_scores_flat = {}
@@ -679,10 +679,10 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
     bestes_cluster = min(abweichungen, key=abweichungen.get)
     return bestes_cluster, abweichungen
 
-# --- Ende der Berechnungslogik ---
+# Ende der Berechnungslogik
 
-# --- Start des Streamlit UI Codes ---
-# Initialisierung der Session State Variablen vor der UI-Logik
+# Start des Streamlit UI Codes
+
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 
@@ -727,7 +727,6 @@ if 'plz_input' not in st.session_state:
 if 'email_input' not in st.session_state:
     st.session_state.email_input = ""
 
-
 # Navigationsbuttons
 def nav_buttons(position):
     col1, col2, col3 = st.columns([1, 6, 1])
@@ -752,6 +751,7 @@ st.markdown("<div id='top'></div>", unsafe_allow_html=True)
 nav_buttons("top")
 
 # Aktuellen Tab bestimmen
+
 current_tab = tab_names[st.session_state.current_tab_index]
 st.markdown(f"## {current_tab}")
 st.markdown(" ➤ ".join([
@@ -759,7 +759,8 @@ st.markdown(" ➤ ".join([
     for name in tab_names
 ]), unsafe_allow_html=True)
 
-# Inhalt der Tabs
+# Inhalt Start-Tabs
+
 if current_tab == "Start":
     st.markdown("""
     
@@ -779,6 +780,8 @@ if current_tab == "Start":
         
         Nach der Selbstbewertung erhalten Sie ein übersichtliches **grafisches Profil**, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von **vier Unternehmenstypen** zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typ bekommen Sie maßgeschneiderte, praxisnahe Handlungsempfehlungen, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.
     """)
+
+# Inhalt MTOK-Tabs
 
 elif current_tab in mtok_structure:
     dimension = current_tab
@@ -841,6 +844,8 @@ elif current_tab in mtok_structure:
             st.session_state.ergebnisse[feld] = np.nanmean(scores_for_this_hf)
         elif feld in st.session_state.ergebnisse:
             del st.session_state.ergebnisse[feld]
+            
+# Inahlt Abschließende Fragen-Tab
 
 elif current_tab == "Abschließende Fragen":
     
@@ -909,7 +914,8 @@ elif current_tab == "Abschließende Fragen":
     st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
-# Im Tab "Auswertung"
+# Inhalt Auswertungs-Tab
+
 elif current_tab == "Auswertung":
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
 
@@ -1153,7 +1159,9 @@ elif current_tab == "Auswertung":
                 file_name="auswertung.html",
                 mime="text/html"
             )
-# Inhalt der Tabs
+            
+# Inhalt Evaluations-Tab
+
 if current_tab == "Evaluation":
     st.markdown("""
     ## Evaluation des Modells
@@ -1164,60 +1172,142 @@ if current_tab == "Evaluation":
 
     options = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
 
-    st.subheader("1. Verständlichkeit des Modells")
+    # 1. Verständlichkeit und Transparenz
+    st.subheader("1. Verständlichkeit und Transparenz des Modells")
 
     st.radio(
-        "Wie gut war die Struktur des Modells für Sie nachvollziehbar?",
+        "Die **Struktur** des Modells war für mich durchgängig nachvollziehbar.",
         options,
         key="verstaendlichkeit_struktur"
     )
 
     st.radio(
-        "Wie verständlich waren die Bewertungskriterien formuliert?",
+        "Die verwendeten **Begriffe und Formulierungen** in den Bewertungskriterien waren klar verständlich.",
         options,
-        key="verstaendlichkeit_kriterien"
+        key="verstaendlichkeit_begriffe"
     )
 
     st.radio(
-        "Waren die Clusterbeschreibungen nachvollziehbar?",
+        "Die **Erklärungen zu Handlungsfeldern und Bewertungsskalen** waren verständlich und hilfreich.",
         options,
-        key="verstaendlichkeit_cluster"
+        key="verstaendlichkeit_erklaerungen"
     )
 
-    st.subheader("2. Relevanz des Modells")
+    st.radio(
+        "Die **Clusterzuordnung** war für mich nachvollziehbar.",
+        options,
+        key="verstaendlichkeit_clusterlogik"
+    )
 
     st.radio(
-        "Wie relevant sind die abgefragten Handlungsfelder für Ihren betrieblichen Kontext?",
+        "Die **grafische Darstellung** der Ergebnisse war verständlich.",
+        options,
+        key="verstaendlichkeit_visualisierung"
+    )
+
+    # 2. Relevanz und betriebliche Passung
+    st.subheader("2. Relevanz und betriebliche Passung")
+
+    st.radio(
+        "Die im Modell adressierten **Themenfelder** sind für unser Unternehmen relevant.",
         options,
         key="relevanz_handlungsfelder"
     )
 
     st.radio(
-        "Wie sinnvoll ist die MTOK-Systematik (Mensch, Technik, Organisation, Kultur)?",
+        "Die **Bewertungskriterien** spiegeln praxisrelevante Herausforderungen in der Produktion wider.",
         options,
-        key="relevanz_mtok"
-    )
-
-    st.subheader("3. Praktische Anwendbarkeit")
-
-    st.radio(
-        "Wie gut unterstützt das Modell eine betriebliche Standortbestimmung?",
-        options,
-        key="anwendbarkeit_standort"
+        key="relevanz_kriterien"
     )
 
     st.radio(
-        "Wie hilfreich sind die abgeleiteten Handlungsempfehlungen?",
+        "Die im Modell hinterlegten **Handlungsempfehlungen** lassen sich auf unseren betrieblichen Alltag übertragen.",
         options,
-        key="anwendbarkeit_empfehlungen"
+        key="relevanz_empfehlungen"
     )
 
-    # Optional: Freitextfeld
+    st.radio(
+        "Die **Clusterprofile** bilden typische Ausgangslagen in der industriellen Produktion realistisch ab.",
+        options,
+        key="relevanz_clusterprofile"
+    )
+
+    st.radio(
+        "Die **Branchenspezifika der zerspanenden Fertigung** wurden im Modell angemessen berücksichtigt.",
+        options,
+        key="relevanz_zerspanung"
+    )
+
+    # 3. Anwendbarkeit und Nutzen
+    st.subheader("3. Anwendbarkeit und betrieblicher Nutzen")
+
+    st.radio(
+        "Das Modell eignet sich als **Instrument zur Systematisierung flexibler Arbeit**.",
+        options,
+        key="anwendbarkeit_modell"
+    )
+
+    st.radio(
+        "Mit Hilfe des Modells lassen sich **konkrete betriebliche Entwicklungsmaßnahmen** ableiten.",
+        options,
+        key="anwendbarkeit_entwicklung"
+    )
+
+    st.radio(
+        "Die Umsetzung als **digitales Tool** war funktional und benutzerfreundlich.",
+        options,
+        key="anwendbarkeit_tool"
+    )
+
+    st.radio(
+        "Das Modell unterstützt eine **strukturierte Selbstbewertung und Reflexion** im Unternehmen.",
+        options,
+        key="anwendbarkeit_reflexion"
+    )
+
+    # 4. Vollständigkeit und Tiefe
+    st.subheader("4. Vollständigkeit und konzeptionelle Tiefe")
+
+    st.radio(
+        "Das Modell berücksichtigt die **zentralen Erfolgsfaktoren flexibler Arbeit** systematisch.",
+        options,
+        key="tiefe_erfolgsfaktoren"
+    )
+
+    st.radio(
+        "Die **inhaltliche Tiefe und Differenzierung** der Bewertungskriterien war angemessen.",
+        options,
+        key="tiefe_kriterien"
+    )
+
+    # 5. Gesamturteil und Weiterempfehlung
+    st.subheader("5. Gesamturteil und Weiterempfehlung")
+
+    st.radio(
+        "Das Modell ist insgesamt **logisch aufgebaut und stimmig** konzipiert.",
+        options,
+        key="gesamt_stimmigkeit"
+    )
+
+    st.radio(
+        "Ich würde das Modell **anderen Unternehmen oder Kolleg:innen weiterempfehlen**.",
+        options,
+        key="gesamt_empfehlung"
+    )
+
+    st.radio(
+        "Der **erwartete Nutzen** des Modells überwiegt den Aufwand der Anwendung.",
+        options,
+        key="gesamt_nutzen_aufwand"
+    )
+
+    # Freitextfeld
+    st.subheader("6. Offene Rückmeldung")
+
     st.text_area(
-        "Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik?",
+        "Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik zum Modell?",
         key="evaluation_feedback_text"
     )
-
     
     # Funktion zur sicheren Konvertierung von Werten
     def safe_value(val):
@@ -1231,15 +1321,38 @@ if current_tab == "Evaluation":
     # Absenden-Button
     if st.button("Absenden und speichern"):
 
-    # 1. Evaluation sammeln
+        # 1. Evaluation sammeln – aktualisierte Struktur mit eindeutigen Keys
         evaluation_data = {
+            # Verständlichkeit und Transparenz
             "Struktur nachvollziehbar": st.session_state.get("verstaendlichkeit_struktur", ""),
-            "Kriterien verständlich": st.session_state.get("verstaendlichkeit_kriterien", ""),
-            "Cluster verständlich": st.session_state.get("verstaendlichkeit_cluster", ""),
+            "Begriffe verständlich": st.session_state.get("verstaendlichkeit_begriffe", ""),
+            "Erklärungen verständlich": st.session_state.get("verstaendlichkeit_erklaerungen", ""),
+            "Logik Clusterzuordnung nachvollziehbar": st.session_state.get("verstaendlichkeit_clusterlogik", ""),
+            "Grafik verständlich": st.session_state.get("verstaendlichkeit_visualisierung", ""),
+    
+            # Relevanz und betriebliche Passung
             "Relevanz Handlungsfelder": st.session_state.get("relevanz_handlungsfelder", ""),
-            "Relevanz MTOK": st.session_state.get("relevanz_mtok", ""),
-            "Standortbestimmung": st.session_state.get("anwendbarkeit_standort", ""),
-            "Empfehlungen hilfreich": st.session_state.get("anwendbarkeit_empfehlungen", ""),
+            "Relevanz Bewertungskriterien": st.session_state.get("relevanz_kriterien", ""),
+            "Übertragbarkeit Empfehlungen": st.session_state.get("relevanz_empfehlungen", ""),
+            "Realitätsnähe Clusterprofile": st.session_state.get("relevanz_clusterprofile", ""),
+            "Berücksichtigung Zerspanung": st.session_state.get("relevanz_zerspanung", ""),
+    
+            # Anwendbarkeit und Nutzen
+            "Anwendbarkeit Modell": st.session_state.get("anwendbarkeit_modell", ""),
+            "Ableitung von Maßnahmen": st.session_state.get("anwendbarkeit_entwicklung", ""),
+            "Benutzerfreundlichkeit Tool": st.session_state.get("anwendbarkeit_tool", ""),
+            "Reflexion unterstützt": st.session_state.get("anwendbarkeit_reflexion", ""),
+    
+            # Vollständigkeit und Tiefe
+            "Erfolgsfaktoren abgedeckt": st.session_state.get("tiefe_erfolgsfaktoren", ""),
+            "Inhaltliche Tiefe angemessen": st.session_state.get("tiefe_kriterien", ""),
+    
+            # Gesamturteil
+            "Gesamtaufbau stimmig": st.session_state.get("gesamt_stimmigkeit", ""),
+            "Weiterempfehlung wahrscheinlich": st.session_state.get("gesamt_empfehlung", ""),
+            "Nutzen überwiegt Aufwand": st.session_state.get("gesamt_nutzen_aufwand", ""),
+    
+            # Freitext
             "Feedback": st.session_state.get("evaluation_feedback_text", "")
         }
 
