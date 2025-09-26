@@ -1354,14 +1354,28 @@ if current_tab == "Evaluation":
         # 2. Freitextfeld
         evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
 
-        # 3. MTOK-Werte übernehmen (bleiben float wie 1.0, 2.3 etc.)
-        mtok_werte_raw = st.session_state.get("ergebnisse", {})
+        # 3. MTOK-Werte auslesen – garantiert vollständig und float-bereinigt
+        mtok_keys = [
+            "Produktivität und Motivation",
+            "Persönliches Umfeld",
+            "Arbeitsplatzgestaltung und Automatisierung",
+            "IT-Systemlandschaft und digital vernetzte Infrastruktur",
+            "Kommunikation, Kooperation und Zusammenarbeit",
+            "Organisatorische Umwelt",
+            "Produktionsorganisation",
+            "Unternehmenskultur",
+            "Soziale Beziehungen und Interaktion"
+        ]
+
+        mtok_raw = st.session_state.get("ergebnisse", {})
         mtok_werte = {}
-        for key, val in mtok_werte_raw.items():
-            if isinstance(val, int):
+
+        for key in mtok_keys:
+            val = mtok_raw.get(key, 99999)
+            if isinstance(val, (int, float)):
                 mtok_werte[key] = float(val)
             else:
-                mtok_werte[key] = val  # float bleibt float
+                mtok_werte[key] = 99999.0  # wenn leer, Text, None etc.
 
         # 4. Cluster-Zuordnung berechnen
         bewertete = zaehle_bewertete_clustervariablen(mtok_werte)
