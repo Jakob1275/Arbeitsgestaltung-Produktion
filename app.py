@@ -751,34 +751,7 @@ if "ergebnisse" not in st.session_state:
 if "item_to_radio_key_map" not in st.session_state:
     st.session_state.item_to_radio_key_map = {}
 
-# Sicherstellen, dass alle Radio-Keys für die Clusterzuordnung existieren
-for key in direkte_fragen_keys:
-    if key not in st.session_state:
-        st.session_state[key] = None
-    score_key = f"{key}_score"
-    if score_key not in st.session_state:
-        # Kategorisierung mit passender Funktion
-        if key == "cnc_range":
-            st.session_state[score_key] = categorize_cnc_machines(st.session_state[key])
-        elif key == "automation_range":
-            st.session_state[score_key] = categorize_automation_percentage(st.session_state[key])
-        elif key == "losgroesse_range":
-            st.session_state[score_key] = categorize_losgroesse(st.session_state[key])
-        elif key == "durchlaufzeit_range":
-            st.session_state[score_key] = categorize_durchlaufzeit(st.session_state[key])
-        elif key == "laufzeit_range":
-            st.session_state[score_key] = categorize_laufzeit(st.session_state[key])
 
-# Initialisierung allgemeiner Angaben
-allgemeine_texteingaben = {
-    "branche_input": "",
-    "plz_input": "",
-    "email_input": ""
-}
-allgemeine_radios = {
-    "funktion_radio_input": None,
-    "mitarbeitende_radio_input": None
-}
 
 # Textfelder initialisieren
 for key, default in allgemeine_texteingaben.items():
