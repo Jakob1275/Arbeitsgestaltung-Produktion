@@ -1311,13 +1311,13 @@ if current_tab == "Evaluation":
     )
 
     def bewertung_in_zahl(wert):
-    mapping = {
-        "Niedrig": 1,
-        "Mittel": 2,
-        "Hoch": 3,
-        "Sehr hoch": 4
-    }
-    return mapping.get(wert, 9999)  # Fallback = 9999 bei None oder unbekanntem Wert
+        mapping = {
+            "Niedrig": 1,
+            "Mittel": 2,
+            "Hoch": 3,
+            "Sehr hoch": 4
+        }
+        return mapping.get(wert, 9999) 
     
     # Speichern der Ergebnisse 
     if st.button("Absenden und speichern"):
