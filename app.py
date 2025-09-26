@@ -751,15 +751,6 @@ if "ergebnisse" not in st.session_state:
 if "item_to_radio_key_map" not in st.session_state:
     st.session_state.item_to_radio_key_map = {}
 
-# Initialisierung direkter Fragen (Abschließende Fragen)
-direkte_fragen_keys = {
-    "cnc_range": None,
-    "automation_range": None,
-    "losgroesse_range": None,
-    "durchlaufzeit_range": None,
-    "laufzeit_range": None,
-}
-
 # Sicherstellen, dass alle Radio-Keys für die Clusterzuordnung existieren
 for key in direkte_fragen_keys:
     if key not in st.session_state:
