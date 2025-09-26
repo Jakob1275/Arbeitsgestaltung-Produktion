@@ -1310,6 +1310,15 @@ if current_tab == "Evaluation":
         key="evaluation_feedback_text"
     )
 
+    def bewertung_in_zahl(wert):
+    mapping = {
+        "Niedrig": 1,
+        "Mittel": 2,
+        "Hoch": 3,
+        "Sehr hoch": 4
+    }
+    return mapping.get(wert, 9999)  # Fallback = 9999 bei None oder unbekanntem Wert
+    
     # Speichern der Ergebnisse 
     if st.button("Absenden und speichern"):
         evaluation_data = {}
@@ -1331,7 +1340,6 @@ if current_tab == "Evaluation":
     # 3. Cluster-Zuordnung berechnen – fehlertolerant
         cluster_result = berechne_clusterzuordnung(Kriterien)
 
-        # Prüfen, ob Clusterberechnung erfolgreich war
         if isinstance(cluster_result, tuple) and len(cluster_result) == 2 and isinstance(cluster_result[1], dict):
             bestes_cluster, abweichungen = cluster_result
             cluster_scores = {
@@ -1340,7 +1348,12 @@ if current_tab == "Evaluation":
             }
         else:
             st.warning("Die Clusterzuordnung konnte nicht durchgeführt werden. Bitte überprüfen Sie Ihre Eingaben.")
-            cluster_scores = {"Zugeordnetes Cluster": "Fehlgeschlagen"}
+            cluster_scores = {
+                "Zugeordnetes Cluster": "Fehlgeschlagen",
+                "Abweichung 1": 9999,
+                "Abweichung 2": 9999,
+                "Abweichung 3": 9999
+            }
 
         # 5. Alle Daten zusammenführen
         daten_gesamt = {}
