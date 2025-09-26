@@ -794,9 +794,9 @@ elif current_tab in mtok_structure:
             begruendung = item["begründung"]
 
             st.markdown(f"""
-                <div style='margin-bottom: -0.2rem'>
+                <div style='margin-bottom: -0.2rem'; front-size:1.3em'>
                     <strong>{frage_text}</strong><br>
-                    <span style='color:gray; font-size:0.9em'>{begruendung}</span>
+                    <span style='color:gray; font-size:0.95em'>{begruendung}</span>
                 </div>
             """, unsafe_allow_html=True)
            
