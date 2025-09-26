@@ -819,15 +819,6 @@ elif current_tab in mtok_structure:
             # Hole ggf. vorhandenen Wert
             initial_value = st.session_state.get(score_key, None)
 
-             # Bewertungsauswahl anzeigen
-            score = st.radio(
-                "", 
-                options,
-                horizontal=True,
-                key=radio_key,
-                index=default_index
-            )
-
             # Bestimme Default-Wert, wenn vorhanden
             try:
                 #default_index = options.index(initial_value) if initial_value is not None else None
@@ -835,6 +826,15 @@ elif current_tab in mtok_structure:
             except ValueError:
                 #default_index = None
                 default_index = 0
+
+            # Bewertungsauswahl anzeigen
+            score = st.radio(
+                "", 
+                options,
+                horizontal=True,
+                key=radio_key,
+                index=default_index
+            )
 
             # Speichere Score separat (mit _score-Endung)
             if score is not None:
