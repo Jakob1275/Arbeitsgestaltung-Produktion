@@ -468,7 +468,7 @@ Kriterien = {
   ]
     }
 
-# Hilfsfunktionen für Clustervariablen
+import numpy as np
 
 def categorize_cnc_machines(num_machines_raw):
     if num_machines_raw is None:
@@ -480,7 +480,7 @@ def categorize_cnc_machines(num_machines_raw):
         "≥ 25": 4
     }
     return mapping.get(num_machines_raw, np.nan)
-    
+
 def categorize_automation_percentage(percentage_str):
     if percentage_str is None:
         return np.nan
@@ -493,6 +493,8 @@ def categorize_automation_percentage(percentage_str):
     return mapping.get(percentage_str, np.nan)
 
 def categorize_losgroesse(losgroesse_str):
+    if losgroesse_str is None:
+        return np.nan
     mapping = {
         "< 5": 1,
         "5-50": 2,
@@ -502,6 +504,8 @@ def categorize_losgroesse(losgroesse_str):
     return mapping.get(losgroesse_str, np.nan)
 
 def categorize_durchlaufzeit(durchlaufzeit_str):
+    if durchlaufzeit_str is None:
+        return np.nan
     mapping = {
         "< 10 min": 1,
         "11–30 min": 2,
@@ -511,6 +515,8 @@ def categorize_durchlaufzeit(durchlaufzeit_str):
     return mapping.get(durchlaufzeit_str, np.nan)
 
 def categorize_laufzeit(laufzeit_str):
+    if laufzeit_str is None:
+        return np.nan
     mapping = {
         "< 1 Tag": 1,
         "1–3 Tage": 2,
@@ -735,50 +741,66 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 
 # Start des Streamlit UI Codes
 
+# Initialisierung des aktuellen Tabs
 if "current_tab_index" not in st.session_state:
     st.session_state.current_tab_index = 0
 
+# Initialisierung der Ergebnisstruktur
 if "ergebnisse" not in st.session_state:
     st.session_state.ergebnisse = {}
 
-# CNC-Maschinen (feste Kategorien via st.radio)
-#if "cnc_range" not in st.session_state:
- #   st.session_state.cnc_range = None
-#if "anzahl_cnc_werkzeugmaschinen_categorized" not in st.session_state:
- #   st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(st.session_state.cnc_range)
+# Initialisierung des item_to_radio_key_map (für Cluster-Zuordnung)
+if "item_to_radio_key_map" not in st.session_state:
+    st.session_state.item_to_radio_key_map = {}
 
-if "automation_range" not in st.session_state:
-    st.session_state.automation_range = None
-if "automatisierungsgrad_categorized" not in st.session_state:
-    st.session_state.automatisierungsgrad_categorized = categorize_automation_percentage(st.session_state.automation_range)
+# Initialisierung direkter Fragen (Abschließende Fragen)
+direkte_fragen_keys = {
+    "cnc_range": None,
+    "automation_range": None,
+    "losgroesse_range": None,
+    "durchlaufzeit_range": None,
+    "laufzeit_range": None,
+}
 
-if "losgroesse_range" not in st.session_state:
-    st.session_state.losgroesse_range = None
-if "losgroesse_categorized" not in st.session_state:
-    st.session_state.losgroesse_categorized = categorize_losgroesse(st.session_state.losgroesse_range)
+# Sicherstellen, dass alle Radio-Keys für die Clusterzuordnung existieren
+for key in direkte_fragen_keys:
+    if key not in st.session_state:
+        st.session_state[key] = None
+    score_key = f"{key}_score"
+    if score_key not in st.session_state:
+        # Kategorisierung mit passender Funktion
+        if key == "cnc_range":
+            st.session_state[score_key] = categorize_cnc_machines(st.session_state[key])
+        elif key == "automation_range":
+            st.session_state[score_key] = categorize_automation_percentage(st.session_state[key])
+        elif key == "losgroesse_range":
+            st.session_state[score_key] = categorize_losgroesse(st.session_state[key])
+        elif key == "durchlaufzeit_range":
+            st.session_state[score_key] = categorize_durchlaufzeit(st.session_state[key])
+        elif key == "laufzeit_range":
+            st.session_state[score_key] = categorize_laufzeit(st.session_state[key])
 
-if "durchlaufzeit_range" not in st.session_state:
-    st.session_state.durchlaufzeit_range = None
-if "durchlaufzeit_categorized" not in st.session_state:
-    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(st.session_state.durchlaufzeit_range)
+# Initialisierung allgemeiner Angaben
+allgemeine_texteingaben = {
+    "branche_input": "",
+    "plz_input": "",
+    "email_input": ""
+}
+allgemeine_radios = {
+    "funktion_radio_input": None,
+    "mitarbeitende_radio_input": None
+}
 
-if "laufzeit_range" not in st.session_state:
-    st.session_state.laufzeit_range = None
-if "laufzeit_categorized" not in st.session_state:
-    st.session_state.laufzeit_categorized = categorize_laufzeit(st.session_state.laufzeit_range)
+# Textfelder initialisieren
+for key, default in allgemeine_texteingaben.items():
+    if key not in st.session_state:
+        st.session_state[key] = default
 
-# Allgemeine Angaben
-if 'branche_input' not in st.session_state:
-    st.session_state.branche_input = ""
-if 'mitarbeitende_radio' not in st.session_state:
-    st.session_state.mitarbeitende_radio = None
-if 'funktion_radio' not in st.session_state:
-    st.session_state.funktion_radio = None
-if 'plz_input' not in st.session_state:
-    st.session_state.plz_input = ""
-if 'email_input' not in st.session_state:
-    st.session_state.email_input = ""
-
+# Radiofelder initialisieren
+for key, default in allgemeine_radios.items():
+    if key not in st.session_state:
+        st.session_state[key] = default
+        
 # Navigationsbuttons
 def nav_buttons(position):
     col1, col2, col3 = st.columns([1, 6, 1])
@@ -906,79 +928,83 @@ elif current_tab in mtok_structure:
 elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
-    cnc_options = ["< 5", "5-10", "11-24", "≥ 25"]
-    cnc_key = "cnc_range"
+    if "item_to_radio_key_map" not in st.session_state:
+        st.session_state["item_to_radio_key_map"] = {}
 
-    # Radio-Feld mit persistenter Auswahl
-    st.radio(
-        "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
-        cnc_options,
-        key=cnc_key
-    )
+    # --- CNC-Maschinen ---
+    frage = "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?"
+    options = ["< 5", "5-10", "11-24", "≥ 25"]
+    key_base = "cnc_range"
+    score_key = f"{key_base}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
 
-    # Danach: Auswahl aus session_state holen
-    selected_cnc = st.session_state.get(cnc_key)
+    selected = st.radio(frage, options, key=key_base)
+    if selected:
+        st.session_state[score_key] = categorize_cnc_machines(selected)
 
-    # Debug-Ausgaben
-    st.write("DEBUG: session_state[cnc_key]:", selected_cnc)
+    # --- Automatisierungsgrad ---
+    frage = "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?"
+    options = ["0%", "1-25%", "26-49%", "≥ 50%"]
+    key_base = "automation_range"
+    score_key = f"{key_base}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
 
-    # Kategorisierung nur, wenn gültiger Wert vorliegt
-    if selected_cnc in cnc_options:
-        st.session_state.anzahl_cnc_werkzeugmaschinen_categorized = categorize_cnc_machines(selected_cnc)
-   
-        # Automatisierungsgrad
-    automation_percentage_options = ["0%", "1-25%", "26-49%", "≥ 50%"]
-    selected_automation_range = st.radio(
-        "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?",
-        automation_percentage_options,
-        index=automation_percentage_options.index(default_cnc),
-        key="automation_range"
-    )
-    st.session_state.automatisierungsgrad_categorized = categorize_automation_percentage(selected_automation_range)
+    selected = st.radio(frage, options, key=key_base)
+    if selected:
+        st.session_state[score_key] = categorize_automation_percentage(selected)
 
-    # Losgröße
-    losgroesse_options = ["< 5", "5-50", "51-99", "≥ 100"]
-    selected_losgroesse = st.radio(
-        "Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?",
-        losgroesse_options,
-        key="losgroesse_range"
-    )
-    st.session_state.losgroesse_categorized = categorize_losgroesse(selected_losgroesse)
+    # --- Losgröße ---
+    frage = "Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?"
+    options = ["< 5", "5-50", "51-99", "≥ 100"]
+    key_base = "losgroesse_range"
+    score_key = f"{key_base}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
 
-    # Durchlaufzeit
-    durchlaufzeit_options = ["< 10 min", "11-30 min", "31-89 min", "≥ 90 min"]
-    selected_durchlaufzeit = st.radio(
-        "Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?",
-        durchlaufzeit_options,
-        key="durchlaufzeit_range"
-    )
-    st.session_state.durchlaufzeit_categorized = categorize_durchlaufzeit(selected_durchlaufzeit)
+    selected = st.radio(frage, options, key=key_base)
+    if selected:
+        st.session_state[score_key] = categorize_losgroesse(selected)
 
-    # Laufzeit
-    laufzeit_options = ["< 1 Tag", "1-3 Tage", "4-6 Tage", "≥ 7 Tage"]
-    selected_laufzeit = st.radio(
-        "Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?",
-        laufzeit_options,
-        key="laufzeit_range"
-    )
-    st.session_state.laufzeit_categorized = categorize_laufzeit(selected_laufzeit)
+    # --- Durchlaufzeit ---
+    frage = "Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?"
+    options = ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"]
+    key_base = "durchlaufzeit_range"
+    score_key = f"{key_base}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
 
+    selected = st.radio(frage, options, key=key_base)
+    if selected:
+        st.session_state[score_key] = categorize_durchlaufzeit(selected)
+
+    # --- Laufzeit ---
+    frage = "Welche durchschnittliche Laufzeit haben die Werkstücke, welche bei Ihnen gefertigt werden?"
+    options = ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"]
+    key_base = "laufzeit_range"
+    score_key = f"{key_base}_score"
+    st.session_state["item_to_radio_key_map"][frage] = score_key
+
+    selected = st.radio(frage, options, key=key_base)
+    if selected:
+        st.session_state[score_key] = categorize_laufzeit(selected)
+
+    # -----------------------------------
     st.subheader("Personen- und unternehmensbezogene Angaben")
+
     st.radio(
-    "In welcher Funktion sind Sie in Ihrem Unternehmen tätig?",
-    ["Geschäftsführer", "Produktions-/ Fertigungsleitung", "Arbeitsvorbereitung", "Teamleitung", "Planungsabteilung (IE, Lean etc.)", "Weitere"],
-    index=None,
-    key="funktion_radio_input"
+        "In welcher Funktion sind Sie in Ihrem Unternehmen tätig?",
+        ["Geschäftsführer", "Produktions-/ Fertigungsleitung", "Arbeitsvorbereitung", "Teamleitung", "Planungsabteilung (IE, Lean etc.)", "Weitere"],
+        index=None,
+        key="funktion_radio_input"
     )
     st.radio(
-    "Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
-    ["1-9", "10-49", "50-199", "200-499", "500-1999", "≥2000"],
-    index=None,
-    key="mitarbeitende_radio_input"
+        "Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
+        ["1-9", "10-49", "50-199", "200-499", "500-1999", "≥2000"],
+        index=None,
+        key="mitarbeitende_radio_input"
     )
     st.text_input("Für welche Branche fertigen Sie?", key="branche_input") 
-    st.text_input("PLZ (optional)", key="plz_input") # Eindeutiger Key
-    st.text_input("E-Mail (optional)", key="email_input") # Eindeutiger Key
+    st.text_input("PLZ (optional)", key="plz_input")
+    st.text_input("E-Mail (optional)", key="email_input")
+
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
 
 # Inhalt Auswertungs-Tab
