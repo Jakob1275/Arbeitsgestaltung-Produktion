@@ -1245,7 +1245,6 @@ if current_tab == "Evaluation":
                 label="",
                 options=options,
                 key=radio_key,
-                horizontal=True,
                 index=0
             )
 
