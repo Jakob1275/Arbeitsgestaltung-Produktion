@@ -752,16 +752,6 @@ if "item_to_radio_key_map" not in st.session_state:
     st.session_state.item_to_radio_key_map = {}
 
 
-
-# Textfelder initialisieren
-for key, default in allgemeine_texteingaben.items():
-    if key not in st.session_state:
-        st.session_state[key] = default
-
-# Radiofelder initialisieren
-for key, default in allgemeine_radios.items():
-    if key not in st.session_state:
-        st.session_state[key] = default
         
 # Navigationsbuttons
 def nav_buttons(position):
