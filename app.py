@@ -906,7 +906,7 @@ elif current_tab in mtok_structure:
 elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
-   cnc_options = ["< 5", "5-10", "11-24", "≥ 25"]
+    cnc_options = ["< 5", "5-10", "11-24", "≥ 25"]
     cnc_key = "cnc_range"
 
     # Radio-Feld mit persistenter Auswahl
