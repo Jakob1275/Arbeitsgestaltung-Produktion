@@ -1379,21 +1379,31 @@ if current_tab == "Evaluation":
         # Zeitstempel hinzufügen
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
-                # 6. In Google Sheet speichern
         def safe_value(val):
-            # 9999 oder Texte sollen erhalten bleiben
-            if val == 9999 or isinstance(val, str):
-                return val
-            # Zahlen (auch 1.0 etc.) sollen als float gespeichert werden
-            if isinstance(val, (int, float)):
-                return float(val)
+        # Kein automatischer Typ-Cast!
             return val
 
+        def zaehle_bewertete_clustervariablen(daten):
+            # Zählt, wie viele der ersten 9 Cluster-Kriterien bewertet wurden (nicht None oder "")
+            werte = list(daten.values())[:9]
+            return sum(1 for v in werte if isinstance(v, (int, float)) and v > 0)
+
         try:
-            # Liste zur Speicherung vorbereiten
-            daten_liste = [safe_value(v) for v in daten_gesamt.values()]
-    
-            # Speichern in Google Sheet
+            daten_liste = []
+            bewertete = zaehle_bewertete_clustervariablen(daten_gesamt)
+
+            for key, val in daten_gesamt.items():
+                # Spezielle Behandlung für Cluster-Zuordnung
+                if "Cluster" in key:
+                    if bewertete < 7:
+                        daten_liste.append(
+                            f"Bitte bewerten Sie mindestens 7 relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {bewertete} bewertet."
+                        )
+                    else:
+                        daten_liste.append(val)  # Originaler Clusterwert (z. B. Cluster 2 ...)
+                else:
+                    daten_liste.append(safe_value(val))
+
             worksheet.append_row(daten_liste)
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
         except Exception as e:
