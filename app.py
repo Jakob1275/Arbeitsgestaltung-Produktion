@@ -1381,10 +1381,16 @@ if current_tab == "Evaluation":
 
         # 6. In Google Sheet speichern
         try:
-            worksheet.append_row([
-                safe_value(bewertung_in_zahl(v)) if isinstance(v, str) else safe_value(v)
-                for v in daten_gesamt.values()
-            ])
+            bewertbare_werte = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
+
+            final_row = []
+            for v in daten_gesamt.values():
+                if isinstance(v, str) and v in bewertbare_werte:
+                    final_row.append(bewertung_in_zahl(v))
+                else:
+                    final_row.append(safe_value(v))
+
+            worksheet.append_row(final_row)
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
         except Exception as e:
             st.error(f"Fehler beim Speichern: {e}")
