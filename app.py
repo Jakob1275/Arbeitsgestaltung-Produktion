@@ -909,7 +909,7 @@ elif current_tab == "Abschließende Fragen":
 
    # CNC-Maschinen
     cnc_options = ["< 5", "5-10", "11-24", "≥ 25"]
-    default_cnc = st.session_state.get("cnc_range", cnc_options[0])
+    default_cnc = st.session_state.get("cnc_range", cnc_options[1])
     selected_cnc_range = st.radio(
         "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
         cnc_options,
