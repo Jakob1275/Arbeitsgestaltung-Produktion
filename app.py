@@ -881,17 +881,18 @@ elif current_tab == "Abschließende Fragen":
     def radio_with_categorization(frage, options, key, categorize_func):
         # Hole bisherigen Wert aus dem Session State
         vorhandene_auswahl = st.session_state.get(key, None)
-    
+
         try:
             default_index = options.index(vorhandene_auswahl) if vorhandene_auswahl in options else 0
         except ValueError:
             default_index = 0
 
-        # Radio mit explizitem Index
-        auswahl = st.radio(frage, options, key=key, index=default_index)
-    
-        if auswahl:
-            st.session_state[f"{key}_score"] = categorize_func(auswahl)
+        # Zeige Radio an – OHNE key (sonst wird State doppelt geführt)
+        auswahl = st.radio(frage, options, index=default_index, key=f"{key}_temp")
+
+        # Speichere Auswahl explizit in Session State
+        st.session_state[key] = auswahl
+        st.session_state[f"{key}_score"] = categorize_func(auswahl)
 
     radio_with_categorization(
         "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
