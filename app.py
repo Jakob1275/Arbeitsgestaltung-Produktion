@@ -1310,6 +1310,7 @@ if current_tab == "Evaluation":
         key="evaluation_feedback_text"
     )
 
+   # Hilfsfunktion zur Bewertungskonvertierung
     def bewertung_in_zahl(wert):
         mapping = {
             "Niedrig": 1,
@@ -1317,9 +1318,20 @@ if current_tab == "Evaluation":
             "Hoch": 3,
             "Sehr hoch": 4
         }
-        return mapping.get(wert, 9999) 
-    
-    # Speichern der Ergebnisse 
+        return mapping.get(wert, 9999)
+
+# Hilfsfunktion zur sicheren Speicherung
+    def safe_value(val):
+        try:
+            if val is None or (isinstance(val, float) and np.isnan(val)):
+                return 9999
+            if isinstance(val, str) and val.strip() == "":
+                return 9999
+            return val
+        except Exception:
+            return 9999
+
+    # Speichern der Ergebnisse
     if st.button("Absenden und speichern"):
         evaluation_data = {}
 
@@ -1328,16 +1340,19 @@ if current_tab == "Evaluation":
             fragen_count = len(eval(f"fragen_{i}"))
             for j in range(fragen_count):
                 key = f"eval{i}_{j}"
-                evaluation_data[key] = st.session_state.get(f"{key}_score", "")
+                antwort = st.session_state.get(f"{key}_score", "")
+                evaluation_data[key] = antwort
 
+        # Freitextfeld
         evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
+
         st.success("Vielen Dank für Ihre Rückmeldung!")
         st.write("Ihre Antworten (Debug):", evaluation_data)
-
-    # 2. MTOK-Werte
+    
+        # 2. MTOK-Werte
         mtok_werte = st.session_state.get("ergebnisse", {})
 
-    # 3. Cluster-Zuordnung berechnen – fehlertolerant
+        # 3. Cluster-Zuordnung berechnen – fehlertolerant
         cluster_result = berechne_clusterzuordnung(Kriterien)
 
         if isinstance(cluster_result, tuple) and len(cluster_result) == 2 and isinstance(cluster_result[1], dict):
@@ -1360,16 +1375,19 @@ if current_tab == "Evaluation":
         daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
-
+    
         # Zeitstempel hinzufügen
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
-    # 6. In Google Sheet speichern
+        # 6. In Google Sheet speichern
         try:
-            worksheet.append_row([safe_value(v) for v in daten_gesamt.values()])
+            worksheet.append_row([
+                safe_value(bewertung_in_zahl(v)) if isinstance(v, str) else safe_value(v)
+                for v in daten_gesamt.values()
+            ])
             st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
         except Exception as e:
-            st.error(f"Fehler beim Speichern: {e}") 
+            st.error(f"Fehler beim Speichern: {e}")
 
 # Trenner
 st.markdown("---")
