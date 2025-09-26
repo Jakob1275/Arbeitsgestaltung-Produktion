@@ -50,6 +50,15 @@ st.markdown("""
             font-size: 18px !important;
             line-height: 1.6;
         }
+        /* Entfernt unteren Abstand nach jedem Radio-Block */
+        div[data-baseweb="radio"] {
+            margin-bottom: -10px;
+        }
+
+        /* Optional: Zeilenabstand beim Text anpassen */
+        .element-container > div > div > div > p {
+            margin-bottom: 0.3em;
+        }
     </style>
 """, unsafe_allow_html=True)
 
