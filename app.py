@@ -1016,6 +1016,8 @@ elif current_tab == "Auswertung":
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
+        st.session_state["cluster_result"] = cluster_result
+        st.session_state["abweichungen_detail"] = abweichungen_detail
 
         if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
             st.warning(cluster_result)
