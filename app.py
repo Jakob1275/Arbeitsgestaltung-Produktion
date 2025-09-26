@@ -799,16 +799,7 @@ elif current_tab in mtok_structure:
                     <span style='color:gray; font-size:0.9em'>{begruendung}</span>
                 </div>
             """, unsafe_allow_html=True)
-
-            # Bewertungsauswahl anzeigen
-            score = st.radio(
-                "", 
-                options,
-                horizontal=True,
-                key=radio_key,
-                index=default_index
-            )
-
+           
             # Nutze indexbasierten Schlüssel (idx), damit die Zuordnung mit Kriterien stabil bleibt
             radio_key = f"{dimension}_{feld}_{idx}"
 
@@ -827,6 +818,15 @@ elif current_tab in mtok_structure:
 
             # Hole ggf. vorhandenen Wert
             initial_value = st.session_state.get(score_key, None)
+
+             # Bewertungsauswahl anzeigen
+            score = st.radio(
+                "", 
+                options,
+                horizontal=True,
+                key=radio_key,
+                index=default_index
+            )
 
             # Bestimme Default-Wert, wenn vorhanden
             try:
