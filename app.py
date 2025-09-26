@@ -1348,13 +1348,20 @@ if current_tab == "Evaluation":
             for j in range(fragen_count):
                 key = f"eval{i}_{j}"
                 antwort = st.session_state.get(f"{key}_score", "")
+                zahlwert = bewertung_in_zahl(antwort)
                 evaluation_data[key] = bewertung_in_zahl(antwort)
 
         # 2. Freitextfeld
         evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
 
         # 3. MTOK-Werte übernehmen (bleiben float wie 1.0, 2.3 etc.)
-        mtok_werte = st.session_state.get("ergebnisse", {})
+        mtok_werte_raw = st.session_state.get("ergebnisse", {})
+        mtok_werte = {}
+        for key, val in mtok_werte_raw.items():
+            if isinstance(val, int):
+                mtok_werte[key] = float(val)
+            else:
+                mtok_werte[key] = val  # float bleibt float
 
         # 4. Cluster-Zuordnung berechnen
         bewertete = zaehle_bewertete_clustervariablen(mtok_werte)
