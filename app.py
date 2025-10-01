@@ -815,7 +815,6 @@ score_mapping = {
     "Weitestgehend erfüllt": 3,
     "Vollständig erfüllt": 4
 }
-
 elif current_tab in mtok_structure:
     dimension = current_tab
     for feld in mtok_structure[dimension]:
