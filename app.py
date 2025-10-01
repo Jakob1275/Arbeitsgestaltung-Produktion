@@ -991,34 +991,36 @@ elif current_tab == "Auswertung":
             values_cycle = values_ordered + values_ordered[:1]
             angles_cycle = angles + angles[:1]
 
-            # Labels umbrechen für bessere Lesbarkeit
-            wrapped_labels = [label.replace(" und ", "\nund ").replace("(", "\n(") for label in labels_ordered]
-
-            # Plot erzeugen
-            fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+            # Plot erstellen
+            fig, ax = plt.subplots(figsize=(6.5, 6.5), subplot_kw=dict(polar=True))
             ax.set_theta_offset(np.pi / 2)      # Start bei 12 Uhr
             ax.set_theta_direction(1)           # Uhrzeigersinn
 
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.25)
 
+            # Achsen
             ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=7)
-    
+            ax.set_xticklabels(labels_ordered, fontsize=7)
+
             ax.set_yticks([1, 2, 3, 4])
             ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7, color='gray')
             ax.set_ylim(0, 4)
 
+            # Layout optimieren
             ax.yaxis.grid(True, linestyle='dotted', color='lightgray')
             ax.xaxis.grid(True, linestyle='solid', color='lightgray')
-            ax.set_title("Cluster-Profil", fontsize=14, pad=20)
+            ax.set_title("Cluster-Profil", fontsize=14, pad=25)
+        
+            # Platz um Diagramm erhöhen
+            plt.subplots_adjust(top=0.90, bottom=0.15)
 
-            # Ausgabe in Streamlit
+            # Anzeige
             buf = BytesIO()
             fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
-            st.image(buf, width=700)  
-
+            st.image(buf, width=700)
+    
         else:
             st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
             img_tag = ""
