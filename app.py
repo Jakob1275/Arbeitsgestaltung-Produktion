@@ -1214,8 +1214,7 @@ elif current_tab == "Auswertung":
                 {cluster_beschreibung_html}
                 <h2>Clusterspezifische Handlungsempfehlungen</h2>
                 {empfehlungen_html}
-                <h2>Readiness-Profil</h2>
-                {img_tag}
+                <h2>Cluster-Profil</h2>
                 {table_html}
             </body>
             </html>
