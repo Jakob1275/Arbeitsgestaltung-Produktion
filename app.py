@@ -986,35 +986,34 @@ elif current_tab == "Auswertung":
                 st.session_state.ergebnisse.get("Soziale Beziehungen und Interaktion", 1)
             ]
     
+            # Winkel und Werte zyklisch schließen
             angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
             values_cycle = values_ordered + values_ordered[:1]
             angles_cycle = angles + angles[:1]
 
-            fig, ax = plt.subplots(figsize=(7, 7), subplot_kw=dict(polar=True))
-
-            # Uhrzeigersinn & Start bei 12 Uhr
-            ax.set_theta_offset(np.pi / 2)
-            ax.set_theta_direction(-1)
+            # Labels umbrechen für bessere Lesbarkeit
+            wrapped_labels = [label.replace(" und ", "\nund ").replace("(", "\n(") for label in labels_ordered]
+        
+            # Plot erzeugen
+            fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+            ax.set_theta_offset(np.pi / 2)      # Start bei 12 Uhr
+            ax.set_theta_direction(1)           # Uhrzeigersinn
 
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
-            ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
+            ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.25)
 
-            # Labels anpassen
             ax.set_xticks(angles)
-            ax.set_xticklabels(labels_ordered, fontsize=8)
-    
-            # Achsenbereich
-            ax.set_ylim(0, 4)
+            ax.set_xticklabels(wrapped_labels, fontsize=7)
+
             ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(["1", "2", "3", "4"], fontsize=8, color="gray")
+            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7, color='gray')
+            ax.set_ylim(0, 4)
 
-            ax.yaxis.grid(True, linestyle='dotted', color='gray')
+            ax.yaxis.grid(True, linestyle='dotted', color='lightgray')
             ax.xaxis.grid(True, linestyle='solid', color='lightgray')
-
-            # Titel und Layout
             ax.set_title("Cluster-Profil", fontsize=14, pad=20)
-            plt.tight_layout(pad=3.0)
 
+            # Ausgabe in Streamlit
             buf = BytesIO()
             fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
