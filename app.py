@@ -857,7 +857,6 @@ elif current_tab in mtok_structure:
             score = st.radio(
                 "", 
                 options,
-                horizontal=True,
                 key=radio_key,
                 index=default_index
             )
