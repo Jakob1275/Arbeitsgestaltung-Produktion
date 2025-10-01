@@ -1021,7 +1021,7 @@ elif current_tab == "Auswertung":
     
         else:
             st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
-            img_tag = ""
+          
 
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
