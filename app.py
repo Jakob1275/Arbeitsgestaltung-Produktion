@@ -997,7 +997,7 @@ elif current_tab == "Auswertung":
             # Plot erzeugen
             fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
             ax.set_theta_offset(np.pi / 2)      # Start bei 12 Uhr
-            ax.set_theta_direction(2)           # Uhrzeigersinn
+            ax.set_theta_direction(-1)           # Uhrzeigersinn
 
             ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
             ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.25)
