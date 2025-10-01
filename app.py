@@ -959,28 +959,65 @@ elif current_tab == "Auswertung":
 
         # Radar-Chart erzeugen, falls Werte vorhanden
         if values and all(isinstance(v, (int, float)) for v in values):
-            angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
-            values_cycle = values + values[:1]
-            angles_cycle = angles + angles[:1]
-            wrapped_labels = [label.replace(" und ", "\nund ").replace("(", "\n(") for label in labels]
 
-            radar_chart_fig, ax = plt.subplots(figsize=(4, 4), subplot_kw=dict(polar=True))
-            ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.3)
-            ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=1)
-            ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=6)
-            ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=5)
-            ax.set_title("Cluster-Profil", fontsize=12, pad=10)
-            plt.tight_layout()
+        # Reihenfolge für MTOK-Struktur (Uhrzeigersinn)
+        labels_ordered = [
+            "Produktivität und Motivation (Mensch)",
+            "Persönliches Umfeld (Mensch)",
+            "Arbeitsplatzgestaltung und Automatisierung (Technik)",
+            "IT-Systemlandschaft und digital vernetzte Infrastruktur (Technik)",
+            "Kommunikation, Kooperation und Zusammenarbeit (Organisation)",
+            "Organisatorische Umwelt (Organisation)",
+            "Produktionsorganisation (Organisation)",
+            "Unternehmenskultur (Kultur)",
+            "Soziale Beziehungen und Interaktion (Kultur)"
+        ]
 
-            buf = BytesIO()
-            radar_chart_fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
-            buf.seek(0)
-            img_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            img_tag = f'<img src="data:image/png;base64,{img_base64}" style="width: 600px; height: auto; margin-top: 20px;">'
+        # Werte entsprechend sortieren (achte auf die korrekte Reihenfolge)
+        values_ordered = [
+            st.session_state.ergebnisse.get("Produktivität und Motivation", 1),
+            st.session_state.ergebnisse.get("Persönliches Umfeld", 1),
+            st.session_state.ergebnisse.get("Arbeitsplatzgestaltung und Automatisierung", 1),
+            st.session_state.ergebnisse.get("IT-Systemlandschaft und digital vernetzte Infrastruktur", 1),
+            st.session_state.ergebnisse.get("Kommunikation, Kooperation und Zusammenarbeit", 1),
+            st.session_state.ergebnisse.get("Organisatorische Umwelt", 1),
+            st.session_state.ergebnisse.get("Produktionsorganisation", 1),
+            st.session_state.ergebnisse.get("Unternehmenskultur", 1),
+            st.session_state.ergebnisse.get("Soziale Beziehungen und Interaktion", 1)
+        ]
+    
+        # Winkel und Werte zyklisch schließen
+        angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
+        values_cycle = values_ordered + values_ordered[:1]
+        angles_cycle = angles + angles[:1]
 
-            st.image(buf, caption="Cluster-Profil", width=700)
+        # Labels umbrechen für bessere Lesbarkeit
+        wrapped_labels = [label.replace(" und ", "\nund ").replace("(", "\n(") for label in labels_ordered]
+
+        # Plot erzeugen
+        fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+        ax.set_theta_offset(np.pi / 2)      # Start bei 12 Uhr
+        ax.set_theta_direction(1)           # Uhrzeigersinn
+
+        ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
+        ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.25)
+
+        ax.set_xticks(angles)
+        ax.set_xticklabels(wrapped_labels, fontsize=7)
+
+        ax.set_yticks([1, 2, 3, 4])
+        ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7, color='gray')
+        ax.set_ylim(0, 4)
+
+        ax.yaxis.grid(True, linestyle='dotted', color='lightgray')
+        ax.xaxis.grid(True, linestyle='solid', color='lightgray')
+        ax.set_title("Cluster-Profil", fontsize=14, pad=20)
+
+        # Ausgabe in Streamlit
+        buf = BytesIO()
+        fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
+        buf.seek(0)
+        st.image(buf, width=700)  
 
         else:
             st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
