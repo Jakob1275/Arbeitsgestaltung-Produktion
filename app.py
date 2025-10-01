@@ -751,7 +751,13 @@ if "ergebnisse" not in st.session_state:
 if "item_to_radio_key_map" not in st.session_state:
     st.session_state.item_to_radio_key_map = {}
 
-
+# Mapping von Textbewertung zu numerischen Score
+score_mapping = {
+    "Nicht erfüllt": 1,
+    "Teilweise erfüllt": 2,
+    "Weitestgehend erfüllt": 3,
+    "Vollständig erfüllt": 4
+}
         
 # Navigationsbuttons
 def nav_buttons(position):
@@ -808,13 +814,7 @@ if current_tab == "Start":
     """)
 
 # Inhalt MTOK-Tabs
-# Mapping von Textbewertung zu numerischen Score
-score_mapping = {
-    "Nicht erfüllt": 1,
-    "Teilweise erfüllt": 2,
-    "Weitestgehend erfüllt": 3,
-    "Vollständig erfüllt": 4
-}
+
 elif current_tab in mtok_structure:
     dimension = current_tab
     for feld in mtok_structure[dimension]:
