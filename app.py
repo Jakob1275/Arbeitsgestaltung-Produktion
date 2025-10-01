@@ -808,6 +808,13 @@ if current_tab == "Start":
     """)
 
 # Inhalt MTOK-Tabs
+# Mapping von Textbewertung zu numerischen Score
+score_mapping = {
+    "Nicht erfüllt": 1,
+    "Teilweise erfüllt": 2,
+    "Weitestgehend erfüllt": 3,
+    "Vollständig erfüllt": 4
+}
 
 elif current_tab in mtok_structure:
     dimension = current_tab
@@ -828,47 +835,41 @@ elif current_tab in mtok_structure:
            
             # Nutze indexbasierten Schlüssel (idx), damit die Zuordnung mit Kriterien stabil bleibt
             radio_key = f"{dimension}_{feld}_{idx}"
+            score_key = f"{radio_key}_score"
 
             # Mapping zur späteren Auswertung
             if "item_to_radio_key_map" not in st.session_state:
                 st.session_state["item_to_radio_key_map"] = {}
-            st.session_state["item_to_radio_key_map"][item['frage']] = f"{radio_key}_score"
-            score_key = f"{radio_key}_score"
-
+            st.session_state["item_to_radio_key_map"][item['frage']] = score_key
+            
             # Bewertungsoptionen abhängig von Einschränkung
             einschraenkung = item.get("einschraenkung", None)
             if einschraenkung == "1_und_4":
-                options = [1, 4]
+                options = ["Nicht erfüllt", "Vollständig erfüllt"]
             else:
-                options = [1, 2, 3, 4]
+                options = ["Nicht erfüllt", "Teilweise erfüllt", "Weitestgehend erfüllt", "Vollständig erfüllt"]
 
-            # Hole ggf. vorhandenen Wert
-            initial_value = st.session_state.get(score_key, None)
+            # Vorherige Auswahl als Text merken (Rückwärts-Mapping)
+            vorhandene_zahl = st.session_state.get(score_key, None)
+            if vorhandene_zahl in [1, 2, 3, 4]:
+                reverse_mapping = {v: k for k, v in score_mapping.items()}
+                initial_value = reverse_mapping.get(vorhandene_zahl)
+            else:
+                initial_value = None
 
-            # Bestimme Default-Wert, wenn vorhanden
             try:
-                #default_index = options.index(initial_value) if initial_value is not None else None
-                default_index = options.index(initial_value) if initial_value in options else 0
+                default_index = options.index(initial_value) if initial_value else 0
             except ValueError:
-                #default_index = None
                 default_index = 0
 
-            # Bewertungsauswahl anzeigen
-            score = st.radio(
-                "",
-                options,
-                key=radio_key,
-                index=default_index
-            )
+            auswahl = st.radio("", options, key=radio_key, index=default_index)
 
-            # Speichere Score separat (mit _score-Endung)
-            if score is not None:
-                st.session_state[score_key] = score
-                scores_for_this_hf.append(score)
-            else:
-                scores_for_this_hf.append(np.nan)
+            # In Score umwandeln
+            score = score_mapping.get(auswahl, np.nan)
+            st.session_state[score_key] = score
+            scores_for_this_hf.append(score)
 
-        # Mittelwert für dieses Handlungsfeld speichern
+        # Mittelwert pro Handlungsfeld
         if any(~np.isnan(scores_for_this_hf)):
             st.session_state.ergebnisse[feld] = np.nanmean(scores_for_this_hf)
         elif feld in st.session_state.ergebnisse:
