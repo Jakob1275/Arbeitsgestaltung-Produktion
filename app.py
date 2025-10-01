@@ -806,7 +806,7 @@ if current_tab == "Start":
        
         •	**Stufe 2** – Teilweise erfüllt: Erste Ansätze sind vorhanden, aber noch nicht systematisch
         
-        •	**Stufe 3** - Weitesgehend erfüllt: Das Kriterium ist größtenteils umgesetzt und funktioniert
+        •	**Stufe 3** - Weitestgehend erfüllt: Das Kriterium ist größtenteils umgesetzt und funktioniert
         
         •	**Stufe 4** – Vollständig erfüllt: Das Kriterium ist vollständig umgesetzt und fest etabliert
         
