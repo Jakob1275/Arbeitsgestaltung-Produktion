@@ -45,7 +45,7 @@ worksheet = get_worksheet()
 
 st.markdown("""
     <style>
-        /* Bisherige Formatierungen (wie bei dir) */
+       
         html, body, [class*="css"]  {
             font-size: 18px !important;
             line-height: 1.6;
@@ -92,37 +92,33 @@ st.markdown("""
             margin-bottom: 1rem;
         }
 
-        /* NEU: Bewertungskarten Stufe 1–4 */
-        .stufe-box {
-            border-radius: 0.5rem;
-            padding: 1rem 1.25rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            font-weight: 500;
-        }
-
-        .stufe-1 {
-            background-color: #e53935;  /* rot */
-        }
-
-        .stufe-2 {
-            background-color: #fb8c00;  /* orange */
-        }
-
-        .stufe-3 {
-            background-color: #fdd835;  /* gelb */
-            color: #000;
-        }
-
-        .stufe-4 {
-            background-color: #43a047;  /* grün */
-        }
     </style>
 """, unsafe_allow_html=True)
+
 # Struktur der Anwendung
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
-st.title("Modell zur Systematisierung flexibler Arbeit")
+#st.title("Modell zur Systematisierung flexibler Arbeit")
+
+st.markdown("""
+    <style>
+        .custom-title {
+            background-color: #f0f4fa;
+            padding: 1rem 1.5rem;
+            border-left: 6px solid #0066cc;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1.2rem;
+            font-size: 30px;
+            font-weight: bold;
+            color: #1c1c1c;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <div class="custom-title">Modell zur Systematisierung flexibler Arbeit</div>
+""", unsafe_allow_html=True)
+
 st.markdown(
     "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
 )
