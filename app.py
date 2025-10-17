@@ -765,6 +765,7 @@ st.markdown(" ➤ ".join([
 # Inhalt Start-Tabs
 
 if current_tab == "Start":
+    
     st.markdown("""
     <style>
         .stufe-box {
