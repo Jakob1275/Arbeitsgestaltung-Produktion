@@ -870,12 +870,13 @@ elif current_tab in mtok_structure:
             with st.container():
                 st.markdown(f"""
                     <div class="evaluation-container">
-                    <div class="evaluation-question">{frage_text}</div>
-                    <div class="evaluation-info">{begruendung}</div>
-                </div>
-            """, unsafe_allow_html=True)
+                        <div class="evaluation-question">{frage_text}</div>
+                        <div class="evaluation-info">{begruendung}</div>
+                """, unsafe_allow_html=True)
 
             auswahl = st.radio("", options, key=radio_key, index=default_index, label_visibility="collapsed")      
+
+            st.markdown("</div>", unsafe_allow_html=True)
             
             # In Score umwandeln
             score = score_mapping.get(auswahl, np.nan)
