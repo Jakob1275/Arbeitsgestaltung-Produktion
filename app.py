@@ -73,7 +73,7 @@ st.markdown("""
         color: #222;
     }
 
-    .evaluation-container + div[data-baseweb="radio"] {
+    .evaluation-container {
         padding: 1rem 1.5rem;
         background-color: #f9f9f9;
         border-radius: 0.5rem;
