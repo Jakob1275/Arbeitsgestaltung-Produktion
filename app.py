@@ -830,7 +830,12 @@ if current_tab == "Start":
     """, unsafe_allow_html=True)
 
 # Inhalt MTOK-Tabs
-
+elif current_tab in mtok_structure:
+    dimension = current_tab
+    for feld in mtok_structure[dimension]:
+        st.subheader(f"Handlungsfeld: {feld}")
+        scores_for_this_hf = []
+        
         for idx, item in enumerate(Kriterien.get(feld, [])):
             frage_text = html.escape(item["frage"])
             begruendung = html.escape(item["begründung"])
