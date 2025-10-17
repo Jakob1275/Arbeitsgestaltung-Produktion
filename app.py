@@ -781,21 +781,20 @@ st.markdown(" ➤ ".join([
 # Inhalt Start-Tabs
 
 if current_tab == "Start":
-    
     st.markdown("""
-        <style>
-            .text-box {
-                padding: 1.2rem;
-                background-color: #f9f9f9;
-                border-left: 5px solid #0066cc;
-                border: 1px solid #ccc;
-                border-radius: 0.5rem;
-                margin-bottom: 2rem;
-                font-size: 17px;
-                line-height: 1.6;
-                }
-        </style>
-    """, unsafe_allow_html=True)
+<style>
+.text-box {
+    padding: 1.2rem;
+    background-color: #f9f9f9;
+    border-left: 5px solid #0066cc;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+    font-size: 17px;
+    line-height: 1.6;
+}
+</style>
+""", unsafe_allow_html=True)
     
     st.markdown("""
     <div class="text-box">
