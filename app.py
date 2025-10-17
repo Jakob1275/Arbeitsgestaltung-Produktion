@@ -100,6 +100,7 @@ st.markdown("""
         align-items: center;
         padding: 0.5rem 1rem;
         border-bottom: 1px solid #ddd;
+        border-radius: 0px;
     }
 
     .header-title {
@@ -141,10 +142,10 @@ with col1:
     st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
 
 with col2:
-    st.image("FH-Logo.png", width=180)
+    st.image("FH-Logo.png", width=210)
 
 with col3:
-    st.image("KIT-Logo.png", width=180)
+    st.image("KIT-Logo.png", width=120)
     
 #st.markdown(
 #    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
