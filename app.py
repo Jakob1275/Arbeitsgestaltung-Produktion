@@ -838,17 +838,13 @@ elif current_tab in mtok_structure:
         scores_for_this_hf = []
 
         for idx, item in enumerate(Kriterien.get(feld, [])):
-            frage_text = item["frage"]
-            begruendung = item["begründung"]
-
             frage_text = html.escape(item["frage"])
             begruendung = html.escape(item["begründung"])
 
             st.markdown(f"""
                 <div class="evaluation-container">
-                     <div class="evaluation-question">{frage_text}</div>
+                    <div class="evaluation-question">{frage_text}</div>
                     <div class="evaluation-info">{begruendung}</div>
-                </div>
             """, unsafe_allow_html=True)
 
             #st.markdown(f"""
@@ -858,7 +854,7 @@ elif current_tab in mtok_structure:
              #   </div>
           #  """, unsafe_allow_html=True)
            
-            # Nutze indexbasierten Schlüssel (idx), damit die Zuordnung mit Kriterien stabil bleibt
+            # Bewertung
             radio_key = f"{dimension}_{feld}_{idx}"
             score_key = f"{radio_key}_score"
 
@@ -874,7 +870,7 @@ elif current_tab in mtok_structure:
             else:
                 options = ["Nicht erfüllt", "Teilweise erfüllt", "Weitestgehend erfüllt", "Vollständig erfüllt"]
 
-            # Vorherige Auswahl als Text merken (Rückwärts-Mapping)
+            # Rückwärts-Mapping
             vorhandene_zahl = st.session_state.get(score_key, None)
             if vorhandene_zahl in [1, 2, 3, 4]:
                 reverse_mapping = {v: k for k, v in score_mapping.items()}
@@ -889,6 +885,8 @@ elif current_tab in mtok_structure:
 
             auswahl = st.radio("", options, key=radio_key, index=default_index)
 
+            st.markdown("</div>", unsafe_allow_html=True)
+            
             # In Score umwandeln
             score = score_mapping.get(auswahl, np.nan)
             st.session_state[score_key] = score
