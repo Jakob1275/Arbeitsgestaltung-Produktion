@@ -102,43 +102,45 @@ st.markdown("""
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 
-# Stildefinition für Rahmen und Titel
 st.markdown("""
-    <style>
-        .header-box {
-            border: 2px solid #ccc;
-            border-radius: 0.6rem;
-            padding: 1.5rem;
-            margin-bottom: 2rem;
-            background-color: #f9f9f9;
-        }
-        .title-text {
-            text-align: left;
-            padding-right: 2rem;
-        }
-    </style>
+<style>
+    .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        border-bottom: 1px solid #ddd;
+    }
+    .header-title {
+        flex-grow: 1;
+    }
+    .logo-container {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
+    .logo-container img {
+        max-height: 50px;
+        height: auto;
+        width: auto;
+    }
+</style>
 """, unsafe_allow_html=True)
 
-# Container mit zwei Hauptspalten: links (Titel), rechts (Logos)
-with st.container():
-    st.markdown('<div class="header-box">', unsafe_allow_html=True)
-    col1, col2 = st.columns([5, 2])  # größerer linker Bereich für Text
-
-    with col1:
-        st.markdown('<div class="title-text">', unsafe_allow_html=True)
-        st.markdown("### Modell zur Systematisierung flexibler Arbeit")
-        st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
-        st.markdown('</div>', unsafe_allow_html=True)
-
-    with col2:
-        col_rechts1, col_rechts2 = st.columns([1, 1])
-        with col_rechts1:
-            st.image("FH-Logo.png", use_container_width=True)
-        with col_rechts2:
-            st.image("KIT-Logo.png", use_container_width=True)
-
-    st.markdown('</div>', unsafe_allow_html=True)
-st.markdown(
+# HTML-Block für Titel + Logos
+st.markdown("""
+<div class="header-container">
+    <div class="header-title">
+        <h2>Modell zur Systematisierung flexibler Arbeit</h2>
+        <p><em>Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung</em></p>
+    </div>
+    <div class="logo-container">
+        <img src="FH-Logo.png" alt="FH Kiel Logo">
+        <img src="KIT-Logo.png" alt="KIT Logo">
+    </div>
+</div>
+""", unsafe_allow_html=True)
+#st.markdown(
     "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
 )
 
