@@ -914,52 +914,52 @@ elif current_tab == "Abschließende Fragen":
         st.markdown("<hr style='margin-top: 1rem; margin-bottom: 1.5rem;'>", unsafe_allow_html=True)
     
     radio_with_categorization(
-        "**Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?**",
+        "**A1.1 Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?**",
         ["< 5", "5-10", "11-24", "≥ 25"],
         "cnc_range",
         categorize_cnc_machines
     )
 
     radio_with_categorization(
-        "Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?",
+        "**A1.2 Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?**",
         ["0%", "1-25%", "26-49%", "≥ 50%"],
         "automation_range",
         categorize_automation_percentage
     )
 
     radio_with_categorization(
-        "Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?",
+        "**A1.3 Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?**",
         ["< 5", "5-50", "51-99", "≥ 100"],
         "losgroesse_range",
         categorize_losgroesse
     )
 
     radio_with_categorization(
-        "Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil)?",
+        "**A1.4 Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil)?**",
         ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"],
         "durchlaufzeit_range",
         categorize_durchlaufzeit
     )
 
     radio_with_categorization(
-        "Welche durchschnittliche Laufzeit haben die Werkstücke?",
+        "**A1.5 Welche durchschnittliche Laufzeit haben die Werkstücke?**",
         ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"],
         "laufzeit_range",
         categorize_laufzeit
     )
 
-    st.subheader("Personen- und unternehmensbezogene Angaben")
-    st.radio("In welcher Funktion sind Sie tätig?",
-        ["Geschäftsführer", "Produktions-/ Fertigungsleitung", "Arbeitsvorbereitung", "Teamleitung", "Planungsabteilung (IE, Lean etc.)", "Weitere"],
-        key="funktion_radio_input")
+    #st.subheader("Personen- und unternehmensbezogene Angaben")
+    #st.radio("In welcher Funktion sind Sie tätig?",
+    #    ["Geschäftsführer", "Produktions-/ Fertigungsleitung", "Arbeitsvorbereitung", "Teamleitung", "Planungsabteilung (IE, Lean etc.)", "Weitere"],
+    #    key="funktion_radio_input")
 
-    st.radio("Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
-        ["1-9", "10-49", "50-199", "200-499", "500-1999", "≥2000"],
-        key="mitarbeitende_radio_input")
+    #st.radio("Wie viele Mitarbeitende arbeiten in Ihrem Unternehmen?",
+    #    ["1-9", "10-49", "50-199", "200-499", "500-1999", "≥2000"],
+    #    key="mitarbeitende_radio_input")
 
-    st.text_input("Für welche Branche fertigen Sie?", key="branche_input")
-    st.text_input("PLZ (optional)", key="plz_input")
-    st.text_input("E-Mail (optional)", key="email_input")
+    #st.text_input("Für welche Branche fertigen Sie?", key="branche_input")
+    #st.text_input("PLZ (optional)", key="plz_input")
+    #st.text_input("E-Mail (optional)", key="email_input")
 
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
     
