@@ -145,7 +145,7 @@ with col2:
     st.image("FH-Logo.png", width=210)
 
 with col3:
-    st.image("KIT-Logo.png", width=120)
+    st.image("kit-logo-en.svg", width=120)
     
 #st.markdown(
 #    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
