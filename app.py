@@ -873,7 +873,14 @@ elif current_tab in mtok_structure:
                         <div class="evaluation-question">{frage_text}</div>
                         <div class="evaluation-info">{begruendung}</div>
                 """, unsafe_allow_html=True)
-                auswahl = st.radio("", options, key=radio_key, index=default_index, label_visibility="collapsed")      
+                auswahl = st.radio(
+                    label="",
+                    options=options,
+                    key=radio_key,
+                    index=default_index,
+                    label_visibility="collapsed"
+                )
+                
                 st.markdown("</div>", unsafe_allow_html=True)
             
             # In Score umwandeln
