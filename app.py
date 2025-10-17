@@ -98,7 +98,45 @@ st.markdown("""
 # Struktur der Anwendung
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
-st.title("Modell zur Systematisierung flexibler Arbeit")
+#st.title("Modell zur Systematisierung flexibler Arbeit")
+
+st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
+
+# Titelbox mit CSS
+st.markdown("""
+    <style>
+        .header-box {
+            border: 2px solid #ccc;
+            border-radius: 0.6rem;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            background-color: #f9f9f9;
+        }
+        .title-text {
+            text-align: center;
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# Inhalt in Spalten (Logos links/rechts, Titel in der Mitte)
+with st.container():
+    st.markdown('<div class="header-box">', unsafe_allow_html=True)
+    col1, col2, col3 = st.columns([1, 5, 1])
+
+    with col1:
+        st.image("FH-Logo.png", use_column_width="always")
+
+    with col2:
+        st.markdown('<div class="title-text">', unsafe_allow_html=True)
+        st.markdown("### Modell zur Systematisierung flexibler Arbeit")
+        st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with col3:
+        st.image("KIT-Logo.png", use_column_width="always")
+    
+    st.markdown('</div>', unsafe_allow_html=True)
+
 st.markdown(
     "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
 )
