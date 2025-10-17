@@ -874,7 +874,7 @@ elif current_tab in mtok_structure:
             with st.container():
                 st.markdown(
                     f"""
-                    <div class="evaluation-box">
+                    <div class="evaluation-container">
                         <div class="evaluation-question">{html.escape(frage_text)}</div>
                         <div class="evaluation-info">{html.escape(begruendung)}</div>
                     """,
