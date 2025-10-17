@@ -45,7 +45,7 @@ worksheet = get_worksheet()
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 
-# Kombinierter Style-Block
+# Style-Block
 st.markdown("""
 <style>
     html, body, [class*="css"]  {
@@ -840,12 +840,22 @@ elif current_tab in mtok_structure:
             frage_text = item["frage"]
             begruendung = item["begründung"]
 
+            frage_text = html.escape(item["frage"])
+            begruendung = html.escape(item["begründung"])
+
             st.markdown(f"""
-                <div style='margin-bottom: -0.2rem'>
-                    <strong>{frage_text}</strong><br>
-                    <span style='color:gray; font-size:0.95em'>{begruendung}</span>
+                <div class="evaluation-container">
+                     <div class="evaluation-question">{frage_text}</div>
+                    <div class="evaluation-info">{begruendung}</div>
                 </div>
             """, unsafe_allow_html=True)
+
+            #st.markdown(f"""
+                #<div style='margin-bottom: -0.2rem'>
+              #      <strong>{frage_text}</strong><br>
+             #       <span style='color:gray; font-size:0.95em'>{begruendung}</span>
+             #   </div>
+          #  """, unsafe_allow_html=True)
            
             # Nutze indexbasierten Schlüssel (idx), damit die Zuordnung mit Kriterien stabil bleibt
             radio_key = f"{dimension}_{feld}_{idx}"
