@@ -43,67 +43,57 @@ def get_worksheet():
 # worksheet global verwenden
 worksheet = get_worksheet()
 
-st.markdown("""
-    <style>
-       
-        html, body, [class*="css"]  {
-            font-size: 18px !important;
-            line-height: 1.6;
-        }
-
-        div[data-baseweb="radio"] {
-            margin-bottom: -10px !important;
-        }
-
-        .element-container:has([data-baseweb="radio"]) {
-            margin-bottom: -5px !important;
-        }
-
-        .evaluation-section {
-            margin-bottom: 2.2rem;
-        }
-
-        .evaluation-question {
-            font-size: 18px;
-            font-weight: 500;
-            margin-bottom: 0.4rem;
-            color: #222;
-        }
-
-        .evaluation-container {
-            padding: 1rem 1.5rem;
-            background-color: #f9f9f9;
-            border-radius: 0.5rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #ddd;
-        }
-
-        .evaluation-title {
-            font-size: 24px;
-            font-weight: bold;
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-            color: #333;
-        }
-
-        .evaluation-info {
-            font-size: 16px;
-            color: #444;
-            margin-bottom: 1rem;
-        }
-
-    </style>
-""", unsafe_allow_html=True)
-
-# Struktur der Anwendung
-
-#st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
-#st.title("Modell zur Systematisierung flexibler Arbeit")
-
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 
+# Kombinierter Style-Block
 st.markdown("""
 <style>
+    html, body, [class*="css"]  {
+        font-size: 18px !important;
+        line-height: 1.6;
+    }
+
+    div[data-baseweb="radio"] {
+        margin-bottom: -10px !important;
+    }
+
+    .element-container:has([data-baseweb="radio"]) {
+        margin-bottom: -5px !important;
+    }
+
+    .evaluation-section {
+        margin-bottom: 2.2rem;
+    }
+
+    .evaluation-question {
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 0.4rem;
+        color: #222;
+    }
+
+    .evaluation-container {
+        padding: 1rem 1.5rem;
+        background-color: #f9f9f9;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #ddd;
+    }
+
+    .evaluation-title {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 1.5rem;
+        margin-bottom: 0.8rem;
+        color: #333;
+    }
+
+    .evaluation-info {
+        font-size: 16px;
+        color: #444;
+        margin-bottom: 1rem;
+    }
+
     .header-container {
         display: flex;
         justify-content: space-between;
@@ -111,22 +101,37 @@ st.markdown("""
         padding: 0.5rem 1rem;
         border-bottom: 1px solid #ddd;
     }
+
     .header-title {
         flex-grow: 1;
     }
+
     .logo-container {
         display: flex;
         gap: 1rem;
         align-items: center;
     }
+
     .logo-container img {
         max-height: 50px;
         height: auto;
         width: auto;
     }
+
+    .text-box {
+        padding: 1.2rem;
+        background-color: #f0f0f0;
+        border-left: 5px solid #0066cc;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+        font-size: 17px;
+        line-height: 1.6;
+    }
 </style>
 """, unsafe_allow_html=True)
 
+# Header mit Logos
 col1, col2, col3 = st.columns([5, 1, 1])
 
 with col1:
@@ -138,7 +143,7 @@ with col2:
 
 with col3:
     st.image("KIT-Logo.png", width=100)
-""", unsafe_allow_html=True)
+    
 #st.markdown(
 #    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
 #)
@@ -781,18 +786,20 @@ st.markdown(" ➤ ".join([
 # Inhalt Start-Tabs
 
 if current_tab == "Start":
-    st.markdown("""<style>
-.text-box {
-    padding: 1.2rem;
-    background-color: #f0f0f0;
-    border-left: 5px solid #0066cc;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    margin-bottom: 2rem;
-    font-size: 17px;
-    line-height: 1.6;
-}
-</style>""", unsafe_allow_html=True)
+    st.markdown("""
+    <style>
+    .text-box {
+        padding: 1.2rem;
+        background-color: #f0f0f0;
+        border-left: 5px solid #0066cc;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+        font-size: 17px;
+        line-height: 1.6;
+    }
+    </style>
+    """, unsafe_allow_html=True)
     
     st.markdown("""
     <div class="text-box">
