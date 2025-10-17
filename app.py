@@ -127,18 +127,17 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# HTML-Block für Titel + Logos
-st.markdown("""
-<div class="header-container">
-    <div class="header-title">
-        <h2>Modell zur Systematisierung flexibler Arbeit</h2>
-        <p><em>Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung</em></p>
-    </div>
-    <div class="logo-container">
-        <img src="FH-Logo.png" alt="FH Kiel Logo">
-        <img src="KIT-Logo.png" alt="KIT Logo">
-    </div>
-</div>
+col1, col2, col3 = st.columns([5, 1, 1])
+
+with col1:
+    st.markdown("## Modell zur Systematisierung flexibler Arbeit")
+    st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
+
+with col2:
+    st.image("FH-Logo.png", width=100)
+
+with col3:
+    st.image("KIT-Logo.png", width=100)
 """, unsafe_allow_html=True)
 #st.markdown(
 #    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
