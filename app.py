@@ -793,7 +793,7 @@ if current_tab == "Start":
                 margin-bottom: 2rem;
                 font-size: 17px;
                 line-height: 1.6;
-            }
+                }
         </style>
     """, unsafe_allow_html=True)
     
