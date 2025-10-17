@@ -141,8 +141,8 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 #st.markdown(
-    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
-)
+#    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
+#)
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
