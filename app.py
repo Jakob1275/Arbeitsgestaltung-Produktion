@@ -797,6 +797,7 @@ if current_tab == "Start":
         st.markdown('<div class="stufe-box stufe-3">🟡 <strong>Stufe 3 – Weitgehend erfüllt:</strong> Das Kriterium ist größtenteils umgesetzt und funktioniert.</div>', unsafe_allow_html=True)
         
         st.markdown('<div class="stufe-box stufe-4">🟢 <strong>Stufe 4 – Vollständig erfüllt:</strong> Das Kriterium ist vollständig umgesetzt und fest etabliert.</div>', unsafe_allow_html=True)
+
     st.markdown("""    
         Nach der Selbstbewertung erhalten Sie ein übersichtliches **grafisches Profil**, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von **vier Unternehmenstypen** zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typem bekommen Sie maßgeschneiderte, praxisnahe Handlungsempfehlungen, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.
     """)
