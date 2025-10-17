@@ -767,16 +767,16 @@ st.markdown(" ➤ ".join([
 if current_tab == "Start":
     
     st.markdown("""
-    <style>
-        .stufe-box {
-            padding: 0.9rem 1.2rem;
-            border-radius: 0.6rem;
-            border: 1px solid #ccc;
-            background-color: #f8f8f8;
-            margin-bottom: 1rem;
-            font-size: 17px;
-        }
-    </style>
+        <style>
+            .stufe-box {
+                padding: 0.9rem 1.2rem;
+                border-radius: 0.6rem;
+                border: 1px solid #ccc;
+                background-color: #f8f8f8;
+                margin-bottom: 1rem;
+                font-size: 17px;
+            }
+        </style>
     """, unsafe_allow_html=True)
     
     st.markdown("""
