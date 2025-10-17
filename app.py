@@ -876,8 +876,8 @@ elif current_tab in mtok_structure:
                         margin-bottom: 1.5rem;
                         border: 1px solid #ddd;
                     '>
-                            <div style='font-size:18px; font-weight:500; margin-bottom:0.4rem; color:#222'>{frage_text}</div>
-                            <div style='font-size:16px; color:#444; margin-bottom:1rem'>{begruendung}</div>
+                        <div style='font-size:18px; font-weight:500; margin-bottom:0.4rem; color:#222'>{frage_text}</div>
+                        <div style='font-size:16px; color:#444; margin-bottom:1rem'>{begruendung}</div>
                     """, unsafe_allow_html=True)
 
                     auswahl = st.radio("", options, key=radio_key, index=default_index, label_visibility="collapsed")
