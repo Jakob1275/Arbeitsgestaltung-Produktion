@@ -142,10 +142,18 @@ with col1:
     st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
 
 with col2:
-    st.markdown('<img src="FH-Logo.png" style="max-height: 210px; border-radius: 0px;">', unsafe_allow_html=True)
+    st.markdown(
+        '<img src="https://raw.githubusercontent.com/deinNutzername/deinRepo/main/FH-Logo.png" '
+        'style="max-height: 70px; border-radius: 0px;">',
+        unsafe_allow_html=True
+    )
 
 with col3:
-    st.markdown('<img src="kit-logo-en.svg" style="max-height: 120px; border-radius: 0px;">', unsafe_allow_html=True)
+    st.markdown(
+        '<img src="https://raw.githubusercontent.com/deinNutzername/deinRepo/main/kit-logo-en.svg" '
+        'style="max-height: 70px; border-radius: 0px;">',
+        unsafe_allow_html=True
+    )
 
 #with col2:
 #    st.image("FH-Logo.png", width=210)
