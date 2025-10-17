@@ -98,27 +98,7 @@ st.markdown("""
 # Struktur der Anwendung
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
-#st.title("Modell zur Systematisierung flexibler Arbeit")
-
-st.markdown("""
-    <style>
-        .custom-title {
-            background-color: #f0f4fa;
-            padding: 1rem 1.5rem;
-            border-left: 6px solid #0066cc;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            margin-bottom: 1.2rem;
-            font-size: 30px;
-            font-weight: bold;
-            color: #1c1c1c;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-    </style>
-
-    <div class="custom-title">Modell zur Systematisierung flexibler Arbeit</div>
-""", unsafe_allow_html=True)
-
+st.title("Modell zur Systematisierung flexibler Arbeit")
 st.markdown(
     "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
 )
