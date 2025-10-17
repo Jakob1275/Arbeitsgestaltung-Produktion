@@ -45,21 +45,20 @@ worksheet = get_worksheet()
 
 st.markdown("""
     <style>
-        /* Grundlegende Schriftgröße und Zeilenhöhe */
+        /* Bisherige Formatierungen (wie bei dir) */
         html, body, [class*="css"]  {
             font-size: 18px !important;
             line-height: 1.6;
         }
 
-        /* Reduziere Abstand unter Radio-Buttons */
         div[data-baseweb="radio"] {
             margin-bottom: -10px !important;
         }
 
-        /* Reduziere Abstand unter Text (Hilfstext) vor dem Radio */
         .element-container:has([data-baseweb="radio"]) {
             margin-bottom: -5px !important;
         }
+
         .evaluation-section {
             margin-bottom: 2.2rem;
         }
@@ -92,9 +91,34 @@ st.markdown("""
             color: #444;
             margin-bottom: 1rem;
         }
+
+        /* NEU: Bewertungskarten Stufe 1–4 */
+        .stufe-box {
+            border-radius: 0.5rem;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1rem;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .stufe-1 {
+            background-color: #e53935;  /* rot */
+        }
+
+        .stufe-2 {
+            background-color: #fb8c00;  /* orange */
+        }
+
+        .stufe-3 {
+            background-color: #fdd835;  /* gelb */
+            color: #000;
+        }
+
+        .stufe-4 {
+            background-color: #43a047;  /* grün */
+        }
     </style>
 """, unsafe_allow_html=True)
-
 # Struktur der Anwendung
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
@@ -747,15 +771,12 @@ if current_tab == "Start":
        
         Das Modell wurde speziell für **Unternehmen der zerspanenden Fertigung** entwickelt. Es ermöglicht Ihnen eine **strukturierte Bestandsaufnahme** Ihres Unternehmens und zeigt gleichzeitig auf, wie Sie die **Einführung mobiler und zeitflexibler Arbeit** unterstützen können. Dabei berücksichtigt das Modell vier wichtige Bereiche: Ihre Beschäftigten, die vorhandene Technik, Ihre Organisation und die Unternehmenskultur. Diese vier Bereiche werden in neun **konkrete Handlungsfelder** unterteilt, die speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.
         
-        Die Bewertung basiert auf einem **vierstufigen System:**
-       
-        •	**Stufe 1** – Nicht erfüllt: Das Kriterium wird derzeit nicht umgesetzt
-       
-        •	**Stufe 2** – Teilweise erfüllt: Erste Ansätze sind vorhanden, aber noch nicht systematisch
-        
-        •	**Stufe 3** - Weitestgehend erfüllt: Das Kriterium ist größtenteils umgesetzt und funktioniert
-        
-        •	**Stufe 4** – Vollständig erfüllt: Das Kriterium ist vollständig umgesetzt und fest etabliert
+        st.markdown('<p><strong>Die Bewertung basiert auf einem vierstufigen System:</strong></p>', unsafe_allow_html=True)
+
+        st.markdown('<div class="stufe-box stufe-1">🔴 <strong>Stufe 1 – Nicht erfüllt:</strong> Dieses Kriterium wird derzeit nicht umgesetzt.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stufe-box stufe-2">🟠 <strong>Stufe 2 – Teilweise erfüllt:</strong> Erste Ansätze sind vorhanden, aber noch nicht systematisch.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stufe-box stufe-3">🟡 <strong>Stufe 3 – Weitgehend erfüllt:</strong> Das Kriterium ist größtenteils umgesetzt und funktioniert.</div>', unsafe_allow_html=True)
+        st.markdown('<div class="stufe-box stufe-4">🟢 <strong>Stufe 4 – Vollständig erfüllt:</strong> Das Kriterium ist vollständig umgesetzt und fest etabliert.</div>', unsafe_allow_html=True)
         
         Nach der Selbstbewertung erhalten Sie ein übersichtliches **grafisches Profil**, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von **vier Unternehmenstypen** zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typem bekommen Sie maßgeschneiderte, praxisnahe Handlungsempfehlungen, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.
     """)
