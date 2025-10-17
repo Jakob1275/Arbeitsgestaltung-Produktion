@@ -110,6 +110,7 @@ st.markdown("""
         display: flex;
         gap: 1rem;
         align-items: center;
+        border-radius: 0px;
     }
 
     .logo-container img {
@@ -140,10 +141,10 @@ with col1:
     st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
 
 with col2:
-    st.image("FH-Logo.png", width=150)
+    st.image("FH-Logo.png", width=180)
 
 with col3:
-    st.image("KIT-Logo.png", width=150)
+    st.image("KIT-Logo.png", width=180)
     
 #st.markdown(
 #    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
