@@ -138,6 +138,10 @@ st.markdown("""
     border-radius: 0px !important;
     box-shadow: none !important;
     }
+
+    div[data-baseweb="radio"] {
+    margin-left: 1rem;
+    }
     
 </style>
 """, unsafe_allow_html=True)
@@ -867,20 +871,16 @@ elif current_tab in mtok_structure:
                 default_index = 0
 
             # Container für saubere visuelle Gruppierung
-            with st.markdown(
-                """
-                <div class="evaluation-box">
-                    <div class="evaluation-question">{frage}</div>
-                        <div class="evaluation-info">{begruendung}</div>
-                    """.format(
-                    frage=html.escape(frage_text),
-                    begruendung=html.escape(begruendung)
-                ),
-                unsafe_allow_html=True
-            ):
-                pass  # HTML-Box geöffnet
+            with st.container():
+                st.markdown(
+                    f"""
+                    <div class="evaluation-box">
+                        <div class="evaluation-question">{html.escape(frage_text)}</div>
+                        <div class="evaluation-info">{html.escape(begruendung)}</div>
+                    """,
+                    unsafe_allow_html=True
+            )
 
-            # Radio-Buttons müssen *außerhalb* des markdown-blocks, aber *innerhalb* der container-Struktur bleiben
             auswahl = st.radio(
                 label="",
                 options=options,
