@@ -58,10 +58,6 @@ st.markdown("""
         margin-bottom: -10px !important;
     }
 
-    .element-container:has([data-baseweb="radio"]) {
-        margin-bottom: -5px !important;
-    }
-
     .evaluation-section {
         margin-bottom: 2.2rem;
     }
@@ -71,14 +67,6 @@ st.markdown("""
         font-weight: bold;
         margin-bottom: 0.2rem;
         color: #222;
-    }
-
-    .element-container:has([data-baseweb="radio"]) {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
-        padding: 1rem 1.5rem;
-        margin-bottom: 1rem;
     }
  
     .evaluation-block {
