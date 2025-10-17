@@ -766,6 +766,22 @@ st.markdown(" ➤ ".join([
 
 if current_tab == "Start":
     st.markdown("""
+    <style>
+        .stufe-box {
+            padding: 0.9rem 1.2rem;
+            border-radius: 0.6rem;
+            border: 1px solid #ccc;
+            background-color: #f8f8f8;
+            margin-bottom: 1rem;
+            font-size: 17px;
+        }
+        .stufe-1 { border-left: 5px solid #ff4d4d; }  /* Rot */
+        .stufe-2 { border-left: 5px solid #ffaa00; }  /* Orange */
+        .stufe-3 { border-left: 5px solid #ffd633; }  /* Gelb */
+        .stufe-4 { border-left: 5px solid #28a745; }  /* Grün */
+    </style>
+""", unsafe_allow_html=True)
+    st.markdown("""
     
         Die **Digitalisierung** und der **Wunsch nach flexibleren Arbeitsmodellen** stellen produzierende Unternehmen vor neue Herausforderungen. Wie können beispielsweise Homeoffice und flexible Arbeitszeiten in der Produktion umgesetzt werden? Das entwickelte Diagnose- und Entwicklungsmodell hilft Ihnen dabei, diese Frage systematisch anzugehen: Es zeigt Ihnen, wo Ihr Unternehmen heute steht und gibt Ihnen konkrete Handlungsempfehlungen für die Umsetzung flexibler Arbeitsformen an die Hand.
        
@@ -774,8 +790,11 @@ if current_tab == "Start":
         st.markdown('<p><strong>Die Bewertung basiert auf einem vierstufigen System:</strong></p>', unsafe_allow_html=True)
 
         st.markdown('<div class="stufe-box stufe-1">🔴 <strong>Stufe 1 – Nicht erfüllt:</strong> Dieses Kriterium wird derzeit nicht umgesetzt.</div>', unsafe_allow_html=True)
+        
         st.markdown('<div class="stufe-box stufe-2">🟠 <strong>Stufe 2 – Teilweise erfüllt:</strong> Erste Ansätze sind vorhanden, aber noch nicht systematisch.</div>', unsafe_allow_html=True)
+        
         st.markdown('<div class="stufe-box stufe-3">🟡 <strong>Stufe 3 – Weitgehend erfüllt:</strong> Das Kriterium ist größtenteils umgesetzt und funktioniert.</div>', unsafe_allow_html=True)
+        
         st.markdown('<div class="stufe-box stufe-4">🟢 <strong>Stufe 4 – Vollständig erfüllt:</strong> Das Kriterium ist vollständig umgesetzt und fest etabliert.</div>', unsafe_allow_html=True)
         
         Nach der Selbstbewertung erhalten Sie ein übersichtliches **grafisches Profil**, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von **vier Unternehmenstypen** zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typem bekommen Sie maßgeschneiderte, praxisnahe Handlungsempfehlungen, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.
