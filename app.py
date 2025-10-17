@@ -68,8 +68,8 @@ st.markdown("""
 
     .evaluation-question {
         font-size: 18px;
-        font-weight: 500;
-        margin-bottom: 0.4rem;
+        font-weight: bold;
+        margin-bottom: 0.2rem;
         color: #222;
     }
 
@@ -77,7 +77,7 @@ st.markdown("""
         padding: 1rem 1.5rem;
         background-color: #f9f9f9;
         border-radius: 0.5rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.2rem;
         border: 1px solid #ddd;
     }
 
@@ -92,7 +92,7 @@ st.markdown("""
     .evaluation-info {
         font-size: 16px;
         color: #444;
-        margin-bottom: 1rem;
+        margin-bottom: 0.2rem;
     }
 
     .header-container {
@@ -831,46 +831,23 @@ if current_tab == "Start":
 
 # Inhalt MTOK-Tabs
 
-elif current_tab in mtok_structure:
-    dimension = current_tab
-    for feld in mtok_structure[dimension]:
-        st.subheader(f"Handlungsfeld: {feld}")
-        scores_for_this_hf = []
-
         for idx, item in enumerate(Kriterien.get(feld, [])):
             frage_text = html.escape(item["frage"])
             begruendung = html.escape(item["begründung"])
 
-            st.markdown(f"""
-                <div class="evaluation-container">
-                    <div class="evaluation-question">{frage_text}</div>
-                    <div class="evaluation-info">{begruendung}</div>
-            """, unsafe_allow_html=True)
-
-            #st.markdown(f"""
-                #<div style='margin-bottom: -0.2rem'>
-              #      <strong>{frage_text}</strong><br>
-             #       <span style='color:gray; font-size:0.95em'>{begruendung}</span>
-             #   </div>
-          #  """, unsafe_allow_html=True)
-           
-            # Bewertung
             radio_key = f"{dimension}_{feld}_{idx}"
             score_key = f"{radio_key}_score"
 
-            # Mapping zur späteren Auswertung
             if "item_to_radio_key_map" not in st.session_state:
                 st.session_state["item_to_radio_key_map"] = {}
             st.session_state["item_to_radio_key_map"][item['frage']] = score_key
-            
-            # Bewertungsoptionen abhängig von Einschränkung
+
             einschraenkung = item.get("einschraenkung", None)
             if einschraenkung == "1_und_4":
                 options = ["Nicht erfüllt", "Vollständig erfüllt"]
             else:
                 options = ["Nicht erfüllt", "Teilweise erfüllt", "Weitestgehend erfüllt", "Vollständig erfüllt"]
 
-            # Rückwärts-Mapping
             vorhandene_zahl = st.session_state.get(score_key, None)
             if vorhandene_zahl in [1, 2, 3, 4]:
                 reverse_mapping = {v: k for k, v in score_mapping.items()}
@@ -883,20 +860,21 @@ elif current_tab in mtok_structure:
             except ValueError:
                 default_index = 0
 
-            auswahl = st.radio("", options, key=radio_key, index=default_index)
+            # ✅ Container für saubere visuelle Gruppierung
+            with st.container():
+                st.markdown(f"""
+                    <div class="evaluation-container">
+                        <div class="evaluation-question">{frage_text}</div>
+                        <div class="evaluation-info">{begruendung}</div>
+                    </div>
+                """, unsafe_allow_html=True)
 
-            st.markdown("</div>", unsafe_allow_html=True)
-            
+                auswahl = st.radio("", options, key=radio_key, index=default_index, label_visibility="collapsed")
+
             # In Score umwandeln
             score = score_mapping.get(auswahl, np.nan)
             st.session_state[score_key] = score
             scores_for_this_hf.append(score)
-
-        # Mittelwert pro Handlungsfeld
-        if any(~np.isnan(scores_for_this_hf)):
-            st.session_state.ergebnisse[feld] = np.nanmean(scores_for_this_hf)
-        elif feld in st.session_state.ergebnisse:
-            del st.session_state.ergebnisse[feld]
             
 elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
