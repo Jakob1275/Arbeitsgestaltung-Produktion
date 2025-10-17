@@ -868,9 +868,8 @@ elif current_tab in mtok_structure:
             # Container für saubere visuelle Gruppierung
             with st.container():
                 st.markdown(f"""
-                    <div class="evaluation-block">
-                        <div class="evaluation-question">{html.escape(frage_text)}</div>
-                        <div class="evaluation-info">{html.escape(begruendung)}</div>
+                    <div class="evaluation-question">{html.escape(frage_text)}</div>
+                    <div class="evaluation-info">{html.escape(begruendung)}</div>
                 """,unsafe_allow_html=True)
 
                 auswahl = st.radio(
@@ -881,7 +880,14 @@ elif current_tab in mtok_structure:
                     label_visibility="collapsed"
                 )        
 
-                st.markdown("</div>", unsafe_allow_html=True)
+                st.markdown("""
+                <hr style='
+                    border: none;
+                    border-top: 1px solid #ccc;
+                    margin-top: 2rem;
+                    margin-bottom: 2rem;
+                '>
+                """, unsafe_allow_html=True)
             
             # In Score umwandeln
             score = score_mapping.get(auswahl, np.nan)
