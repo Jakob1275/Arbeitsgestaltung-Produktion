@@ -73,13 +73,12 @@ st.markdown("""
         color: #222;
     }
 
-    .evaluation-container {
-        padding: 1rem 1.5rem;
+    .element-container:has([data-baseweb="radio"]) {
         background-color: #f9f9f9;
-        border-radius: 0.5rem;
-        margin-bottom: 0.2rem;
-        margin-left: 1.5rem;
         border: 1px solid #ddd;
+        border-radius: 0.5rem;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1rem;
     }
 
     .evaluation-title {
@@ -872,14 +871,10 @@ elif current_tab in mtok_structure:
 
             # Container für saubere visuelle Gruppierung
             with st.container():
-                st.markdown(
-                    f"""
-                    <div class="evaluation-container">
-                        <div class="evaluation-question">{html.escape(frage_text)}</div>
-                        <div class="evaluation-info">{html.escape(begruendung)}</div>
-                    """,
-                    unsafe_allow_html=True
-                )
+                st.markdown(f"""
+                    <div class="evaluation-question">{html.escape(frage_text)}</div>
+                    <div class="evaluation-info">{html.escape(begruendung)}</div>
+                """,unsafe_allow_html=True)
 
                 auswahl = st.radio(
                     label="",
@@ -888,8 +883,6 @@ elif current_tab in mtok_structure:
                     index=default_index,
                     label_visibility="collapsed"
                 )        
-
-                st.markdown("</div>", unsafe_allow_html=True)  # HTML-Box schließen
             
             # In Score umwandeln
             score = score_mapping.get(auswahl, np.nan)
