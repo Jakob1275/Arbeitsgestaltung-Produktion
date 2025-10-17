@@ -775,10 +775,6 @@ if current_tab == "Start":
             margin-bottom: 1rem;
             font-size: 17px;
         }
-        .stufe-1 { border-left: 5px solid #ff4d4d; }  /* Rot */
-        .stufe-2 { border-left: 5px solid #ffaa00; }  /* Orange */
-        .stufe-3 { border-left: 5px solid #ffd633; }  /* Gelb */
-        .stufe-4 { border-left: 5px solid #28a745; }  /* Grün */
     </style>
     """, unsafe_allow_html=True)
     
