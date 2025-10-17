@@ -116,6 +116,7 @@ st.markdown("""
         max-height: 50px;
         height: auto;
         width: auto;
+        border-radius: 0px;
     }
 
     .text-box {
@@ -139,10 +140,10 @@ with col1:
     st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
 
 with col2:
-    st.image("FH-Logo.png", width=100)
+    st.image("FH-Logo.png", width=150)
 
 with col3:
-    st.image("KIT-Logo.png", width=100)
+    st.image("KIT-Logo.png", width=150)
     
 #st.markdown(
 #    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
