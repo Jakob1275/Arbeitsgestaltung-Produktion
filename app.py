@@ -131,6 +131,12 @@ st.markdown("""
         font-size: 17px;
         line-height: 1.6;
     }
+
+    img {
+    border-radius: 0px !important;
+    box-shadow: none !important;
+    }
+    
 </style>
 """, unsafe_allow_html=True)
 
