@@ -901,9 +901,24 @@ elif current_tab in mtok_structure:
             if "ergebnisse" not in st.session_state:
                 st.session_state["ergebnisse"] = {}
             st.session_state.ergebnisse[feld] = np.nanmean(scores_for_this_hf)
-        elif "ergebnisse" in st.session_state and feld in st.session_state.ergebnisse:
-            del st.session_state.ergebnisse[feld]
-            
+        else:
+            if "ergebnisse" in st.session_state and feld in st.session_state.ergebnisse:
+                del st.session_state.ergebnisse[feld]
+
+        # ⬇️ Einzelantworten erfassen
+        if "einzelantworten" not in st.session_state:
+            st.session_state["einzelantworten"] = {}
+
+        for idx, score in enumerate(scores_for_this_hf):
+            if not np.isnan(score):
+                item = Kriterien.get(feld, [])[idx]
+                frage_text = item.get("frage", "")
+                radio_key = f"{feld}__{idx}"
+                st.session_state["einzelantworten"][radio_key] = {
+                    "frage": frage_text,
+                    "antwort": st.session_state.get(f"{dimension}_{feld}_{idx}", ""),
+                    "score": score
+                }
 elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
@@ -1451,6 +1466,9 @@ if current_tab == "Evaluation":
         daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
+        for key, eintrag in st.session_state.get("einzelantworten", {}).items():
+            daten_gesamt[f"{key}__antwort"] = eintrag["antwort"]
+            daten_gesamt[f"{key}__score"] = eintrag["score"]
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
         # Speichern in Google Sheet
