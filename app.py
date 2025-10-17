@@ -100,43 +100,46 @@ st.markdown("""
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 #st.title("Modell zur Systematisierung flexibler Arbeit")
 
+import streamlit as st
+
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 
-# Titelbox mit CSS
+# Stildefinition für Rahmen und Titel
 st.markdown("""
     <style>
         .header-box {
             border: 2px solid #ccc;
             border-radius: 0.6rem;
-            padding: 1rem;
+            padding: 1.5rem;
             margin-bottom: 2rem;
             background-color: #f9f9f9;
         }
         .title-text {
-            text-align: center;
+            text-align: left;
+            padding-right: 2rem;
         }
     </style>
 """, unsafe_allow_html=True)
 
-# Inhalt in Spalten (Logos links/rechts, Titel in der Mitte)
+# Container mit zwei Hauptspalten: links (Titel), rechts (Logos)
 with st.container():
     st.markdown('<div class="header-box">', unsafe_allow_html=True)
-    col1, col2, col3 = st.columns([1, 5, 1])
+    col1, col2 = st.columns([5, 2])  # größerer linker Bereich für Text
 
     with col1:
-        st.image("FH-Logo.png", use_column_width="always")
-
-    with col2:
         st.markdown('<div class="title-text">', unsafe_allow_html=True)
         st.markdown("### Modell zur Systematisierung flexibler Arbeit")
         st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
         st.markdown('</div>', unsafe_allow_html=True)
 
-    with col3:
-        st.image("KIT-Logo.png", use_column_width="always")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
+    with col2:
+        col_rechts1, col_rechts2 = st.columns([1, 1])
+        with col_rechts1:
+            st.image("FH-Logo.png", use_container_width=True)
+        with col_rechts2:
+            st.image("KIT-Logo.png", use_container_width=True)
 
+    st.markdown('</div>', unsafe_allow_html=True)
 st.markdown(
     "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
 )
