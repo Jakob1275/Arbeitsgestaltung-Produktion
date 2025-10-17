@@ -898,7 +898,6 @@ elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
     def radio_with_categorization(frage, options, key, categorize_func):
-        # Hole bisherigen Wert aus dem Session State
         vorhandene_auswahl = st.session_state.get(key, None)
 
         try:
@@ -906,15 +905,16 @@ elif current_tab == "Abschließende Fragen":
         except ValueError:
             default_index = 0
 
-        # Zeige Radio an – OHNE key (sonst wird State doppelt geführt)
         auswahl = st.radio(frage, options, index=default_index, key=f"{key}_temp")
 
         # Speichere Auswahl explizit in Session State
         st.session_state[key] = auswahl
         st.session_state[f"{key}_score"] = categorize_func(auswahl)
-
+        
+        st.markdown("<hr style='margin-top: 1rem; margin-bottom: 1.5rem;'>", unsafe_allow_html=True)
+    
     radio_with_categorization(
-        "Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
+        "**Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?**",
         ["< 5", "5-10", "11-24", "≥ 25"],
         "cnc_range",
         categorize_cnc_machines
