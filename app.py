@@ -97,10 +97,8 @@ st.markdown("""
 
 # Struktur der Anwendung
 
-st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
+#st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 #st.title("Modell zur Systematisierung flexibler Arbeit")
-
-import streamlit as st
 
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 
