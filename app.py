@@ -867,21 +867,29 @@ elif current_tab in mtok_structure:
                 default_index = 0
 
             # Container für saubere visuelle Gruppierung
-            with st.container():
-                st.markdown(f"""
-                    <div class="evaluation-container">
-                        <div class="evaluation-question">{frage_text}</div>
+            with st.markdown(
+                """
+                <div class="evaluation-box">
+                    <div class="evaluation-question">{frage}</div>
                         <div class="evaluation-info">{begruendung}</div>
-                """, unsafe_allow_html=True)
-                auswahl = st.radio(
-                    label="",
-                    options=options,
-                    key=radio_key,
-                    index=default_index,
-                    label_visibility="collapsed"
-                )
-                
-                st.markdown("</div>", unsafe_allow_html=True)
+                    """.format(
+                    frage=html.escape(frage_text),
+                    begruendung=html.escape(begruendung)
+                ),
+                unsafe_allow_html=True
+            ):
+                pass  # HTML-Box geöffnet
+
+            # Radio-Buttons müssen *außerhalb* des markdown-blocks, aber *innerhalb* der container-Struktur bleiben
+            auswahl = st.radio(
+                label="",
+                options=options,
+                key=radio_key,
+                index=default_index,
+                label_visibility="collapsed"
+            )        
+
+            st.markdown("</div>", unsafe_allow_html=True)  # HTML-Box schließen
             
             # In Score umwandeln
             score = score_mapping.get(auswahl, np.nan)
