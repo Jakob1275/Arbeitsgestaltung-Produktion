@@ -296,7 +296,7 @@ Kriterien = {
     {
         "frage": "T2.5 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
         "begründung": "Monitoring-Tools oder Kameras erlauben Eingriffe ohne dauerhafte Präsenz."
-    }
+    },
     {
         "frage": "T2.6 Digitale Kommunikations- und Kollaborationstools sind standardisiert verfügbar.",
         "begründung": "Einheitliche Tools erleichtern Informationsaustausch und Zusammenarbeit über Standorte hinweg."
