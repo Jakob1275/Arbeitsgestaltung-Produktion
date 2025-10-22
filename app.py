@@ -160,7 +160,7 @@ with col3:
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
-    "Mensch": ["Qualifikation und Kompetenzentwicklung", "Persönliches Voraussetzungen"],
+    "Mensch": ["Qualifikation und Kompetenzentwicklung", "Persönliche Voraussetzungen"],
     "Technik": ["Arbeitsplatzgestaltung und Automatisierung", "IT-Systemlandschaft und digital vernetzte Infrastruktur"],
     "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Organisatorische Umwelt", "Produktionsorganisation"],
     "Kultur": ["Unternehmenskultur", "Soziale Beziehungen und Interaktion"]
@@ -171,7 +171,7 @@ einleitungstexte = {
         "Die folgenden Aussagen beziehen sich auf betriebliche Maßnahmen zur Schulung, "
         "Qualifizierung und Kompetenzentwicklung für flexible Arbeit in der zerspanenden Fertigung."
     ),
-    "Persönliches Voraussetzungen": (
+    "Persönliche Voraussetzungen": (
         "Die folgenden Aussagen beziehen sich auf persönliche Einstellungen, Haltungen, Fähigkeiten und "
         "die individuelle Bereitschaft der Beschäftigten, mobile, zeitflexible und digital unterstützte "
         "Arbeit in der zerspanenden Fertigung umzusetzen."
@@ -226,7 +226,7 @@ Kriterien = {
     "begründung": "Qualifikation und kontinuierliche Kompetenzentwicklung sind zentrale Voraussetzungen für selbstständiges und verantwortungsbewusstes Arbeiten in flexiblen Arbeitsmodellen."
   }
     ],
-  "Persönliches Vorraussetzungen": [
+  "Persönliche Voraussetzungen": [
     {
       "frage": "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
       "begründung": "Eine positive Grundhaltung erleichtert den Einstieg in ortsunabhängiges Arbeiten und unterstützt die Akzeptanz neuer Arbeitsformen."
