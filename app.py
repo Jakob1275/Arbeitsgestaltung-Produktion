@@ -597,7 +597,7 @@ kriterien_item_to_cluster_variable_mapping = {
     "Aufwand Mobil": [
         "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
         "M1.4 Angebote zur Qualifizierung im Hinblick auf mobile und zeitflexible Arbeitsmodelle bestehen.",
-        "T1.1 Fertigungsprozesse sind störungsarm.",,
+        "T1.1 Fertigungsprozesse sind störungsarm.",
         "T1.8 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
         "T2.1 Die IT-Infrastruktur stellt geeignete mobile Endgeräte zur Verfügung.",
         "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
