@@ -161,7 +161,7 @@ with col3:
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
     "Mensch": ["Qualifikation und Kompetenzentwicklung", "Persönliche Voraussetzungen"],
-    "Technik": ["Arbeitsplatzgestaltung und Automatisierung", "IT-Systemlandschaft und digital vernetzte Infrastruktur"],
+    "Technik": ["Automatisierung und Arbeitsplatzgestaltung", "Digitale Vernetzung und IT-Infrastruktur"],
     "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Organisatorische Umwelt", "Produktionsorganisation"],
     "Kultur": ["Unternehmenskultur", "Soziale Beziehungen und Interaktion"]
 }
@@ -1006,8 +1006,8 @@ elif current_tab == "Auswertung":
             labels_ordered = [
                 "Qualifikation und Kompetenzentwicklung (Mensch)",
                 "Persönliches Voraussetzungen (Mensch)",
-                "Arbeitsplatzgestaltung und Automatisierung (Technik)",
-                "IT-Systemlandschaft und digital vernetzte Infrastruktur (Technik)",
+                "Automatisierung und Arbeitsplatzgestaltung (Technik)",
+                "Digitale Vernetzung und IT-Infrastruktur (Technik)",
                 "Kommunikation, Kooperation und Zusammenarbeit (Organisation)",
                 "Organisatorische Umwelt (Organisation)",
                 "Produktionsorganisation (Organisation)",
@@ -1017,10 +1017,10 @@ elif current_tab == "Auswertung":
 
             # Werte entsprechend sortieren (achte auf die korrekte Reihenfolge)
             values_ordered = [
-                st.session_state.ergebnisse.get("Produktivität und Motivation", 1),
-                st.session_state.ergebnisse.get("Persönliches Umfeld", 1),
-                st.session_state.ergebnisse.get("Arbeitsplatzgestaltung und Automatisierung", 1),
-                st.session_state.ergebnisse.get("IT-Systemlandschaft und digital vernetzte Infrastruktur", 1),
+                st.session_state.ergebnisse.get("Qualifikation und Kompetenzentwicklung", 1),
+                st.session_state.ergebnisse.get("Persönliche Voraussetzungen", 1),
+                st.session_state.ergebnisse.get("Automatisierung und Arbeitsplatzgestaltung", 1),
+                st.session_state.ergebnisse.get("Arbeitsplatzgestaltung und ", 1),
                 st.session_state.ergebnisse.get("Kommunikation, Kooperation und Zusammenarbeit", 1),
                 st.session_state.ergebnisse.get("Organisatorische Umwelt", 1),
                 st.session_state.ergebnisse.get("Produktionsorganisation", 1),
@@ -1409,10 +1409,10 @@ if current_tab == "Evaluation":
 
         # 3. MTOK-Werte auslesen 
         mtok_keys = [
-            "Produktivität und Motivation",
-            "Persönliches Umfeld",
-            "Arbeitsplatzgestaltung und Automatisierung",
-            "IT-Systemlandschaft und digital vernetzte Infrastruktur",
+            "Qualifikation und Kompetenzentwicklung",
+            "Persönliche Voraussetzungen",
+            "Automatisierung und Arbeitsplatzgestaltung",
+            "Digitale Vernetzung und IT-Infrastruktur",
             "Kommunikation, Kooperation und Zusammenarbeit",
             "Organisatorische Umwelt",
             "Produktionsorganisation",
