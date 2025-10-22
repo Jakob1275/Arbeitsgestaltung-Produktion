@@ -160,7 +160,7 @@ with col3:
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
-    "Mensch": ["Produktivität und Motivation", "Persönliches Umfeld"],
+    "Mensch": ["Qualifikation und Kompetenzentwicklung", "Persönliches Voraussetzungen"],
     "Technik": ["Arbeitsplatzgestaltung und Automatisierung", "IT-Systemlandschaft und digital vernetzte Infrastruktur"],
     "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Organisatorische Umwelt", "Produktionsorganisation"],
     "Kultur": ["Unternehmenskultur", "Soziale Beziehungen und Interaktion"]
@@ -171,7 +171,7 @@ einleitungstexte = {
         "Die folgenden Aussagen beziehen sich auf betriebliche Maßnahmen zur Schulung, "
         "Qualifizierung und Kompetenzentwicklung für flexible Arbeit in der zerspanenden Fertigung."
     ),
-    "Persönliches Vorraussetzungen": (
+    "Persönliches Voraussetzungen": (
         "Die folgenden Aussagen beziehen sich auf persönliche Einstellungen, Haltungen, Fähigkeiten und "
         "die individuelle Bereitschaft der Beschäftigten, mobile, zeitflexible und digital unterstützte "
         "Arbeit in der zerspanenden Fertigung umzusetzen."
@@ -1004,8 +1004,8 @@ elif current_tab == "Auswertung":
 
             # Reihenfolge für MTOK-Struktur (Uhrzeigersinn)
             labels_ordered = [
-                "Produktivität und Motivation (Mensch)",
-                "Persönliches Umfeld (Mensch)",
+                "Qualifikation und Kompetenzentwicklung (Mensch)",
+                "Persönliches Voraussetzungen (Mensch)",
                 "Arbeitsplatzgestaltung und Automatisierung (Technik)",
                 "IT-Systemlandschaft und digital vernetzte Infrastruktur (Technik)",
                 "Kommunikation, Kooperation und Zusammenarbeit (Organisation)",
