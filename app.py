@@ -1120,11 +1120,6 @@ elif current_tab == "Auswertung":
             if bild_pfad:
                 st.image(bild_pfad, caption=cluster_result, width=400)
 
-# Anzeige des passenden Clusterbildes
-bild_pfad = cluster_bilder.get(cluster_result)
-if bild_pfad:
-    st.image(bild_pfad, caption=f"{cluster_result}", use_container_width=True)
- 
             # Handlungsempfehlungen nach Cluster und MTOK
             st.subheader("Clusterspezifische Handlungsempfehlungen")
             handlungsempfehlungen = {
