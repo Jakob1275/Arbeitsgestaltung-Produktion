@@ -225,7 +225,7 @@ Kriterien = {
     "frage": "M1.4 Beschäftigte verfügen über ein ausreichendes Qualifikationsniveau und erhalten gezielte Unterstützung zur Weiterentwicklung ihrer Kompetenzen für mobile und zeitflexible Arbeit.",
     "begründung": "Qualifikation und kontinuierliche Kompetenzentwicklung sind zentrale Voraussetzungen für selbstständiges und verantwortungsbewusstes Arbeiten in flexiblen Arbeitsmodellen."
   }
-],
+    ],
   "Persönliches Vorraussetzungen": [
     {
       "frage": "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
@@ -251,7 +251,7 @@ Kriterien = {
       "frage": "M2.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
       "begründung": "Technikakzeptanz und Veränderungsbereitschaft sind zentrale Voraussetzungen für den erfolgreichen Umgang mit digitalisierten Arbeitsprozessen."
     }
-],
+    ],
    "Automatisierung und Arbeitsplatzgestaltung": [
     {
         "frage": "T1.1 Fertigungsprozesse sind störungsarm.",
