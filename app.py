@@ -1107,7 +1107,23 @@ elif current_tab == "Auswertung":
             }
             st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
 
+            # Cluster-Bilder (lokale Dateien oder URLs)
+            cluster_bilder = {
+                "Cluster 1 – Traditionell und reaktiv": "Cluster 1.png",
+                "Cluster 2 – Produktionsstark, aber mobilitätsfern": "Cluster 2.png",
+                "Cluster 3 – Digital-affin und akzeptanzstark": "Cluster 3.png",
+                "Cluster 4 – Technisch solide, aber prozessual träge": "Cluster 4.png"
+            }
 
+            # Bild für das aktuelle Cluster anzeigen
+            bild_pfad = cluster_bilder.get(cluster_result)
+            if bild_pfad:
+                st.image(bild_pfad, caption=cluster_result, width=400)
+
+# Anzeige des passenden Clusterbildes
+bild_pfad = cluster_bilder.get(cluster_result)
+if bild_pfad:
+    st.image(bild_pfad, caption=f"{cluster_result}", use_container_width=True)
  
             # Handlungsempfehlungen nach Cluster und MTOK
             st.subheader("Clusterspezifische Handlungsempfehlungen")
