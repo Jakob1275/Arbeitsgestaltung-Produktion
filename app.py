@@ -317,7 +317,7 @@ Kriterien = {
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "T2.3 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben .",
+      "frage": "T2.3 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
       "begründung": "Zuverlässiger IT-Support sichert technische Funktionsfähigkeit und reduziert Akzeptanzbarrieren."
     },
     {
@@ -539,64 +539,71 @@ kriterien_item_to_cluster_variable_mapping = {
 
     # 6. Digitalisierungsgrad
     "Digitalisierungsgrad": [
-        "M2.7 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren Grundfunktionen.",
-        "T1.7 Maschinenarbeitsplätze sind über Schnittstellen mit zentralen digitalen Systemen verbunden.",
-        "T2.5 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
+        "M2.7 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
+        "T1.4 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
+        "T1.6 Prozess- und Maschinendaten stehen in Echtzeit digital zur Verfügung.",
+        "T1.7 Werkzeugmaschinen sind mit zentralen digitalen Systemen vernetzt.",
+        "T1.8 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
         "T2.4 Digitale Kommunikations- und Kollaborationstools sind standardisiert verfügbar.",
-        "O2.5 Die Personalplanung berücksichtigt flexible Arbeitszeiten und ist technisch im Planungssystem abbildbar.",
-        "O3.8 Die Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
-        "O3.9 Simulationen werden aktiv zur Produktionsplanung und -steuerung eingesetzt.",
+        "T2.5 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
+        "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten und ist digital abgebildet.",
+        "O3.6 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
+        "O3.7 Simulationen werden aktiv zur Produktionsplanung und -steuerung eingesetzt."
     ],
     
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
-        "T1.1 Fertigungsprozesse sind störungsarm.", # Niedriger Wert hier bedeutet hohe Instabilität (daher Skala invertiert für dieses Item bei Berechnung)
-        "O1.1 Informationen für Planung, Wissenstransfer, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
-        "O1.2 Konzepte zur Förderung digitaler Kommunikationskompetenz und zur strukturierten Einarbeitung in Kooperationsprozesse sind etabliert.",
-        "O3.7 Kurzfristige Maschinenstillstände führen nicht unmittelbar zu kritischen Produktivitätsverlusten.",
+        "T1.1 Fertigungsprozesse sind störungsarm.",
+        "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
+        "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
+        "O3.4 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
+        "O3.5 Qualitätssicherungsprozesse sind automatisiert und kontinuierlich wirksam.",
+        "O3.7 Simulationen werden aktiv zur Produktionsplanung und -steuerung eingesetzt."
     ],
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
-        "T1.9 Methoden zur regelmäßigen Erfassung potenzieller Auswirkungen flexibler Arbeit existieren.",
-        "K1.3 Zielerreichung hat Vorrang vor physischer Anwesenheit.",
-        "K1.6 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
-        "K2.2 Führungskräfte unterstützen aktiv flexible Arbeitsformen und fördern Eigenverantwortung im Team."
+        "M1.7 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
+        "O3.2 Maschinenbediener können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
+        "K1.3 Zielerreichung steht vor physischer Anwesenheit.",
+        "K1.5 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
+        "K2.2 Führungskräfte unterstützen flexible Arbeitsformen und respektieren individuelle Arbeitsweisen."
     ],
     
     # 9. Akzeptanz
     "Akzeptanz": [
-        "M1.3 Es besteht ein erkennbares Interesse der Beschäftigten an mobilen und/oder zeitflexiblen Arbeitsmodellen (z.B. Mitarbeiterbefragungen, Verbesserungsvorschlägen).",
-        "M1.7 Die Auswirkungen flexibler Arbeit auf die Produktivität werden regelmäßig analysiert und reflektiert",
+        "M1.3 Das Interesse der Beschäftigten an mobilen und/oder zeitflexiblen Arbeitsmodellen wird regelmäßig erfasst.",
+        "M1.7 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
         "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
-        "O2.3 Es bestehen verbindliche Betriebsvereinbarungen zur Regelung mobiler und/oder zeitflexibler Arbeit.",
-        "K1.6 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
-        "K2.1 Die Unternehmensführung positioniert sich aktiv und lebt Flexibilität sichtbar vor."
+        "M2.8 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
+        "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
+        "K1.1 Vertrauen bildet die Grundlage der Zusammenarbeit.",
+        "K2.1 Die Unternehmensführung lebt Flexibilität sichtbar vor und positioniert sich aktiv dazu."
     ],
     
     # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
-        "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
-        "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
-        "T2.6 IT-Sicherheitskonzepte sind etabliert, werden regelmäßig geprüft und gewährleisten den Schutz vor externen Angriffen und Datenverlust.",
-        "O1.1 Informationen für Planung, Wissenstransfer, Schichtübergaben und Störfälle sind über verlässliche, digitale Kanäle zeitnah und adressatengerecht verfügbar.",
-        "O2.5 Die Personalplanung berücksichtigt flexible Arbeitszeiten und ist technisch im Planungssystem abbildbar.",
-        "O2.8 Beschäftigte können Beginn und Ende ihrer täglichen Arbeitszeit innerhalb eines definierten Rahmens mitgestalten."
+        "T1.5 Produktionsprozesse sind standardisiert dokumentiert.",
+        "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
+        "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten und ist digital abgebildet.",
+        "O2.7 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
+        "O2.5 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen."
     ],
     
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
     # HINWEIS: Wird auch invertiert (Siehe Aufwand Zeit)
     "Aufwand Mobil": [
-        "M1.1 Im Unternehmen werden die Anforderungen an mobile Arbeit systematisch vermittelt (z. B. durch Schulungen, Leitfäden).",
-        "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
-        "T1.1 Fertigungsprozesse sind störungsarm.",
-        "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
-        "T1.8 Fernüberwachung und Fernzugriff auf Maschinen ist technisch realisiert.",
-        "T2.3 Der IT-Support ist auch bei mobiler Arbeit verlässlich erreichbar und kann auch produktionsbezogene IT-Probleme beheben.",
-        "O1.2 Konzepte zur Förderung digitaler Kommunikationskompetenz und zur strukturierten Einarbeitung in Kooperationsprozesse sind etabliert.",
-        "O3.1 Die Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und systematisch aufteilbar."
+        "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
+        "M1.4 Angebote zur Qualifizierung im Hinblick auf mobile und zeitflexible Arbeitsmodelle bestehen.",
+        "T1.1 Fertigungsprozesse sind störungsarm.",,
+        "T1.8 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
+        "T2.1 Die IT-Infrastruktur stellt geeignete mobile Endgeräte zur Verfügung.",
+        "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
+        "T2.3 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
+        "T2.6 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
+        "O1.2 Konzepte zur Förderung digitaler Kommunikations- und Kooperationskompetenz sind etabliert."
     ]
 }
 
@@ -834,7 +841,7 @@ elif current_tab in mtok_structure:
         st.subheader(f"Handlungsfeld: {feld}")
         if feld in einleitungstexte:
             st.markdown(
-                f"<div style='font-size:16px; color:#555; margin-bottom:1rem;'>{einleitungstexte[feld]}</div>",
+                f"<div style='font-size:18px; color:#333; margin-bottom:1.2rem;line-height:1.5;'>{einleitungstexte[feld]}</div>",
                 unsafe_allow_html=True
             )
 
