@@ -1209,7 +1209,7 @@ elif current_tab == "Abschließende Fragen":
     # Fragenaufrufe
     radio_with_categorization(
         "A1.1 Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
-        ["< 5", "5-10", "11-25", "> 25"],
+        ["< 5", "5-10", "11-25", "&gt; 25"],
         "cnc_range",
         categorize_cnc_machines,
         "Die Anzahl der CNC-Werkzeugmaschinen beeinflusst die Komplexität und Automatisierungsmöglichkeiten der Produktion."
