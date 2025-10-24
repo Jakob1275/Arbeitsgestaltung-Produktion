@@ -730,10 +730,10 @@ def categorize_durchlaufzeit(durchlaufzeit_str):
     if durchlaufzeit_str is None:
         return np.nan
     mapping = {
-        "< 10 min": 1,
-        "11–30 min": 2,
-        "31–89 min": 3,
-        "≥ 90 min": 4
+        "< 1 Tag": 1,
+        "1–3 Tage": 2,
+        "4–6 Tage": 3,
+        "≥ 7 Tage": 4
     }
     return mapping.get(durchlaufzeit_str, np.nan)
 
@@ -741,10 +741,10 @@ def categorize_laufzeit(laufzeit_str):
     if laufzeit_str is None:
         return np.nan
     mapping = {
-        "< 1 Tag": 1,
-        "1–3 Tage": 2,
-        "4–6 Tage": 3,
-        "≥ 7 Tage": 4
+        "< 10 min": 1,
+        "11–30 min": 2,
+        "31–89 min": 3,
+        "≥ 90 min": 4
     }
     return mapping.get(laufzeit_str, np.nan)
 
@@ -758,10 +758,14 @@ kriterien_item_to_cluster_variable_mapping = {
 
     # 6. Digitalisierungsgrad
     "Digitalisierungsgrad": [
-        "M2.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
+        "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
+        "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
         "T2.3 Prozess- und Maschinendaten stehen in Echtzeit digital zur Verfügung.",
         "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
         "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
+        "O1.2 Erfahrungswissen wird dokumentiert und digital zugänglich gemacht.",
+        "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
+        "O3.4 Qualitätssicherungsprozesse sind automatisisert im Fertigungsprozess möglich.",
         "O3.5 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
     ],
     
@@ -770,16 +774,20 @@ kriterien_item_to_cluster_variable_mapping = {
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
         "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
+        "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen",
         "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
         "O3.4 Qualitätssicherungsprozesse sind automatisisert im Fertigungsprozess möglich.",
     ],
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
+        "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
+        "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.3 Zielerreichung und Ergebnisse stehen vor physischer Anwesenheit.",
         "K1.4 Herausforderungen und Zielkonflikte flexibler Arbeit werden offen angesprochen und reflektiert.",
+        "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu.",
         "K2.2 Führungskräfte unterstützen flexible Arbeitsformen aktiv und führen ergebnisorientiert."
     ],
     
@@ -787,7 +795,9 @@ kriterien_item_to_cluster_variable_mapping = {
     "Akzeptanz": [
         "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
         "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
+        "M2.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
         "M2.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
+        "O1.4 Erwartungen an dauerhafte Erreichbarkeit sind klar geregelt und werden begrenzt.",
         "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.1 Vertrauen bildet die Grundlage der Zusammenarbeit.",
@@ -797,11 +807,18 @@ kriterien_item_to_cluster_variable_mapping = {
     # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
+        "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
+        "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
+        "M1.4 Beschäftigte verfügen über ein ausreichendes Qualifikationsniveau und erhalten gezielte Unterstützung zur Weiterentwicklung ihrer Kompetenzen für mobile und zeitflexible Arbeit.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
+        "O2.1 Rechtliche Vorgaben zu flexibler Arbeit sind bekannt und werden eingehalten.",
+        "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
         "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
         "O2.7 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
         "O2.5 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen.",
+        "O2.7 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
+        "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu."
     ],
     
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
@@ -809,13 +826,20 @@ kriterien_item_to_cluster_variable_mapping = {
     "Aufwand Mobil": [
         "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
         "M1.3 Beschäftigte werden unterstützt und gefördert, Prozessstörungen eigenständig und sicher beheben zu können.",
-        "M1.4 Beschäftigte verfügen über ein ausreichendes Qualifikationsniveau und erhalten gezielte Unterstützung zur Weiterentwicklung ihrer Kompetenzen für mobile und zeitflexible Arbeit.",
+        "M2.3 Beschäftigte verfügen über die Fähigkeit, ihre Arbeit eigenständig zu strukturieren und zu organisieren.",
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
-        "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
+        "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
+        "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
         "T2.1 Mobile Endgeräte stehen für mobile Arbeit zur Verfügung.",
         "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
+        "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
         "T2.6 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
-        "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft."
+        "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
+        "O2.1 Rechtliche Vorgaben zu flexibler Arbeit sind bekannt und werden eingehalten.",
+        "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
+        "O2.4 Die Personalplanung berücksichtigt flexible Arbeitsorte.",
+        "O3.1 Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und systematisch aufteilbar.",
+        "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu."
     ]
 }
 
@@ -1204,14 +1228,14 @@ elif current_tab == "Abschließende Fragen":
 
     radio_with_categorization(
         "A1.4 Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil)?",
-        ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"],
+        ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"],
         "durchlaufzeit_range",
         categorize_durchlaufzeit
     )
 
     radio_with_categorization(
         "A1.5 Welche durchschnittliche Laufzeit haben die Werkstücke?",
-        ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"],
+        ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"],
         "laufzeit_range",
         categorize_laufzeit
     )
