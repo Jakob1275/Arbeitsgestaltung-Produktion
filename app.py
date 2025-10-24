@@ -242,7 +242,7 @@ Kriterien = {
         "begründung": "Stabile Prozesse reduzieren Eingriffe und schaffen Grundlagen für flexible Arbeitsmodelle."
     },
     {
-        "frage": "T1.2 Werkzeugmaschinen können über längere Zeiträume ohne ständige Anwesenheit betrieben werden.",
+        "frage": "T1.2 CNC-Werkzeugmaschinen können über längere Zeiträume ohne ständige Anwesenheit betrieben werden.",
         "begründung": "Ein hoher Automatisierungsgrad oder lange unbeaufsichtigte Laufzeiten ermöglichen zeitliche Entkopplung und reduzieren Präsenzzwänge."
     },
     {
@@ -772,7 +772,7 @@ kriterien_item_to_cluster_variable_mapping = {
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
-        "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
+        "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen",
         "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
@@ -808,7 +808,7 @@ kriterien_item_to_cluster_variable_mapping = {
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
         "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
-        "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
+        "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
         "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit im Rahmen flexibler Arbeit.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
@@ -828,7 +828,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "M1.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
         "M2.3 Beschäftigte verfügen über die Fähigkeit, ihre Arbeit eigenständig zu strukturieren und zu organisieren.",
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
-        "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
+        "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
         "T2.1 Mobile Endgeräte stehen für mobile Arbeit zur Verfügung.",
         "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
