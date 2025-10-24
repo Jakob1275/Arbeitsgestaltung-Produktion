@@ -1338,8 +1338,10 @@ elif current_tab == "Auswertung":
                     st.markdown(f"### {dimension}")
                     for eintrag in cluster_empfehlungen[dimension]:
                         st.markdown(f"""
-            **➤ {eintrag['text']}**  
-            <div style='color:#666; font-size: 90%; margin-left: 16px;'>{eintrag['bemerkung']}</div>
+            <div style='margin-bottom: 22px;'>
+                <strong>➤ {eintrag['text']}</strong><br>
+                <span style='color:#444; font-size: 94%; font-weight: normal;'>{eintrag['bemerkung']}</span>
+            </div>
             """, unsafe_allow_html=True)
                     st.markdown("---")
             
