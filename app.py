@@ -998,7 +998,7 @@ if "item_to_radio_key_map" not in st.session_state:
 score_mapping = {
     "Nicht erfüllt": 1,
     "Teilweise erfüllt": 2,
-    "Weitestgehend erfüllt": 3,
+    "Weitgehend erfüllt": 3,
     "Vollständig erfüllt": 4
 }
         
@@ -1099,7 +1099,7 @@ elif current_tab in mtok_structure:
             if einschraenkung == "1_und_4":
                 options = ["Nicht erfüllt", "Vollständig erfüllt"]
             else:
-                options = ["Nicht erfüllt", "Teilweise erfüllt", "Weitestgehend erfüllt", "Vollständig erfüllt"]
+                options = ["Nicht erfüllt", "Teilweise erfüllt", "Weitgehend erfüllt", "Vollständig erfüllt"]
 
             # Vorherige Auswahl berücksichtigen
             vorhandene_zahl = st.session_state.get(score_key, None)
