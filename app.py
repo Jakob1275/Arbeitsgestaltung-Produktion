@@ -163,7 +163,7 @@ mtok_structure = {
     "Mensch": ["Qualifikation und Kompetenzentwicklung", "Persönliche Voraussetzungen"],
     "Technik": ["Automatisierung und Arbeitsplatzgestaltung", "Digitale Vernetzung und IT-Infrastruktur"],
     "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Organisatorische Umwelt", "Produktionsorganisation"],
-    "Kultur": ["Unternehmenskultur", "Soziale Beziehungen und Interaktion"]
+    "Kultur": ["Unternehmenskultur", "Führung und Teamzusammenhalt"]
 }
 
 einleitungstexte = {
@@ -197,11 +197,11 @@ einleitungstexte = {
         "die eine effiziente und zugleich flexible Produktionsgestaltung unterstützen."
     ),
     "Unternehmenskultur": (
-        "Die folgenden Aussagen beziehen sich auf Einstellungen, Werte und Führungsprinzipien "
+        "Die folgenden Aussagen beziehen sich auf grundlegende Einstellungen, Werte und kulturelle Prinzipien, "
         "die den Umgang mit flexibler Arbeit im Unternehmen prägen."
     ),
-    "Soziale Beziehungen und Interaktion": (
-        "Die folgenden Aussagen beziehen sich auf Führungsverhalten, Zusammenarbeit und soziale Dynamiken, "
+    "Führung und Teamzusammenhalt": (
+        "Die folgenden Aussagen beziehen sich auf Führungsverhalten und soziale Dynamiken im Team, "
         "die Vertrauen, Selbstverantwortung und Zusammenhalt in flexiblen Arbeitsumgebungen fördern."
     ),
 }
@@ -224,8 +224,8 @@ Kriterien = {
   {
     "frage": "M1.4 Beschäftigte verfügen über ein ausreichendes Qualifikationsniveau und erhalten gezielte Unterstützung zur Weiterentwicklung ihrer Kompetenzen für mobile und zeitflexible Arbeit.",
     "begründung": "Qualifikation und kontinuierliche Kompetenzentwicklung sind zentrale Voraussetzungen für selbstständiges und verantwortungsbewusstes Arbeiten in flexiblen Arbeitsmodellen."
-  }
-    ],
+  },
+  ],
   "Persönliche Voraussetzungen": [
     {
       "frage": "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
@@ -266,11 +266,11 @@ Kriterien = {
         "begründung": "Bereiche an der Maschine oder getrennte Räumlichkeiten ermöglichen Tätigkeiten wie Videokonferenzen, Planung oder Dokumentation in Fertigungsnähe."
     },
     {
-        "frage": "T1.5 Produktionsprozesse sind standardisiert dokumentiert.",
+        "frage": "T1.4 Produktionsprozesse sind standardisiert dokumentiert.",
         "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate."
     },
     {
-        "frage": "T1.6 Die ergonomische Gestaltung der Arbeitsplätze unterstützt eine gesundheitsförderliche Arbeit.",
+        "frage": "T1.5 Die ergonomische Gestaltung der Arbeitsplätze unterstützt eine gesundheitsförderliche Arbeit.",
         "begründung": "Ergonomische Arbeitsplätze reduzieren physische Belastung und fördern Leistungsfähigkeit bei flexiblen Arbeitszeiten."
     },
    ],
@@ -329,6 +329,10 @@ Kriterien = {
       "frage": "O1.3 Verantwortlichkeiten sind klar geregelt und relevante Akteure (z. B. Betriebsrat, Datenschutz) eingebunden.",
       "begründung": "Klare Rollen und Beteiligung schaffen Transparenz, Rechtssicherheit und Vertrauen."
     },
+    {
+      "frage": "O1.4 Erwartungen an dauerhafte Erreichbarkeit sind klar geregelt und werden begrenzt.",
+      "begründung": "Klare Grenzen fördern Erholung, Selbststeuerung und nachhaltige Nutzung flexibler Arbeitsmodelle."
+    }
     ],
     "Organisatorische Umwelt": [
     {
@@ -407,47 +411,35 @@ Kriterien = {
       "begründung": "Handlungsspielräume fördern Motivation, Eigenverantwortung und Innovationsfähigkeit."
     },
     {
-      "frage": "K1.3 Zielerreichung steht vor physischer Anwesenheit.",
+      "frage": "K1.3 Zielerreichung und Ergebnisse stehen vor physischer Anwesenheit.",
       "begründung": "Ergebnisorientierung statt Präsenzkultur stärkt Eigenverantwortung und Flexibilisierung.",
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "K1.4 Erwartungen an dauerhafte Erreichbarkeit sind klar geregelt und werden begrenzt.",
-      "begründung": "Klare Grenzen fördern Erholung, Selbststeuerung und nachhaltige Nutzung flexibler Arbeitsmodelle."
-    },
-    {
-      "frage": "K1.5 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
-      "begründung": "Transparente Diskussion stärkt Vertrauen und vermeidet dysfunktionale Überlastung oder Idealisierung."
+      "frage": "K1.4 Herausforderungen und Zielkonflikte flexibler Arbeit werden offen angesprochen und reflektiert.",
+      "begründung": "Transparente Diskussion stärkt Vertrauen, ermöglicht Anpassungen und vermeidet dysfunktionale Überlastung."
     }
     ],
-   "Soziale Beziehungen und Interaktion": [
-    {
-      "frage": "K2.1 Die Unternehmensführung lebt Flexibilität sichtbar vor und positioniert sich aktiv dazu.",
+   "Führung und Teamzusammenhalt": [
+   {
+      "frage": "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu.",
       "begründung": "Vorbildverhalten auf oberster Ebene schafft Legitimität und Orientierung für nachgelagerte Führungsebenen.",
       "einschraenkung": "1_und_4"
     },
-    {
-      "frage": "K2.2 Führungskräfte unterstützen flexible Arbeitsformen und respektieren individuelle Arbeitsweisen.",
-      "begründung": "Vertrauen und Anerkennung unterschiedlicher Arbeitsstile fördern Eigenverantwortung und Motivation im Team."
+     {
+      "frage": "K2.2 Führungskräfte unterstützen flexible Arbeitsformen aktiv und führen ergebnisorientiert.",
+      "begründung": "Vertrauen und Ergebnisorientierung statt Präsenzkontrolle fördern Eigenverantwortung und Motivation im Team."
     },
-    {
-      "frage": "K2.3 Führungskräfte verfügen über Kompetenzen zur Steuerung hybrider Teams.",
-      "begründung": "Hybride Arbeit erfordert gezielte Fähigkeiten in digitaler Kommunikation und dezentraler Koordination."
-    },
-    {
-      "frage": "K2.4 Die Teamkultur ist von gegenseitiger Unterstützung und Kooperation geprägt.",
+     {
+      "frage": "K2.3 Die Teamkultur ist von gegenseitiger Unterstützung und Kooperation geprägt.",
       "begründung": "Soziale Unterstützung erhöht Resilienz und Zusammenhalt bei reduzierter physischer Präsenz."
     },
     {
-      "frage": "K2.5 Zielsetzung und Zusammenarbeit im Team werden regelmäßig gemeinsam reflektiert.",
-      "begründung": "Gemeinsame Reflexion stärkt Teamlernen, Eigenverantwortung und kontinuierliche Verbesserung."
+      "frage": "K2.4 Der Teamzusammenhalt wird aktiv gefördert, auch bei räumlicher oder zeitlicher Distanz.",
+      "begründung": "Gezielte Maßnahmen (z. B. Teamevents, regelmäßige Meetings) verhindern soziale Isolation und stärken Bindung."
     },
     {
-      "frage": "K2.6 Rollen, Verantwortlichkeiten und Abläufe im Team sind klar geregelt.",
-      "begründung": "Klarheit in Strukturen und Zuständigkeiten erhöht Handlungssicherheit und verringert Reibungsverluste."
-    },
-    {
-      "frage": "K2.7 Konflikte im Team werden frühzeitig erkannt und konstruktiv gelöst.",
+      "frage": "K2.5 Konflikte im Team werden frühzeitig erkannt und konstruktiv gelöst.",
       "begründung": "Ein strukturierter Umgang mit Konflikten sichert Vertrauen und Stabilität flexibler Arbeitsmodelle."
     }
     ]
@@ -1012,7 +1004,7 @@ elif current_tab == "Auswertung":
                 "Organisatorische Umwelt (Organisation)",
                 "Produktionsorganisation (Organisation)",
                 "Unternehmenskultur (Kultur)",
-                "Soziale Beziehungen und Interaktion (Kultur)"
+                "Führung und Teamzusammenhalt (Kultur)"
             ]
 
             # Werte entsprechend sortieren (achte auf die korrekte Reihenfolge)
@@ -1025,7 +1017,7 @@ elif current_tab == "Auswertung":
                 st.session_state.ergebnisse.get("Organisatorische Umwelt", 1),
                 st.session_state.ergebnisse.get("Produktionsorganisation", 1),
                 st.session_state.ergebnisse.get("Unternehmenskultur", 1),
-                st.session_state.ergebnisse.get("Soziale Beziehungen und Interaktion", 1)
+                st.session_state.ergebnisse.get("Führung und Teamzusammenhalt", 1)
             ]
     
             # Winkel und Werte zyklisch schließen
@@ -1428,7 +1420,7 @@ if current_tab == "Evaluation":
             "Organisatorische Umwelt",
             "Produktionsorganisation",
             "Unternehmenskultur",
-            "Soziale Beziehungen und Interaktion"
+            "Führung und Teamzusammenhalt"
         ]
 
         mtok_raw = st.session_state.get("ergebnisse", {})
