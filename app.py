@@ -1036,10 +1036,18 @@ elif current_tab == "Auswertung":
             #ax.set_title("Cluster-Profil", fontsize=14, pad=20)
 
             # Ausgabe in Streamlit
+            # Radar-Diagramm als PNG speichern und gleichzeitig Base64-kodieren
             buf = BytesIO()
             fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
+
+            # Für die Streamlit-Anzeige
             st.image(buf, width=700)
+
+            # Für den HTML-Export: Base64 umwandeln
+            buf.seek(0)
+            image_base64 = base64.b64encode(buf.read()).decode("utf-8")
+            radar_html = f'<img src="data:image/png;base64,{image_base64}" alt="Radar-Diagramm" width="600"/>'
     
         else:
             st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
@@ -1248,6 +1256,7 @@ elif current_tab == "Auswertung":
                 <h2>Clusterspezifische Handlungsempfehlungen</h2>
                 {empfehlungen_html}
                 <h2>Unternehmens-Profil</h2>
+                {radar_html}
                 {table_html}
             </body>
             </html>
