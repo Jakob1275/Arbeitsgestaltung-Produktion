@@ -214,7 +214,7 @@ Kriterien = {
     "begründung": "Mobile Arbeit setzt unter anderem einen sicheren IT-Zugang, die Einbindung in digitale Prozesse und eigenverantwortliches Arbeiten voraus."
   },
   {
-    "frage": "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit sind den Beschäftigten bekannt.",
+    "frage": "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
     "begründung": "Nur wenn die Voraussetzungen und Grenzen zeitflexibler Arbeit bekannt sind, kann diese in der Zerspanung realistisch und störungsfrei umgesetzt werden."
   },
   {
@@ -254,7 +254,7 @@ Kriterien = {
     ],
    "Automatisierung und Arbeitsplatzgestaltung": [
     {
-        "frage": "T1.1 Fertigungsprozesse sind störungsarm.",
+        "frage": "T1.1 Zerpanende Fertigungsprozesse sind störungsarm.",
         "begründung": "Stabile Prozesse reduzieren Eingriffe und schaffen Grundlagen für flexible Arbeitsmodelle."
     },
     {
@@ -266,7 +266,7 @@ Kriterien = {
         "begründung": "Bereiche an der Maschine oder getrennte Räumlichkeiten ermöglichen Tätigkeiten wie Videokonferenzen, Planung oder Dokumentation in Fertigungsnähe."
     },
     {
-        "frage": "T1.4 Produktionsprozesse sind standardisiert dokumentiert.",
+        "frage": "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
         "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate."
     },
     {
@@ -290,28 +290,20 @@ Kriterien = {
         "begründung": "Echtzeitdaten ermöglichen Steuerung und Optimierung auch bei variabler Anwesenheit."
     },
     {
-        "frage": "T2.4 Maschinen sind mit zentralen digitalen Systemen vernetzt.",
-        "begründung": "Schnittstellen zu ERP-, MES- oder BDE-Systemen erlauben ortsunabhängige Steuerung."
-    },
-    {
-        "frage": "T2.5 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
+        "frage": "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
         "begründung": "Monitoring-Tools oder Kameras erlauben Eingriffe ohne dauerhafte Präsenz."
     },
     {
-        "frage": "T2.6 Digitale Kommunikations- und Kollaborationstools sind standardisiert verfügbar.",
-        "begründung": "Einheitliche Tools erleichtern Informationsaustausch und Zusammenarbeit über Standorte hinweg."
-    },
-    {
-        "frage": "T2.7 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
+        "frage": "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
         "begründung": "Digitale Toolmanagement-Systeme ermöglichen eine flexible und effiziente Betriebsmittelplanung."
     },   
     {
-        "frage": "T2.8 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
+        "frage": "T2.6 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
         "begründung": "Zuverlässiger IT-Support sichert technische Funktionsfähigkeit und reduziert Akzeptanzbarrieren.",
         "einschraenkung": "1_und_4"
     },
     {
-        "frage": "T2.9 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
+        "frage": "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
         "begründung": "Starke IT-Sicherheit schützt sensible Daten und gewährleistet stabile Abläufe bei flexibler Arbeit.",
         "einschraenkung": "1_und_4"
     }
@@ -379,23 +371,19 @@ Kriterien = {
       "begründung": "Die Einbindung digitaler Tätigkeiten in laufende Produktionsprozesse erhöht Effizienz, fördert hybride Facharbeit und schafft Grundlagen für mobile Arbeitsgestaltung."
     },
     {
-      "frage": "O3.3 Produktionsprozesse sind kurzfristig umplanbar.",
-      "begründung": "Hohe Gestaltungsfreiheit in der Fertigung ermöglicht schnelle Reaktionen auf Änderungen und unterstützt flexible Einsatzplanung."
-    },
-    {
-      "frage": "O3.4 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
+      "frage": "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
       "begründung": "Planbare Prozesszeiten schaffen Handlungssicherheit und ermöglichen eine verlässliche Integration flexibler Arbeitszeitmodelle."
     },
     {
-      "frage": "O3.5 Qualitätssicherungsprozesse sind automatisiert und kontinuierlich wirksam.",
+      "frage": "O3.4 Qualitätssicherungsprozesse sind automatisisert im Fertigungsprozess möglich.",
       "begründung": "Automatisierte Prüfverfahren reduzieren Kontrollaufwände und erhöhen die zeitliche Flexibilität im Produktionsablauf."
     },
     {
-      "frage": "O3.6 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
+      "frage": "O3.5 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
       "begründung": "Digitale Systeme ermöglichen Echtzeitsteuerung und flexible Anpassung an sich ändernde Rahmenbedingungen."
     },
     {
-      "frage": "O3.7 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
+      "frage": "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
       "begründung": "Eine systematische Rückkopplung zwischen Flexibilisierung und Produktivitätskennzahlen ist erforderlich, um Effizienzgewinne oder Zielkonflikte zu erkennen."
     }
         
@@ -790,19 +778,19 @@ if current_tab == "Start":
     
     st.markdown("""
     <div class="text-box">
-    <p><strong>Die Digitalisierung</strong> und der <strong>Wunsch nach flexibleren Arbeitsmodellen</strong> stellen produzierende Unternehmen vor neue Herausforderungen. Wie können beispielsweise Homeoffice und flexible Arbeitszeiten in der Produktion umgesetzt werden? Das entwickelte Diagnose- und Entwicklungsmodell hilft Ihnen dabei, diese Frage systematisch anzugehen: Es zeigt Ihnen, wo Ihr Unternehmen heute steht und gibt Ihnen konkrete Handlungsempfehlungen für die Umsetzung flexibler Arbeitsformen an die Hand.</p>
+    <p><strong>Die Digitalisierung</strong> und der <strong>Wunsch nach flexibleren Arbeitsmodellen</strong> stellen produzierende Unternehmen vor neue Herausforderungen. Wie können beispielsweise Homeoffice und flexible Arbeitszeiten in der Produktion umgesetzt werden? Das entwickelte <strong>Diagnose- und Entwicklungsmodell</strong> hilft Ihnen dabei, diese Frage systematisch anzugehen: Es zeigt Ihnen, wo Ihr Unternehmen heute steht und gibt Ihnen konkrete <strong>Handlungsempfehlungen</strong> für die Umsetzung flexibler Arbeitsformen an die Hand.</p>
 
-    <p>Das Modell wurde speziell für <strong>Unternehmen der zerspanenden Fertigung</strong> entwickelt. Es ermöglicht Ihnen eine <strong>strukturierte Bestandsaufnahme</strong> Ihres Unternehmens und zeigt gleichzeitig auf, wie Sie die <strong>Einführung mobiler und zeitflexibler Arbeit</strong> unterstützen können. Dabei berücksichtigt das Modell vier wichtige Bereiche: Ihre Beschäftigten, die vorhandene Technik, Ihre Organisation und die Unternehmenskultur. Diese vier Bereiche werden in neun <strong>konkrete Handlungsfelder</strong> unterteilt, die speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.</p>
+    <p>Das Modell wurde speziell für <strong>Unternehmen der zerspanenden Fertigung</strong> entwickelt. Es ermöglicht Ihnen eine <strong>strukturierte Bestandsaufnahme</strong> Ihres Unternehmens und zeigt gleichzeitig auf, wie Sie die <strong>Einführung mobiler und zeitflexibler Arbeit</strong> unterstützen können. Dabei berücksichtigt das Modell vier wichtige Bereiche: Ihre <strong>Beschäftigten</strong>, die vorhandene <strong>Technik</strong>, Ihre <strong>Organisation</strong> und die <strong>Unternehmenskultur</strong>. Diese vier Bereiche werden in neun <strong>konkrete Handlungsfelder</strong> unterteilt, die speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.</p>
     
     <p><strong>Die Bewertung basiert auf einem vierstufigen System:</strong></p>
     <ul>
-        <li><strong>Stufe 1 – Nicht erfüllt:</strong> Dieses Kriterium wird derzeit nicht umgesetzt</li>
-        <li><strong>Stufe 2 – Teilweise erfüllt:</strong> Erste Ansätze sind vorhanden, aber noch nicht systematisch</li>
-        <li><strong>Stufe 3 – Weitgehend erfüllt:</strong> Das Kriterium ist größtenteils umgesetzt und funktioniert</li>
-        <li><strong>Stufe 4 – Vollständig erfüllt:</strong> Das Kriterium ist vollständig umgesetzt und fest etabliert</li>
+        <li><strong>Stufe 1 – Nicht erfüllt:</strong> Dieses Kriterium wird derzeit nicht umgesetzt.</li>
+        <li><strong>Stufe 2 – Teilweise erfüllt:</strong> Erste Ansätze sind vorhanden, aber noch nicht systematisch.</li>
+        <li><strong>Stufe 3 – Weitgehend erfüllt:</strong> Das Kriterium ist größtenteils umgesetzt und funktioniert.</li>
+        <li><strong>Stufe 4 – Vollständig erfüllt:</strong> Das Kriterium ist vollständig umgesetzt und fest etabliert.</li>
     </ul>
 
-    <p>Nach der Selbstbewertung erhalten Sie ein übersichtliches <strong>grafisches Profil</strong>, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von <strong>vier Unternehmenstypen</strong> zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typ bekommen Sie maßgeschneiderte, praxisnahe Handlungsempfehlungen, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.</p>
+    <p>Nach der Selbstbewertung erhalten Sie ein übersichtliches <strong>grafisches Profil</strong>, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von <strong>vier Unternehmenstypen</strong> zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typ bekommen Sie maßgeschneiderte, <strong>praxisnahe Handlungsempfehlungen</strong>, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -993,7 +981,7 @@ elif current_tab == "Auswertung":
 
         # Radar-Chart erzeugen, falls Werte vorhanden
         if values and all(isinstance(v, (int, float)) for v in values):
-
+            st.subheader("Unternehmens-Profil")
             # Reihenfolge für MTOK-Struktur (Uhrzeigersinn)
             labels_ordered = [
                 "Qualifikation und Kompetenzentwicklung (Mensch)",
@@ -1045,7 +1033,7 @@ elif current_tab == "Auswertung":
 
             ax.yaxis.grid(True, linestyle='dotted', color='lightgray')
             ax.xaxis.grid(True, linestyle='solid', color='lightgray')
-            ax.set_title("Cluster-Profil", fontsize=14, pad=20)
+            #ax.set_title("Cluster-Profil", fontsize=14, pad=20)
 
             # Ausgabe in Streamlit
             buf = BytesIO()
@@ -1259,7 +1247,7 @@ elif current_tab == "Auswertung":
                 {cluster_beschreibung_html}
                 <h2>Clusterspezifische Handlungsempfehlungen</h2>
                 {empfehlungen_html}
-                <h2>Cluster-Profil</h2>
+                <h2>Unternehmens-Profil</h2>
                 {table_html}
             </body>
             </html>
