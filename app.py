@@ -1183,19 +1183,21 @@ elif current_tab == "Abschließende Fragen":
                 <div class="evaluation-question">{frage}</div>
             """, unsafe_allow_html=True)
 
-            # ❗️Hier: Bemerkung ausgeben, falls vorhanden
             if bemerkung:
-                st.caption(bemerkung)  # Alternativ: st.markdown(f"*{bemerkung}*")
-
+                st.caption(bemerkung) 
+                
             # Auswahlfeld anzeigen
             auswahl = st.radio(
                 label="",
                 options=options,
                 index=default_index,
-                key=key,
+                key=f"{key}_temp",
                 label_visibility="collapsed"
             )
 
+            st.session_state[key] = auswahl
+            st.session_state[f"{key}_categorized"] = categorize_func(auswahl)
+            
             # Horizontale Trennlinie
             st.markdown("""
                 <hr style='
