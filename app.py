@@ -700,7 +700,7 @@ def categorize_cnc_machines(num_machines_raw):
         "< 5": 1,
         "5-10": 2,
         "11-25": 3,
-        "&gt; 25": 4
+        "› 25": 4
     }
     return mapping.get(num_machines_raw, np.nan)
 
@@ -711,7 +711,7 @@ def categorize_automation_percentage(percentage_str):
         "0%": 1,
         "1-25%": 2,
         "26-50%": 3,
-        "&gt; 50%": 4
+        "› 50%": 4
     }
     return mapping.get(percentage_str, np.nan)
 
@@ -722,7 +722,7 @@ def categorize_losgroesse(losgroesse_str):
         "< 5": 1,
         "5-50": 2,
         "51-100": 3,
-        "&gt; 100": 4
+        "› 100": 4
     }
     return mapping.get(losgroesse_str, np.nan)
 
@@ -733,7 +733,7 @@ def categorize_durchlaufzeit(durchlaufzeit_str):
         "< 1 Tag": 1,
         "1–3 Tage": 2,
         "4–7 Tage": 3,
-        "&gt; 7 Tage": 4
+        "› 7 Tage": 4
     }
     return mapping.get(durchlaufzeit_str, np.nan)
 
@@ -744,7 +744,7 @@ def categorize_laufzeit(laufzeit_str):
         "< 10 min": 1,
         "11–30 min": 2,
         "31–90 min": 3,
-        "&gt; 90 min": 4
+        "› 90 min": 4
     }
     return mapping.get(laufzeit_str, np.nan)
 
@@ -1209,7 +1209,7 @@ elif current_tab == "Abschließende Fragen":
     # Fragenaufrufe
     radio_with_categorization(
         "A1.1 Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
-        ["< 5", "5-10", "11-25", "&gt; 25"],
+        ["< 5", "5-10", "11-25", "› 25"],
         "cnc_range",
         categorize_cnc_machines,
         "Die Anzahl der CNC-Werkzeugmaschinen beeinflusst die Komplexität und Automatisierungsmöglichkeiten der Produktion."
@@ -1217,7 +1217,7 @@ elif current_tab == "Abschließende Fragen":
 
     radio_with_categorization(
         "A1.2 Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?",
-        ["0%", "1-25%", "26-50%", "&gt; 50%"],
+        ["0%", "1-25%", "26-50%", "› 50%"],
         "automation_range",
         categorize_automation_percentage,
         "Der Automatisierungsgrad ist ein zentraler Indikator für Entkopplungspotenziale im Arbeitsprozess"
@@ -1225,7 +1225,7 @@ elif current_tab == "Abschließende Fragen":
 
     radio_with_categorization(
         "A1.3 Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?",
-        ["< 5", "5-50", "51-100", "&gt; 100"],
+        ["< 5", "5-50", "51-100", "› 100"],
         "losgroesse_range",
         categorize_losgroesse,
         "Die Losgröße beeinflusst die Umrüstfrequenz und damit die Planbarkeit flexibler Arbeit."
@@ -1233,7 +1233,7 @@ elif current_tab == "Abschließende Fragen":
 
     radio_with_categorization(
         "A1.4 Welche durchschnittliche Laufzeit haben die Werkstücke, die bei Ihnen gefertigt werden?",
-        ["< 10 min", "11–30 min", "31–90 min", "&gt; 90 min"],
+        ["< 10 min", "11–30 min", "31–90 min", "› 90 min"],
         "laufzeit_range",
         categorize_laufzeit,
         "Die Laufzeit spiegelt die Auftragskomplexität und Planungsanforderung wider."
@@ -1241,7 +1241,7 @@ elif current_tab == "Abschließende Fragen":
     
     radio_with_categorization(
         "A1.5 Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?",
-        ["< 1 Tag", "1–3 Tage", "4–7 Tage", "&gt; 7 Tage"],
+        ["< 1 Tag", "1–3 Tage", "4–7 Tage", "› 7 Tage"],
         "durchlaufzeit_range",
         categorize_durchlaufzeit,
         "Die Durchlaufzeit ist ein Indikator für Prozessstruktur und Produktionssteuerung."
