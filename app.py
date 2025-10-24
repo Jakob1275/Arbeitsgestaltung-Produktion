@@ -1227,17 +1227,17 @@ elif current_tab == "Abschließende Fragen":
     )
 
     radio_with_categorization(
-        "A1.4 Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil)?",
-        ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"],
-        "durchlaufzeit_range",
-        categorize_durchlaufzeit
-    )
-
-    radio_with_categorization(
-        "A1.5 Welche durchschnittliche Laufzeit haben die Werkstücke?",
+        "A1.4 Welche durchschnittliche Laufzeit haben die Werkstücke, die bei Ihnen gefertigt werden?",
         ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"],
         "laufzeit_range",
         categorize_laufzeit
+    )
+    
+    radio_with_categorization(
+        "A1.5 Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?",
+        ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"],
+        "durchlaufzeit_range",
+        categorize_durchlaufzeit
     )
 
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
