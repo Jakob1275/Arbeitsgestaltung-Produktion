@@ -162,11 +162,11 @@ einleitungstexte = {
     ),
     "Automatisierung und Arbeitsplatzgestaltung": (
         "Die folgenden Aussagen beziehen sich auf Automatisierung, ergonomische Gestaltung "
-        "und die physische Arbeitsumgebung in der Fertigung."
+        "und die physische Arbeitsumgebung in der zerspanenden Fertigung."
     ),
     "Digitale Vernetzung und IT-Infrastruktur": (
         "Die folgenden Aussagen beziehen sich auf digitale Systeme, Datenflüsse und technische Infrastruktur, "
-        "die eine orts- und zeitflexible Arbeit in der Fertigung ermöglichen."
+        "die eine mobile und zeitflexible Arbeit in der Fertigung ermöglichen."
     ),
     "Kommunikation, Kooperation und Zusammenarbeit": (
         "Die folgenden Aussagen beziehen sich auf betriebliche Strukturen und Instrumente, "
@@ -238,7 +238,7 @@ Kriterien = {
     ],
    "Automatisierung und Arbeitsplatzgestaltung": [
     {
-        "frage": "T1.1 Zerpanende Fertigungsprozesse sind störungsarm.",
+        "frage": "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
         "begründung": "Stabile Prozesse reduzieren Eingriffe und schaffen Grundlagen für flexible Arbeitsmodelle."
     },
     {
@@ -359,7 +359,7 @@ Kriterien = {
       "begründung": "Planbare Prozesszeiten schaffen Handlungssicherheit und ermöglichen eine verlässliche Integration flexibler Arbeitszeitmodelle."
     },
     {
-      "frage": "O3.4 Qualitätssicherungsprozesse sind automatisisert im Fertigungsprozess möglich.",
+      "frage": "O3.4 Qualitätssicherungsprozesse sind automatisiert im Fertigungsprozess möglich.",
       "begründung": "Automatisierte Prüfverfahren reduzieren Kontrollaufwände und erhöhen die zeitliche Flexibilität im Produktionsablauf."
     },
     {
@@ -699,8 +699,8 @@ def categorize_cnc_machines(num_machines_raw):
     mapping = {
         "< 5": 1,
         "5-10": 2,
-        "11-24": 3,
-        "≥ 25": 4
+        "11-25": 3,
+        "> 25": 4
     }
     return mapping.get(num_machines_raw, np.nan)
 
@@ -710,8 +710,8 @@ def categorize_automation_percentage(percentage_str):
     mapping = {
         "0%": 1,
         "1-25%": 2,
-        "26-49%": 3,
-        "≥ 50%": 4
+        "26-50%": 3,
+        "> 50%": 4
     }
     return mapping.get(percentage_str, np.nan)
 
@@ -721,8 +721,8 @@ def categorize_losgroesse(losgroesse_str):
     mapping = {
         "< 5": 1,
         "5-50": 2,
-        "51-99": 3,
-        "≥ 100": 4
+        "51-100": 3,
+        "> 100": 4
     }
     return mapping.get(losgroesse_str, np.nan)
 
@@ -732,8 +732,8 @@ def categorize_durchlaufzeit(durchlaufzeit_str):
     mapping = {
         "< 1 Tag": 1,
         "1–3 Tage": 2,
-        "4–6 Tage": 3,
-        "≥ 7 Tage": 4
+        "4–7 Tage": 3,
+        "> 7 Tage": 4
     }
     return mapping.get(durchlaufzeit_str, np.nan)
 
@@ -743,8 +743,8 @@ def categorize_laufzeit(laufzeit_str):
     mapping = {
         "< 10 min": 1,
         "11–30 min": 2,
-        "31–89 min": 3,
-        "≥ 90 min": 4
+        "31–90 min": 3,
+        "> 90 min": 4
     }
     return mapping.get(laufzeit_str, np.nan)
 
@@ -1169,7 +1169,7 @@ elif current_tab in mtok_structure:
 elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
-    def radio_with_categorization(frage, options, key, categorize_func):
+    def radio_with_categorization(frage, options, key, categorize_func, bemerkung=None):
         vorhandene_auswahl = st.session_state.get(key, None)
 
         try:
@@ -1178,10 +1178,16 @@ elif current_tab == "Abschließende Fragen":
             default_index = 0
 
         with st.container():
+            # Frage anzeigen
             st.markdown(f"""
                 <div class="evaluation-question">{frage}</div>
             """, unsafe_allow_html=True)
 
+            # ❗️Hier: Bemerkung ausgeben, falls vorhanden
+            if bemerkung:
+                st.caption(bemerkung)  # Alternativ: st.markdown(f"*{bemerkung}*")
+
+            # Auswahlfeld anzeigen
             auswahl = st.radio(
                 label="",
                 options=options,
@@ -1190,7 +1196,7 @@ elif current_tab == "Abschließende Fragen":
                 label_visibility="collapsed"
             )
 
-            # horizontale Linie am Ende
+            # Horizontale Trennlinie
             st.markdown("""
                 <hr style='
                     border: none;
@@ -1200,44 +1206,45 @@ elif current_tab == "Abschließende Fragen":
                 '>
             """, unsafe_allow_html=True)
 
-        # Speicherung in Session State
-        st.session_state[key] = auswahl
-        st.session_state[f"{key}_score"] = categorize_func(auswahl)
-
     # Fragenaufrufe
     radio_with_categorization(
         "A1.1 Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
-        ["< 5", "5-10", "11-24", "≥ 25"],
+        ["< 5", "5-10", "11-25", "> 25"],
         "cnc_range",
-        categorize_cnc_machines
+        categorize_cnc_machines,
+        "Die Anzahl der CNC-Werkzeugmaschinen beeinflusst die Komplexität und Automatisierungsmöglichkeiten der Produktion."
     )
 
     radio_with_categorization(
         "A1.2 Wie viel Prozent Ihrer CNC-Werkzeugmaschinen besitzen eine Automation für den Werkstückwechsel?",
-        ["0%", "1-25%", "26-49%", "≥ 50%"],
+        ["0%", "1-25%", "26-50%", "> 50%"],
         "automation_range",
-        categorize_automation_percentage
+        categorize_automation_percentage,
+        "Der Automatisierungsgrad ist ein zentraler Indikator für Entkopplungspotenziale im Arbeitsprozess"
     )
 
     radio_with_categorization(
         "A1.3 Welche durchschnittlichen Losgrößen werden bei Ihnen gefertigt?",
-        ["< 5", "5-50", "51-99", "≥ 100"],
+        ["< 5", "5-50", "51-100", "> 100"],
         "losgroesse_range",
-        categorize_losgroesse
+        categorize_losgroesse,
+        "Die Losgröße beeinflusst die Umrüstfrequenz und damit die Planbarkeit flexibler Arbeit."
     )
 
     radio_with_categorization(
         "A1.4 Welche durchschnittliche Laufzeit haben die Werkstücke, die bei Ihnen gefertigt werden?",
-        ["< 10 min", "11–30 min", "31–89 min", "≥ 90 min"],
+        ["< 10 min", "11–30 min", "31–90 min", "> 90 min"],
         "laufzeit_range",
-        categorize_laufzeit
+        categorize_laufzeit,
+        "Die Laufzeit spiegelt die Auftragskomplexität und Planungsanforderung wider."
     )
     
     radio_with_categorization(
         "A1.5 Wie lang ist die durchschnittliche Durchlaufzeit (von Rohmaterial bis zum unentgrateten Fertigteil) eines Auftrags über alle Maschinen?",
-        ["< 1 Tag", "1–3 Tage", "4–6 Tage", "≥ 7 Tage"],
+        ["< 1 Tag", "1–3 Tage", "4–7 Tage", "> 7 Tage"],
         "durchlaufzeit_range",
-        categorize_durchlaufzeit
+        categorize_durchlaufzeit,
+        "Die Durchlaufzeit ist ein Indikator für Prozessstruktur und Produktionssteuerung."
     )
 
     st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
