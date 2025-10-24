@@ -202,13 +202,13 @@ Kriterien = {
     "begründung": "Nur wenn die Voraussetzungen und Grenzen zeitflexibler Arbeit bekannt sind, kann diese in der Zerspanung realistisch und störungsfrei umgesetzt werden."
   },
   {
-    "frage": "M1.3 Beschäftigte werden unterstützt und gefördert, Prozessstörungen eigenständig und sicher beheben zu können.",
-    "begründung": "Flexibles Arbeiten erfordert, dass Beschäftigte über Handlungsspielräume und die notwendige Unterstützung verfügen, um bei Prozessabweichungen eigenverantwortlich zu handeln."
+    "frage": "M1.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
+    "begründung": "In flexiblen Arbeitsmodellen ist es entscheidend, dass Beschäftigte auch ohne direkte Aufsicht Störungen erkennen und beheben können."
   },
   {
-    "frage": "M1.4 Beschäftigte verfügen über ein ausreichendes Qualifikationsniveau und erhalten gezielte Unterstützung zur Weiterentwicklung ihrer Kompetenzen für mobile und zeitflexible Arbeit.",
-    "begründung": "Qualifikation und kontinuierliche Kompetenzentwicklung sind zentrale Voraussetzungen für selbstständiges und verantwortungsbewusstes Arbeiten in flexiblen Arbeitsmodellen."
-  },
+    "frage": "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit im Rahmen flexibler Arbeit.",
+    "begründung": "Selbstorganisiertes Arbeiten erfordert kontinuierliche Weiterentwicklung."
+  }
   ],
   "Persönliche Voraussetzungen": [
     {
@@ -810,7 +810,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
         "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
-        "M1.4 Beschäftigte verfügen über ein ausreichendes Qualifikationsniveau und erhalten gezielte Unterstützung zur Weiterentwicklung ihrer Kompetenzen für mobile und zeitflexible Arbeit.",
+        "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit im Rahmen flexibler Arbeit.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
         "O2.1 Rechtliche Vorgaben zu flexibler Arbeit sind bekannt und werden eingehalten.",
         "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
@@ -825,7 +825,7 @@ kriterien_item_to_cluster_variable_mapping = {
     # HINWEIS: Wird auch invertiert (Siehe Aufwand Zeit)
     "Aufwand Mobil": [
         "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
-        "M1.3 Beschäftigte werden unterstützt und gefördert, Prozessstörungen eigenständig und sicher beheben zu können.",
+        "M1.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
         "M2.3 Beschäftigte verfügen über die Fähigkeit, ihre Arbeit eigenständig zu strukturieren und zu organisieren.",
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
         "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
