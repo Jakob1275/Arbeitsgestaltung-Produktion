@@ -1192,7 +1192,7 @@ elif current_tab == "Abschließende Fragen":
                 label="",
                 options=options,
                 index=default_index,
-                key=f"{key}_temp",
+                key=key,
                 label_visibility="collapsed"
             )
 
