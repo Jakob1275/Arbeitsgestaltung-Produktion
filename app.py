@@ -759,7 +759,7 @@ kriterien_item_to_cluster_variable_mapping = {
     # 6. Digitalisierungsgrad
     "Digitalisierungsgrad": [
         "M2.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
-        "T2.3 Prozess- und Maschinendaten stehen in Echtzeit digital zur Verfügung.
+        "T2.3 Prozess- und Maschinendaten stehen in Echtzeit digital zur Verfügung.",
         "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
         "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
         "O3.5 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
