@@ -1338,8 +1338,7 @@ elif current_tab == "Auswertung":
                     st.markdown(f"### {dimension}")
                     for eintrag in cluster_empfehlungen[dimension]:
                         st.markdown(f"**➤ {eintrag['text']}**")
-                        with st.expander("ℹ️ Erläuterung anzeigen"):
-                            st.markdown(eintrag["bemerkung"])
+                        st.markdown(f"<div style='margin-left: 1rem; color: #444;'>{eintrag['bemerkung']}</div>", unsafe_allow_html=True)
                     st.markdown("---")
             
             cluster_beschreibung_html = f"""
