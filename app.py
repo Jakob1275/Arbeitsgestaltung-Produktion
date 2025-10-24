@@ -13,19 +13,6 @@ import html
 
 #Google Sheet Verbindung
 
-# Zugriff Secrets mit Goofle Verbindungen
-#service_account_info = st.secrets["gcp_service_account"]
-
-# Authentifizierung mit aktuellem Scope
-#scope = ["https://www.googleapis.com/auth/spreadsheets"]
-#credentials = Credentials.from_service_account_info(service_account_info, scopes=scope)
-
-# Autorisierung für Google Sheets
-#client = gspread.authorize(credentials)
-
-# Spreadsheet öffnen
-#worksheet = client.open_by_key("1pPljjp03HAB7KM_Qk9B4IYnnx0NVuFMxV81qvD67B3g").worksheet("Tabellenblatt1")
-
 @st.cache_resource
 def get_worksheet():
     # Zugriff auf die Secrets
@@ -44,6 +31,7 @@ def get_worksheet():
 # worksheet global verwenden
 worksheet = get_worksheet()
 
+#Titel der Seiten
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
 
 # Style-Block
@@ -149,14 +137,10 @@ with col1:
     st.markdown("*Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung*")
 
 with col2:
-    st.image("FH-Logo.png", width=180)
+    st.image("kit-logo-en.svg", width=120)
 
 with col3:
-    st.image("kit-logo-en.svg", width=120)
-    
-#st.markdown(
-#    "#### Typisierung und Gestaltung mobiler und zeitflexibler Arbeit in der zerspanenden Fertigung"
-#)
+    st.image("FH-Logo.png", width=180)
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
@@ -433,6 +417,282 @@ Kriterien = {
     ]
     }
 
+#Clusterbeschreibung
+cluster_beschreibungen = {
+    "Cluster 1 – Traditionell und reaktiv": (
+        "Dieses Cluster ist geprägt durch eine geringe Technikaffinität, hohe Prozessunsicherheit und eine niedrige Offenheit "
+        "für neue Arbeitsformen. Digitale Systeme sind häufig veraltet oder nur punktuell vorhanden. Mobile oder zeitflexible "
+        "Arbeitsmodelle werden nicht genutzt oder aktiv abgelehnt. Die Führung agiert überwiegend hierarchisch, Veränderungsbereitschaft "
+        "ist kaum erkennbar. Die Einführung flexibler Arbeit erfordert grundlegende strukturelle, kulturelle und technische Vorarbeiten."
+     ),
+    "Cluster 2 – Produktionsstark, aber mobilitätsfern": (
+        "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung und stabile Produktionsprozesse, "
+        "zeigen jedoch eine geringe Offenheit und Akzeptanz für mobile oder flexible Arbeitsformen. Die Wertschöpfung im Produktionsbereich "
+        "steht klar im Vordergrund. Kulturelle Barrieren sowie fehlende organisatorische Modelle zur Flexibilisierung hemmen den Wandel. "
+        "Technisch wäre Flexibilität oft bereits möglich, scheitert jedoch an Einstellung, Struktur oder fehlender Systematik."
+    ),
+    "Cluster 3 – Digital-affin und akzeptanzstark": (
+        "Diese Unternehmen zeichnen sich durch eine hohe Technikreife, stabile Prozesse sowie eine starke Offenheit für neue Arbeitsformen aus. "
+        "Mobile und zeitflexible Arbeit wird bereits eingesetzt oder ist in Pilotbereichen etabliert. Die Führungskultur ist dialogorientiert, "
+        "und Beschäftigte werden aktiv eingebunden. Dieses Cluster hat sehr gute Voraussetzungen, flexible Arbeit systematisch auszurollen "
+        "und weiterzuentwickeln – sowohl technisch als auch kulturell-organisatorisch."
+        ),
+    "Cluster 4 – Technisch solide, aber prozessual träge": (
+        "In diesem Cluster sind zwar solide technische Grundlagen vorhanden (z. B. ERP, CAD, IT-Support), doch lange Laufzeiten, hohe Komplexität "
+        "und eine geringe Umsetzungsgeschwindigkeit behindern die Einführung flexibler Arbeit. Veränderungsprozesse laufen schleppend. "
+        "Die Belegschaft ist nicht grundsätzlich ablehnend, doch es fehlt an konkreten Umsetzungsstrategien und an kommunikativer Begleitung. "
+        "Technik und Akzeptanz bilden eine gute Basis – der Fokus muss auf Prozessvereinfachung und klarer Umsetzung liegen."
+    )
+}
+
+#Clusterbilder
+cluster_bilder = {
+    "Cluster 1 – Traditionell und reaktiv": "Cluster 1.png",
+    "Cluster 2 – Produktionsstark, aber mobilitätsfern": "Cluster 2.png",
+    "Cluster 3 – Digital-affin und akzeptanzstark": "Cluster 3.png",
+    "Cluster 4 – Technisch solide, aber prozessual träge": "Cluster 4.png"
+ }
+
+#Definition Handlungsempfehlungen
+handlungsempfehlungen = {
+    "Cluster 1 – Traditionell und reaktiv": {
+        "Technik": [
+            {
+                "text": "Führen Sie eine systematische Standortanalyse der technischen Infrastruktur durch – mit Fokus auf produktionsnahe IT-Grundversorgung (z. B. stabile Netzabdeckung, Arbeitsplatz-PCs, Zugang zu ERP/MDE/PZE).",
+                "bemerkung": "Die Basis für jede Form flexibler Arbeit ist funktionierende Infrastruktur. Gerade in Cluster 1 fehlen häufig IT-Grundlagen, insbesondere im Werkstattbereich."
+            },
+            {
+                "text": "Starten Sie mit klar umrissenen Digitalisierungsinseln – z. B. digitale Schichtpläne, Wartungslisten oder Urlaubsfreigaben für Teamleiter:innen.",
+                "bemerkung": "Technikeinführungen sollten in etablierten Routinen ansetzen. Kleinprojekte mit sichtbarem Nutzen stärken Akzeptanz und Selbstvertrauen im Umgang mit IT."
+            },
+            {
+                "text": "Nutzen Sie vorhandene Maschinendaten für einfache Visualisierungen (z. B. Stillstandsanalyse an CNC-Bearbeitungszentren) und koppeln Sie diese an einfache Dashboards.",
+                "bemerkung": "Auch klassische Fertigungsbetriebe verfügen oft über verwertbare Steuerungsdaten. Eine erste Visualisierung kann Türöffner für datengestützte Verbesserungen sein."
+            }
+        ],
+        "Organisation": [
+            {
+                "text": "Führen Sie niedrigschwellige Pilotmodelle für Zeitflexibilität ein – z. B. Gleitzeitkonten in AV oder verlängerte Pausenfenster im 1-Schichtbetrieb.",
+                "bemerkung": "In reaktiven Betrieben fehlt oft die Erfahrung mit flexiblen Arbeitsformen. Kleinversuche mit klaren Spielregeln ermöglichen risikofreies Ausprobieren."
+            },
+            {
+                "text": "Integrieren Sie Reflexionsroutinen (z. B. „Wo stehen wir mit Flexibilisierung?“-Check-ins in Teambesprechungen).",
+                "bemerkung": "Reaktive Strukturen verändern sich selten von selbst. Kontinuierliche Reflexion verankert Flexibilisierung als gemeinsamen Lernprozess."
+            },
+            {
+                "text": "Richten Sie eine bereichsübergreifende Steuerungsgruppe für mobile und zeitflexible Arbeit ein – mit Beteiligung von Betriebsrat, Produktion und Verwaltung.",
+                "bemerkung": "Gerade in traditionell geführten Unternehmen braucht es transparente Strukturen, um Misstrauen abzubauen und gemeinsam handhabbare Lösungen zu erarbeiten."
+            }
+        ],
+        "Kultur": [
+            {
+                "text": "Laden Sie gezielt externe Impulsgeber aus vergleichbaren Betrieben ein (z. B. Kurzvorträge, Betriebsbesichtigungen), die erste Schritte in Flexibilisierung gegangen sind.",
+                "bemerkung": "Betriebe mit geringer Veränderungsdynamik profitieren von realitätsnahen Vorbildern. Externe Inputs wirken oft motivierender als interne Appelle."
+            },
+            {
+                "text": "Führen Sie monatliche Teamrunden ein, in denen Arbeitsprobleme offen diskutiert werden dürfen – mit Fokus auf lösungsorientierter Kommunikation.",
+                "bemerkung": "Eine offene Gesprächskultur ist Grundlage für jede Veränderung. In reaktiven Betrieben muss dies aktiv gefördert und moderiert werden."
+            },
+            {
+                "text": "Entwickeln Sie gemeinsam mit Führungskräften ein internes Flexibilitätsleitbild – mit konkreten Beispielen aus dem Betriebsalltag.",
+                "bemerkung": "Ein betriebsspezifisches Leitbild konkretisiert abstrakte Veränderungsziele und schafft Orientierung in kulturell gefestigten Strukturen."
+            }
+        ],
+        "Mensch": [
+            {
+                "text": "Bieten Sie praxisnahe Kurzschulungen zur digitalen Anwendungskompetenz an (z. B. 30-Minuten-Workshops zu Excel, Zeiterfassung, Teams).",
+                "bemerkung": "Viele Beschäftigte im Cluster 1 meiden digitale Anwendungen aus Unsicherheit. Kurze, alltagsnahe Formate senken Schwellen und fördern Selbstvertrauen."
+            },
+            {
+                "text": "Stellen Sie eine Vertrauensperson oder Lotsen aus der Belegschaft bereit, die Kolleg:innen bei Fragen zur Selbstorganisation und Technik unterstützt.",
+                "bemerkung": "Peer-Lernen ist in vertrauten Strukturen oft effektiver als formelle Schulung. Ein erfahrener Kollege oder eine Kollegin kann niedrigschwellige Hilfe bieten."
+            },
+            {
+                "text": "Führen Sie individuelle Beratungssprechstunden zur Vereinbarkeit von Arbeitszeit und Privatleben ein – besonders für pflegende Angehörige und Eltern.",
+                "bemerkung": "Flexibilisierung muss konkret anschlussfähig sein. Individuelle Lebenslagen lassen sich besser durch persönliche Gespräche als durch allgemeine Regelungen adressieren."
+            }
+        ]
+    },
+
+    "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
+        "Technik": [
+            {
+                "text": "Ermöglichen Sie sicheren Remote-Zugriff auf produktionsrelevante Systeme für indirekte Bereiche (z. B. AV, Konstruktion, Qualitätssicherung).",
+                "bemerkung": "In diesem Cluster ist die technische Infrastruktur oft vorhanden, wird aber nicht für mobile Arbeit genutzt. VPN-Zugänge, mobile Clients oder Remote-Desktop-Lösungen schaffen eine direkte Anschlussfähigkeit."
+            },
+            {
+                "text": "Stellen Sie produktionsnahe Dashboards bereit, die sowohl in der Fertigung als auch mobil verfügbar sind (z. B. Fertigungsstatus, Auftragsfortschritt, Rückmeldungen).",
+                "bemerkung": "Produktionsstarke Betriebe profitieren von Transparenz über KPIs. Mobil verfügbare Dashboards fördern Vertrauen und ermöglichen ortsunabhängige Entscheidungen – ohne in Steuerungshoheit einzugreifen."
+            },
+            {
+                "text": "Nutzen Sie CAD-, CAM- und Werkzeugdaten zentralisiert – mit Zugriffsmöglichkeiten von verschiedenen Standorten (z. B. Konstruktion, NC-Programmierung, AV).",
+                "bemerkung": "Flexibilisierung in technischen Bereichen erfordert Zugriff auf zentrale Datenpools. Einheitliche Datenhaltung ist dafür technische Voraussetzung und organisatorische Entlastung zugleich."
+            }
+        ],
+        "Organisation": [
+            {
+                "text": "Führen Sie hybridfähige Rollenanalysen durch – mit Fokus auf indirekte Bereiche und Schichtbegleitfunktionen (z. B. AV, IT, Produktionsplanung, Qualität).",
+                "bemerkung": "Oft ist unklar, welche Aufgaben tatsächlich ortsunabhängig bearbeitet werden können. Eine strukturierte Analyse zeigt das Potenzial und hilft, realistische Flexibilisierungsmodelle zu entwickeln."
+            },
+            {
+                "text": "Entwickeln Sie modularisierte Arbeitszeitmodelle – z. B. Früh-/Spät-Gleitzeitfenster oder rollierende Homeoffice-Tage für bestimmte Teams.",
+                "bemerkung": "In produktionsgeprägten Betrieben ist Schichtstabilität zentral. Modularisierte Modelle ermöglichen dennoch zeitliche Spielräume ohne Verlust an Produktionssicherheit."
+            },
+            {
+                "text": "Schaffen Sie organisatorische Schnittstellen für den Informationsaustausch zwischen mobilen und präsenten Beschäftigten (z. B. feste Abstimmfenster, digitale Boards).",
+                "bemerkung": "Mobilität darf nicht zur Informationslücke führen. Klare, regelmäßige Austauschformate sichern Zusammenarbeit über Arbeitsorte hinweg ab."
+            }
+        ],
+        "Kultur": [
+            {
+                "text": "Thematisieren Sie Mobilitäts- und Flexibilisierungsoptionen aktiv in Führungskreisen – auch mit kritischer Reflexion eigener Haltungen.",
+                "bemerkung": "In diesem Cluster liegt das Haupthemmnis in der Kultur. Reflexion in der Führung zu Vertrauen, Kontrolle und Leistung ist ein zentraler Hebel für Veränderung."
+            },
+            {
+                "text": "Stellen Sie positive Praxisbeispiele aus dem eigenen Unternehmen systematisch sichtbar dar – z. B. im Intranet, in Teammeetings oder über Aushänge.",
+                "bemerkung": "Akzeptanz entsteht durch Vorbilder. Wenn erste Teams erfolgreich mobil arbeiten, kann dies Zweifel in anderen Bereichen reduzieren."
+            },
+            {
+                "text": "Verankern Sie die Vereinbarkeit von Arbeit und Privatleben in bestehenden Führungs- und Zielvereinbarungssystemen.",
+                "bemerkung": "Oft wird Vereinbarkeit nur kommunikativ, aber nicht systemisch gefördert. Die Integration in Zielsysteme zeigt Verbindlichkeit und steigert Führungssensibilität."
+            }
+        ],
+        "Mensch": [
+            {
+                "text": "Führen Sie gezielte Schulungen zu digitalen Tools in den relevanten indirekten Bereichen durch – z. B. AV, Konstruktion, Qualitätssicherung.",
+                "bemerkung": "Zwar besteht in diesem Cluster hohe technische Ausstattung, doch nicht alle Beschäftigten nutzen sie souverän. Tool-Schulungen stärken Handlungssicherheit für mobile Arbeit."
+            },
+            {
+                "text": "Bieten Sie strukturierte Onboarding-Prozesse für mobile Arbeit an – z. B. mit Checklisten, Kontaktpersonen und klaren Kommunikationsstandards.",
+                "bemerkung": "Viele Fachkräfte wissen nicht, was im Homeoffice erwartet wird. Ein strukturiertes Onboarding hilft, Unsicherheit zu reduzieren und Leistungserwartungen zu klären."
+            },
+            {
+                "text": "Ermutigen Sie Teams zur Entwicklung eigener Flexibilitätsregeln – etwa zur Erreichbarkeit, Aufgabenteilung oder Feedbackkultur im mobilen Arbeiten.",
+                "bemerkung": "Wenn Mitarbeitende eigene Regeln mitgestalten, steigt die Identifikation. Gleichzeitig wird die alltagsnahe Umsetzbarkeit gefördert."
+            }
+        ]
+    },
+
+    "Cluster 3 – Digital-affin und akzeptanzstark": {
+        "Technik": [
+            {
+                "text": "Erweitern Sie bestehende Tools durch funktionsübergreifende Kollaborationsplattformen (z. B. MS Teams, Planner, Confluence).",
+                "bemerkung": "In Cluster 3 sind Basistechnologien vorhanden. Der nächste Schritt besteht in der systematischen Integration und Nutzung von Kooperationsfunktionen über Team- und Abteilungsgrenzen hinweg."
+            },
+            {
+                "text": "Digitalisieren Sie vollständig administrative Abläufe rund um Arbeitszeit, Urlaubsplanung und Schichtorganisation.",
+                "bemerkung": "Die technischen Voraussetzungen sind in der Regel vorhanden. Automatisierte Prozesse steigern Transparenz und entlasten Führungskräfte und Mitarbeitende gleichermaßen."
+            },
+            {
+                "text": "Verknüpfen Sie produktionsrelevante Datenquellen in Echtzeit (z. B. MDE/BDE/ERP mit Visualisierung für remote-Zugriffe).",
+                "bemerkung": "Flexibilität braucht Datentransparenz. In digital-affinen Unternehmen können bestehende Systeme sinnvoll verknüpft werden, um ortsunabhängige Steuerung zu ermöglichen."
+            }
+        ],
+        "Organisation": [
+            {
+                "text": "Etablieren Sie regelmäßige Review-Zyklen zur Reflexion und Weiterentwicklung flexibler Arbeit (z. B. halbjährliche Team-Workshops).",
+                "bemerkung": "Cluster 3 zeichnet sich durch hohe Offenheit aus. Um Flexibilisierung langfristig erfolgreich zu gestalten, bedarf es strukturierter Feedback- und Weiterentwicklungsformate."
+            },
+            {
+                "text": "Definieren Sie verbindliche Regelungen zu Erreichbarkeit, Arbeitszeiterfassung und Aufgabenverteilung in mobilen Settings.",
+                "bemerkung": "Eine offene Arbeitskultur braucht zugleich verlässliche Strukturen. Klare Rahmenbedingungen fördern Vertrauen und Fairness im Team."
+            },
+            {
+                "text": "Nutzen Sie hybride Betriebsvereinbarungen als lernende Regelwerke – mit offenen Evaluationsklauseln.",
+                "bemerkung": "Flexibilisierung darf nicht im Experiment enden. Regelwerke mit Weiterentwicklungsoptionen helfen, Agilität und Verbindlichkeit zu vereinen."
+            }
+        ],
+        "Kultur": [
+            {
+                "text": "Fördern Sie Eigenverantwortung durch mehr Entscheidungsspielräume bei Arbeitsort und -zeit – auf Teamebene abgestimmt.",
+                "bemerkung": "Dieses Cluster ist bereit für Autonomie. Führung sollte Gestaltungsspielräume freigeben, dabei aber teaminterne Aushandlung unterstützen."
+            },
+            {
+                "text": "Stärken Sie eine dialogische Führungskultur – z. B. durch Führungskräftefeedbacks oder Peer-Coachings.",
+                "bemerkung": "Die Führungskultur ist bereits offen – sie kann durch gezielte Maßnahmen weiterentwickelt werden, um Ambiguitätstoleranz und Vertrauen zu festigen."
+            },
+            {
+                "text": "Feiern Sie erfolgreiche Umsetzungen flexibler Arbeit sichtbar – z. B. durch interne Erfolgsgeschichten oder Anerkennungsformate.",
+                "bemerkung": "Gelingen braucht Sichtbarkeit. Positive Beispiele stärken die kulturelle Akzeptanz und motivieren zur weiteren Ausweitung."
+            }
+        ],
+        "Mensch": [
+            {
+                "text": "Nutzen Sie das Erfahrungswissen langjähriger Mitarbeitender für Mentoringformate im Umgang mit digital-flexibler Arbeit.",
+                "bemerkung": "Die Belegschaft verfügt über vielfältige Erfahrung. Mentoring-Formate fördern Wissenstransfer und stärken soziale Bindung im hybriden Kontext."
+            },
+            {
+                "text": "Fördern Sie Selbstlernkompetenzen durch Zugang zu E-Learning-Plattformen und individuelle Entwicklungsziele.",
+                "bemerkung": "In diesem Cluster sind Lernbereitschaft und IT-Affinität hoch. Zielgerichtete Selbstlernformate stärken Eigenverantwortung und digitale Souveränität."
+            },
+            {
+                "text": "Ergänzen Sie das Onboarding neuer Beschäftigter um Module zur Selbstorganisation im hybriden Arbeiten.",
+                "bemerkung": "Gerade neue Mitarbeitende brauchen Orientierung. Onboarding-Prozesse sollten systematisch an digitale und flexible Arbeitsrealitäten angepasst werden."
+            }
+        ]
+    },
+
+   "Cluster 4 – Technisch solide, aber prozessual träge": {
+        "Technik": [
+            {
+                "text": "Identifizieren Sie technische Engpässe in der Datenverfügbarkeit und beseitigen Sie Hürden für Echtzeittransparenz (z. B. fehlende Schnittstellen zwischen ERP und MES).",
+                "bemerkung": "Obwohl Systeme vorhanden sind, fehlt oft die systematische Verbindung. Transparente Datenflüsse sind Grundvoraussetzung für Prozessoptimierung und Mobilität."
+            },
+            {
+                "text": "Ergänzen Sie bestehende Steuerungstechnik durch einfache Assistenzsysteme, die auch mobil genutzt werden können (z. B. Tablet-Lösungen für AV oder QS).",
+                "bemerkung": "In prozessual trägen Betrieben können Assistenzsysteme helfen, bestehende Technik effizienter zu nutzen – ohne direkt ganze Systeme umzustellen."
+            },
+            {
+                "text": "Führen Sie technische Pilotprojekte zur digitalen Auftragsverfolgung in ausgewählten Bereichen durch.",
+                "bemerkung": "Pilotprojekte mit überschaubarem Risiko ermöglichen technische Fortschritte, ohne den Gesamtprozess zu gefährden."
+            }
+        ],
+        "Organisation": [
+            {
+                "text": "Entflechten Sie komplexe oder überlastete Kernprozesse – z. B. durch Prozessmapping und Identifikation nicht-wertschöpfender Tätigkeiten.",
+                "bemerkung": "Prozessuale Trägheit entsteht oft aus überladenen Abläufen. Eine strukturierte Prozessanalyse zeigt Potenziale für Entschlackung und Flexibilität auf."
+            },
+            {
+                "text": "Erstellen Sie Roadmaps für flexible Arbeit – mit konkreten Etappen, Verantwortlichkeiten und Evaluationszeitpunkten.",
+                "bemerkung": "In technisch stabilen, aber trägen Betrieben braucht es Struktur. Roadmaps schaffen Orientierung und steigern Umsetzungswahrscheinlichkeit."
+            },
+            {
+                "text": "Erproben Sie modulare Arbeitszeitmodelle zunächst in unterstützenden Bereichen (z. B. Qualitätssicherung, Instandhaltung).",
+                "bemerkung": "Diese Bereiche haben oft ausreichend Freiheitsgrade. Erste Modelle dort wirken als Proof-of-Concept für spätere Ausweitung."
+            }
+        ],
+        "Kultur": [
+            {
+                "text": "Stärken Sie Veränderungsbereitschaft durch interne Kommunikation über Erfolge anderer Bereiche (z. B. „Flexibilitäts-Funktionen des Monats“).",
+                "bemerkung": "Kommunikation über Erfolge wirkt motivierend. In trägen Kulturen braucht es positive Reize zur Reaktivierung."
+            },
+            {
+                "text": "Binden Sie die betriebliche Interessenvertretung frühzeitig in Transformationsprozesse ein – insbesondere bei Fragen der Flexibilisierung.",
+                "bemerkung": "Vertrauensvolle Zusammenarbeit mit Gremien reduziert Blockaden und schafft gemeinsame Verantwortung für den Wandel."
+            },
+            {
+                "text": "Führen Sie bewusst „Lernformate“ statt reine „Informationsformate“ ein – z. B. kurze Praxislabs zu flexiblen Arbeitsformen.",
+                "bemerkung": "Erklärungen reichen nicht aus. Praxisnahe Lernräume fördern Beteiligung und Akzeptanz nachhaltig."
+            }
+        ],
+        "Mensch": [
+            {
+                "text": "Stärken Sie individuelle Handlungsfähigkeit durch klare Rollendefinitionen und transparente Zielvorgaben.",
+                "bemerkung": "In unklaren Prozessen hilft Orientierung. Klare Rollen geben Sicherheit und machen Flexibilität anschlussfähig."
+            },
+            {
+                "text": "Befragen Sie Beschäftigte gezielt nach Unterstützungsbedarfen bei der Einführung flexibler Arbeit (z. B. anonyme Kurzbefragung).",
+                "bemerkung": "Oft ist nicht bekannt, woran es hakt. Befragungen schaffen Sichtbarkeit und ermöglichen gezielte Maßnahmen."
+            },
+            {
+                "text": "Benennen Sie Veränderungsbotschafter:innen aus der Belegschaft, die gute Erfahrungen mit Flexibilisierung gemacht haben.",
+                "bemerkung": "Anerkannte Kolleg:innen können als Brückenbauer:innen zwischen Management und Belegschaft wirken – besonders in trägen Systemen."
+            }
+        ]
+    }
+}
+
+#Mapping der Antworten
 def categorize_cnc_machines(num_machines_raw):
     if num_machines_raw is None:
         return np.nan
@@ -498,71 +758,64 @@ kriterien_item_to_cluster_variable_mapping = {
 
     # 6. Digitalisierungsgrad
     "Digitalisierungsgrad": [
-        "M2.7 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
-        "T1.4 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
-        "T1.6 Prozess- und Maschinendaten stehen in Echtzeit digital zur Verfügung.",
-        "T1.7 Werkzeugmaschinen sind mit zentralen digitalen Systemen vernetzt.",
-        "T1.8 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
-        "T2.4 Digitale Kommunikations- und Kollaborationstools sind standardisiert verfügbar.",
-        "T2.5 Digitale Schnittstellen zwischen Produktion, Planung und Führung sind etabliert.",
-        "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten und ist digital abgebildet.",
-        "O3.6 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
-        "O3.7 Simulationen werden aktiv zur Produktionsplanung und -steuerung eingesetzt."
+        "M2.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
+        "T2.3 Prozess- und Maschinendaten stehen in Echtzeit digital zur Verfügung.
+        "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
+        "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
+        "O3.5 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
     ],
     
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
-        "T1.1 Fertigungsprozesse sind störungsarm.",
+        "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
         "T1.2 Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
-        "O3.4 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
-        "O3.5 Qualitätssicherungsprozesse sind automatisiert und kontinuierlich wirksam.",
-        "O3.7 Simulationen werden aktiv zur Produktionsplanung und -steuerung eingesetzt."
+        "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
+        "O3.4 Qualitätssicherungsprozesse sind automatisisert im Fertigungsprozess möglich.",
     ],
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
-        "M1.7 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
-        "O3.2 Maschinenbediener können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
-        "K1.3 Zielerreichung steht vor physischer Anwesenheit.",
-        "K1.5 Zielkonflikte zwischen Flexibilität und Produktionssicherheit werden offen angesprochen.",
-        "K2.2 Führungskräfte unterstützen flexible Arbeitsformen und respektieren individuelle Arbeitsweisen."
+        "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
+        "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
+        "K1.3 Zielerreichung und Ergebnisse stehen vor physischer Anwesenheit.",
+        "K1.4 Herausforderungen und Zielkonflikte flexibler Arbeit werden offen angesprochen und reflektiert.",
+        "K2.2 Führungskräfte unterstützen flexible Arbeitsformen aktiv und führen ergebnisorientiert."
     ],
     
     # 9. Akzeptanz
     "Akzeptanz": [
-        "M1.3 Das Interesse der Beschäftigten an mobilen und/oder zeitflexiblen Arbeitsmodellen wird regelmäßig erfasst.",
-        "M1.7 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
         "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
-        "M2.8 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
+        "M2.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
         "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
+        "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.1 Vertrauen bildet die Grundlage der Zusammenarbeit.",
-        "K2.1 Die Unternehmensführung lebt Flexibilität sichtbar vor und positioniert sich aktiv dazu."
+        "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu."
     ],
     
     # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
-        "T1.5 Produktionsprozesse sind standardisiert dokumentiert.",
+        "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
-        "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten und ist digital abgebildet.",
+        "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
         "O2.7 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
-        "O2.5 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen."
+        "O2.5 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen.",
     ],
     
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
     # HINWEIS: Wird auch invertiert (Siehe Aufwand Zeit)
     "Aufwand Mobil": [
         "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
-        "M1.4 Angebote zur Qualifizierung im Hinblick auf mobile und zeitflexible Arbeitsmodelle bestehen.",
-        "T1.1 Fertigungsprozesse sind störungsarm.",
-        "T1.8 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
-        "T2.1 Die IT-Infrastruktur stellt geeignete mobile Endgeräte zur Verfügung.",
+        "M1.3 Beschäftigte werden unterstützt und gefördert, Prozessstörungen eigenständig und sicher beheben zu können.",
+        "M1.4 Beschäftigte verfügen über ein ausreichendes Qualifikationsniveau und erhalten gezielte Unterstützung zur Weiterentwicklung ihrer Kompetenzen für mobile und zeitflexible Arbeit.",
+        "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
+        "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
+        "T2.1 Mobile Endgeräte stehen für mobile Arbeit zur Verfügung.",
         "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
-        "T2.3 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
-        "T2.6 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
-        "O1.2 Konzepte zur Förderung digitaler Kommunikations- und Kooperationskompetenz sind etabliert."
+        "T2.6 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
+        "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft."
     ]
 }
 
@@ -623,7 +876,6 @@ cluster_item_values = {
 }
 
 #Berechnung der Clusterzuordnung
-
 def berechne_clusterzuordnung(kriterien_all_items_dict):
     # 1. Sammle alle individuellen Item-Bewertungen aus dem item_to_radio_key_map
     all_item_scores_flat = {}
@@ -750,7 +1002,6 @@ st.markdown("<div id='top'></div>", unsafe_allow_html=True)
 nav_buttons("top")
 
 # Aktuellen Tab bestimmen
-
 current_tab = tab_names[st.session_state.current_tab_index]
 st.markdown(f"## {current_tab}")
 st.markdown(" ➤ ".join([
@@ -794,6 +1045,7 @@ if current_tab == "Start":
     </div>
     """, unsafe_allow_html=True)
 
+#Fragenblock
 elif current_tab in mtok_structure:
     dimension = current_tab
     for feld in mtok_structure[dimension]:
@@ -888,7 +1140,8 @@ elif current_tab in mtok_structure:
                 score = 9999
 
             st.session_state["einzel_scores"][f"{feld}__{idx}"] = score
-            
+
+#Abschließende Fragen
 elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
 
@@ -927,7 +1180,7 @@ elif current_tab == "Abschließende Fragen":
         st.session_state[key] = auswahl
         st.session_state[f"{key}_score"] = categorize_func(auswahl)
 
-    # ⬇️ Fragenaufrufe
+    # Fragenaufrufe
     radio_with_categorization(
         "A1.1 Wie viele CNC-Werkzeugmaschinen haben Sie in Ihrer zerspanenden Fertigung?",
         ["< 5", "5-10", "11-24", "≥ 25"],
@@ -1067,41 +1320,8 @@ elif current_tab == "Auswertung":
 
             # Clusterbeschreibung
             st.subheader("Clusterbeschreibung")
-            cluster_beschreibungen = {
-                "Cluster 1 – Traditionell und reaktiv": (
-                    "Dieses Cluster ist geprägt durch eine geringe Technikaffinität, hohe Prozessunsicherheit und eine niedrige Offenheit "
-                    "für neue Arbeitsformen. Digitale Systeme sind häufig veraltet oder nur punktuell vorhanden. Mobile oder zeitflexible "
-                    "Arbeitsmodelle werden nicht genutzt oder aktiv abgelehnt. Die Führung agiert überwiegend hierarchisch, Veränderungsbereitschaft "
-                    "ist kaum erkennbar. Die Einführung flexibler Arbeit erfordert grundlegende strukturelle, kulturelle und technische Vorarbeiten."
-                ),
-                "Cluster 2 – Produktionsstark, aber mobilitätsfern": (
-                    "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung und stabile Produktionsprozesse, "
-                    "zeigen jedoch eine geringe Offenheit und Akzeptanz für mobile oder flexible Arbeitsformen. Die Wertschöpfung im Produktionsbereich "
-                    "steht klar im Vordergrund. Kulturelle Barrieren sowie fehlende organisatorische Modelle zur Flexibilisierung hemmen den Wandel. "
-                    "Technisch wäre Flexibilität oft bereits möglich, scheitert jedoch an Einstellung, Struktur oder fehlender Systematik."
-                ),
-                "Cluster 3 – Digital-affin und akzeptanzstark": (
-                    "Diese Unternehmen zeichnen sich durch eine hohe Technikreife, stabile Prozesse sowie eine starke Offenheit für neue Arbeitsformen aus. "
-                    "Mobile und zeitflexible Arbeit wird bereits eingesetzt oder ist in Pilotbereichen etabliert. Die Führungskultur ist dialogorientiert, "
-                    "und Beschäftigte werden aktiv eingebunden. Dieses Cluster hat sehr gute Voraussetzungen, flexible Arbeit systematisch auszurollen "
-                    "und weiterzuentwickeln – sowohl technisch als auch kulturell-organisatorisch."
-                ),
-                "Cluster 4 – Technisch solide, aber prozessual träge": (
-                    "In diesem Cluster sind zwar solide technische Grundlagen vorhanden (z. B. ERP, CAD, IT-Support), doch lange Laufzeiten, hohe Komplexität "
-                    "und eine geringe Umsetzungsgeschwindigkeit behindern die Einführung flexibler Arbeit. Veränderungsprozesse laufen schleppend. "
-                    "Die Belegschaft ist nicht grundsätzlich ablehnend, doch es fehlt an konkreten Umsetzungsstrategien und an kommunikativer Begleitung. "
-                    "Technik und Akzeptanz bilden eine gute Basis – der Fokus muss auf Prozessvereinfachung und klarer Umsetzung liegen."
-                )
-            }
-            st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
 
-            # Cluster-Bilder (lokale Dateien oder URLs)
-            cluster_bilder = {
-                "Cluster 1 – Traditionell und reaktiv": "Cluster 1.png",
-                "Cluster 2 – Produktionsstark, aber mobilitätsfern": "Cluster 2.png",
-                "Cluster 3 – Digital-affin und akzeptanzstark": "Cluster 3.png",
-                "Cluster 4 – Technisch solide, aber prozessual träge": "Cluster 4.png"
-            }
+            st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
 
             # Bild für das aktuelle Cluster anzeigen
             bild_pfad = cluster_bilder.get(cluster_result)
@@ -1110,89 +1330,16 @@ elif current_tab == "Auswertung":
 
             # Handlungsempfehlungen nach Cluster und MTOK
             st.subheader("Clusterspezifische Handlungsempfehlungen")
-            handlungsempfehlungen = {
-            "Cluster 1 – Traditionell und reaktiv": {
-                "Technik": [
-                    "- Prüfen Sie grundlegende digitale Infrastruktur (z. B. WLAN in Büros und Besprechungsräumen).",
-                    "- Beginnen Sie mit einfach implementierbaren Tools (z. B. digitale Schichtpläne oder Messenger)."
-                ],
-                "Organisation": [
-                    "- Entwickeln Sie Pilotmodelle für Zeitflexibilität (z. B. Gleitzeit in indirekten Bereichen).",
-                    "- Führen Sie standardisierte Feedbackprozesse ein, um Veränderungsresistenz zu adressieren."
-                ],
-                "Kultur": [
-                    "- Starten Sie mit Führungskräfte-Coachings zur Gestaltung flexibler Arbeit.",
-                    "- Etablieren Sie eine positive Fehler- und Lernkultur durch regelmäßige Teambesprechungen."
-                ],
-                "Mensch": [
-                    "- Sensibilisieren Sie Mitarbeitende für den Nutzen flexibler Arbeit (z. B. Workshops, Aushänge).",
-                    "- Unterstützen Sie betroffene Beschäftigte durch kurze Schulungsmaßnahmen zur Selbstorganisation."
-                ]
-            },
-            "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
-                "Technik": [
-                    "- Binden Sie Produktionsdaten gezielt in Dashboard-Lösungen ein (z. B. Power BI).",
-                    "- Stellen Sie Remote-Zugriffe für Planer:innen und AV-Bereiche bereit (z. B. VPN, TDM-Clients)."
-                ],
-                "Organisation": [
-                    "- Entwickeln Sie Teilzeit- und Schichtmodelle mit Fokus auf bestimmte Berufsgruppen.",
-                    "- Schaffen Sie Transparenz über Aufgaben, die auch remote bearbeitbar sind."
-                ],
-                "Kultur": [
-                    "- Thematisieren Sie Mobilitätsoptionen in Führungsrunden offen und lösungsorientiert.",
-                    "- Heben Sie die Vereinbarkeit von Familie und Beruf in internen Leitbildern stärker hervor."
-                ],
-                "Mensch": [
-                    "- Befähigen Sie Fachkräfte in AV, Konstruktion oder QS gezielt zur Nutzung flexibler Tools.",
-                    "- Nutzen Sie Erfahrungsberichte von Pilotbereichen als Impuls für weitere Mitarbeitende."
-                ]
-            },
-            "Cluster 3 – Digital-affin und akzeptanzstark": {
-                "Technik": [
-                    "- Prüfen Sie fortgeschrittene Tools zur kollaborativen Zusammenarbeit (z. B. MS Teams mit Planner).",
-                    "- Nutzen Sie digitale Schichtplanungs- oder Urlaubsantragssysteme zur weiteren Flexibilisierung."
-                ],
-                "Organisation": [
-                    "- Etablieren Sie feste Review-Zyklen zur Bewertung und Weiterentwicklung flexibler Arbeit.",
-                    "- Schaffen Sie klare Regeln zur Erreichbarkeit und Aufgabentransparenz im mobilen Arbeiten."
-                ],
-                "Kultur": [
-                    "- Verstärken Sie Wertschätzung durch autonome Arbeitsgestaltung und Entscheidungsspielräume.",
-                    "- Fördern Sie teaminterne Aushandlungsprozesse über Präsenz- und Mobilezeiten."
-                ],
-                "Mensch": [
-                    "- Nutzen Sie das Potenzial erfahrener Mitarbeitender für Mentoring im Umgang mit Flexibilität.",
-                    "- Stärken Sie Selbstlernkompetenzen durch E-Learning-Angebote oder Selbstcoaching-Inhalte."
-                ]
-            },
-            "Cluster 4 – Technisch solide, aber prozessual träge": {
-                "Technik": [
-                    "- Identifizieren Sie technische Engpässe in der Datenverfügbarkeit (z. B. Live-Kennzahlenanzeige).",
-                    "- Setzen Sie auf Assistenzsysteme, die Mobilität auch in getakteten Bereichen ermöglichen."
-                ],
-                "Organisation": [
-                    "- Reduzieren Sie Durchlaufzeiten und Komplexität in ausgewählten Kernprozessen.",
-                    "- Entwickeln Sie Umsetzungsroadmaps für Pilotbereiche mit klaren Meilensteinen."
-                ],
-                "Kultur": [
-                    "- Reduzieren Sie Umsetzungsbarrieren durch interne Kommunikation mit Best-Practice-Beispielen.",
-                    "- Integrieren Sie betriebliche Interessenvertretungen frühzeitig in Transformationsvorhaben."
-                ],
-                "Mensch": [
-                    "- Schaffen Sie Sicherheit durch klare Rollendefinitionen und transparente Arbeitsaufträge.",
-                    "- Fördern Sie aktive Beteiligung z. B. durch Befragungen und Change-Botschafter:innen."
-                ]
-            }
-        }
-            
+
             cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
 
-            # 1. Darstellung in App
             for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
                 if dimension in cluster_empfehlungen:
                     st.markdown(f"### {dimension}")
-                    for empfehlung in cluster_empfehlungen[dimension]:
-                        st.markdown(f"- {empfehlung}")
+                    for eintrag in cluster_empfehlungen[dimension]:
+                        st.markdown(f"**➤ {eintrag['text']}**")
+                        with st.expander("ℹ️ Erläuterung anzeigen"):
+                            st.markdown(eintrag["bemerkung"])
                     st.markdown("---")
             
             cluster_beschreibung_html = f"""
@@ -1205,9 +1352,14 @@ elif current_tab == "Auswertung":
             empfehlungen_html = ""
             for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
                 if dimension in cluster_empfehlungen:
-                    empfehlungs_block = "<ul>"  # Hier beginnt die Liste!
-                    for empfehlung in cluster_empfehlungen[dimension]:
-                        empfehlungs_block += f"<li>{empfehlung[2:]}</li>"  # Entferne führendes "- "
+                    empfehlungs_block = "<ul>"
+                    for eintrag in cluster_empfehlungen[dimension]:
+                        empfehlungs_block += f"""
+                        <li>
+                            <strong>{eintrag['text']}</strong><br>
+                            <span style='font-size: 90%; color: #555;'>{eintrag['bemerkung']}</span>
+                        </li>
+                        """
                     empfehlungs_block += "</ul>"
                     empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
         
@@ -1227,7 +1379,7 @@ elif current_tab == "Auswertung":
             </table>
             """
 
-            # HTML-Komplettausgabe
+    # HTML-Komplettausgabe
             html_content = f"""
             <!DOCTYPE html>
             <html lang=\"de\">
@@ -1268,7 +1420,8 @@ elif current_tab == "Auswertung":
                 file_name="auswertung.html",
                 mime="text/html"
             )
-            
+
+#Evaluationsfragen
 if current_tab == "Evaluation":
 
     # Einführungstext
