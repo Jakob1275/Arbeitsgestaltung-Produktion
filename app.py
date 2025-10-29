@@ -774,7 +774,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
-        "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen",
+        "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
         "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
         "O3.4 Qualitätssicherungsprozesse sind automatisisert im Fertigungsprozess möglich.",
     ],
@@ -808,14 +808,13 @@ kriterien_item_to_cluster_variable_mapping = {
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
         "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
+        "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit im Rahmen flexibler Arbeit.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
-        "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit im Rahmen flexibler Arbeit.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
         "O2.1 Rechtliche Vorgaben zu flexibler Arbeit sind bekannt und werden eingehalten.",
         "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
         "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
-        "O2.7 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
         "O2.5 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen.",
         "O2.7 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
         "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu."
