@@ -194,29 +194,29 @@ einleitungstexte = {
 Kriterien = {
 "Qualifikation und Kompetenzentwicklung": [
   {
-    "frage": "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
-    "begründung": "Mobile Arbeit setzt unter anderem einen sicheren IT-Zugang, die Einbindung in digitale Prozesse und eigenverantwortliches Arbeiten voraus."
+    "frage": "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z.B. durch Schulungen oder Leitfäden).",
+    "begründung": "Ein sicherer Umgang mit IT-Systemen und eigenverantwortliches Arbeiten sind zentrale Voraussetzungen mobiler Arbeit."
   },
   {
     "frage": "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
-    "begründung": "Nur wenn die Voraussetzungen und Grenzen zeitflexibler Arbeit bekannt sind, kann diese in der Zerspanung realistisch und störungsfrei umgesetzt werden."
+    "begründung": "Zeitflexible Arbeit erfordert stabile Prozesse, klare Abstimmung und ausreichende Personalressourcen im Rahmen betrieblicher Produktionszeiträume."
   },
   {
     "frage": "M1.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
     "begründung": "In flexiblen Arbeitsmodellen ist es entscheidend, dass Beschäftigte auch ohne direkte Aufsicht Störungen erkennen und beheben können."
   },
   {
-    "frage": "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit im Rahmen flexibler Arbeit.",
-    "begründung": "Selbstorganisiertes Arbeiten erfordert kontinuierliche Weiterentwicklung."
+    "frage": "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit.",
+    "begründung": "Selbstorganisiertes Arbeiten erfordert kontinuierliche Qualifizierung und die Förderung eigenverantwortlicher Handlungskompetenz."
   }
   ],
   "Persönliche Voraussetzungen": [
     {
-      "frage": "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
+      "frage": "M2.1 Beschäftigte zeigen Offenheit gegenüber <strong>mobiler</strong> Arbeit.",
       "begründung": "Eine positive Grundhaltung erleichtert den Einstieg in ortsunabhängiges Arbeiten und unterstützt die Akzeptanz neuer Arbeitsformen."
     },
     {
-      "frage": "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
+      "frage": "M2.2 Beschäftigte zeigen Offenheit gegenüber <strong>zeitflexibler</strong> Arbeit.",
       "begründung": "Offenheit gegenüber flexiblen Arbeitszeiten fördert Anpassungsfähigkeit und Akzeptanz betrieblicher Veränderungen."
     },
     {
@@ -252,11 +252,7 @@ Kriterien = {
     {
         "frage": "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
         "begründung": "Standardisierung erleichtert Vertretungen, Übergaben und mobile Unterstützungsformate."
-    },
-    {
-        "frage": "T1.5 Die ergonomische Gestaltung der Arbeitsplätze unterstützt eine gesundheitsförderliche Arbeit.",
-        "begründung": "Ergonomische Arbeitsplätze reduzieren physische Belastung und fördern Leistungsfähigkeit bei flexiblen Arbeitszeiten."
-    },
+    }
    ],
    "Digitale Vernetzung und IT-Infrastruktur": [
     {
@@ -275,10 +271,10 @@ Kriterien = {
     },
     {
         "frage": "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
-        "begründung": "Monitoring-Tools oder Kameras erlauben Eingriffe ohne dauerhafte Präsenz."
+        "begründung": "Monitoring-Tools oder Kameras erlauben Kontrolle ohne dauerhafte Präsenz."
     },
     {
-        "frage": "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
+        "frage": "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und abgebildet.",
         "begründung": "Digitale Toolmanagement-Systeme ermöglichen eine flexible und effiziente Betriebsmittelplanung."
     },   
     {
@@ -317,17 +313,17 @@ Kriterien = {
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
+      "frage": "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
       "begründung": "Klare Regelungen schaffen Rechtssicherheit, Orientierung und Transparenz für Beschäftigte und Führungskräfte.",
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
+      "frage": "O2.3 Die Personalplanung berücksichtigt flexible <strong>Arbeitszeiten</strong>.",
       "begründung": "Digitale Planungssysteme wie MES oder ERP ermöglichen eine verlässliche Steuerung und Dokumentation flexibler Arbeitszeiten.",
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "O2.4 Die Personalplanung berücksichtigt flexible Arbeitsorte.",
+      "frage": "O2.4 Die Personalplanung berücksichtigt flexible <strong>Arbeitsorte</strong>.",
       "begründung": "Systemische Einbindung in Planungstools ermöglicht die Koordination ortsunabhängiger Einsätze.",
       "einschraenkung": "1_und_4"
     },
@@ -347,8 +343,8 @@ Kriterien = {
     ],
     "Produktionsorganisation": [
     {
-      "frage": "O3.1 Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und systematisch aufteilbar.",
-      "begründung": "Die Trennung von präsenzpflichtigen und mobil bearbeitbaren Tätigkeiten ist Grundlage jeder flexiblen Arbeitsgestaltung."
+      "frage": "O3.1 Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und aufteilbar.",
+      "begründung": "Die Trennung von präsenzpflichtigen und mobil bearbeitbaren Tätigkeiten ist Grundlage einer flexiblen Arbeitsgestaltung."
     },
     {
       "frage": "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
@@ -363,7 +359,7 @@ Kriterien = {
       "begründung": "Automatisierte Prüfverfahren reduzieren Kontrollaufwände und erhöhen die zeitliche Flexibilität im Produktionsablauf."
     },
     {
-      "frage": "O3.5 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
+      "frage": "O3.5 Auftragsplanung ist digital unterstützt und dynamisch anpassbar.",
       "begründung": "Digitale Systeme ermöglichen Echtzeitsteuerung und flexible Anpassung an sich ändernde Rahmenbedingungen."
     },
     {
@@ -781,7 +777,7 @@ kriterien_item_to_cluster_variable_mapping = {
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
-        "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
+        "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z.B. durch Schulungen oder Leitfäden).",
         "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
@@ -808,7 +804,7 @@ kriterien_item_to_cluster_variable_mapping = {
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
         "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
-        "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit im Rahmen flexibler Arbeit.",
+        "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
@@ -823,7 +819,7 @@ kriterien_item_to_cluster_variable_mapping = {
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
     # HINWEIS: Wird auch invertiert (Siehe Aufwand Zeit)
     "Aufwand Mobil": [
-        "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z. B. durch Schulungen oder Leitfäden).",
+        "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z.B. durch Schulungen oder Leitfäden).",
         "M1.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
         "M2.3 Beschäftigte verfügen über die Fähigkeit, ihre Arbeit eigenständig zu strukturieren und zu organisieren.",
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
@@ -1052,9 +1048,9 @@ if current_tab == "Start":
     
     st.markdown("""
     <div class="text-box">
-    <p><strong>Die Digitalisierung</strong> und der <strong>Wunsch nach flexibleren Arbeitsmodellen</strong> stellen produzierende Unternehmen vor neue Herausforderungen. Wie können beispielsweise Homeoffice und flexible Arbeitszeiten in der Produktion umgesetzt werden? Das entwickelte <strong>Diagnose- und Entwicklungsmodell</strong> hilft Ihnen dabei, diese Frage systematisch anzugehen: Es zeigt Ihnen, wo Ihr Unternehmen heute steht und gibt Ihnen konkrete <strong>Handlungsempfehlungen</strong> für die Umsetzung flexibler Arbeitsformen an die Hand.</p>
+    <p><strong>Die Digitalisierung</strong> und der <strong>Wunsch nach flexibleren Arbeitsmodellen</strong> stellen produzierende Unternehmen vor neue Herausforderungen. Wie können beispielsweise Homeoffice und flexible Arbeitszeiten für die Beschäftigten in der Produktion umgesetzt werden? Das entwickelte <strong>Diagnose- und Entwicklungsmodell</strong> hilft Ihnen dabei, diese Frage systematisch anzugehen: Es zeigt Ihnen, wo Ihr Unternehmen aktuell steht, und liefert konkrete <strong>Handlungsempfehlungen</strong>, die Sie auf dem <strong>Weg zur Einführung flexibler Arbeitsmodelle</strong> unterstützen.</p>
 
-    <p>Das Modell wurde speziell für <strong>Unternehmen der zerspanenden Fertigung</strong> entwickelt. Es ermöglicht Ihnen eine <strong>strukturierte Bestandsaufnahme</strong> Ihres Unternehmens und zeigt gleichzeitig auf, wie Sie die <strong>Einführung mobiler und zeitflexibler Arbeit</strong> unterstützen können. Dabei berücksichtigt das Modell vier wichtige Bereiche: Ihre <strong>Beschäftigten</strong>, die vorhandene <strong>Technik</strong>, Ihre <strong>Organisation</strong> und die <strong>Unternehmenskultur</strong>. Diese vier Bereiche werden in neun <strong>konkrete Handlungsfelder</strong> unterteilt, die speziell auf die Besonderheiten der zerspanenden Fertigung zugeschnitten sind.</p>
+    <p>Das Modell wurde speziell für <strong>Unternehmen der zerspanenden Fertigung</strong> entwickelt. Es berücksichtigt vier zentrale Bereiche: Ihre <strong>Beschäftigten</strong>, die eingesetzte <strong>Technik</strong>, die <strong>Organisation</strong> sowie die <strong>Unternehmenskultur</strong>. Diese Dimensionen sind in neun <strong>konkrete Handlungsfelder</strong> untergliedert, die gezielt auf die Anforderungen und Besonderheiten der zerspanenden Fertigung abgestimmt sind.</p>
     
     <p><strong>Die Bewertung basiert auf einem vierstufigen System:</strong></p>
     <ul>
@@ -1064,7 +1060,7 @@ if current_tab == "Start":
         <li><strong>Stufe 4 – Vollständig erfüllt:</strong> Das Kriterium ist vollständig umgesetzt und fest etabliert.</li>
     </ul>
 
-    <p>Nach der Selbstbewertung erhalten Sie ein übersichtliches <strong>grafisches Profil</strong>, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von <strong>vier Unternehmenstypen</strong> zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typ bekommen Sie maßgeschneiderte, <strong>praxisnahe Handlungsempfehlungen</strong>, die Ihnen konkrete nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.</p>
+    <p>Nach der Selbstbewertung erhalten Sie ein übersichtliches <strong>grafisches Profil</strong>, das Ihre Stärken und Verbesserungsmöglichkeiten auf einen Blick zeigt. Das System ordnet Ihr Unternehmen automatisch einem von <strong>vier Unternehmenstypen</strong> zu, die aus der Praxis abgeleitet wurden. Basierend auf diesem Typ bekommen Sie maßgeschneiderte, <strong>praxisnahe Handlungsempfehlungen</strong>, die Ihnen nächste Schritte für die Weiterentwicklung Ihrer Arbeitsorganisation aufzeigen.</p>
     </div>
     """, unsafe_allow_html=True)
 
