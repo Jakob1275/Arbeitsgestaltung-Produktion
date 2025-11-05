@@ -140,7 +140,7 @@ with col2:
     st.image("kit-logo-en.svg", width=120)
 
 with col3:
-    st.image("FH-Logo.png", width=180)
+    st.image("HAW-Logo.png", width=180)
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
