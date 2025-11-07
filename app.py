@@ -153,15 +153,14 @@ mtok_structure = {
 einleitungstexte = {
     "Qualifikation und Kompetenzentwicklung": (
         "Die folgenden Aussagen beziehen sich auf betriebliche Maßnahmen zur Schulung, "
-        "Qualifizierung und Kompetenzentwicklung für flexible Arbeit in der zerspanenden Fertigung."
+        "Qualifizierung und Kompetenzentwicklung der Beschäftigten in der zerspanenden Fertigung."
     ),
     "Persönliche Voraussetzungen": (
         "Die folgenden Aussagen beziehen sich auf persönliche Einstellungen, Haltungen, Fähigkeiten und "
-        "die individuelle Bereitschaft der Beschäftigten, mobile, zeitflexible und digital unterstützte "
-        "Arbeit in der zerspanenden Fertigung umzusetzen."
+        "die individuelle Bereitschaft der Beschäftigten in der zerspanenden Fertigung."
     ),
     "Automatisierung und Arbeitsplatzgestaltung": (
-        "Die folgenden Aussagen beziehen sich auf Automatisierung, ergonomische Gestaltung "
+        "Die folgenden Aussagen beziehen sich auf die Automatisierung "
         "und die physische Arbeitsumgebung in der zerspanenden Fertigung."
     ),
     "Digitale Vernetzung und IT-Infrastruktur": (
@@ -194,11 +193,11 @@ einleitungstexte = {
 Kriterien = {
 "Qualifikation und Kompetenzentwicklung": [
   {
-    "frage": "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z.B. durch Schulungen oder Leitfäden).",
-    "begründung": "Ein sicherer Umgang mit IT-Systemen und eigenverantwortliches Arbeiten sind zentrale Voraussetzungen mobiler Arbeit."
+    "frage": "M1.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
+    "begründung": "Mobile Arbeit verlangt eigenständiges Arbeiten mit digitalen Tools, klare Kommunikation und hohe Selbstorganisation."
   },
   {
-    "frage": "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
+    "frage": "M1.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
     "begründung": "Zeitflexible Arbeit erfordert stabile Prozesse, klare Abstimmung und ausreichende Personalressourcen im Rahmen betrieblicher Produktionszeiträume."
   },
   {
@@ -206,22 +205,22 @@ Kriterien = {
     "begründung": "In flexiblen Arbeitsmodellen ist es entscheidend, dass Beschäftigte auch ohne direkte Aufsicht Störungen erkennen und beheben können."
   },
   {
-    "frage": "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit.",
-    "begründung": "Selbstorganisiertes Arbeiten erfordert kontinuierliche Qualifizierung und die Förderung eigenverantwortlicher Handlungskompetenz."
+    "frage": "M1.4 Beschäftigte werden gezielt darin gefördert, ihre Arbeit eigenverantwortlich zu organisieren und Entscheidungen im Rahmen ihrer Aufgaben zu treffen.",
+    "begründung": "Flexible Arbeitsformen erfordern ein hohes Maß an Selbstorganisation und Entscheidungskompetenz."
   }
   ],
   "Persönliche Voraussetzungen": [
     {
-      "frage": "M2.1 Beschäftigte zeigen Offenheit gegenüber <strong>mobiler</strong> Arbeit.",
+      "frage": "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
       "begründung": "Eine positive Grundhaltung erleichtert den Einstieg in ortsunabhängiges Arbeiten und unterstützt die Akzeptanz neuer Arbeitsformen."
     },
     {
-      "frage": "M2.2 Beschäftigte zeigen Offenheit gegenüber <strong>zeitflexibler</strong> Arbeit.",
+      "frage": "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
       "begründung": "Offenheit gegenüber flexiblen Arbeitszeiten fördert Anpassungsfähigkeit und Akzeptanz betrieblicher Veränderungen."
     },
     {
-      "frage": "M2.3 Beschäftigte verfügen über die Fähigkeit, ihre Arbeit eigenständig zu strukturieren und zu organisieren.",
-      "begründung": "Selbstorganisation ist eine zentrale Voraussetzung, um mobil oder zeitflexibel effizient und verantwortungsvoll arbeiten zu können."
+      "frage": "M2.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen selbst beheben.",
+      "begründung": "Die Fähigkeit, kleinere Fehler eigenverantwortlich zu lösen, ist entscheidend für reibungslose Abläufe in mobilen und zeitflexiblen Arbeitsmodellen."
     },
     {
       "frage": "M2.4 Beschäftigte bringen regelmäßig eigene Ideen und Verbesserungsvorschläge ein.",
@@ -242,7 +241,7 @@ Kriterien = {
         "begründung": "Stabile Prozesse reduzieren Eingriffe und schaffen Grundlagen für flexible Arbeitsmodelle."
     },
     {
-        "frage": "T1.2 CNC-Werkzeugmaschinen können über längere Zeiträume ohne ständige Anwesenheit betrieben werden.",
+        "frage": "T1.2 CNC-Werkzeugmaschinen können über längere Zeiträume (über 8 Stunden) ohne ständige Anwesenheit betrieben werden.",
         "begründung": "Ein hoher Automatisierungsgrad oder lange unbeaufsichtigte Laufzeiten ermöglichen zeitliche Entkopplung und reduzieren Präsenzzwänge."
     },
     {
@@ -256,7 +255,7 @@ Kriterien = {
    ],
    "Digitale Vernetzung und IT-Infrastruktur": [
     {
-        "frage": "T2.1 Mobile Endgeräte stehen für mobile Arbeit zur Verfügung.",
+        "frage": "T2.1 Mobile Endgeräte können für mobile Arbeit zur Verfügung gestellt werden.",
         "begründung": "Mobile Endgeräte wie Laptops oder Tablets sind Grundvoraussetzung für ortsunabhängiges Arbeiten.",
         "einschraenkung": "1_und_4"
     },
@@ -284,8 +283,7 @@ Kriterien = {
     },
     {
         "frage": "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
-        "begründung": "Starke IT-Sicherheit schützt sensible Daten und gewährleistet stabile Abläufe bei flexibler Arbeit.",
-        "einschraenkung": "1_und_4"
+        "begründung": "Starke IT-Sicherheit schützt sensible Daten und gewährleistet stabile Abläufe bei flexibler Arbeit."
     }
     ],
     "Kommunikation, Kooperation und Zusammenarbeit": [
@@ -298,45 +296,40 @@ Kriterien = {
       "begründung": "Systematischer Wissenstransfer fördert Qualität, Lernen und Unabhängigkeit von Einzelpersonen."
     },
     {
-      "frage": "O1.3 Verantwortlichkeiten sind klar geregelt und relevante Akteure (z. B. Betriebsrat, Datenschutz) eingebunden.",
-      "begründung": "Klare Rollen und Beteiligung schaffen Transparenz, Rechtssicherheit und Vertrauen."
+      "frage": "O1.3 Zuständigkeiten, Schnittstellen und Rollen im Unternehmen sind klar definiert und kommuniziert.",
+      "begründung": "Für reibungslose Abläufe in flexiblen Arbeitsmodellen braucht es eindeutige Verantwortlichkeiten, klare Abstimmungen und transparente Strukturen."
     },
     {
-      "frage": "O1.4 Erwartungen an dauerhafte Erreichbarkeit sind klar geregelt und werden begrenzt.",
-      "begründung": "Klare Grenzen fördern Erholung, Selbststeuerung und nachhaltige Nutzung flexibler Arbeitsmodelle."
+      "frage": "O1.4 Beschäftigte unterstützen sich aktiv bei Herausforderungen, Abstimmungen und gemeinsamen Aufgaben.",
+      "begründung": "Gegenseitige Unterstützung fördert Vertrauen, sichert reibungslose Abläufe und stärkt die Selbstorganisation."
     }
     ],
     "Organisatorische Umwelt": [
     {
-      "frage": "O2.1 Rechtliche Vorgaben zu flexibler Arbeit sind bekannt und werden eingehalten.",
-      "begründung": "Rechtskonformität zu Arbeitszeit, Datenschutz und Arbeitsschutz stärkt Vertrauen und Akzeptanz flexibler Modelle.",
-      "einschraenkung": "1_und_4"
-    },
-    {
-      "frage": "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
+      "frage": "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
       "begründung": "Klare Regelungen schaffen Rechtssicherheit, Orientierung und Transparenz für Beschäftigte und Führungskräfte.",
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "O2.3 Die Personalplanung berücksichtigt flexible <strong>Arbeitszeiten</strong>.",
+      "frage": "O2.2 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
       "begründung": "Digitale Planungssysteme wie MES oder ERP ermöglichen eine verlässliche Steuerung und Dokumentation flexibler Arbeitszeiten.",
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "O2.4 Die Personalplanung berücksichtigt flexible <strong>Arbeitsorte</strong>.",
+      "frage": "O2.3 Die Personalplanung berücksichtigt flexible Arbeitsorte.",
       "begründung": "Systemische Einbindung in Planungstools ermöglicht die Koordination ortsunabhängiger Einsätze.",
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "O2.5 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen.",
+      "frage": "O2.4 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen.",
       "begründung": "Mitgestaltungsmöglichkeiten fördern Eigenverantwortung und Akzeptanz flexibler Arbeitszeitmodelle."
     },
     {
-      "frage": "O2.6 Pausenregelungen lassen zeitliche Flexibilität im Rahmen betrieblicher Vorgaben zu.",
+      "frage": "O2.5 Pausenregelungen lassen zeitliche Flexibilität im Rahmen betrieblicher Vorgaben zu.",
       "begründung": "Flexible Pausen erhöhen Erholung, Selbstbestimmung und Konzentrationsfähigkeit."
     },
     {
-      "frage": "O2.7 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
+      "frage": "O2.6 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
       "begründung": "Transparente Zeitkonten fördern Fairness und eine ausgewogene Nutzung flexibler Arbeitszeiten.",
       "einschraenkung": "1_und_4"  
     }
@@ -344,7 +337,7 @@ Kriterien = {
     "Produktionsorganisation": [
     {
       "frage": "O3.1 Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und aufteilbar.",
-      "begründung": "Die Trennung von präsenzpflichtigen und mobil bearbeitbaren Tätigkeiten ist Grundlage einer flexiblen Arbeitsgestaltung."
+      "begründung": "Die Trennung von präsenzpflichtigen (z.B. Einrichten) und mobil bearbeitbaren Tätigkeiten (z.B. Programmierung) ist Grundlage einer flexiblen Arbeitsgestaltung."
     },
     {
       "frage": "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
@@ -355,7 +348,7 @@ Kriterien = {
       "begründung": "Planbare Prozesszeiten schaffen Handlungssicherheit und ermöglichen eine verlässliche Integration flexibler Arbeitszeitmodelle."
     },
     {
-      "frage": "O3.4 Qualitätssicherungsprozesse sind automatisiert im Fertigungsprozess möglich.",
+      "frage": "O3.4 Qualitätssicherungsprozesse (z.B. Maßkontrollen) sind automatisiert im Fertigungsprozess integriert und werden aktiv genutzt.",
       "begründung": "Automatisierte Prüfverfahren reduzieren Kontrollaufwände und erhöhen die zeitliche Flexibilität im Produktionsablauf."
     },
     {
@@ -375,8 +368,8 @@ Kriterien = {
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "K1.2 Beschäftigte erhalten Handlungsfreiräume zur Gestaltung ihrer Arbeit.",
-      "begründung": "Handlungsspielräume fördern Motivation, Eigenverantwortung und Innovationsfähigkeit."
+      "frage": "K1.2 Beschäftigte verfügen über Handlungsfreiräume und dürfen im Rahmen ihrer Aufgaben auch Fehler machen, um daraus zu lernen.",
+      "begründung": "Eine konstruktive Fehlerkultur stärkt Eigenverantwortung, Innovationsfähigkeit und die Weiterentwicklung individueller Handlungskompetenz."
     },
     {
       "frage": "K1.3 Zielerreichung und Ergebnisse stehen vor physischer Anwesenheit.",
@@ -390,24 +383,20 @@ Kriterien = {
     ],
    "Führung und Teamzusammenhalt": [
    {
-      "frage": "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu.",
-      "begründung": "Vorbildverhalten auf oberster Ebene schafft Legitimität und Orientierung für nachgelagerte Führungsebenen.",
+      "frage": "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv.",
+      "begründung": "Offenheit der Unternehmensleitung schafft Raum für Innovation und fördert die Bereitschaft, flexible Arbeitsmodelle gemeinsam zu gestalten.",
       "einschraenkung": "1_und_4"
     },
-     {
-      "frage": "K2.2 Führungskräfte unterstützen flexible Arbeitsformen aktiv und führen ergebnisorientiert.",
+    {
+      "frage": "K2.2 Führungskräfte stehen flexible Arbeitsformen offen gegenüber und führen ergebnisorientiert.",
       "begründung": "Vertrauen und Ergebnisorientierung statt Präsenzkontrolle fördern Eigenverantwortung und Motivation im Team."
     },
-     {
+    {
       "frage": "K2.3 Die Teamkultur ist von gegenseitiger Unterstützung und Kooperation geprägt.",
       "begründung": "Soziale Unterstützung erhöht Resilienz und Zusammenhalt bei reduzierter physischer Präsenz."
     },
     {
-      "frage": "K2.4 Der Teamzusammenhalt wird aktiv gefördert, auch bei räumlicher oder zeitlicher Distanz.",
-      "begründung": "Gezielte Maßnahmen (z. B. Teamevents, regelmäßige Meetings) verhindern soziale Isolation und stärken Bindung."
-    },
-    {
-      "frage": "K2.5 Konflikte im Team werden frühzeitig erkannt und konstruktiv gelöst.",
+      "frage": "K2.4 Konflikte im Team werden frühzeitig erkannt und konstruktiv gelöst.",
       "begründung": "Ein strukturierter Umgang mit Konflikten sichert Vertrauen und Stabilität flexibler Arbeitsmodelle."
     }
     ]
@@ -572,8 +561,8 @@ handlungsempfehlungen = {
     "Cluster 3 – Digital-affin und akzeptanzstark": {
         "Technik": [
             {
-                "text": "Erweitern Sie bestehende Tools durch funktionsübergreifende Kollaborationsplattformen (z. B. MS Teams, Planner, Confluence).",
-                "bemerkung": "In Cluster 3 sind Basistechnologien vorhanden. Der nächste Schritt besteht in der systematischen Integration und Nutzung von Kooperationsfunktionen über Team- und Abteilungsgrenzen hinweg."
+                  "text": "Schaffen Sie zentrale, digitale Informationspunkte („Single Points of Information“) zur Bereitstellung relevanter Produktions-, Auftrags- oder Mitarbeiterdaten.",
+                  "bemerkung": "In Cluster 3 sind die grundlegenden digitalen Technologien bereits etabliert. Der nächste Entwicklungsschritt besteht darin, verstreute Informationen aus verschiedenen Systemen gezielt zu bündeln, um Medienbrüche zu vermeiden, Transparenz zu fördern und die Eigenverantwortung der Beschäftigten weiter zu stärken."
             },
             {
                 "text": "Digitalisieren Sie vollständig administrative Abläufe rund um Arbeitszeit, Urlaubsplanung und Schichtorganisation.",
@@ -761,7 +750,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
         "O1.2 Erfahrungswissen wird dokumentiert und digital zugänglich gemacht.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
-        "O3.4 Qualitätssicherungsprozesse sind automatisisert im Fertigungsprozess möglich.",
+        "O3.4 Qualitätssicherungsprozesse (z.B. Maßkontrollen) sind automatisiert im Fertigungsprozess integriert und werden aktiv genutzt.",
         "O3.5 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
     ],
     
@@ -772,19 +761,19 @@ kriterien_item_to_cluster_variable_mapping = {
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
         "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
-        "O3.4 Qualitätssicherungsprozesse sind automatisisert im Fertigungsprozess möglich.",
+        "O3.4 Qualitätssicherungsprozesse (z.B. Maßkontrollen) sind automatisiert im Fertigungsprozess integriert und werden aktiv genutzt."
     ],
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
-        "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z.B. durch Schulungen oder Leitfäden).",
-        "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
+        "M1.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
+        "M1.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.3 Zielerreichung und Ergebnisse stehen vor physischer Anwesenheit.",
         "K1.4 Herausforderungen und Zielkonflikte flexibler Arbeit werden offen angesprochen und reflektiert.",
-        "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu.",
-        "K2.2 Führungskräfte unterstützen flexible Arbeitsformen aktiv und führen ergebnisorientiert."
+        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv.",
+        "K2.2 Führungskräfte stehen flexible Arbeitsformen offen gegenüber und führen ergebnisorientiert."
     ],
     
     # 9. Akzeptanz
@@ -793,48 +782,45 @@ kriterien_item_to_cluster_variable_mapping = {
         "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
         "M2.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
         "M2.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
-        "O1.4 Erwartungen an dauerhafte Erreichbarkeit sind klar geregelt und werden begrenzt.",
-        "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
+        "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.1 Vertrauen bildet die Grundlage der Zusammenarbeit.",
-        "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu."
+        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv."
     ],
     
     # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
-        "M1.2 Voraussetzungen und Grenzen zeitflexibler Arbeit werden klar kommuniziert.",
-        "M1.4 Die betriebliche Kompetenzentwicklung fördert gezielt die Selbstorganisation und Entscheidungsfähigkeit.",
+        "M1.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
+        "M1.4 Beschäftigte werden gezielt darin gefördert, ihre Arbeit eigenverantwortlich zu organisieren und Entscheidungen im Rahmen ihrer Aufgaben zu treffen.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
-        "O2.1 Rechtliche Vorgaben zu flexibler Arbeit sind bekannt und werden eingehalten.",
-        "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
-        "O2.3 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
-        "O2.5 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen.",
-        "O2.7 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
-        "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu."
+        "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
+        "O2.2 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
+        "O2.4 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen.",
+        "O2.6 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
+        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv."
     ],
     
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
     # HINWEIS: Wird auch invertiert (Siehe Aufwand Zeit)
     "Aufwand Mobil": [
-        "M1.1 Anforderungen an mobile Arbeit werden systematisch vermittelt (z.B. durch Schulungen oder Leitfäden).",
+        "M1.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
         "M1.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
-        "M2.3 Beschäftigte verfügen über die Fähigkeit, ihre Arbeit eigenständig zu strukturieren und zu organisieren.",
+        "M2.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen selbst beheben.",
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
-        "T2.1 Mobile Endgeräte stehen für mobile Arbeit zur Verfügung.",
+        "T2.1 Mobile Endgeräte können für mobile Arbeit zur Verfügung gestellt werden.",
         "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
         "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
         "T2.6 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
         "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
-        "O2.1 Rechtliche Vorgaben zu flexibler Arbeit sind bekannt und werden eingehalten.",
-        "O2.2 Verbindliche Betriebsvereinbarungen zu mobiler und zeitflexibler Arbeit bestehen.",
-        "O2.4 Die Personalplanung berücksichtigt flexible Arbeitsorte.",
+        "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
+        "O2.3 Die Personalplanung berücksichtigt flexible Arbeitsorte.",
         "O3.1 Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und systematisch aufteilbar.",
-        "K2.1 Die Unternehmensführung lebt flexible Arbeitsformen sichtbar vor und positioniert sich aktiv dazu."
+        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv."
     ]
 }
 
