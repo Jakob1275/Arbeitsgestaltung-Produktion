@@ -412,18 +412,18 @@ cluster_beschreibungen = {
      ),
     "Cluster 2 – Produktionsstark, aber mobilitätsfern": (
         "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung und stabile Produktionsprozesse, "
-        "zeigen jedoch eine geringe Offenheit und Akzeptanz für mobile oder flexible Arbeitsformen. Die Wertschöpfung im Produktionsbereich "
+        "zeigen jedoch eine geringe Offenheit und Akzeptanz für mobile oder zeitflexible Arbeitsmodelle. Die Wertschöpfung im Produktionsbereich "
         "steht klar im Vordergrund. Kulturelle Barrieren sowie fehlende organisatorische Modelle zur Flexibilisierung hemmen den Wandel. "
         "Technisch wäre Flexibilität oft bereits möglich, scheitert jedoch an Einstellung, Struktur oder fehlender Systematik."
     ),
     "Cluster 3 – Digital-affin und akzeptanzstark": (
-        "Diese Unternehmen zeichnen sich durch eine hohe Technikreife, stabile Prozesse sowie eine starke Offenheit für neue Arbeitsformen aus. "
+        "Diese Unternehmen zeichnen sich durch eine hohe Technikreife, stabile Prozesse sowie eine ausgeprägte Offenheit für neue Arbeitsformen aus. "
         "Mobile und zeitflexible Arbeit wird bereits eingesetzt oder ist in Pilotbereichen etabliert. Die Führungskultur ist dialogorientiert, "
         "und Beschäftigte werden aktiv eingebunden. Dieses Cluster hat sehr gute Voraussetzungen, flexible Arbeit systematisch auszurollen "
-        "und weiterzuentwickeln – sowohl technisch als auch kulturell-organisatorisch."
+        "und weiterzuentwickeln. Dies sowohl technisch als auch kulturell-organisatorisch."
         ),
     "Cluster 4 – Technisch solide, aber prozessual träge": (
-        "In diesem Cluster sind zwar solide technische Grundlagen vorhanden (z. B. ERP, CAD, IT-Support), doch lange Laufzeiten, hohe Komplexität "
+        "In diesem Cluster sind solide technische Grundlagen vorhanden (z. B. ERP, CAD, IT-Support), doch lange Laufzeiten, hohe Komplexität "
         "und eine geringe Umsetzungsgeschwindigkeit behindern die Einführung flexibler Arbeit. Veränderungsprozesse laufen schleppend. "
         "Die Belegschaft ist nicht grundsätzlich ablehnend, doch es fehlt an konkreten Umsetzungsstrategien und an kommunikativer Begleitung. "
         "Technik und Akzeptanz bilden eine gute Basis – der Fokus muss auf Prozessvereinfachung und klarer Umsetzung liegen."
@@ -443,44 +443,44 @@ handlungsempfehlungen = {
     "Cluster 1 – Traditionell und reaktiv": {
         "Technik": [
             {
-                "text": "Führen Sie eine systematische Standortanalyse der technischen Infrastruktur durch – mit Fokus auf produktionsnahe IT-Grundversorgung (z. B. stabile Netzabdeckung, Arbeitsplatz-PCs, Zugang zu ERP/MDE/PZE).",
-                "bemerkung": "Die Basis für jede Form flexibler Arbeit ist funktionierende Infrastruktur. Gerade in Cluster 1 fehlen häufig IT-Grundlagen, insbesondere im Werkstattbereich."
+                "text": "Führen Sie eine strukturierte Bestandsaufnahme der Fertigungsprozesse der am häufigsten produzierten Werkstücke durch – mit Schwerpunkt auf Stabilität, Ausfallsicherheit und Automatisierungspotenzial.",
+                "bemerkung": "Die Basis für jede Form flexibler Arbeit sind stabile und verlässliche Produktionsprozesse."
             },
             {
-                "text": "Starten Sie mit klar umrissenen Digitalisierungsinseln – z. B. digitale Schichtpläne, Wartungslisten oder Urlaubsfreigaben für Teamleiter:innen.",
-                "bemerkung": "Technikeinführungen sollten in etablierten Routinen ansetzen. Kleinprojekte mit sichtbarem Nutzen stärken Akzeptanz und Selbstvertrauen im Umgang mit IT."
+                "text": "Kategorisieren Sie Werkstücke nach Fertigungsart und Größe, um Potenziale für eine wirtschaftliche Automatisierung zu identifizieren.",
+                "bemerkung": "Ähnliche Werkstücke bilden oft ein ausreichend großes Volumen, um diese Prozesse zu automatisieren und standardisieren."
             },
             {
-                "text": "Nutzen Sie vorhandene Maschinendaten für einfache Visualisierungen (z. B. Stillstandsanalyse an CNC-Bearbeitungszentren) und koppeln Sie diese an einfache Dashboards.",
-                "bemerkung": "Auch klassische Fertigungsbetriebe verfügen oft über verwertbare Steuerungsdaten. Eine erste Visualisierung kann Türöffner für datengestützte Verbesserungen sein."
+                "text": "Führen Sie eine systematische Standortanalyse der technischen Infrastruktur durch – mit Fokus auf produktionsnahe IT-Grundversorgung (z. B. stabile Netzabdeckung, Arbeitsplatz-PCs, Zugang zu ERP).",
+                "bemerkung": "Eine funktionierende technische Infrastruktur ist Grundvoraussetzung für Prozesssicherheit und Digitalisierung. In Cluster 1 fehlen häufig IT-Grundlagen, insbesondere im Werkstattbereich."
             }
         ],
         "Organisation": [
             {
                 "text": "Führen Sie niedrigschwellige Pilotmodelle für Zeitflexibilität ein – z. B. Gleitzeitkonten in AV oder verlängerte Pausenfenster im 1-Schichtbetrieb.",
-                "bemerkung": "In reaktiven Betrieben fehlt oft die Erfahrung mit flexiblen Arbeitsformen. Kleinversuche mit klaren Spielregeln ermöglichen risikofreies Ausprobieren."
+                "bemerkung": "In Betrieben des Clusters 1 fehlt oft die Erfahrung mit flexiblen Arbeitsformen. Kleinversuche mit klaren Spielregeln ermöglichen risikofreies Ausprobieren."
             },
             {
-                "text": "Integrieren Sie Reflexionsroutinen (z. B. „Wo stehen wir mit Flexibilisierung?“-Check-ins in Teambesprechungen).",
-                "bemerkung": "Reaktive Strukturen verändern sich selten von selbst. Kontinuierliche Reflexion verankert Flexibilisierung als gemeinsamen Lernprozess."
+                "text": "Integrieren Sie regelmäßige Lern- und Reflexionsroutinen (z. B. „Was lief stabil, was nicht?“ in Teamrunden).",
+                "bemerkung": "ontinuierliches Lernen aus Abweichungen stärkt Prozesssicherheit und fördert zugleich gemeinsames Verantwortungsbewusstsein."
             },
             {
-                "text": "Richten Sie eine bereichsübergreifende Steuerungsgruppe für mobile und zeitflexible Arbeit ein – mit Beteiligung von Betriebsrat, Produktion und Verwaltung.",
-                "bemerkung": "Gerade in traditionell geführten Unternehmen braucht es transparente Strukturen, um Misstrauen abzubauen und gemeinsam handhabbare Lösungen zu erarbeiten."
+                "text": "Bilden Sie eine bereichsübergreifende Arbeitsgruppe „Prozesssicherheit & Flexibilität“, die Technik, Produktion, Verwaltung und Betriebsrat einbindet.",
+                "bemerkung": "Gemeinsame Verantwortung schafft Akzeptanz und stellt sicher, dass technische Veränderungen organisatorisch mitgetragen werden."
             }
         ],
         "Kultur": [
             {
-                "text": "Laden Sie gezielt externe Impulsgeber aus vergleichbaren Betrieben ein (z. B. Kurzvorträge, Betriebsbesichtigungen), die erste Schritte in Flexibilisierung gegangen sind.",
-                "bemerkung": "Betriebe mit geringer Veränderungsdynamik profitieren von realitätsnahen Vorbildern. Externe Inputs wirken oft motivierender als interne Appelle."
+                "text": "Laden Sie externe Praxisbeispiele ein, die zeigen, wie Automatisierung und Flexibilisierung gemeinsam funktionieren können.",
+                "bemerkung": "Externe Impulse helfen, Ängste vor Automatisierung abzubauen und zeigen, dass Prozesssicherheit und Mitarbeiterbeteiligung kein Widerspruch sind."
             },
             {
                 "text": "Führen Sie monatliche Teamrunden ein, in denen Arbeitsprobleme offen diskutiert werden dürfen – mit Fokus auf lösungsorientierter Kommunikation.",
                 "bemerkung": "Eine offene Gesprächskultur ist Grundlage für jede Veränderung. In reaktiven Betrieben muss dies aktiv gefördert und moderiert werden."
             },
             {
-                "text": "Entwickeln Sie gemeinsam mit Führungskräften ein internes Flexibilitätsleitbild – mit konkreten Beispielen aus dem Betriebsalltag.",
-                "bemerkung": "Ein betriebsspezifisches Leitbild konkretisiert abstrakte Veränderungsziele und schafft Orientierung in kulturell gefestigten Strukturen."
+                "text": "Entwickeln Sie gemeinsam ein „Leitbild für verlässliche Zusammenarbeit“ – mit Fokus auf Sicherheit im Wandel und gegenseitige Unterstützung.",
+                "bemerkung": "Ein gemeinsames Leitbild übersetzt Werte wie Vertrauen und Stabilität in konkrete Verhaltensregeln und Orientierung im Alltag."
             }
         ],
         "Mensch": [
@@ -489,12 +489,12 @@ handlungsempfehlungen = {
                 "bemerkung": "Viele Beschäftigte im Cluster 1 meiden digitale Anwendungen aus Unsicherheit. Kurze, alltagsnahe Formate senken Schwellen und fördern Selbstvertrauen."
             },
             {
-                "text": "Stellen Sie eine Vertrauensperson oder Lotsen aus der Belegschaft bereit, die Kolleg:innen bei Fragen zur Selbstorganisation und Technik unterstützt.",
-                "bemerkung": "Peer-Lernen ist in vertrauten Strukturen oft effektiver als formelle Schulung. Ein erfahrener Kollege oder eine Kollegin kann niedrigschwellige Hilfe bieten."
+                "text": "Etablieren Sie den Austausch („Kollegen helfen Kollegen“) zur Unterstützung bei Selbstorganisation und Technikfragen.",
+                "bemerkung": "Offenheit und Selbstorganisation entstehen im Vertrauen. Kollegiale Lernpartnerschaften senken Hemmschwellen und stärken gemeinsames Lernen."
             },
             {
-                "text": "Führen Sie individuelle Beratungssprechstunden zur Vereinbarkeit von Arbeitszeit und Privatleben ein – besonders für pflegende Angehörige und Eltern.",
-                "bemerkung": "Flexibilisierung muss konkret anschlussfähig sein. Individuelle Lebenslagen lassen sich besser durch persönliche Gespräche als durch allgemeine Regelungen adressieren."
+                "text": "Schaffen Sie Freiräume für Eigeninitiative – z. B. wöchentliche Verbesserungszeiten, in denen Teams selbstständig Prozessvorschläge entwickeln dürfen.",
+                "bemerkung": "Selbstorganisation wird nur gelebt, wenn Mitarbeitende die Chance haben, eigene Ideen einzubringen und Verantwortung zu übernehmen."
             }
         ]
     },
@@ -617,61 +617,65 @@ handlungsempfehlungen = {
         ]
     },
 
-   "Cluster 4 – Technisch solide, aber prozessual träge": {
+    "Cluster 4 – Technisch solide, aber prozessual träge": {
         "Technik": [
             {
-                "text": "Identifizieren Sie technische Engpässe in der Datenverfügbarkeit und beseitigen Sie Hürden für Echtzeittransparenz (z. B. fehlende Schnittstellen zwischen ERP und MES).",
-                "bemerkung": "Obwohl Systeme vorhanden sind, fehlt oft die systematische Verbindung. Transparente Datenflüsse sind Grundvoraussetzung für Prozessoptimierung und Mobilität."
+                "text": "Analysieren Sie wiederkehrende manuelle Tätigkeiten in den Fertigungsprozessen (z. B. M0´s, Entspanen, Maßprüfung, Reinigungsprozesse) und prüfen Sie deren Automatisierbarkeit.",
+                "bemerkung": "Technisch stabile und durchlaufende Prozesse ohne händischen Eingriff bringen eine spürbare Entlastung und Prozesssicherheit."
             },
             {
-                "text": "Ergänzen Sie bestehende Steuerungstechnik durch einfache Assistenzsysteme, die auch mobil genutzt werden können (z. B. Tablet-Lösungen für AV oder QS).",
-                "bemerkung": "In prozessual trägen Betrieben können Assistenzsysteme helfen, bestehende Technik effizienter zu nutzen – ohne direkt ganze Systeme umzustellen."
+                "text": "Erweitern Sie Ihre Bearbeitungszentren schrittweise um einfache Automatisierungslösungen – z. B. Be- und Entladeroboter, Palettenwechsler oder Werkstückspeicher.",
+                "bemerkung": "Bereits kleine Automatisierungslösungen erhöhen Maschinenlaufzeiten und Prozessstabilität deutlich, ohne dass bestehende Anlagen ersetzt werden müssen."
             },
             {
-                "text": "Führen Sie technische Pilotprojekte zur digitalen Auftragsverfolgung in ausgewählten Bereichen durch.",
-                "bemerkung": "Pilotprojekte mit überschaubarem Risiko ermöglichen technische Fortschritte, ohne den Gesamtprozess zu gefährden."
+                "text": "Digitalisieren Sie begleitende Fertigungsschritte z. B. Auftragszettel, Prüfprotokolle oder Werkzeuglisten über Tablets oder Terminals an der Maschine.",
+                "bemerkung": "So lassen sich Papierflüsse vermeiden und Informationen stehen allen Beteiligten aktuell zur Verfügung."
+            },
+            {
+                "text": "Richten Sie standardisierte Nullpunktspannsysteme oder modulare Vorrichtungen ein, um Rüstzeiten zu senken und Wiederholgenauigkeit zu erhöhen.",
+                "bemerkung": "Standardisierung schafft die Voraussetzung für stabile Prozesse – und erleichtert jede weitere Automatisierung."
             }
         ],
-        "Organisation": [
+    "Organisation": [
             {
-                "text": "Entflechten Sie komplexe oder überlastete Kernprozesse – z. B. durch Prozessmapping und Identifikation nicht-wertschöpfender Tätigkeiten.",
-                "bemerkung": "Prozessuale Trägheit entsteht oft aus überladenen Abläufen. Eine strukturierte Prozessanalyse zeigt Potenziale für Entschlackung und Flexibilität auf."
+                "text": "Ordnen Sie Arbeitsvorbereitung, Fertigung und Instandhaltung enger verzahnt – z. B. durch gemeinsame Abstimmungen zu Rüstfolgen oder Werkzeugstrategien.",
+                "bemerkung": "Viele Prozessverzögerungen entstehen an den Schnittstellen. Regelmäßige Abstimmungen erhöhen Planungssicherheit und reduzieren Wartezeiten."
             },
             {
-                "text": "Erstellen Sie Roadmaps für flexible Arbeit – mit konkreten Etappen, Verantwortlichkeiten und Evaluationszeitpunkten.",
-                "bemerkung": "In technisch stabilen, aber trägen Betrieben braucht es Struktur. Roadmaps schaffen Orientierung und steigern Umsetzungswahrscheinlichkeit."
+                "text": "Starten Sie Pilotzellen für automatisiertes Arbeiten – z. B. eine Maschine mit Palettenwechsler oder Roboterhandling als Testfeld.",
+                "bemerkung": "Kleine Testbereiche ermöglichen Erfahrungen mit Automatisierung, ohne gleich die gesamte Produktion umzustellen."
             },
             {
-                "text": "Erproben Sie modulare Arbeitszeitmodelle zunächst in unterstützenden Bereichen (z. B. Qualitätssicherung, Instandhaltung).",
-                "bemerkung": "Diese Bereiche haben oft ausreichend Freiheitsgrade. Erste Modelle dort wirken als Proof-of-Concept für spätere Ausweitung."
+                "text": "Standardisieren Sie Werkzeug- und Spannmittelmanagement, um Suchen, Nachbestellen und Einmessen zu reduzieren.",
+                "bemerkung": "Klare Standards im Betriebsmittelmanagement beschleunigen Prozesse und vermeiden unnötige Maschinenstillstände."
             }
         ],
-        "Kultur": [
+    "Kultur": [
             {
-                "text": "Stärken Sie Veränderungsbereitschaft durch interne Kommunikation über Erfolge anderer Bereiche (z. B. „Flexibilitäts-Funktionen des Monats“).",
-                "bemerkung": "Kommunikation über Erfolge wirkt motivierend. In trägen Kulturen braucht es positive Reize zur Reaktivierung."
+                "text": "Kommunizieren Sie Verbesserungen durch Automatisierung offen – z. B. „Diese Maschine läuft jetzt 30 % länger ohne Bedienung“. ",
+                "bemerkung": "Sichtbare Ergebnisse motivieren und zeigen, dass Automatisierung kein Selbstzweck, sondern ein praktischer Nutzen ist."
             },
             {
-                "text": "Binden Sie die betriebliche Interessenvertretung frühzeitig in Transformationsprozesse ein – insbesondere bei Fragen der Flexibilisierung.",
-                "bemerkung": "Vertrauensvolle Zusammenarbeit mit Gremien reduziert Blockaden und schafft gemeinsame Verantwortung für den Wandel."
+                "text": "Beziehen Sie erfahrene Beschäftigte aktiv in die Auswahl und Einführung neuer Systeme ein.",
+                "bemerkung": "Die Akzeptanz steigt, wenn die Mitarbeitenden ihre Erfahrung bei der Gestaltung automatisierter Abläufe einbringen können."
             },
             {
-                "text": "Führen Sie bewusst „Lernformate“ statt reine „Informationsformate“ ein – z. B. kurze Praxislabs zu flexiblen Arbeitsformen.",
-                "bemerkung": "Erklärungen reichen nicht aus. Praxisnahe Lernräume fördern Beteiligung und Akzeptanz nachhaltig."
+                "text": "Schaffen Sie Austauschformate zwischen Programmierung, Fertigung und Instandhaltung, um Erfahrungen mit Automatisierung zu teilen.",
+                "bemerkung": "So wird Wissen über stabile Prozesse und Automatisierung im gesamten Betrieb verbreitet."
             }
         ],
-        "Mensch": [
+     "Mensch": [
             {
-                "text": "Stärken Sie individuelle Handlungsfähigkeit durch klare Rollendefinitionen und transparente Zielvorgaben.",
-                "bemerkung": "In unklaren Prozessen hilft Orientierung. Klare Rollen geben Sicherheit und machen Flexibilität anschlussfähig."
+                "text": "Qualifizieren Sie Maschinenbediener in Themen wie Roboterbedienung, Nullpunktspannsysteme und einfache Programmkorrekturen.",
+                "bemerkung": "Ziel ist, die Fachkräfte selbstständiger zu machen, statt Automatisierung als Bedrohung zu erleben."
             },
             {
-                "text": "Befragen Sie Beschäftigte gezielt nach Unterstützungsbedarfen bei der Einführung flexibler Arbeit (z. B. anonyme Kurzbefragung).",
-                "bemerkung": "Oft ist nicht bekannt, woran es hakt. Befragungen schaffen Sichtbarkeit und ermöglichen gezielte Maßnahmen."
+                "text": "Ermöglichen Sie Mitarbeitenden, Automatisierungsideen selbst einzubringen – z. B. über eine einfache Ideensammlung in der Werkstatt.",
+                "bemerkung": "Praktische Vorschläge aus dem Alltag sind oft die besten Ansätze für sinnvolle Automatisierung."
             },
             {
-                "text": "Benennen Sie Veränderungsbotschafter:innen aus der Belegschaft, die gute Erfahrungen mit Flexibilisierung gemacht haben.",
-                "bemerkung": "Anerkannte Kolleg:innen können als Brückenbauer:innen zwischen Management und Belegschaft wirken – besonders in trägen Systemen."
+                "text": "Fördern Sie Eigenverantwortung durch kleine Verbesserungsaufträge („Wie können wir diesen Arbeitsschritt automatisieren oder vereinfachen?“).",
+                "bemerkung": "So entsteht schrittweise eine Kultur, in der Beschäftigte Automatisierung als Teil ihrer täglichen Arbeit verstehen."
             }
         ]
     }
