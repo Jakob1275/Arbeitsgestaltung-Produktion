@@ -193,7 +193,7 @@ einleitungstexte = {
 Kriterien = {
   "Persönliche Voraussetzungen": [
     {
-      "frage": "M1.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
+      "frage": "M1.1 Beschäftigte zeigen Offenheit gegenüber <u>mobiler</u> Arbeit.",
       "begründung": "Eine positive Grundhaltung erleichtert den Einstieg in ortsunabhängiges Arbeiten und unterstützt die Akzeptanz neuer Arbeitsformen."
     },
     {
