@@ -1068,7 +1068,8 @@ elif current_tab in mtok_structure:
         scores_for_this_hf = []
 
         for idx, item in enumerate(Kriterien.get(feld, [])):
-            frage_text = html.escape(item["frage"])
+            #frage_text = html.escape(item["frage"])
+            frage_text = item["frage"]
             begruendung = html.escape(item["begründung"])
 
             radio_key = f"{dimension}_{feld}_{idx}"
