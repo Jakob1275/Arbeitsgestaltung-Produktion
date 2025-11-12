@@ -209,8 +209,8 @@ Kriterien = {
       "begründung": "Eigeninitiative und Mitgestaltung fördern Motivation und die Weiterentwicklung betrieblicher Flexibilisierungskonzepte."
     },
     {
-      "frage": "M1.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
-      "begründung": "Systemverständnis erhöht Handlungssicherheit, reduziert Fehlbedienungen und unterstützt die Integration digitaler Technologien in den Arbeitsalltag."
+      "frage": "M1.5 Beschäftigte zeigen Offenheit und Interesse an automatisierten Produktionssystemen.",
+      "begründung": "Offenheit und Interesse fördern die Bereitschaft, sich mit neuen Technologien auseinanderzusetzen."
     },
     {
       "frage": "M1.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
@@ -237,12 +237,12 @@ Kriterien = {
   ],
    "Automatisierung und Arbeitsplatzgestaltung": [
     {
-        "frage": "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
-        "begründung": "Stabile Prozesse reduzieren Eingriffe und schaffen Grundlagen für flexible Arbeitsmodelle."
+        "frage": "T1.1 Zerspanende Fertigungsprozesse sind prozessstabil und störungsarm.",
+        "begründung": "Stabile Prozesse reduzieren ungeplante Eingriffe und Störungen, die Präsenz erfordern, und schaffen Grundlagen für flexible Arbeitsmodelle."
     },
     {
         "frage": "T1.2 CNC-Werkzeugmaschinen können über längere Zeiträume (über 8 Stunden) ohne ständige Anwesenheit betrieben werden.",
-        "begründung": "Ein hoher Automatisierungsgrad oder lange unbeaufsichtigte Laufzeiten ermöglichen zeitliche Entkopplung und reduzieren Präsenzzwänge."
+        "begründung": "Ein hoher Automatisierungsgrad ermöglicht lange unbeaufsichtigte Laufzeiten, zeitliche Entkopplung und reduziert Präsenzzwänge."
     },
     {
         "frage": "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
@@ -278,8 +278,7 @@ Kriterien = {
     },   
     {
         "frage": "T2.6 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
-        "begründung": "Zuverlässiger IT-Support sichert technische Funktionsfähigkeit und reduziert Akzeptanzbarrieren.",
-        "einschraenkung": "1_und_4"
+        "begründung": "Zuverlässiger IT-Support sichert technische Funktionsfähigkeit und reduziert Akzeptanzbarrieren."
     },
     {
         "frage": "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
@@ -337,7 +336,7 @@ Kriterien = {
     "Produktionsorganisation": [
     {
       "frage": "O3.1 Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und aufteilbar.",
-      "begründung": "Die Trennung von präsenzpflichtigen (z.B. Einrichten) und mobil bearbeitbaren Tätigkeiten (z.B. Programmierung) ist Grundlage einer flexiblen Arbeitsgestaltung."
+      "begründung": "Die Trennung von präsenzpflichtigen (z.B. Einrichten) und mobil bearbeitbaren Tätigkeiten (z.B. Programmieren) ist Grundlage einer flexiblen Arbeitsgestaltung."
     },
     {
       "frage": "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
@@ -348,8 +347,8 @@ Kriterien = {
       "begründung": "Planbare Prozesszeiten schaffen Handlungssicherheit und ermöglichen eine verlässliche Integration flexibler Arbeitszeitmodelle."
     },
     {
-      "frage": "O3.4 Qualitätssicherungsprozesse (z.B. Maßkontrollen) sind automatisiert im Fertigungsprozess integriert und werden aktiv genutzt.",
-      "begründung": "Automatisierte Prüfverfahren reduzieren Kontrollaufwände und erhöhen die zeitliche Flexibilität im Produktionsablauf."
+      "frage": "O3.4 Qualitätssicherungsprozesse (z. B. Maßkontrollen) sind automatisiert in den Fertigungsprozess eingebunden und werden direkt durch die Werkzeugmaschine ausgeführt.",
+      "begründung": "Die Integration automatisierter Prüfverfahren minimiert Kontrollaufwände, verbessert die Prozessstabilität und erhöht die zeitliche Flexibilität in der Fertigung."
     },
     {
       "frage": "O3.5 Auftragsplanung ist digital unterstützt und dynamisch anpassbar.",
@@ -384,8 +383,7 @@ Kriterien = {
    "Führung und Teamzusammenhalt": [
    {
       "frage": "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv.",
-      "begründung": "Offenheit der Unternehmensleitung schafft Raum für Innovation und fördert die Bereitschaft, flexible Arbeitsmodelle gemeinsam zu gestalten.",
-      "einschraenkung": "1_und_4"
+      "begründung": "Offenheit der Unternehmensleitung schafft Raum für Innovation und fördert die Bereitschaft, flexible Arbeitsmodelle gemeinsam zu gestalten."
     },
     {
       "frage": "K2.2 Führungskräfte stehen flexible Arbeitsformen offen gegenüber und führen ergebnisorientiert.",
@@ -462,7 +460,7 @@ handlungsempfehlungen = {
             },
             {
                 "text": "Integrieren Sie regelmäßige Lern- und Reflexionsroutinen (z. B. „Was lief stabil, was nicht?“ in Teamrunden).",
-                "bemerkung": "ontinuierliches Lernen aus Abweichungen stärkt Prozesssicherheit und fördert zugleich gemeinsames Verantwortungsbewusstsein."
+                "bemerkung": "Kontinuierliches Lernen aus Abweichungen stärkt Prozesssicherheit und fördert zugleich gemeinsames Verantwortungsbewusstsein."
             },
             {
                 "text": "Bilden Sie eine bereichsübergreifende Arbeitsgruppe „Prozesssicherheit & Flexibilität“, die Technik, Produktion, Verwaltung und Betriebsrat einbindet.",
@@ -754,18 +752,18 @@ kriterien_item_to_cluster_variable_mapping = {
         "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
         "O1.2 Erfahrungswissen wird dokumentiert und digital zugänglich gemacht.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
-        "O3.4 Qualitätssicherungsprozesse (z.B. Maßkontrollen) sind automatisiert im Fertigungsprozess integriert und werden aktiv genutzt.",
+        "O3.4 Qualitätssicherungsprozesse (z. B. Maßkontrollen) sind automatisiert in den Fertigungsprozess eingebunden und werden direkt durch die Werkzeugmaschine ausgeführt.",
         "O3.5 Auftragssteuerung ist digital unterstützt und dynamisch anpassbar.",
     ],
     
     # 7. Prozessinstabilität
     "Prozessinstabilität": [
-        "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
+        "T1.1 Zerspanende Fertigungsprozesse sind prozessstabil und störungsarm.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
         "O3.3 Lauf- und Durchlaufzeiten sind planbar und stabil steuerbar.",
-        "O3.4 Qualitätssicherungsprozesse (z.B. Maßkontrollen) sind automatisiert im Fertigungsprozess integriert und werden aktiv genutzt."
+        "O3.4 Qualitätssicherungsprozesse (z. B. Maßkontrollen) sind automatisiert in den Fertigungsprozess eingebunden und werden direkt durch die Werkzeugmaschine ausgeführt."
     ],
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
@@ -784,7 +782,7 @@ kriterien_item_to_cluster_variable_mapping = {
     "Akzeptanz": [
         "M1.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
         "M1.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
-        "M1.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
+        "M1.5 Beschäftigte zeigen Offenheit und Interesse an automatisierten Produktionssystemen.",
         "M1.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
         "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
@@ -813,7 +811,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "M1.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen selbst beheben.",
         "M2.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
         "M2.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
-        "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
+        "T1.1 Zerspanende Fertigungsprozesse sind prozessstabil und störungsarm.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
         "T2.1 Mobile Endgeräte können für mobile Arbeit zur Verfügung gestellt werden.",
