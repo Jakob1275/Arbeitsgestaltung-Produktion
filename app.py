@@ -144,20 +144,20 @@ with col3:
 
 # MTOK-Dimensionen und Handlungsfelder
 mtok_structure = {
-    "Mensch": ["Qualifikation und Kompetenzentwicklung", "Persönliche Voraussetzungen"],
+    "Mensch": ["Persönliche Voraussetzungen", "Qualifikation und Kompetenzentwicklung"],
     "Technik": ["Automatisierung und Arbeitsplatzgestaltung", "Digitale Vernetzung und IT-Infrastruktur"],
     "Organisation": ["Kommunikation, Kooperation und Zusammenarbeit", "Organisatorische Umwelt", "Produktionsorganisation"],
     "Kultur": ["Unternehmenskultur", "Führung und Teamzusammenhalt"]
 }
 
 einleitungstexte = {
-    "Qualifikation und Kompetenzentwicklung": (
-        "Die folgenden Aussagen beziehen sich auf betriebliche Maßnahmen zur Schulung, "
-        "Qualifizierung und Kompetenzentwicklung der Beschäftigten in der zerspanenden Fertigung."
-    ),
     "Persönliche Voraussetzungen": (
         "Die folgenden Aussagen beziehen sich auf persönliche Einstellungen, Haltungen, Fähigkeiten und "
         "die individuelle Bereitschaft der Beschäftigten in der zerspanenden Fertigung."
+    ),
+    "Qualifikation und Kompetenzentwicklung": (
+        "Die folgenden Aussagen beziehen sich auf betriebliche Maßnahmen zur Schulung, "
+        "Qualifizierung und Kompetenzentwicklung der Beschäftigten in der zerspanenden Fertigung."
     ),
     "Automatisierung und Arbeitsplatzgestaltung": (
         "Die folgenden Aussagen beziehen sich auf die Automatisierung "
@@ -191,50 +191,50 @@ einleitungstexte = {
 
 # Kriterienliste
 Kriterien = {
-"Qualifikation und Kompetenzentwicklung": [
-  {
-    "frage": "M1.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
-    "begründung": "Mobile Arbeit verlangt eigenständiges Arbeiten mit digitalen Tools, klare Kommunikation und hohe Selbstorganisation."
-  },
-  {
-    "frage": "M1.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
-    "begründung": "Zeitflexible Arbeit erfordert stabile Prozesse, klare Abstimmung und ausreichende Personalressourcen im Rahmen betrieblicher Produktionszeiträume."
-  },
-  {
-    "frage": "M1.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
-    "begründung": "In flexiblen Arbeitsmodellen ist es entscheidend, dass Beschäftigte auch ohne direkte Aufsicht Störungen erkennen und beheben können."
-  },
-  {
-    "frage": "M1.4 Beschäftigte werden gezielt darin gefördert, ihre Arbeit eigenverantwortlich zu organisieren und Entscheidungen im Rahmen ihrer Aufgaben zu treffen.",
-    "begründung": "Flexible Arbeitsformen erfordern ein hohes Maß an Selbstorganisation und Entscheidungskompetenz."
-  }
-  ],
   "Persönliche Voraussetzungen": [
     {
-      "frage": "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
+      "frage": "M1.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
       "begründung": "Eine positive Grundhaltung erleichtert den Einstieg in ortsunabhängiges Arbeiten und unterstützt die Akzeptanz neuer Arbeitsformen."
     },
     {
-      "frage": "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
+      "frage": "M1.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
       "begründung": "Offenheit gegenüber flexiblen Arbeitszeiten fördert Anpassungsfähigkeit und Akzeptanz betrieblicher Veränderungen."
     },
     {
-      "frage": "M2.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen selbst beheben.",
+      "frage": "M1.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen selbst beheben.",
       "begründung": "Die Fähigkeit, kleinere Fehler eigenverantwortlich zu lösen, ist entscheidend für reibungslose Abläufe in mobilen und zeitflexiblen Arbeitsmodellen."
     },
     {
-      "frage": "M2.4 Beschäftigte bringen regelmäßig eigene Ideen und Verbesserungsvorschläge ein.",
+      "frage": "M1.4 Beschäftigte bringen regelmäßig eigene Ideen und Verbesserungsvorschläge ein.",
       "begründung": "Eigeninitiative und Mitgestaltung fördern Motivation und die Weiterentwicklung betrieblicher Flexibilisierungskonzepte."
     },
     {
-      "frage": "M2.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
+      "frage": "M1.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
       "begründung": "Systemverständnis erhöht Handlungssicherheit, reduziert Fehlbedienungen und unterstützt die Integration digitaler Technologien in den Arbeitsalltag."
     },
     {
-      "frage": "M2.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
+      "frage": "M1.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
       "begründung": "Technikakzeptanz und Veränderungsbereitschaft sind zentrale Voraussetzungen für den erfolgreichen Umgang mit digitalisierten Arbeitsprozessen."
     }
     ],
+    "Qualifikation und Kompetenzentwicklung": [
+  {
+    "frage": "M2.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
+    "begründung": "Mobile Arbeit verlangt eigenständiges Arbeiten mit digitalen Tools, klare Kommunikation und hohe Selbstorganisation."
+  },
+  {
+    "frage": "M2.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
+    "begründung": "Zeitflexible Arbeit erfordert stabile Prozesse, klare Abstimmung und ausreichende Personalressourcen im Rahmen betrieblicher Produktionszeiträume."
+  },
+  {
+    "frage": "M2.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
+    "begründung": "In flexiblen Arbeitsmodellen ist es entscheidend, dass Beschäftigte auch ohne direkte Aufsicht Störungen erkennen und beheben können."
+  },
+  {
+    "frage": "M2.4 Beschäftigte werden gezielt darin gefördert, ihre Arbeit eigenverantwortlich zu organisieren und Entscheidungen im Rahmen ihrer Aufgaben zu treffen.",
+    "begründung": "Flexible Arbeitsformen erfordern ein hohes Maß an Selbstorganisation und Entscheidungskompetenz."
+  }
+  ],
    "Automatisierung und Arbeitsplatzgestaltung": [
     {
         "frage": "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
@@ -770,8 +770,8 @@ kriterien_item_to_cluster_variable_mapping = {
     
     # 8. Nutzen (Wahrgenommener Nutzen von Flexibilität)
     "Nutzen": [
-        "M1.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
-        "M1.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
+        "M2.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
+        "M2.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.3 Zielerreichung und Ergebnisse stehen vor physischer Anwesenheit.",
@@ -782,10 +782,10 @@ kriterien_item_to_cluster_variable_mapping = {
     
     # 9. Akzeptanz
     "Akzeptanz": [
-        "M2.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
-        "M2.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
-        "M2.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
-        "M2.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
+        "M1.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
+        "M1.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
+        "M1.5 Beschäftigte verstehen automatisierte Produktionssysteme und digitale Prozesse in ihren wesentlichen Funktionen.",
+        "M1.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
         "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.1 Vertrauen bildet die Grundlage der Zusammenarbeit.",
@@ -795,8 +795,8 @@ kriterien_item_to_cluster_variable_mapping = {
     # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
-        "M1.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
-        "M1.4 Beschäftigte werden gezielt darin gefördert, ihre Arbeit eigenverantwortlich zu organisieren und Entscheidungen im Rahmen ihrer Aufgaben zu treffen.",
+        "M2.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
+        "M2.4 Beschäftigte werden gezielt darin gefördert, ihre Arbeit eigenverantwortlich zu organisieren und Entscheidungen im Rahmen ihrer Aufgaben zu treffen.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
@@ -810,9 +810,9 @@ kriterien_item_to_cluster_variable_mapping = {
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
     # HINWEIS: Wird auch invertiert (Siehe Aufwand Zeit)
     "Aufwand Mobil": [
-        "M1.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
-        "M1.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
-        "M2.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen selbst beheben.",
+        "M1.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen selbst beheben.",
+        "M2.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
+        "M2.3 Beschäftigte erhalten gezielte Unterstützung, um bei Prozessabweichungen eigenverantwortlich und sicher zu handeln.",
         "T1.1 Zerspanende Fertigungsprozesse sind störungsarm.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
@@ -1255,8 +1255,8 @@ elif current_tab == "Auswertung":
             st.subheader("Unternehmens-Profil")
             # Reihenfolge für MTOK-Struktur (Uhrzeigersinn)
             labels_ordered = [
-                "Qualifikation und Kompetenzentwicklung (Mensch)",
                 "Persönliches Voraussetzungen (Mensch)",
+                "Qualifikation und Kompetenzentwicklung (Mensch)",
                 "Automatisierung und Arbeitsplatzgestaltung (Technik)",
                 "Digitale Vernetzung und IT-Infrastruktur (Technik)",
                 "Kommunikation, Kooperation und Zusammenarbeit (Organisation)",
@@ -1268,8 +1268,8 @@ elif current_tab == "Auswertung":
 
             # Werte entsprechend sortieren (achte auf die korrekte Reihenfolge)
             values_ordered = [
-                st.session_state.ergebnisse.get("Qualifikation und Kompetenzentwicklung", 1),
                 st.session_state.ergebnisse.get("Persönliche Voraussetzungen", 1),
+                st.session_state.ergebnisse.get("Qualifikation und Kompetenzentwicklung", 1),
                 st.session_state.ergebnisse.get("Automatisierung und Arbeitsplatzgestaltung", 1),
                 st.session_state.ergebnisse.get("Arbeitsplatzgestaltung und ", 1),
                 st.session_state.ergebnisse.get("Kommunikation, Kooperation und Zusammenarbeit", 1),
