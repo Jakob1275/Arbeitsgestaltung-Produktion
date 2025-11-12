@@ -1335,8 +1335,7 @@ elif current_tab == "Auswertung":
         else:
             st.subheader("Automatische Clusterzuordnung")
             st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
-
-            # Neuer Code 
+          
             # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
             alle_cluster = list(cluster_beschreibungen.keys())
             
@@ -1384,35 +1383,6 @@ elif current_tab == "Auswertung":
                         """, unsafe_allow_html=True)
                                 st.markdown("---")
 
-            # Ende neuer Lösung
-            
-            # Clusterbeschreibung
-            #st.subheader("Clusterbeschreibung")
-
-            #st.info(cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar."))
-
-            # Bild für das aktuelle Cluster anzeigen
-            #bild_pfad = cluster_bilder.get(cluster_result)
-            #if bild_pfad:
-                #st.image(bild_pfad, caption=cluster_result, width=400)
-
-            # Handlungsempfehlungen nach Cluster und MTOK
-            #st.subheader("Clusterspezifische Handlungsempfehlungen")
-
-            #cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
-
-            #for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
-                #if dimension in cluster_empfehlungen:
-                    #st.markdown(f"### {dimension}")
-                    #for eintrag in cluster_empfehlungen[dimension]:
-                        #st.markdown(f"""
-            #<div style='margin-bottom: 22px;'>
-               # <strong>➤ {eintrag['text']}</strong><br>
-                #<span style='color:#444; font-size: 94%; font-weight: normal;'>{eintrag['bemerkung']}</span>
-           # </div>
-            #""", unsafe_allow_html=True)
-                    #st.markdown("---")
-            
             cluster_beschreibung_html = f"""
             <h2>Clusterbeschreibung</h2>
             <div class="box">
@@ -1541,7 +1511,6 @@ if current_tab == "Evaluation":
         "Die Struktur des Modells war für mich durchgängig nachvollziehbar.",
         "Die verwendeten Begriffe und Formulierungen in den Bewertungskriterien waren klar verständlich.",
         "Die Erklärungen zu Handlungsfeldern und Bewertungsskalen waren verständlich und hilfreich.",
-        "Die Clusterzuordnung war für mich nachvollziehbar.",
         "Die grafische Darstellung der Ergebnisse war verständlich."
     ]
     zeige_fragen("1. Verständlichkeit und Transparenz des Modells", fragen_1, "eval1")
@@ -1550,8 +1519,6 @@ if current_tab == "Evaluation":
     fragen_2 = [
         "Die im Modell adressierten Themenfelder sind für unser Unternehmen relevant.",
         "Die Bewertungskriterien spiegeln praxisrelevante Herausforderungen in der Produktion wider.",
-        "Die im Modell hinterlegten Handlungsempfehlungen lassen sich auf unseren betrieblichen Alltag übertragen.",
-        "Die Clusterprofile bilden typische Ausgangslagen in der industriellen Produktion realistisch ab.",
         "Die Branchenspezifika der zerspanenden Fertigung wurden im Modell angemessen berücksichtigt."
     ]
     zeige_fragen("2. Relevanz und betriebliche Passung", fragen_2, "eval2")
@@ -1559,29 +1526,22 @@ if current_tab == "Evaluation":
     # Bereich 3 – Anwendbarkeit
     fragen_3 = [
         "Das Modell eignet sich als Instrument zur Systematisierung flexibler Arbeit.",
+        "Die Clusterbeschreibung trifft auf das Unternehmen zu.",
         "Mit Hilfe des Modells lassen sich konkrete betriebliche Entwicklungsmaßnahmen ableiten.",
-        "Die Umsetzung als digitales Tool war funktional und benutzerfreundlich.",
         "Das Modell unterstützt eine strukturierte Selbstbewertung und Reflexion im Unternehmen."
     ]
     zeige_fragen("3. Anwendbarkeit und betrieblicher Nutzen", fragen_3, "eval3")
 
-    # Bereich 4 – Tiefe
+    # Bereich 4 – Gesamturteil
     fragen_4 = [
-        "Das Modell berücksichtigt die zentralen Erfolgsfaktoren flexibler Arbeit systematisch.",
-        "Die inhaltliche Tiefe und Differenzierung der Bewertungskriterien war angemessen."
-    ]
-    zeige_fragen("4. Vollständigkeit und konzeptionelle Tiefe", fragen_4, "eval4")
-
-    # Bereich 5 – Gesamturteil
-    fragen_5 = [
         "Das Modell ist insgesamt logisch aufgebaut und stimmig konzipiert.",
-        "Ich würde das Modell anderen Unternehmen oder Kolleg:innen weiterempfehlen.",
+        "Ich würde das Modell anderen Unternehmen oder Kollegen weiterempfehlen.",
         "Der erwartete Nutzen des Modells überwiegt den Aufwand der Anwendung."
     ]
-    zeige_fragen("5. Gesamturteil und Weiterempfehlung", fragen_5, "eval5")
+    zeige_fragen("4. Gesamturteil und Weiterempfehlung", fragen_4, "eval4")
 
-    # Bereich 6 – Freitext
-    st.subheader("6. Offene Rückmeldung")
+    # Bereich 5 – Freitext
+    st.subheader("5. Offene Rückmeldung")
     st.text_area(
         "Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik zum Modell?",
         key="evaluation_feedback_text"
