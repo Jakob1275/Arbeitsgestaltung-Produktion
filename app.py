@@ -197,7 +197,7 @@ Kriterien = {
       "begründung": "Eine positive Grundhaltung erleichtert den Einstieg in ortsunabhängiges Arbeiten und unterstützt die Akzeptanz neuer Arbeitsformen."
     },
     {
-      "frage": "M1.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
+      "frage": "M1.2 Beschäftigte zeigen Offenheit gegenüber <u>zeitflexibler</u> Arbeit.",
       "begründung": "Offenheit gegenüber flexiblen Arbeitszeiten fördert Anpassungsfähigkeit und Akzeptanz betrieblicher Veränderungen."
     },
     {
@@ -219,11 +219,11 @@ Kriterien = {
     ],
     "Qualifikation und Kompetenzentwicklung": [
   {
-    "frage": "M2.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an mobile Arbeit zu verstehen und umzusetzen zu können.",
+    "frage": "M2.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an <u>mobile Arbeit</u> zu verstehen und umzusetzen zu können.",
     "begründung": "Mobile Arbeit verlangt eigenständiges Arbeiten mit digitalen Tools, klare Kommunikation und hohe Selbstorganisation."
   },
   {
-    "frage": "M2.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
+    "frage": "M2.2 Beschäftigten werden Voraussetzungen und Grenzen <u>zeitflexibler</u> Arbeit klar kommuniziert.",
     "begründung": "Zeitflexible Arbeit erfordert stabile Prozesse, klare Abstimmung und ausreichende Personalressourcen im Rahmen betrieblicher Produktionszeiträume."
   },
   {
@@ -311,12 +311,12 @@ Kriterien = {
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "O2.2 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
+      "frage": "O2.2 Die Personalplanung berücksichtigt flexible <u>Arbeitszeiten</u>.",
       "begründung": "Digitale Planungssysteme wie MES oder ERP ermöglichen eine verlässliche Steuerung und Dokumentation flexibler Arbeitszeiten.",
       "einschraenkung": "1_und_4"
     },
     {
-      "frage": "O2.3 Die Personalplanung berücksichtigt flexible Arbeitsorte.",
+      "frage": "O2.3 Die Personalplanung berücksichtigt flexible <u>Arbeitsorte</u>.",
       "begründung": "Systemische Einbindung in Planungstools ermöglicht die Koordination ortsunabhängiger Einsätze.",
       "einschraenkung": "1_und_4"
     },
