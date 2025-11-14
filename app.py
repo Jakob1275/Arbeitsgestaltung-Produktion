@@ -441,12 +441,12 @@ handlungsempfehlungen = {
     "Cluster 1 – Traditionell und reaktiv": {
         "Technik": [
             {
-                "text": "Führen Sie eine strukturierte Bestandsaufnahme der Fertigungsprozesse der am häufigsten produzierten Werkstücke durch – mit Schwerpunkt auf Stabilität, Ausfallsicherheit und Automatisierungspotenzial.",
-                "bemerkung": "Die Basis für jede Form flexibler Arbeit sind stabile und verlässliche Produktionsprozesse."
-            },
-            {
                 "text": "Kategorisieren Sie Werkstücke nach Fertigungsart und Größe, um Potenziale für eine wirtschaftliche Automatisierung zu identifizieren.",
                 "bemerkung": "Ähnliche Werkstücke bilden oft ein ausreichend großes Volumen, um diese Prozesse zu automatisieren und standardisieren."
+            },
+            {
+                "text": "Führen Sie eine strukturierte Bestandsaufnahme der Fertigungsprozesse der am häufigsten produzierten Werkstücke durch – mit Schwerpunkt auf Stabilität, Ausfallsicherheit und Automatisierungspotenzial.",
+                "bemerkung": "Die Basis für jede Form flexibler Arbeit sind stabile und verlässliche Produktionsprozesse."
             },
             {
                 "text": "Führen Sie eine systematische Standortanalyse der technischen Infrastruktur durch – mit Fokus auf produktionsnahe IT-Grundversorgung (z. B. stabile Netzabdeckung, Arbeitsplatz-PCs, Zugang zu ERP).",
@@ -455,8 +455,8 @@ handlungsempfehlungen = {
         ],
         "Organisation": [
             {
-                "text": "Führen Sie niedrigschwellige Pilotmodelle für Zeitflexibilität ein – z. B. Gleitzeitkonten in AV oder verlängerte Pausenfenster im 1-Schichtbetrieb.",
-                "bemerkung": "In Betrieben des Clusters 1 fehlt oft die Erfahrung mit flexiblen Arbeitsformen. Kleinversuche mit klaren Spielregeln ermöglichen risikofreies Ausprobieren."
+                "text": "Führen Sie niedrigschwellige Pilotmodelle für Zeitflexibilität ein – z. B. Gleitzeitkonten in der Arbeitsvorbereitung oder flexible Pausenregelungen im 1-Schichtbetrieb.",
+                "bemerkung": "In Betrieben des Clusters 1 fehlt oft die Erfahrung mit flexiblen Arbeitsformen. Kleinversuche in indirekten Bereichen (AV, QS, Planung) ermöglichen risikofreies Ausprobieren, bevor direkte Produktionsbereiche einbezogen werden."
             },
             {
                 "text": "Integrieren Sie regelmäßige Lern- und Reflexionsroutinen (z. B. „Was lief stabil, was nicht?“ in Teamrunden).",
@@ -469,8 +469,8 @@ handlungsempfehlungen = {
         ],
         "Kultur": [
             {
-                "text": "Laden Sie externe Praxisbeispiele ein, die zeigen, wie Automatisierung und Flexibilisierung gemeinsam funktionieren können.",
-                "bemerkung": "Externe Impulse helfen, Ängste vor Automatisierung abzubauen und zeigen, dass Prozesssicherheit und Mitarbeiterbeteiligung kein Widerspruch sind."
+                "text": "Organisieren Sie Betriebsbesichtigungen oder Praxisberichte von ähnlich strukturierten Betrieben, die flexible Arbeitsmodelle erfolgreich eingeführt haben.",
+                "bemerkung": "Externe Impulse von vergleichbaren Betrieben (ähnliche Größe, Branche, Fertigung) helfen, Ängste vor Automatisierung abzubauen und zeigen, dass Prozesssicherheit und Mitarbeiterbeteiligung kein Widerspruch sind."
             },
             {
                 "text": "Führen Sie monatliche Teamrunden ein, in denen Arbeitsprobleme offen diskutiert werden dürfen – mit Fokus auf lösungsorientierter Kommunikation.",
@@ -483,8 +483,8 @@ handlungsempfehlungen = {
         ],
         "Mensch": [
             {
-                "text": "Bieten Sie praxisnahe Kurzschulungen zur digitalen Anwendungskompetenz an (z. B. 30-Minuten-Workshops zu Excel, Zeiterfassung, Teams).",
-                "bemerkung": "Viele Beschäftigte im Cluster 1 meiden digitale Anwendungen aus Unsicherheit. Kurze, alltagsnahe Formate senken Schwellen und fördern Selbstvertrauen."
+                "text": "Kommunizieren Sie transparent den persönlichen Mehrwert flexibler Arbeitsmodelle für die Beschäftigten (z. B. bessere Vereinbarkeit, Zeitautonomie).",
+                "bemerkung": "In traditionellen Betrieben werden flexible Arbeitsformen oft als „Risiko" oder „Mehrarbeit" wahrgenommen. Eine klare Kommunikation des individuellen Nutzens fördert Akzeptanz und intrinsische Motivation."
             },
             {
                 "text": "Etablieren Sie den Austausch („Kollegen helfen Kollegen“) zur Unterstützung bei Selbstorganisation und Technikfragen.",
@@ -500,8 +500,8 @@ handlungsempfehlungen = {
     "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
         "Technik": [
             {
-                "text": "Ermöglichen Sie sicheren Remote-Zugriff auf produktionsrelevante Systeme für indirekte Bereiche (z. B. AV, Konstruktion, Qualitätssicherung).",
-                "bemerkung": "In diesem Cluster ist die technische Infrastruktur oft vorhanden, wird aber nicht für mobile Arbeit genutzt. VPN-Zugänge, mobile Clients oder Remote-Desktop-Lösungen schaffen eine direkte Anschlussfähigkeit."
+                "text": "Ermöglichen Sie sicheren Remote-Zugriff auf produktionsrelevante Systeme für indirekte Bereiche (z. B. Arbeitsvorbereitung, Konstruktion, Qualitätssicherung, NC-Programmierung).",
+                "bemerkung": "In diesem Cluster ist die technische Infrastruktur oft vorhanden, wird aber nicht für mobile Arbeit genutzt. VPN-Zugänge, mobile Endgeräte oder Remote-Desktop-Lösungen schaffen direkte Anschlussfähigkeit ohne zusätzliche Investitionen."
             },
             {
                 "text": "Stellen Sie produktionsnahe Dashboards bereit, die sowohl in der Fertigung als auch mobil verfügbar sind (z. B. Fertigungsstatus, Auftragsfortschritt, Rückmeldungen).",
@@ -518,8 +518,8 @@ handlungsempfehlungen = {
                 "bemerkung": "Oft ist unklar, welche Aufgaben tatsächlich ortsunabhängig bearbeitet werden können. Eine strukturierte Analyse zeigt das Potenzial und hilft, realistische Flexibilisierungsmodelle zu entwickeln."
             },
             {
-                "text": "Entwickeln Sie modularisierte Arbeitszeitmodelle – z. B. Früh-/Spät-Gleitzeitfenster oder rollierende Homeoffice-Tage für bestimmte Teams.",
-                "bemerkung": "In produktionsgeprägten Betrieben ist Schichtstabilität zentral. Modularisierte Modelle ermöglichen dennoch zeitliche Spielräume ohne Verlust an Produktionssicherheit."
+                "text": "Entwickeln Sie modularisierte Arbeitszeitmodelle – z. B. erweiterte Gleitzeitfenster in indirekten Bereichen oder festgelegte mobile Arbeitstage für Funktionen ohne Schichtbindung.",
+                "bemerkung": "In produktionsgeprägten Betrieben ist Schichtstabilität zentral. Modularisierte Modelle ermöglichen dennoch zeitliche und örtliche Spielräume in indirekten Bereichen, ohne Produktionssicherheit zu gefährden."
             },
             {
                 "text": "Schaffen Sie organisatorische Schnittstellen für den Informationsaustausch zwischen mobilen und präsenten Beschäftigten (z. B. feste Abstimmfenster, digitale Boards).",
@@ -542,12 +542,12 @@ handlungsempfehlungen = {
         ],
         "Mensch": [
             {
-                "text": "Führen Sie gezielte Schulungen zu digitalen Tools in den relevanten indirekten Bereichen durch – z. B. AV, Konstruktion, Qualitätssicherung.",
-                "bemerkung": "Zwar besteht in diesem Cluster hohe technische Ausstattung, doch nicht alle Beschäftigten nutzen sie souverän. Tool-Schulungen stärken Handlungssicherheit für mobile Arbeit."
+                "text": "Qualifizieren Sie Führungskräfte gezielt für die Führung hybrider Teams – mit Fokus auf Vertrauen, Ergebnisorientierung und digitale Kommunikation.",
+                "bemerkung": "In mobilitätsfernen Betrieben fehlt oft Führungserfahrung mit ortsflexiblen Teams. Gezielte Schulungen helfen, von Präsenzkontrolle zu ergebnisorientierter Führung zu wechseln und stärken Vertrauen."
             },
             {
-                "text": "Bieten Sie strukturierte Onboarding-Prozesse für mobile Arbeit an – z. B. mit Checklisten, Kontaktpersonen und klaren Kommunikationsstandards.",
-                "bemerkung": "Viele Fachkräfte wissen nicht, was im Homeoffice erwartet wird. Ein strukturiertes Onboarding hilft, Unsicherheit zu reduzieren und Leistungserwartungen zu klären."
+                "text": "Führen Sie gezielte Schulungen zu digitalen Tools in den Produktionsbereichen durch.",
+                "bemerkung": "Zwar besteht in diesem Cluster hohe technische Ausstattung, doch nicht alle Beschäftigten nutzen sie souverän. Tool-Schulungen (z. B. zu VPN, Kollaborationstools, ERP) stärken Handlungssicherheit."
             },
             {
                 "text": "Ermutigen Sie Teams zur Entwicklung eigener Flexibilitätsregeln – etwa zur Erreichbarkeit, Aufgabenteilung oder Feedbackkultur im mobilen Arbeiten.",
@@ -567,8 +567,8 @@ handlungsempfehlungen = {
                 "bemerkung": "Die technischen Voraussetzungen sind in der Regel vorhanden. Automatisierte Prozesse steigern Transparenz und entlasten Führungskräfte und Mitarbeitende gleichermaßen."
             },
             {
-                "text": "Verknüpfen Sie produktionsrelevante Datenquellen in Echtzeit (z. B. MDE/BDE/ERP mit Visualisierung für remote-Zugriffe).",
-                "bemerkung": "Flexibilität braucht Datentransparenz. In digital-affinen Unternehmen können bestehende Systeme sinnvoll verknüpft werden, um ortsunabhängige Steuerung zu ermöglichen."
+                "text": "Prüfen Sie den Einsatz digitaler Assistenzsysteme zur Unterstützung flexibler Arbeit (z. B. automatisierte Störungsbenachrichtigungen, prädiktive Wartungshinweise, KI-gestützte Planungsoptimierung).",
+                "bemerkung": "In technologisch reifen Betrieben können intelligente Systeme Beschäftigte bei ortsunabhängiger Arbeit unterstützen. Automatisierte Benachrichtigungen und vorausschauende Analysen erhöhen Handlungssicherheit und reduzieren die Notwendigkeit physischer Präsenz."
             }
         ],
         "Organisation": [
@@ -577,8 +577,8 @@ handlungsempfehlungen = {
                 "bemerkung": "Cluster 3 zeichnet sich durch hohe Offenheit aus. Um Flexibilisierung langfristig erfolgreich zu gestalten, bedarf es strukturierter Feedback- und Weiterentwicklungsformate."
             },
             {
-                "text": "Definieren Sie verbindliche Regelungen zu Erreichbarkeit, Arbeitszeiterfassung und Aufgabenverteilung in mobilen Settings.",
-                "bemerkung": "Eine offene Arbeitskultur braucht zugleich verlässliche Strukturen. Klare Rahmenbedingungen fördern Vertrauen und Fairness im Team."
+                "text": "Entwickeln Sie gemeinsam mit den Teams verbindliche Regelungen zu Erreichbarkeit, Arbeitszeiterfassung und Aufgabenverteilung in hybriden Settings.",
+                "bemerkung": "Eine offene Arbeitskultur braucht zugleich verlässliche Strukturen. Die partizipative Entwicklung von Rahmenbedingungen fördert Akzeptanz, Vertrauen und Fairness im Team."
             },
             {
                 "text": "Nutzen Sie hybride Betriebsvereinbarungen als lernende Regelwerke – mit offenen Evaluationsklauseln.",
@@ -591,8 +591,8 @@ handlungsempfehlungen = {
                 "bemerkung": "Dieses Cluster ist bereit für Autonomie. Führung sollte Gestaltungsspielräume freigeben, dabei aber teaminterne Aushandlung unterstützen."
             },
             {
-                "text": "Stärken Sie eine dialogische Führungskultur – z. B. durch Führungskräftefeedbacks oder Peer-Coachings.",
-                "bemerkung": "Die Führungskultur ist bereits offen – sie kann durch gezielte Maßnahmen weiterentwickelt werden, um Ambiguitätstoleranz und Vertrauen zu festigen."
+                "text": "Thematisieren Sie aktiv die Grenzen flexibler Arbeit und fördern Sie eine gesunde Balance zwischen Erreichbarkeit und Erholung.",
+                "bemerkung": "In digital-affinen Betrieben mit hoher Flexibilität besteht das Risiko der Selbstausbeutung und Entgrenzung. Eine offene Kommunikation über Belastungsgrenzen und das Recht auf Nichterreichbarkeit schützt Gesundheit und langfristige Leistungsfähigkeit."
             },
             {
                 "text": "Feiern Sie erfolgreiche Umsetzungen flexibler Arbeit sichtbar – z. B. durch interne Erfolgsgeschichten oder Anerkennungsformate.",
@@ -601,12 +601,12 @@ handlungsempfehlungen = {
         ],
         "Mensch": [
             {
-                "text": "Nutzen Sie das Erfahrungswissen langjähriger Mitarbeitender für Mentoringformate im Umgang mit digital-flexibler Arbeit.",
-                "bemerkung": "Die Belegschaft verfügt über vielfältige Erfahrung. Mentoring-Formate fördern Wissenstransfer und stärken soziale Bindung im hybriden Kontext."
+                "text": "Qualifizieren Sie Führungskräfte gezielt für die Steuerung hochflexibler, selbstorganisierter Teams – mit Fokus auf Coaching, Empowerment und agile Führungsmethoden.",
+                "bemerkung": "In Cluster 3 verschiebt sich die Führungsrolle von Steuerung zu Befähigung. Gezielte Weiterbildung in agilen Methoden, Coaching-Kompetenzen und dem Umgang mit Ambiguität stärkt Führungskräfte für die nächste Entwicklungsstufe."
             },
             {
-                "text": "Fördern Sie Selbstlernkompetenzen durch Zugang zu E-Learning-Plattformen und individuelle Entwicklungsziele.",
-                "bemerkung": "In diesem Cluster sind Lernbereitschaft und IT-Affinität hoch. Zielgerichtete Selbstlernformate stärken Eigenverantwortung und digitale Souveränität."
+                "text": "Fördern Sie Selbstlernkompetenzen durch Zugang zu E-Learning-Plattformen und vereinbaren Sie individuelle Entwicklungsziele in regelmäßigen Entwicklungsgesprächen.",
+                "bemerkung": "In diesem Cluster sind Lernbereitschaft und IT-Affinität hoch. Zielgerichtete Selbstlernformate in Kombination mit strukturierten Entwicklungsdialogen stärken Eigenverantwortung, digitale Souveränität und langfristige Beschäftigungsfähigkeit."
             },
             {
                 "text": "Ergänzen Sie das Onboarding neuer Beschäftigter um Module zur Selbstorganisation im hybriden Arbeiten.",
@@ -622,10 +622,6 @@ handlungsempfehlungen = {
                 "bemerkung": "Technisch stabile und durchlaufende Prozesse ohne händischen Eingriff bringen eine spürbare Entlastung und Prozesssicherheit."
             },
             {
-                "text": "Erweitern Sie Ihre Bearbeitungszentren schrittweise um einfache Automatisierungslösungen – z. B. Be- und Entladeroboter, Palettenwechsler oder Werkstückspeicher.",
-                "bemerkung": "Bereits kleine Automatisierungslösungen erhöhen Maschinenlaufzeiten und Prozessstabilität deutlich, ohne dass bestehende Anlagen ersetzt werden müssen."
-            },
-            {
                 "text": "Digitalisieren Sie begleitende Fertigungsschritte z. B. Auftragszettel, Prüfprotokolle oder Werkzeuglisten über Tablets oder Terminals an der Maschine.",
                 "bemerkung": "So lassen sich Papierflüsse vermeiden und Informationen stehen allen Beteiligten aktuell zur Verfügung."
             },
@@ -636,8 +632,8 @@ handlungsempfehlungen = {
         ],
     "Organisation": [
             {
-                "text": "Ordnen Sie Arbeitsvorbereitung, Fertigung und Instandhaltung enger verzahnt – z. B. durch gemeinsame Abstimmungen zu Rüstfolgen oder Werkzeugstrategien.",
-                "bemerkung": "Viele Prozessverzögerungen entstehen an den Schnittstellen. Regelmäßige Abstimmungen erhöhen Planungssicherheit und reduzieren Wartezeiten."
+                "text": "Verzahnen Sie Arbeitsvorbereitung, Fertigung und Instandhaltung enger – z. B. durch gemeinsame Abstimmungen zu Rüstfolgen, Werkzeugstrategien oder Wartungsfenstern.",
+                "bemerkung": "Viele Prozessverzögerungen entstehen an den Schnittstellen. Regelmäßige Abstimmungen erhöhen Planungssicherheit, reduzieren Wartezeiten und schaffen Grundlagen für flexiblere Arbeitsorganisation."
             },
             {
                 "text": "Starten Sie Pilotzellen für automatisiertes Arbeiten – z. B. eine Maschine mit Palettenwechsler oder Roboterhandling als Testfeld.",
@@ -646,12 +642,16 @@ handlungsempfehlungen = {
             {
                 "text": "Standardisieren Sie Werkzeug- und Spannmittelmanagement, um Suchen, Nachbestellen und Einmessen zu reduzieren.",
                 "bemerkung": "Klare Standards im Betriebsmittelmanagement beschleunigen Prozesse und vermeiden unnötige Maschinenstillstände."
+            },
+            {
+                "text": "Etablieren Sie eine zentrale Koordinationsstelle für Automatisierungs- und Flexibilisierungsprojekte, die Umsetzung treibt und Kommunikation bündelt.",
+                "bemerkung": "In trägen Strukturen fehlt oft eine treibende Kraft. Eine klare Verantwortlichkeit beschleunigt Entscheidungen, hält Momentum aufrecht und verknüpft technische Automatisierung mit organisatorischer Flexibilisierung."
             }
         ],
     "Kultur": [
-            {
-                "text": "Kommunizieren Sie Verbesserungen durch Automatisierung offen – z. B. „Diese Maschine läuft jetzt 30 % länger ohne Bedienung“. ",
-                "bemerkung": "Sichtbare Ergebnisse motivieren und zeigen, dass Automatisierung kein Selbstzweck, sondern ein praktischer Nutzen ist."
+           {
+                "text": "Kommunizieren Sie den Zusammenhang zwischen Automatisierung und flexibler Arbeit offen – z. B. „Diese Maschine läuft jetzt 30 % länger ohne Bedienung – das ermöglicht flexiblere Arbeitszeiten".",
+                "bemerkung": "Sichtbare Verknüpfung zwischen technischer Verbesserung und persönlichem Nutzen motiviert und zeigt, dass Automatisierung kein Selbstzweck ist, sondern Arbeitsgestaltung verbessert."
             },
             {
                 "text": "Beziehen Sie erfahrene Beschäftigte aktiv in die Auswahl und Einführung neuer Systeme ein.",
@@ -660,6 +660,10 @@ handlungsempfehlungen = {
             {
                 "text": "Schaffen Sie Austauschformate zwischen Programmierung, Fertigung und Instandhaltung, um Erfahrungen mit Automatisierung zu teilen.",
                 "bemerkung": "So wird Wissen über stabile Prozesse und Automatisierung im gesamten Betrieb verbreitet."
+            },
+            {
+                "text": "Adressieren Sie Bedenken bezüglich Arbeitsplatzsicherheit durch Automatisierung transparent und zeigen Sie auf, wie Automatisierung neue Tätigkeitsfelder und Flexibilität schafft.",
+                "bemerkung": "In trägen Organisationen können Ängste vor Automatisierung Veränderungen blockieren. Offene Kommunikation über Chancen (z. B. attraktivere Arbeitszeiten, weniger monotone Tätigkeiten) baut Widerstände ab."
             }
         ],
      "Mensch": [
@@ -674,6 +678,10 @@ handlungsempfehlungen = {
             {
                 "text": "Fördern Sie Eigenverantwortung durch kleine Verbesserungsaufträge („Wie können wir diesen Arbeitsschritt automatisieren oder vereinfachen?“).",
                 "bemerkung": "So entsteht schrittweise eine Kultur, in der Beschäftigte Automatisierung als Teil ihrer täglichen Arbeit verstehen."
+            },
+            {
+                "text": "Schulen Sie Führungskräfte und Planer in den Zusammenhängen zwischen Automatisierung, Prozessstabilität und flexiblen Arbeitsmodellen.",
+                "bemerkung": "Oft fehlt das Verständnis, wie technische Verbesserungen organisatorische Flexibilität ermöglichen. Gezielte Qualifizierung hilft, beide Ebenen strategisch zu verknüpfen."
             }
         ]
     }
