@@ -632,8 +632,8 @@ handlungsempfehlungen = {
         ],
     "Organisation": [
             {
-                "text": "Verzahnen Sie Arbeitsvorbereitung, Fertigung und Instandhaltung enger – z. B. durch gemeinsame Abstimmungen zu Rüstfolgen, Werkzeugstrategien oder Wartungsfenstern.",
-                "bemerkung": "Viele Prozessverzögerungen entstehen an den Schnittstellen. Regelmäßige Abstimmungen erhöhen Planungssicherheit, reduzieren Wartezeiten und schaffen Grundlagen für flexiblere Arbeitsorganisation."
+                "text": "Analysieren Sie Durchlaufzeiten systematisch und identifizieren Sie Engpässe, die flexible Arbeitsgestaltung erschweren (z. B. lange Wartezeiten, ineffiziente Materialflüsse).",
+                "bemerkung": "Lange Durchlaufzeiten binden Personal unnötig und verhindern flexible Arbeitszeiten. Eine gezielte Prozessanalyse deckt Optimierungspotenziale auf."
             },
             {
                 "text": "Starten Sie Pilotzellen für automatisiertes Arbeiten – z. B. eine Maschine mit Palettenwechsler oder Roboterhandling als Testfeld.",
