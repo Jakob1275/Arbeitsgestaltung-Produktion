@@ -1587,7 +1587,7 @@ if current_tab == "Evaluation":
         evaluation_data = {}
     
         # 1. Evaluation speichern
-        for i in range(1, 6):
+        for i in range(1, 5):
             fragen_count = len(eval(f"fragen_{i}"))
             for j in range(fragen_count):
                 key = f"eval{i}_{j}"
