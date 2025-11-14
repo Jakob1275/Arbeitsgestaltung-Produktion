@@ -650,7 +650,7 @@ handlungsempfehlungen = {
         ],
     "Kultur": [
            {
-                "text": "Kommunizieren Sie den Zusammenhang zwischen Automatisierung und flexibler Arbeit offen – z. B. „Diese Maschine läuft jetzt 30 % länger ohne Bedienung – das ermöglicht flexiblere Arbeitszeiten".",
+                "text": "Kommunizieren Sie den Zusammenhang zwischen Automatisierung und flexibler Arbeit offen – z. B. Diese Maschine läuft jetzt 30 % länger ohne Bedienung – das ermöglicht flexiblere Arbeitszeiten.",
                 "bemerkung": "Sichtbare Verknüpfung zwischen technischer Verbesserung und persönlichem Nutzen motiviert und zeigt, dass Automatisierung kein Selbstzweck ist, sondern Arbeitsgestaltung verbessert."
             },
             {
