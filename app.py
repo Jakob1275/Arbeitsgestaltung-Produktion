@@ -219,7 +219,7 @@ Kriterien = {
     ],
     "Qualifikation und Kompetenzentwicklung": [
   {
-    "frage": "M2.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an <u>mobile Arbeit</u> zu verstehen und umzusetzen zu können.",
+    "frage": "M2.1 Beschäftigte erhalten Schulungen oder Leitfäden, um Anforderungen an <u>mobile</u> Arbeit zu verstehen und umzusetzen zu können.",
     "begründung": "Mobile Arbeit verlangt eigenständiges Arbeiten mit digitalen Tools, klare Kommunikation und hohe Selbstorganisation."
   },
   {
