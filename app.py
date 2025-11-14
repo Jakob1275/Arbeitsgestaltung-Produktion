@@ -455,7 +455,7 @@ handlungsempfehlungen = {
         ],
         "Organisation": [
             {
-                "text": "Führen Sie niedrigschwellige Pilotmodelle für Zeitflexibilität ein – z. B. Gleitzeitkonten in der Arbeitsvorbereitung oder flexible Pausenregelungen im 1-Schichtbetrieb.",
+                "text": "Führen Sie niedrigschwellige Pilotmodelle für Zeitflexibilität ein – z. B. Gleitzeitkonten in der Arbeitsvorbereitung oder flexible Pausenregelungen im Schichtbetrieb.",
                 "bemerkung": "In Betrieben des Clusters 1 fehlt oft die Erfahrung mit flexiblen Arbeitsformen. Kleinversuche in indirekten Bereichen (AV, QS, Planung) ermöglichen risikofreies Ausprobieren, bevor direkte Produktionsbereiche einbezogen werden."
             },
             {
@@ -551,7 +551,7 @@ handlungsempfehlungen = {
             },
             {
                 "text": "Ermutigen Sie Teams zur Entwicklung eigener Flexibilitätsregeln – etwa zur Erreichbarkeit, Aufgabenteilung oder Feedbackkultur im mobilen Arbeiten.",
-                "bemerkung": "Wenn Mitarbeitende eigene Regeln mitgestalten, steigt die Identifikation. Gleichzeitig wird die alltagsnahe Umsetzbarkeit gefördert."
+                "bemerkung": "Wenn Beschäftigte eigene Regeln mitgestalten, steigt die Identifikation. Gleichzeitig wird die alltagsnahe Umsetzbarkeit gefördert."
             }
         ]
     },
@@ -650,7 +650,7 @@ handlungsempfehlungen = {
         ],
     "Kultur": [
            {
-                "text": "Kommunizieren Sie den Zusammenhang zwischen Automatisierung und flexibler Arbeit offen – z. B. Diese Maschine läuft jetzt 30 % länger ohne Bedienung – das ermöglicht flexiblere Arbeitszeiten.",
+                "text": "Kommunizieren Sie den Zusammenhang zwischen Automatisierung und flexibler Arbeit offen – z. B. „Diese Maschine läuft jetzt 30 % länger ohne Bedienung“ – das ermöglicht flexiblere Arbeitszeiten.",
                 "bemerkung": "Sichtbare Verknüpfung zwischen technischer Verbesserung und persönlichem Nutzen motiviert und zeigt, dass Automatisierung kein Selbstzweck ist, sondern Arbeitsgestaltung verbessert."
             },
             {
