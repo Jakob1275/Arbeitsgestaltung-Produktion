@@ -484,7 +484,7 @@ handlungsempfehlungen = {
         "Mensch": [
             {
                 "text": "Kommunizieren Sie transparent den persönlichen Mehrwert flexibler Arbeitsmodelle für die Beschäftigten (z. B. bessere Vereinbarkeit, Zeitautonomie).",
-                "bemerkung": "In traditionellen Betrieben werden flexible Arbeitsformen oft als „Risiko" oder „Mehrarbeit" wahrgenommen. Eine klare Kommunikation des individuellen Nutzens fördert Akzeptanz und intrinsische Motivation."
+                "bemerkung": "In traditionellen Betrieben werden flexible Arbeitsformen oft als Risiko oder Mehrarbeit wahrgenommen. Eine klare Kommunikation des individuellen Nutzens fördert Akzeptanz und intrinsische Motivation."
             },
             {
                 "text": "Etablieren Sie den Austausch („Kollegen helfen Kollegen“) zur Unterstützung bei Selbstorganisation und Technikfragen.",
