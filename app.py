@@ -581,13 +581,17 @@ handlungsempfehlungen = {
                 "bemerkung": "Eine offene Arbeitskultur braucht zugleich verlässliche Strukturen. Die partizipative Entwicklung von Rahmenbedingungen fördert Akzeptanz, Vertrauen und Fairness im Team."
             },
             {
+                "text": "Bündeln Sie präsenzpflichtige und mobil bearbeitbare Aufgaben.",
+                "bemerkung": "Klare Präsenz- und Mobilphasen reduzieren Ortswechsel, schaffen Struktur und erhöhen die Effizienz – ideal für die digital-affinen Teams in Cluster 3."
+            },
+            {
                 "text": "Nutzen Sie hybride Betriebsvereinbarungen als lernende Regelwerke – mit offenen Evaluationsklauseln.",
                 "bemerkung": "Flexibilisierung darf nicht im Experiment enden. Regelwerke mit Weiterentwicklungsoptionen helfen, Agilität und Verbindlichkeit zu vereinen."
             }
         ],
         "Kultur": [
             {
-                "text": "Fördern Sie Eigenverantwortung durch mehr Entscheidungsspielräume bei Arbeitsort und -zeit – auf Teamebene abgestimmt.",
+                "text": "Fördern Sie Eigenverantwortung durch mehr Entscheidungsspielräume im Team bei Arbeitsort und -zeit Abstimmungen.",
                 "bemerkung": "Dieses Cluster ist bereit für Autonomie. Führung sollte Gestaltungsspielräume freigeben, dabei aber teaminterne Aushandlung unterstützen."
             },
             {
