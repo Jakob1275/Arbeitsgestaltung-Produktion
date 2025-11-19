@@ -1608,9 +1608,9 @@ if current_tab == "Evaluation":
 
         for frage_text, session_key in item_to_radio_key_map.items():
             value = st.session_state.get(session_key, None)
-            if value is not None:
-                zahlwert = bewertung_in_zahl(value)
-                item_rohwerte[f"ITEM::{frage_text}"] = safe_value(zahlwert)
+            if isinstance(value, (int, float)):
+                item_rohwerte[f"ITEM::{frage_text}"] = float(value)
+
         
         # 3. MTOK-Werte auslesen 
         mtok_keys = [
