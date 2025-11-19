@@ -1647,12 +1647,25 @@ if current_tab == "Evaluation":
                 "Abweichung 4": 99999
             }
 
+        # 5. Einzelne Itemwerte für McDonald’s Omega speichern
+        item_rohwerte = {}
+        item_to_radio_key_map = st.session_state.get("item_to_radio_key_map", {})
+
+        for frage_text, session_key in item_to_radio_key_map.items():
+            value = st.session_state.get(session_key, None)
+            if value is not None:
+                # optional: direkt in Zahlwert umwandeln, wenn deine Skala z. B. "trifft zu" etc. ist
+                zahlwert = bewertung_in_zahl(value)
+                      
         daten_gesamt = {}
+        daten_gesamt.update(item_rohwerte)
         daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
+
         for key, score in st.session_state.get("einzel_scores", {}).items():
             daten_gesamt[f"{key}__score"] = score
+            
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
         # Speichern in Google Sheet
