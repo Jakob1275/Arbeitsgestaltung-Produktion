@@ -1602,6 +1602,16 @@ if current_tab == "Evaluation":
         # 2. Freitextfeld
         evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
 
+        # 5. Einzelne Itemwerte für McDonald’s Omega speichern
+        item_rohwerte = {}
+        item_to_radio_key_map = st.session_state.get("item_to_radio_key_map", {})
+
+        for frage_text, session_key in item_to_radio_key_map.items():
+            value = st.session_state.get(session_key, None)
+            if value is not None:
+                # optional: direkt in Zahlwert umwandeln, wenn deine Skala z. B. "trifft zu" etc. ist
+                zahlwert = bewertung_in_zahl(value)
+        
         # 3. MTOK-Werte auslesen 
         mtok_keys = [
             "Qualifikation und Kompetenzentwicklung",
@@ -1646,16 +1656,6 @@ if current_tab == "Evaluation":
                 "Abweichung 3": 99999,
                 "Abweichung 4": 99999
             }
-
-        # 5. Einzelne Itemwerte für McDonald’s Omega speichern
-        item_rohwerte = {}
-        item_to_radio_key_map = st.session_state.get("item_to_radio_key_map", {})
-
-        for frage_text, session_key in item_to_radio_key_map.items():
-            value = st.session_state.get(session_key, None)
-            if value is not None:
-                # optional: direkt in Zahlwert umwandeln, wenn deine Skala z. B. "trifft zu" etc. ist
-                zahlwert = bewertung_in_zahl(value)
                       
         daten_gesamt = {}
         daten_gesamt.update(item_rohwerte)
