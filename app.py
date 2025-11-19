@@ -1612,12 +1612,12 @@ if current_tab == "Evaluation":
                 item_rohwerte[f"ITEM::{frage_text}"] = float(value)
 
         # 6. Direkte Eingabevariablen speichern (z. B. CNC-Anzahl, Automatisierungsgrad)
-        direct_raw = {
-            "RAW::Anzahl CNC-Werkzeugmaschinen": st.session_state.get("cnc_range"),
-            "RAW::Automatisierungsgrad": st.session_state.get("automation_range"),
-            "RAW::Losgröße": st.session_state.get("losgroesse_range"),
-            "RAW::Durchlaufzeit": st.session_state.get("durchlaufzeit_range"),
-            "RAW::Laufzeit": st.session_state.get("laufzeit_range"),
+        direct_kat = {
+            "KAT::Anzahl CNC-Werkzeugmaschinen": st.session_state.get("anzahl_cnc_range"),
+            "KAT::Automatisierungsgrad": st.session_state.get("automatisierungsgrad_categorized"),
+            "KAT::Losgröße": st.session_state.get("losgroesse_categorized"),
+            "KAT::Durchlaufzeit": st.session_state.get("durchlaufzeit_categorized"),
+            "KAT::Laufzeit": st.session_state.get("laufzeit_categorized"),
         }
         
         # 3. MTOK-Werte auslesen 
