@@ -1672,8 +1672,8 @@ if current_tab == "Evaluation":
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
 
-        for key, score in st.session_state.get("einzel_scores", {}).items():
-            daten_gesamt[f"{key}__score"] = score
+        #for key, score in st.session_state.get("einzel_scores", {}).items():
+           # daten_gesamt[f"{key}__score"] = score
             
         daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
 
