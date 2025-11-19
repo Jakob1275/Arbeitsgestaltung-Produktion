@@ -441,8 +441,8 @@ handlungsempfehlungen = {
     "Cluster 1 – Traditionell und reaktiv": {
         "Technik": [
             {
-                "text": "Kategorisieren Sie Werkstücke nach Fertigungsart und Größe, um Potenziale für eine wirtschaftliche Automatisierung zu identifizieren.",
-                "bemerkung": "Ähnliche Werkstücke bilden oft ein ausreichend großes Volumen, um diese Prozesse zu automatisieren und standardisieren."
+                "text": "Kategorisieren Sie Werkstücke nach Fertigungsart und Größe, um Potenziale für eine Automatisierung zu identifizieren.",
+                "bemerkung": "Ähnliche Werkstücke bilden oft ein ausreichend großes Volumen, um diese Fertigungsprozesse zu automatisieren und standardisieren."
             },
             {
                 "text": "Führen Sie eine strukturierte Bestandsaufnahme der Fertigungsprozesse der am häufigsten produzierten Werkstücke durch – mit Schwerpunkt auf Stabilität, Ausfallsicherheit und Automatisierungspotenzial.",
@@ -456,21 +456,21 @@ handlungsempfehlungen = {
         "Organisation": [
             {
                 "text": "Führen Sie niedrigschwellige Pilotmodelle für Zeitflexibilität ein – z. B. Gleitzeitkonten in der Arbeitsvorbereitung oder flexible Pausenregelungen im Schichtbetrieb.",
-                "bemerkung": "In Betrieben des Clusters 1 fehlt oft die Erfahrung mit flexiblen Arbeitsformen. Kleinversuche in indirekten Bereichen (AV, QS, Planung) ermöglichen risikofreies Ausprobieren, bevor direkte Produktionsbereiche einbezogen werden."
+                "bemerkung": "Oft fehlt die Erfahrung mit flexiblen Arbeitsformen. Kleinversuche in indirekten Bereichen (AV, QS, Planung) ermöglichen risikofreies Ausprobieren, bevor direkte Produktionsbereiche einbezogen werden."
             },
             {
                 "text": "Integrieren Sie regelmäßige Lern- und Reflexionsroutinen (z. B. „Was lief stabil, was nicht?“ in Teamrunden).",
                 "bemerkung": "Kontinuierliches Lernen aus Abweichungen stärkt Prozesssicherheit und fördert zugleich gemeinsames Verantwortungsbewusstsein."
             },
             {
-                "text": "Bilden Sie eine bereichsübergreifende Arbeitsgruppe „Prozesssicherheit & Flexibilität“, die Technik, Produktion, Verwaltung und Betriebsrat einbindet.",
-                "bemerkung": "Gemeinsame Verantwortung schafft Akzeptanz und stellt sicher, dass technische Veränderungen organisatorisch mitgetragen werden."
+                "text": "Standardisieren Sie Werkzeug- und Spannmittelmanagement, um Suchen, Nachbestellen und Einmessen zu reduzieren.",
+                "bemerkung": "Klare Standards im Betriebsmittelmanagement beschleunigen Prozesse und vermeiden unnötige Maschinenstillstände."
             }
         ],
         "Kultur": [
             {
                 "text": "Organisieren Sie Betriebsbesichtigungen oder Praxisberichte von ähnlich strukturierten Betrieben, die flexible Arbeitsmodelle erfolgreich eingeführt haben.",
-                "bemerkung": "Externe Impulse von vergleichbaren Betrieben (ähnliche Größe, Branche, Fertigung) helfen, Ängste vor Automatisierung abzubauen und zeigen, dass Prozesssicherheit und Mitarbeiterbeteiligung kein Widerspruch sind."
+                "bemerkung": "Externe Impulse von vergleichbaren Betrieben (Größe, Branche, Fertigung) helfen, Ängste und Bedenken vor Automatisierung abzubauen und zeigen, dass Prozesssicherheit und Mitarbeiterbeteiligung kein Widerspruch sind."
             },
             {
                 "text": "Führen Sie monatliche Teamrunden ein, in denen Arbeitsprobleme offen diskutiert werden dürfen – mit Fokus auf lösungsorientierter Kommunikation.",
@@ -491,7 +491,7 @@ handlungsempfehlungen = {
                 "bemerkung": "Offenheit und Selbstorganisation entstehen im Vertrauen. Kollegiale Lernpartnerschaften senken Hemmschwellen und stärken gemeinsames Lernen."
             },
             {
-                "text": "Schaffen Sie Freiräume für Eigeninitiative – z. B. wöchentliche Verbesserungszeiten, in denen Teams selbstständig Prozessvorschläge entwickeln dürfen.",
+                "text": "Schaffen Sie Freiräume für Eigeninitiative (z. B. wöchentliche Verbesserungszeiten), in denen Teams selbstständig Prozessvorschläge entwickeln dürfen.",
                 "bemerkung": "Selbstorganisation wird nur gelebt, wenn Mitarbeitende die Chance haben, eigene Ideen einzubringen und Verantwortung zu übernehmen."
             }
         ]
@@ -518,7 +518,7 @@ handlungsempfehlungen = {
                 "bemerkung": "Oft ist unklar, welche Aufgaben tatsächlich ortsunabhängig bearbeitet werden können. Eine strukturierte Analyse zeigt das Potenzial und hilft, realistische Flexibilisierungsmodelle zu entwickeln."
             },
             {
-                "text": "Entwickeln Sie modularisierte Arbeitszeitmodelle – z. B. erweiterte Gleitzeitfenster in indirekten Bereichen oder festgelegte mobile Arbeitstage für Funktionen ohne Schichtbindung.",
+                "text": "Entwickeln Sie modularisierte Arbeitszeitmodelle (z. B. erweiterte Gleitzeitfenster in indirekten Bereichen oder festgelegte mobile Arbeitstage für Funktionen ohne Schichtbindung).",
                 "bemerkung": "In produktionsgeprägten Betrieben ist Schichtstabilität zentral. Modularisierte Modelle ermöglichen dennoch zeitliche und örtliche Spielräume in indirekten Bereichen, ohne Produktionssicherheit zu gefährden."
             },
             {
