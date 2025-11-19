@@ -1612,14 +1612,13 @@ if current_tab == "Evaluation":
                 item_rohwerte[f"ITEM::{frage_text}"] = float(value)
 
         # 6. Direkte Eingabevariablen speichern (z. B. CNC-Anzahl, Automatisierungsgrad)
-        direct_input_results = {}
-
-        for var_name, (range_key, categorized_key, _) in direct_input_keys.items():
-            raw_value = st.session_state.get(range_key, None)
-            categorized_value = st.session_state.get(categorized_key, None)
-
-            # Rohwerte speichern
-            direct_input_results[f"RAW::{var_name}"] = raw_value if raw_value is not None else "NA"
+        direct_raw = {
+            "RAW::Anzahl CNC-Werkzeugmaschinen": st.session_state.get("cnc_range"),
+            "RAW::Automatisierungsgrad": st.session_state.get("automation_range"),
+            "RAW::Losgröße": st.session_state.get("losgroesse_range"),
+            "RAW::Durchlaufzeit": st.session_state.get("durchlaufzeit_range"),
+            "RAW::Laufzeit": st.session_state.get("laufzeit_range"),
+        }
         
         # 3. MTOK-Werte auslesen 
         mtok_keys = [
@@ -1668,7 +1667,7 @@ if current_tab == "Evaluation":
                       
         daten_gesamt = {}
         daten_gesamt.update(item_rohwerte)
-        daten_gesamt.update(direct_input_results)
+        daten_gesamt.update(direct_raw)
         daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
