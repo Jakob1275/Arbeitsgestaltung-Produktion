@@ -1613,11 +1613,11 @@ if current_tab == "Evaluation":
 
         # 6. Direkte Eingabevariablen speichern (z. B. CNC-Anzahl, Automatisierungsgrad)
         direct_kat = {
-            "KAT::Anzahl CNC-Werkzeugmaschinen": st.session_state.get("anzahl_cnc_range"),
+            "KAT::Anzahl CNC-Werkzeugmaschinen": st.session_state.get("anzahl_cnc_werkzeugmaschinen_categorized"),
             "KAT::Automatisierungsgrad": st.session_state.get("automatisierungsgrad_categorized"),
             "KAT::Losgröße": st.session_state.get("losgroesse_categorized"),
-            "KAT::Durchlaufzeit": st.session_state.get("durchlaufzeit_categorized"),
             "KAT::Laufzeit": st.session_state.get("laufzeit_categorized"),
+            "KAT::Durchlaufzeit": st.session_state.get("durchlaufzeit_categorized"),
         }
         
         # 3. MTOK-Werte auslesen 
