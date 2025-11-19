@@ -1667,7 +1667,7 @@ if current_tab == "Evaluation":
                       
         daten_gesamt = {}
         daten_gesamt.update(item_rohwerte)
-        daten_gesamt.update(direct_raw)
+        daten_gesamt.update(direct_kat)
         daten_gesamt.update(mtok_werte)
         daten_gesamt.update(cluster_scores)
         daten_gesamt.update(evaluation_data)
