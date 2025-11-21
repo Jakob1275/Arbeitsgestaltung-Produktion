@@ -1003,38 +1003,6 @@ score_mapping = {
     "Weitgehend erfüllt": 3,
     "Vollständig erfüllt": 4
 }
-        
-# Navigationsbuttons
-def nav_buttons(position):
-    col1, col2, col3 = st.columns([1, 6, 1])
-    with col1:
-        if st.session_state.current_tab_index > 0:
-            if st.button("← Zurück", key=f"back_{position}"):
-                st.session_state.current_tab_index -= 1
-                st.rerun()
-    with col3:
-        if st.session_state.current_tab_index < len(tab_names) - 1:
-            if st.button("Weiter →", key=f"next_{position}"):
-                speichere_daten(status="Zwischenstand")
-                st.session_state.current_tab_index += 1
-                st.rerun()
-
-# Tabs definieren
-tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung","Evaluation"]
-
-# Scroll-Anker oben
-st.markdown("<div id='top'></div>", unsafe_allow_html=True)
-
-# Oben: Navigation anzeigen
-nav_buttons("top")
-
-# Aktuellen Tab bestimmen
-current_tab = tab_names[st.session_state.current_tab_index]
-st.markdown(f"## {current_tab}")
-st.markdown(" ➤ ".join([
-    f"<b style='color:#1f77b4'>{name}</b>" if name == current_tab else name
-    for name in tab_names
-]), unsafe_allow_html=True)
 
 # Speicherfunktion 
 
@@ -1143,7 +1111,40 @@ def speichere_daten(status: str = "Zwischenstand"):
     except Exception as e:
         if status == "Final":
             st.error(f"Fehler beim Speichern: {e}")
-            
+
+
+# Navigationsbuttons
+def nav_buttons(position):
+    col1, col2, col3 = st.columns([1, 6, 1])
+    with col1:
+        if st.session_state.current_tab_index > 0:
+            if st.button("← Zurück", key=f"back_{position}"):
+                st.session_state.current_tab_index -= 1
+                st.rerun()
+    with col3:
+        if st.session_state.current_tab_index < len(tab_names) - 1:
+            if st.button("Weiter →", key=f"next_{position}"):
+                speichere_daten(status="Zwischenstand")
+                st.session_state.current_tab_index += 1
+                st.rerun()
+
+# Tabs definieren
+tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung","Evaluation"]
+
+# Scroll-Anker oben
+st.markdown("<div id='top'></div>", unsafe_allow_html=True)
+
+# Oben: Navigation anzeigen
+nav_buttons("top")
+
+# Aktuellen Tab bestimmen
+current_tab = tab_names[st.session_state.current_tab_index]
+st.markdown(f"## {current_tab}")
+st.markdown(" ➤ ".join([
+    f"<b style='color:#1f77b4'>{name}</b>" if name == current_tab else name
+    for name in tab_names
+]), unsafe_allow_html=True)
+
 # Inhalt Start-Tabs
 
 if current_tab == "Start":
