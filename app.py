@@ -1011,14 +1011,24 @@ def speichere_daten(status: str = "Zwischenstand"):
     evaluation_data = {}
 
     # 1. Evaluation speichern
-    for i in range(1, 5):
-        fragen_count = len(eval(f"fragen_{i}"))
-        for j in range(fragen_count):
-            key = f"eval{i}_{j}"
-            antwort = st.session_state.get(f"{key}_score", "")
-            zahlwert = bewertung_in_zahl(antwort)
-            evaluation_data[key] = safe_value(zahlwert)
+    #for i in range(1, 5):
+        #fragen_count = len(eval(f"fragen_{i}"))
+        #for j in range(fragen_count):
+            #key = f"eval{i}_{j}"
+            #antwort = st.session_state.get(f"{key}_score", "")
+            #zahlwert = bewertung_in_zahl(antwort)
+            #evaluation_data[key] = safe_value(zahlwert)
 
+    for session_key, value in st.session_state.items():
+    # Muster: eval1_0_score, eval2_3_score etc.
+    m = re.match(r"^(eval\d+_\d+)_score$", session_key)
+    if m:
+        base_key = m.group(1)  # z.B. "eval1_0"
+        antwort = value
+        zahlwert = bewertung_in_zahl(antwort)
+        evaluation_data[base_key] = safe_value(zahlwert)
+
+    
     # 2. Freitextfeld
     evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
 
