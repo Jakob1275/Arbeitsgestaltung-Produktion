@@ -1020,13 +1020,13 @@ def speichere_daten(status: str = "Zwischenstand"):
             #evaluation_data[key] = safe_value(zahlwert)
 
     for session_key, value in st.session_state.items():
-    # Muster: eval1_0_score, eval2_3_score etc.
-    m = re.match(r"^(eval\d+_\d+)_score$", session_key)
-    if m:
-        base_key = m.group(1)  # z.B. "eval1_0"
-        antwort = value
-        zahlwert = bewertung_in_zahl(antwort)
-        evaluation_data[base_key] = safe_value(zahlwert)
+        # Muster: eval1_0_score, eval2_3_score etc.
+        m = re.match(r"^(eval\d+_\d+)_score$", session_key)
+        if m:
+            base_key = m.group(1)  # z.B. "eval1_0"
+            antwort = value
+            zahlwert = bewertung_in_zahl(antwort)
+            evaluation_data[base_key] = safe_value(zahlwert)
 
     
     # 2. Freitextfeld
