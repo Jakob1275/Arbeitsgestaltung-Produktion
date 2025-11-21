@@ -10,6 +10,13 @@ import gspread
 from google.oauth2.service_account import Credentials
 from datetime import datetime
 import html
+import uuid
+
+if "session_id" not in st.session_state:
+    st.session_state["session_id"] = str(uuid.uuid4())
+
+if "current_step" not in st.session_state:
+    st.session_state["current_step"] = 1
 
 #Google Sheet Verbindung
 
@@ -1008,6 +1015,7 @@ def nav_buttons(position):
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}"):
+                speichere_daten(status="Zwischenstand")
                 st.session_state.current_tab_index += 1
                 st.rerun()
 
@@ -1028,6 +1036,114 @@ st.markdown(" ➤ ".join([
     for name in tab_names
 ]), unsafe_allow_html=True)
 
+# Speicherfunktion 
+
+
+def speichere_daten(status: str = "Zwischenstand"):
+    evaluation_data = {}
+
+    # 1. Evaluation speichern
+    for i in range(1, 5):
+        fragen_count = len(eval(f"fragen_{i}"))
+        for j in range(fragen_count):
+            key = f"eval{i}_{j}"
+            antwort = st.session_state.get(f"{key}_score", "")
+            zahlwert = bewertung_in_zahl(antwort)
+            evaluation_data[key] = safe_value(zahlwert)
+
+    # 2. Freitextfeld
+    evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
+
+    # 3. Einzelne Itemwerte für McDonald’s Omega speichern
+    item_rohwerte = {}
+    item_to_radio_key_map = st.session_state.get("item_to_radio_key_map", {})
+
+    for frage_text, session_key in item_to_radio_key_map.items():
+        value = st.session_state.get(session_key, None)
+        if isinstance(value, (int, float)):
+            item_rohwerte[f"ITEM::{frage_text}"] = float(value)
+
+    # 4. Direkte Eingabevariablen speichern
+    direct_kat = {
+        "KAT::Anzahl CNC-Werkzeugmaschinen": st.session_state.get("anzahl_cnc_werkzeugmaschinen_categorized"),
+        "KAT::Automatisierungsgrad": st.session_state.get("automatisierungsgrad_categorized"),
+        "KAT::Losgröße": st.session_state.get("losgroesse_categorized"),
+        "KAT::Laufzeit": st.session_state.get("laufzeit_categorized"),
+        "KAT::Durchlaufzeit": st.session_state.get("durchlaufzeit_categorized"),
+    }
+
+    # 5. MTOK-Werte auslesen
+    mtok_keys = [
+        "Qualifikation und Kompetenzentwicklung",
+        "Persönliche Voraussetzungen",
+        "Automatisierung und Arbeitsplatzgestaltung",
+        "Digitale Vernetzung und IT-Infrastruktur",
+        "Kommunikation, Kooperation und Zusammenarbeit",
+        "Organisatorische Umwelt",
+        "Produktionsorganisation",
+        "Unternehmenskultur",
+        "Führung und Teamzusammenhalt"
+    ]
+
+    mtok_raw = st.session_state.get("ergebnisse", {})
+    mtok_werte = {}
+
+    for key in mtok_keys:
+        val = mtok_raw.get(key, 99999)
+        if isinstance(val, (int, float)):
+            mtok_werte[key] = float(val)
+        else:
+            mtok_werte[key] = 99999.0
+
+    # 6. Cluster-Zuordnung – bei Zwischenstand etwas „entschärfen“
+    if status == "Final":
+        cluster_result = st.session_state.get("cluster_result", None)
+        abweichungen_detail = st.session_state.get("abweichungen_detail", {})
+        bewertete = zaehle_bewertete_clustervariablen(mtok_werte)
+
+        if isinstance(cluster_result, str) and isinstance(abweichungen_detail, dict) and bewertete >= 7:
+            cluster_scores = {
+                "Zugeordnetes Cluster": cluster_result,
+                **{f"Abweichung {k}": v for k, v in abweichungen_detail.items()}
+            }
+        else:
+            cluster_scores = {
+                "Zugeordnetes Cluster": f"Bitte bewerten Sie mindestens 7 relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {bewertete} bewertet.",
+                "Abweichung 1": 99999,
+                "Abweichung 2": 99999,
+                "Abweichung 3": 99999,
+                "Abweichung 4": 99999
+            }
+    else:
+        # Bei Zwischenstand keine „harte“ Clusterbewertung erzwingen
+        cluster_scores = {
+            "Zugeordnetes Cluster": "Zwischenstand – noch nicht final berechnet",
+            "Abweichung 1": 99999,
+            "Abweichung 2": 99999,
+            "Abweichung 3": 99999,
+            "Abweichung 4": 99999
+        }
+
+    daten_gesamt = {}
+    daten_gesamt.update(item_rohwerte)
+    daten_gesamt.update(direct_kat)
+    daten_gesamt.update(mtok_werte)
+    daten_gesamt.update(cluster_scores)
+    daten_gesamt.update(evaluation_data)
+
+    daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
+    daten_gesamt["Session_ID"] = st.session_state["session_id"]
+    daten_gesamt["Status"] = status
+
+    try:
+        daten_liste = [safe_value(v) for v in daten_gesamt.values()]
+        worksheet.append_row(daten_liste)
+        if status == "Final":
+            st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
+    except Exception as e:
+        if status == "Final":
+            st.error(f"Fehler beim Speichern: {e}")
+            
 # Inhalt Start-Tabs
 
 if current_tab == "Start":
@@ -1590,102 +1706,9 @@ if current_tab == "Evaluation":
 
     # Absenden und speichern
     if st.button("Absenden und speichern"):
-        evaluation_data = {}
+        speichere_daten(status="Final")
     
-        # 1. Evaluation speichern
-        for i in range(1, 5):
-            fragen_count = len(eval(f"fragen_{i}"))
-            for j in range(fragen_count):
-                key = f"eval{i}_{j}"
-                antwort = st.session_state.get(f"{key}_score", "")
-                zahlwert = bewertung_in_zahl(antwort)
-                evaluation_data[key] = safe_value(zahlwert)
-
-        # 2. Freitextfeld
-        evaluation_data["feedback"] = st.session_state.get("evaluation_feedback_text", "")
-
-        # 5. Einzelne Itemwerte für McDonald’s Omega speichern
-        item_rohwerte = {}
-        item_to_radio_key_map = st.session_state.get("item_to_radio_key_map", {})
-
-        for frage_text, session_key in item_to_radio_key_map.items():
-            value = st.session_state.get(session_key, None)
-            if isinstance(value, (int, float)):
-                item_rohwerte[f"ITEM::{frage_text}"] = float(value)
-
-        # 6. Direkte Eingabevariablen speichern (z. B. CNC-Anzahl, Automatisierungsgrad)
-        direct_kat = {
-            "KAT::Anzahl CNC-Werkzeugmaschinen": st.session_state.get("anzahl_cnc_werkzeugmaschinen_categorized"),
-            "KAT::Automatisierungsgrad": st.session_state.get("automatisierungsgrad_categorized"),
-            "KAT::Losgröße": st.session_state.get("losgroesse_categorized"),
-            "KAT::Laufzeit": st.session_state.get("laufzeit_categorized"),
-            "KAT::Durchlaufzeit": st.session_state.get("durchlaufzeit_categorized"),
-        }
-        
-        # 3. MTOK-Werte auslesen 
-        mtok_keys = [
-            "Qualifikation und Kompetenzentwicklung",
-            "Persönliche Voraussetzungen",
-            "Automatisierung und Arbeitsplatzgestaltung",
-            "Digitale Vernetzung und IT-Infrastruktur",
-            "Kommunikation, Kooperation und Zusammenarbeit",
-            "Organisatorische Umwelt",
-            "Produktionsorganisation",
-            "Unternehmenskultur",
-            "Führung und Teamzusammenhalt"
-        ]
-
-        mtok_raw = st.session_state.get("ergebnisse", {})
-        mtok_werte = {}
-
-        for key in mtok_keys:
-            val = mtok_raw.get(key, 99999)
-            if isinstance(val, (int, float)):
-                mtok_werte[key] = float(val)
-            else:
-                mtok_werte[key] = 99999.0  # wenn leer, Text, None etc.
-
-        # 4. Cluster-Zuordnung (aus Session State laden, nicht neu berechnen)
-        cluster_result = st.session_state.get("cluster_result", None)
-        abweichungen_detail = st.session_state.get("abweichungen_detail", {})
-
-        # Anzahl bewerteter MTOK-Felder zählen
-        bewertete = zaehle_bewertete_clustervariablen(mtok_werte)
-
-        # Bewertung und Cluster-Scores nur übernehmen, wenn valide
-        if isinstance(cluster_result, str) and isinstance(abweichungen_detail, dict) and bewertete >= 7:
-            cluster_scores = {
-                "Zugeordnetes Cluster": cluster_result,
-                **{f"Abweichung {k}": v for k, v in abweichungen_detail.items()}
-            }
-        else:
-            cluster_scores = {
-                "Zugeordnetes Cluster": f"Bitte bewerten Sie mindestens 7 relevante Kriterien-Sets (Cluster-Variablen) für eine präzise Clusterzuordnung. Aktuell sind {bewertete} bewertet.",
-                "Abweichung 1": 99999,
-                "Abweichung 2": 99999,
-                "Abweichung 3": 99999,
-                "Abweichung 4": 99999
-            }
-                      
-        daten_gesamt = {}
-        daten_gesamt.update(item_rohwerte)
-        daten_gesamt.update(direct_kat)
-        daten_gesamt.update(mtok_werte)
-        daten_gesamt.update(cluster_scores)
-        daten_gesamt.update(evaluation_data)
-
-        #for key, score in st.session_state.get("einzel_scores", {}).items():
-           # daten_gesamt[f"{key}__score"] = score
-            
-        daten_gesamt["Zeitstempel"] = datetime.now().isoformat()
-
-        # Speichern in Google Sheet
-        try:
-            daten_liste = [safe_value(v) for v in daten_gesamt.values()]
-            worksheet.append_row(daten_liste)
-            st.success("Vielen Dank! Ihre Rückmeldung wurde gespeichert.")
-        except Exception as e:
-            st.error(f"Fehler beim Speichern: {e}")
+       
             
 # Trenner
 st.markdown("---")
