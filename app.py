@@ -1161,6 +1161,8 @@ elif current_tab in mtok_structure:
 
             st.session_state["einzel_scores"][f"{feld}__{idx}"] = score
 
+    st.info("Bitte springen Sie zunächst nach oben, nachdem Sie WEITER gedrückt haben.") 
+
 #Abschließende Fragen
 elif current_tab == "Abschließende Fragen":
     st.subheader("Spezifische technische und prozessuale Angaben")
@@ -1245,7 +1247,7 @@ elif current_tab == "Abschließende Fragen":
         "Die Durchlaufzeit ist ein Indikator für Prozessstruktur und Produktionssteuerung."
     )
 
-    st.info("Vielen Dank. Sie können nun zur Auswertung übergehen.")
+    st.info("Bitte springen Sie zunächst nach oben, nachdem Sie WEITER gedrückt haben.")
     
 # Inhalt Auswertungs-Tab
 
