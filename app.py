@@ -1653,10 +1653,9 @@ if current_tab == "Evaluation":
 
     # Bereich 1 – Verständlichkeit
     fragen_1 = [
-        "Die Struktur des Modells war für mich durchgängig nachvollziehbar.",
         "Die verwendeten Begriffe und Formulierungen in den Bewertungskriterien waren klar verständlich.",
-        "Die Erklärungen zu Handlungsfeldern und Bewertungsskalen waren verständlich und hilfreich.",
-        "Die grafische Darstellung der Ergebnisse war verständlich."
+        "Die Erklärungen zu Handlungsfeldern und Bewertungsskalen waren hilfreich.",
+        "Die grafische Darstellung der Ergebnisse war unterstützend."
     ]
     zeige_fragen("1. Verständlichkeit und Transparenz des Modells", fragen_1, "eval1")
 
@@ -1671,15 +1670,15 @@ if current_tab == "Evaluation":
     # Bereich 3 – Anwendbarkeit
     fragen_3 = [
         "Das Modell eignet sich als Instrument zur Systematisierung flexibler Arbeit.",
-        "Die Clusterbeschreibung trifft auf das Unternehmen zu.",
-        "Mit Hilfe des Modells lassen sich konkrete betriebliche Entwicklungsmaßnahmen ableiten.",
         "Das Modell unterstützt eine strukturierte Selbstbewertung und Reflexion im Unternehmen."
+        "Die Clusterbeschreibung trifft auf unser Unternehmen zu.",
+        "Mit Hilfe des Modells lassen sich konkrete betriebliche Entwicklungsmaßnahmen ableiten.",
     ]
     zeige_fragen("3. Anwendbarkeit und betrieblicher Nutzen", fragen_3, "eval3")
 
     # Bereich 4 – Gesamturteil
     fragen_4 = [
-        "Das Modell ist insgesamt logisch aufgebaut und stimmig konzipiert.",
+        "Das Modell ist insgesamt frei von Widersprüchen.",
         "Ich würde das Modell anderen Unternehmen oder Kollegen weiterempfehlen.",
         "Der erwartete Nutzen des Modells überwiegt den Aufwand der Anwendung."
     ]
@@ -1695,10 +1694,10 @@ if current_tab == "Evaluation":
     # Hilfsfunktion zur Bewertungskonvertierung
     def bewertung_in_zahl(wert):
         mapping = {
-            "Niedrig": 1,
-            "Mittel": 2,
-            "Hoch": 3,
-            "Sehr hoch": 4
+            "Nicht erfüllt": 1,
+            "Teilweise erfüllt": 2,
+            "Weitgehend erfüllt": 3,
+            "Vollständig erfüllt": 4
         }
         return mapping.get(wert, 99999)
 
