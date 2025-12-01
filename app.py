@@ -1410,7 +1410,7 @@ elif current_tab == "Auswertung":
                 st.session_state.ergebnisse.get("Persönliche Voraussetzungen", 1),
                 st.session_state.ergebnisse.get("Qualifikation und Kompetenzentwicklung", 1),
                 st.session_state.ergebnisse.get("Automatisierung und Arbeitsplatzgestaltung", 1),
-                st.session_state.ergebnisse.get("Arbeitsplatzgestaltung und ", 1),
+                st.session_state.ergebnisse.get("Digitale Vernetzung und IT-Infrastruktur", 1),
                 st.session_state.ergebnisse.get("Kommunikation, Kooperation und Zusammenarbeit", 1),
                 st.session_state.ergebnisse.get("Organisatorische Umwelt", 1),
                 st.session_state.ergebnisse.get("Produktionsorganisation", 1),
