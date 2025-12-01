@@ -1603,18 +1603,31 @@ elif current_tab == "Auswertung":
 
 #Evaluationsfragen
 if current_tab == "Evaluation":
-
-    # Einführungstext
+     st.markdown("""
+    <style>
+    .text-box {
+        padding: 1.2rem;
+        background-color: #f0f0f0;
+        border-left: 5px solid #0066cc;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        margin-bottom: 2rem;
+        font-size: 17px;
+        line-height: 1.6;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
     st.markdown("""
-        <div style='font-size: 1.1rem; margin-bottom: 1rem;'>      
-        <p>Vielen Dank, dass Sie sich die Zeit genommen haben, das Modell zur Systematisierung flexibler Arbeit in der Zerspanung zu bearbeiten.</p>
+    <div class="text-box">
+    <p>Vielen Dank, dass Sie sich die Zeit genommen haben, das Modell zur Systematisierung flexibler Arbeit in der Zerspanung zu bearbeiten.</p>
         
         <p>Mit der Bearbeitung des Modells haben Sie mir bereits wertvolle Einblicke in die Flexibilitätsbedarfe Ihres Unternehmens gegeben.</p>
         
         <p>Nun bitte ich Sie um eine kurze Einschätzung zu <strong>Aufbau, Verständlichkeit und Praxisnutzen</strong> des Modells selbst. Ihre ehrliche und kritische Rückmeldung ist dabei das wichtigste Ziel: Nur so kann ich das Instrument optimieren und es zu einem wirkungsvollen Werkzeug für die gesamte Branche machen.</p>
         
         <p><strong>Ihre Antworten bleiben selbstverständlich anonym und werden ausschließlich für die wissenschaftliche Weiterentwicklung verwendet.</strong></p>
-        </div>
+    </div>
     """, unsafe_allow_html=True)
 
     # Bewertungsoptionen
@@ -1722,8 +1735,7 @@ if current_tab == "Evaluation":
     if st.button("Absenden und speichern"):
         speichere_daten(status="Final")
     
-       
-            
+           
 # Trenner
 st.markdown("---")
 
