@@ -978,8 +978,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
         return "Keine passende Clusterzuordnung möglich, bitte mehr Kriterien in relevanten Bereichen bewerten.", {}
 
     bestes_cluster = min(abweichungen, key=abweichungen.get)
-     # Cluster-Variablen-Werte für spätere Visualisierung speichern
-    st.session_state["cluster_variablen_werte"] = nutzer_cluster_variable_werte_filtered
+
     return bestes_cluster, abweichungen
 
 # Ende der Berechnungslogik
@@ -1465,7 +1464,7 @@ elif current_tab == "Auswertung":
             st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
           
 
-        cluster_vals = st.session_state.get("cluster_variablen_werte", {})
+        cluster_vals = st.session_state.get("cluster_scores", {})
 
         if cluster_vals:
             st.subheader("Profil der Cluster-Variablen")
