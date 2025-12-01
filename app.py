@@ -979,7 +979,7 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 
     bestes_cluster = min(abweichungen, key=abweichungen.get)
 
-    return bestes_cluster, abweichungen
+    return bestes_cluster, abweichungen, nutzer_cluster_variable_werte_filtered
 
 # Ende der Berechnungslogik
 
@@ -1464,49 +1464,84 @@ elif current_tab == "Auswertung":
             st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
           
 
-        cluster_vals = st.session_state.get("cluster_scores", {})
-
-        if cluster_vals:
-            st.subheader("Profil der Cluster-Variablen")
-
-            labels = list(cluster_vals.keys())
-            values = list(cluster_vals.values())
-
-            # Werte und Winkel zyklisch schließen
-            angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
-            values_cycle = values + values[:1]
-            angles_cycle = angles + angles[:1]
-
-            fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
-            ax.set_theta_offset(np.pi / 2)
-            ax.set_theta_direction(-1)
-
-            ax.plot(angles_cycle, values_cycle)
-            ax.fill(angles_cycle, values_cycle, alpha=0.25)
-
-            ax.set_xticks(angles)
-            ax.set_xticklabels(labels, fontsize=7)
         
-            ax.set_yticks([1, 2, 3, 4])
-            ax.set_ylim(0, 4)
-
-            st.pyplot(fig)
-        else:
-            st.info("Noch keine Cluster-Variablen für ein Radar-Diagramm vorhanden.")
 
 
         
         # Cluster-Zuordnung
-        cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
+        cluster_result, abweichungen_detail, cluster_values = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
         st.session_state["cluster_result"] = cluster_result
         st.session_state["abweichungen_detail"] = abweichungen_detail
+        st.session_state["cluster_values"] = cluster_values
 
         if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
             st.warning(cluster_result)
         else:
             st.subheader("Automatische Clusterzuordnung")
             st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
+
+          
+            def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Profil"):
+                """
+                Zeigt die berechneten Cluster-Variablen des Nutzers als Radar-Chart in Streamlit an.
+                cluster_values: Dict[str, float] – z. B. aus berechne_clusterzuordnung
+                """
+
+                if not cluster_values:
+                    st.warning("Keine Clusterwerte vorhanden – bitte erst genügend Kriterien bewerten.")
+                    return
+
+                # Feste Reihenfolge der Variablen (damit Diagramm immer gleich aussieht)
+                labels_ordered = [
+                    "Anzahl CNC-Werkzeugmaschinen",
+                    "Automatisierungsgrad",
+                    "Losgröße",
+                    "Durchlaufzeit",
+                    "Laufzeit",
+                    "Digitalisierungsgrad",
+                    "Aufwand Zeit",
+                    "Aufwand Mobil",
+                    "Prozessinstabilität",
+                    "Akzeptanz",
+                    "Flexibilitätsbereitschaft"
+                ]
+
+                # Nur Labels verwenden, die auch wirklich in cluster_values enthalten sind
+                labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
+                if not labels:
+                    st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
+                    return
+
+                values = [cluster_values[lbl] for lbl in labels]
+
+                # Kreis schließen
+                angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
+                angles_cycle = angles + angles[:1]
+                values_cycle = values + values[:1]
+
+                # Labels ggf. umbrechen
+                wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
+
+                # Plot
+                fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+                ax.set_theta_offset(np.pi / 2)
+                ax.set_theta_direction(-1)
+
+                ax.plot(angles_cycle, values_cycle, linewidth=2)
+                ax.fill(angles_cycle, values_cycle, alpha=0.25)
+
+                ax.set_xticks(angles)
+                ax.set_xticklabels(wrapped_labels, fontsize=8)
+
+                ax.set_yticks([1, 2, 3, 4, 5])
+                ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7)
+                ax.set_ylim(0, 5)
+
+                ax.grid(True, linestyle="dotted")
+                ax.set_title(title, fontsize=12, pad=20)
+    
+                st.pyplot(fig)
           
             # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
             alle_cluster = list(cluster_beschreibungen.keys())
