@@ -1135,7 +1135,7 @@ def nav_buttons(position):
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}"):
                 st.session_state.current_tab_index += 1
-                #st.rerun()
+                st.rerun()
 
 # Tabs definieren
 tab_names = ["Start"] + list(mtok_structure.keys()) + ["Abschließende Fragen", "Auswertung","Evaluation"]
