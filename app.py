@@ -1603,7 +1603,7 @@ elif current_tab == "Auswertung":
 
 #Evaluationsfragen
 if current_tab == "Evaluation":
-     st.markdown("""
+    st.markdown("""
         <style>
         .text-box {
             padding: 1.2rem;
@@ -1617,7 +1617,6 @@ if current_tab == "Evaluation":
         }
         </style>
     """, unsafe_allow_html=True)
-
     st.markdown("""
         <div class="text-box">
             <p>Vielen Dank, dass Sie sich die Zeit genommen haben, das Modell zur Systematisierung flexibler Arbeit in der Zerspanung zu bearbeiten.</p>
