@@ -1134,7 +1134,6 @@ def nav_buttons(position):
     with col3:
         if st.session_state.current_tab_index < len(tab_names) - 1:
             if st.button("Weiter →", key=f"next_{position}"):
-                speichere_daten(status="Zwischenstand")
                 st.session_state.current_tab_index += 1
                 #st.rerun()
 
