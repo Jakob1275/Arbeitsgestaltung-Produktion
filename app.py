@@ -978,6 +978,8 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
         return "Keine passende Clusterzuordnung möglich, bitte mehr Kriterien in relevanten Bereichen bewerten.", {}
 
     bestes_cluster = min(abweichungen, key=abweichungen.get)
+     # Cluster-Variablen-Werte für spätere Visualisierung speichern
+    st.session_state["cluster_variablen_werte"] = nutzer_cluster_variable_werte_filtered
     return bestes_cluster, abweichungen
 
 # Ende der Berechnungslogik
@@ -1463,6 +1465,38 @@ elif current_tab == "Auswertung":
             st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
           
 
+        cluster_vals = st.session_state.get("cluster_variablen_werte", {})
+
+        if cluster_vals:
+            st.subheader("Profil der Cluster-Variablen")
+
+            labels = list(cluster_vals.keys())
+            values = list(cluster_vals.values())
+
+            # Werte und Winkel zyklisch schließen
+            angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
+            values_cycle = values + values[:1]
+            angles_cycle = angles + angles[:1]
+
+            fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+            ax.set_theta_offset(np.pi / 2)
+            ax.set_theta_direction(-1)
+
+            ax.plot(angles_cycle, values_cycle)
+            ax.fill(angles_cycle, values_cycle, alpha=0.25)
+
+            ax.set_xticks(angles)
+            ax.set_xticklabels(labels, fontsize=7)
+        
+            ax.set_yticks([1, 2, 3, 4])
+            ax.set_ylim(0, 4)
+
+            st.pyplot(fig)
+        else:
+            st.info("Noch keine Cluster-Variablen für ein Radar-Diagramm vorhanden.")
+
+
+        
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
