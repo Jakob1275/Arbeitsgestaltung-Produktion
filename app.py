@@ -1517,7 +1517,6 @@ elif current_tab == "Auswertung":
 
         if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
             st.warning(cluster_result)
-            # An dieser Stelle keinen weiteren Kram rendern, da das Profil noch nicht valide ist
             return
 
         # 3. Zwei Diagramme nebeneinander
