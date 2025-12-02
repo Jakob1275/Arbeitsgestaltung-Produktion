@@ -1550,23 +1550,23 @@ elif current_tab == "Auswertung":
         tab_labels = [f"✓ {cluster_result}" if c == cluster_result else c for c in alle_cluster]
         tabs = st.tabs(tab_labels)
             
-            # Für jedes Cluster einen Tab-Inhalt erstellen
-            for idx, cluster_name in enumerate(alle_cluster):
-                with tabs[idx]:
-                    # Hinweis, wenn es das zugeordnete Cluster ist
-                    if cluster_name == cluster_result:
-                        st.info("📌 **Dies ist Ihr zugeordnetes Cluster**")
+        # Für jedes Cluster einen Tab-Inhalt erstellen
+        for idx, cluster_name in enumerate(alle_cluster):
+            with tabs[idx]:
+                # Hinweis, wenn es das zugeordnete Cluster ist
+                 if cluster_name == cluster_result:
+                    st.info("📌 **Dies ist Ihr zugeordnetes Cluster**")
                     
-                    # Clusterbeschreibung
-                    st.markdown("### Clusterbeschreibung")
-                    st.info(cluster_beschreibungen.get(cluster_name, "Keine Beschreibung verfügbar."))
+                 # Clusterbeschreibung
+                st.markdown("### Clusterbeschreibung")
+                st.info(cluster_beschreibungen.get(cluster_name, "Keine Beschreibung verfügbar."))
                     
-                    # Bild für das Cluster
-                    bild_pfad = cluster_bilder.get(cluster_name)
-                    if bild_pfad:
-                        st.image(bild_pfad, caption=cluster_name, width=400)
+                # Bild für das Cluster
+                bild_pfad = cluster_bilder.get(cluster_name)
+                if bild_pfad:
+                    st.image(bild_pfad, caption=cluster_name, width=400)
                     
-                    # Handlungsempfehlungen
+                   # Handlungsempfehlungen
                     st.markdown("### Handlungsempfehlungen")
                     cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
                     
