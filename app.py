@@ -1378,6 +1378,67 @@ elif current_tab == "Abschließende Fragen":
     
 # Inhalt Auswertungs-Tab
 
+def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Profil"):
+    """
+    Zeigt die berechneten Cluster-Variablen des Nutzers als Radar-Chart in Streamlit an.
+    cluster_values: Dict[str, float] – z. B. aus berechne_clusterzuordnung
+    """
+
+    if not cluster_values:
+        st.warning("Keine Clusterwerte vorhanden – bitte erst genügend Kriterien bewerten.")
+        return
+
+# Feste Reihenfolge der Variablen (damit Diagramm immer gleich aussieht)
+    labels_ordered = [
+    "Anzahl CNC-Werkzeugmaschinen",
+    "Automatisierungsgrad",
+    "Losgröße",
+    "Durchlaufzeit",
+    "Laufzeit",
+    "Digitalisierungsgrad",
+    "Aufwand Zeit",
+    "Aufwand Mobil",
+    "Prozessinstabilität",
+    "Akzeptanz",
+    "Flexibilitätsbereitschaft"
+]
+
+# Nur Labels verwenden, die auch wirklich in cluster_values enthalten sind
+labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
+if not labels:
+    st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
+    return
+
+values = [cluster_values[lbl] for lbl in labels]
+
+# Kreis schließen
+angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
+angles_cycle = angles + angles[:1]
+values_cycle = values + values[:1]
+
+# Labels ggf. umbrechen
+wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
+
+# Plot
+fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+ax.set_theta_offset(np.pi / 2)
+ax.set_theta_direction(-1)
+
+ax.plot(angles_cycle, values_cycle, linewidth=2)
+ax.fill(angles_cycle, values_cycle, alpha=0.25)
+
+ax.set_xticks(angles)
+ax.set_xticklabels(wrapped_labels, fontsize=8)
+
+ax.set_yticks([1, 2, 3, 4, 5])
+ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7)
+ax.set_ylim(0, 5)
+
+ax.grid(True, linestyle="dotted")
+ax.set_title(title, fontsize=12, pad=20)
+    
+st.pyplot(fig)
+
 elif current_tab == "Auswertung":
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
 
@@ -1455,6 +1516,13 @@ elif current_tab == "Auswertung":
             # Für die Streamlit-Anzeige
             st.image(buf, width=700)
 
+            # nach Erzeugung des ersten Radar-Figs / buf
+            col1, col2 = st.columns(2)
+            with col1:
+                st.image(buf, use_column_width=True)
+            with col2:
+                plot_cluster_radar(cluster_values, title="Cluster-Variablen-Profil")
+        
             # Für den HTML-Export: Base64 umwandeln
             buf.seek(0)
             image_base64 = base64.b64encode(buf.read()).decode("utf-8")
@@ -1464,10 +1532,6 @@ elif current_tab == "Auswertung":
             st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
           
 
-        
-
-
-        
         # Cluster-Zuordnung
         cluster_result, abweichungen_detail, cluster_values = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
@@ -1480,68 +1544,9 @@ elif current_tab == "Auswertung":
         else:
             st.subheader("Automatische Clusterzuordnung")
             st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
-
+            plot_cluster_radar(cluster_values, title="Cluster-Variablen-Profil")
           
-            def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Profil"):
-                """
-                Zeigt die berechneten Cluster-Variablen des Nutzers als Radar-Chart in Streamlit an.
-                cluster_values: Dict[str, float] – z. B. aus berechne_clusterzuordnung
-                """
-
-                if not cluster_values:
-                    st.warning("Keine Clusterwerte vorhanden – bitte erst genügend Kriterien bewerten.")
-                    return
-
-                # Feste Reihenfolge der Variablen (damit Diagramm immer gleich aussieht)
-                labels_ordered = [
-                    "Anzahl CNC-Werkzeugmaschinen",
-                    "Automatisierungsgrad",
-                    "Losgröße",
-                    "Durchlaufzeit",
-                    "Laufzeit",
-                    "Digitalisierungsgrad",
-                    "Aufwand Zeit",
-                    "Aufwand Mobil",
-                    "Prozessinstabilität",
-                    "Akzeptanz",
-                    "Flexibilitätsbereitschaft"
-                ]
-
-                # Nur Labels verwenden, die auch wirklich in cluster_values enthalten sind
-                labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
-                if not labels:
-                    st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
-                    return
-
-                values = [cluster_values[lbl] for lbl in labels]
-
-                # Kreis schließen
-                angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
-                angles_cycle = angles + angles[:1]
-                values_cycle = values + values[:1]
-
-                # Labels ggf. umbrechen
-                wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
-
-                # Plot
-                fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
-                ax.set_theta_offset(np.pi / 2)
-                ax.set_theta_direction(-1)
-
-                ax.plot(angles_cycle, values_cycle, linewidth=2)
-                ax.fill(angles_cycle, values_cycle, alpha=0.25)
-
-                ax.set_xticks(angles)
-                ax.set_xticklabels(wrapped_labels, fontsize=8)
-
-                ax.set_yticks([1, 2, 3, 4, 5])
-                ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7)
-                ax.set_ylim(0, 5)
-
-                ax.grid(True, linestyle="dotted")
-                ax.set_title(title, fontsize=12, pad=20)
-    
-                st.pyplot(fig)
+            
           
             # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
             alle_cluster = list(cluster_beschreibungen.keys())
