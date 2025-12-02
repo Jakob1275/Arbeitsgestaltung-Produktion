@@ -1011,40 +1011,40 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
 ]
 
 # Nur Labels verwenden, die auch wirklich in cluster_values enthalten sind
-labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
-if not labels:
-    st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
-return
+    labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
+    if not labels:
+        st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
+        return
 
-values = [cluster_values[lbl] for lbl in labels]
+    values = [cluster_values[lbl] for lbl in labels]
 
-# Kreis schließen
-angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
-angles_cycle = angles + angles[:1]
-values_cycle = values + values[:1]
+    # Kreis schließen
+    angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
+    angles_cycle = angles + angles[:1]
+    values_cycle = values + values[:1]
 
-# Labels ggf. umbrechen
-wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
+    # Labels ggf. umbrechen
+    wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
 
-# Plot
-fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
-ax.set_theta_offset(np.pi / 2)
-ax.set_theta_direction(-1)
+    # Plot
+    fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+    ax.set_theta_offset(np.pi / 2)
+    ax.set_theta_direction(-1)
 
-ax.plot(angles_cycle, values_cycle, linewidth=2)
-ax.fill(angles_cycle, values_cycle, alpha=0.25)
+    ax.plot(angles_cycle, values_cycle, linewidth=2)
+    ax.fill(angles_cycle, values_cycle, alpha=0.25)
 
-ax.set_xticks(angles)
-ax.set_xticklabels(wrapped_labels, fontsize=8)
+    ax.set_xticks(angles)
+    ax.set_xticklabels(wrapped_labels, fontsize=8)
 
-ax.set_yticks([1, 2, 3, 4, 5])
-ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7)
-ax.set_ylim(0, 5)
+    ax.set_yticks([1, 2, 3, 4, 5])
+    ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7)
+    ax.set_ylim(0, 5)
 
-ax.grid(True, linestyle="dotted")
-ax.set_title(title, fontsize=12, pad=20)
-    
-st.pyplot(fig)
+    ax.grid(True, linestyle="dotted")
+    ax.set_title(title, fontsize=12, pad=20)
+        
+    st.pyplot(fig)
 
 
 
