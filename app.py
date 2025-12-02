@@ -983,6 +983,71 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 
 # Ende der Berechnungslogik
 
+# Inhalt Auswertungs-Tab
+
+def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Profil"):
+    """
+    Zeigt die berechneten Cluster-Variablen des Nutzers als Radar-Chart in Streamlit an.
+    cluster_values: Dict[str, float] – z. B. aus berechne_clusterzuordnung
+    """
+
+    if not cluster_values:
+        st.warning("Keine Clusterwerte vorhanden – bitte erst genügend Kriterien bewerten.")
+        return
+
+# Feste Reihenfolge der Variablen (damit Diagramm immer gleich aussieht)
+    labels_ordered = [
+    "Anzahl CNC-Werkzeugmaschinen",
+    "Automatisierungsgrad",
+    "Losgröße",
+    "Durchlaufzeit",
+    "Laufzeit",
+    "Digitalisierungsgrad",
+    "Aufwand Zeit",
+    "Aufwand Mobil",
+    "Prozessinstabilität",
+    "Akzeptanz",
+    "Flexibilitätsbereitschaft"
+]
+
+# Nur Labels verwenden, die auch wirklich in cluster_values enthalten sind
+labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
+if not labels:
+    st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
+    return
+
+values = [cluster_values[lbl] for lbl in labels]
+
+# Kreis schließen
+angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
+angles_cycle = angles + angles[:1]
+values_cycle = values + values[:1]
+
+# Labels ggf. umbrechen
+wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
+
+# Plot
+fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+ax.set_theta_offset(np.pi / 2)
+ax.set_theta_direction(-1)
+
+ax.plot(angles_cycle, values_cycle, linewidth=2)
+ax.fill(angles_cycle, values_cycle, alpha=0.25)
+
+ax.set_xticks(angles)
+ax.set_xticklabels(wrapped_labels, fontsize=8)
+
+ax.set_yticks([1, 2, 3, 4, 5])
+ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7)
+ax.set_ylim(0, 5)
+
+ax.grid(True, linestyle="dotted")
+ax.set_title(title, fontsize=12, pad=20)
+    
+st.pyplot(fig)
+
+
+
 # Start des Streamlit UI Codes
 
 # Initialisierung des aktuellen Tabs
@@ -1376,68 +1441,7 @@ elif current_tab == "Abschließende Fragen":
 
     st.info("Bitte springen Sie zunächst nach oben, nachdem Sie WEITER gedrückt haben.")
     
-# Inhalt Auswertungs-Tab
 
-def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Profil"):
-    """
-    Zeigt die berechneten Cluster-Variablen des Nutzers als Radar-Chart in Streamlit an.
-    cluster_values: Dict[str, float] – z. B. aus berechne_clusterzuordnung
-    """
-
-    if not cluster_values:
-        st.warning("Keine Clusterwerte vorhanden – bitte erst genügend Kriterien bewerten.")
-        return
-
-# Feste Reihenfolge der Variablen (damit Diagramm immer gleich aussieht)
-    labels_ordered = [
-    "Anzahl CNC-Werkzeugmaschinen",
-    "Automatisierungsgrad",
-    "Losgröße",
-    "Durchlaufzeit",
-    "Laufzeit",
-    "Digitalisierungsgrad",
-    "Aufwand Zeit",
-    "Aufwand Mobil",
-    "Prozessinstabilität",
-    "Akzeptanz",
-    "Flexibilitätsbereitschaft"
-]
-
-# Nur Labels verwenden, die auch wirklich in cluster_values enthalten sind
-labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
-if not labels:
-    st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
-    return
-
-values = [cluster_values[lbl] for lbl in labels]
-
-# Kreis schließen
-angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
-angles_cycle = angles + angles[:1]
-values_cycle = values + values[:1]
-
-# Labels ggf. umbrechen
-wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
-
-# Plot
-fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
-ax.set_theta_offset(np.pi / 2)
-ax.set_theta_direction(-1)
-
-ax.plot(angles_cycle, values_cycle, linewidth=2)
-ax.fill(angles_cycle, values_cycle, alpha=0.25)
-
-ax.set_xticks(angles)
-ax.set_xticklabels(wrapped_labels, fontsize=8)
-
-ax.set_yticks([1, 2, 3, 4, 5])
-ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7)
-ax.set_ylim(0, 5)
-
-ax.grid(True, linestyle="dotted")
-ax.set_title(title, fontsize=12, pad=20)
-    
-st.pyplot(fig)
 
 elif current_tab == "Auswertung":
     if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
