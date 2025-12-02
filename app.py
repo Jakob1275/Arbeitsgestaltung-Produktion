@@ -1537,33 +1537,18 @@ elif current_tab == "Auswertung":
             plot_cluster_radar(cluster_values, title="")
 
 
-            # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
-            alle_cluster = list(cluster_beschreibungen.keys())
+        # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
+        alle_cluster = list(cluster_beschreibungen.keys())
             
-            # Das zugeordnete Cluster an erste Stelle setzen
-            if cluster_result in alle_cluster:
-                alle_cluster.remove(cluster_result)
-                alle_cluster.insert(0, cluster_result)
+        # Das zugeordnete Cluster an erste Stelle setzen
+        if cluster_result in alle_cluster:
+            alle_cluster.remove(cluster_result)
+            alle_cluster.insert(0, cluster_result)
 
-            st.markdown("""
-            <style>
-            /* Tab-Leiste zentrieren */
-            .stTabs [data-baseweb="tab-list"] {
-                justify-content: center !important;
-            }
-
-            /* Optional: Tabs etwas größer / Abstand */
-            .stTabs [data-baseweb="tab"] {
-                padding-left: 20px;
-                padding-right: 20px;
-                font-size: 15px;
-            }
-            </style>
-            """, unsafe_allow_html=True)
             
-            # Tabs erstellen (erstes Tab ist das zugeordnete Cluster)
-            tab_labels = [f"✓ {cluster_result}" if c == cluster_result else c for c in alle_cluster]
-            tabs = st.tabs(tab_labels)
+        # Tabs erstellen (erstes Tab ist das zugeordnete Cluster)
+        tab_labels = [f"✓ {cluster_result}" if c == cluster_result else c for c in alle_cluster]
+        tabs = st.tabs(tab_labels)
             
             # Für jedes Cluster einen Tab-Inhalt erstellen
             for idx, cluster_name in enumerate(alle_cluster):
