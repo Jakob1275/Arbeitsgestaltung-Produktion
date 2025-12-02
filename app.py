@@ -1444,99 +1444,71 @@ elif current_tab == "Abschließende Fragen":
 
 
 elif current_tab == "Auswertung":
-    if st.session_state.get('ergebnisse') and st.session_state.ergebnisse:
+    if st.session_state.get("ergebnisse") and st.session_state.ergebnisse:
 
-        # Labels & Werte sammeln
-        labels, values = [], []
-        for dim_name, handlungsfelder_in_dim in mtok_structure.items():
-            for hf_name in handlungsfelder_in_dim:
-                val = st.session_state.ergebnisse.get(hf_name)
-                if val is not None:
-                    labels.append(f"{hf_name} ({dim_name})")
-                    values.append(val)
+        # 1. MTOK-Radar vorbereiten
+        labels_ordered = [
+            "Persönliche Voraussetzungen (Mensch)",
+            "Qualifikation und Kompetenzentwicklung (Mensch)",
+            "Automatisierung und Arbeitsplatzgestaltung (Technik)",
+            "Digitale Vernetzung und IT-Infrastruktur (Technik)",
+            "Kommunikation, Kooperation und Zusammenarbeit (Organisation)",
+            "Organisatorische Umwelt (Organisation)",
+            "Produktionsorganisation (Organisation)",
+            "Unternehmenskultur (Kultur)",
+            "Führung und Teamzusammenhalt (Kultur)",
+        ]
 
-        # Radar-Chart erzeugen, falls Werte vorhanden
-        if values and all(isinstance(v, (int, float)) for v in values):
-            st.subheader("Unternehmens-Profil")
-            # Reihenfolge für MTOK-Struktur (Uhrzeigersinn)
-            labels_ordered = [
-                "Persönliches Voraussetzungen (Mensch)",
-                "Qualifikation und Kompetenzentwicklung (Mensch)",
-                "Automatisierung und Arbeitsplatzgestaltung (Technik)",
-                "Digitale Vernetzung und IT-Infrastruktur (Technik)",
-                "Kommunikation, Kooperation und Zusammenarbeit (Organisation)",
-                "Organisatorische Umwelt (Organisation)",
-                "Produktionsorganisation (Organisation)",
-                "Unternehmenskultur (Kultur)",
-                "Führung und Teamzusammenhalt (Kultur)"
-            ]
+        values_ordered = [
+            st.session_state.ergebnisse.get("Persönliche Voraussetzungen", 1),
+            st.session_state.ergebnisse.get("Qualifikation und Kompetenzentwicklung", 1),
+            st.session_state.ergebnisse.get("Automatisierung und Arbeitsplatzgestaltung", 1),
+            st.session_state.ergebnisse.get("Digitale Vernetzung und IT-Infrastruktur", 1),
+            st.session_state.ergebnisse.get("Kommunikation, Kooperation und Zusammenarbeit", 1),
+            st.session_state.ergebnisse.get("Organisatorische Umwelt", 1),
+            st.session_state.ergebnisse.get("Produktionsorganisation", 1),
+            st.session_state.ergebnisse.get("Unternehmenskultur", 1),
+            st.session_state.ergebnisse.get("Führung und Teamzusammenhalt", 1),
+        ]
 
-            # Werte entsprechend sortieren (achte auf die korrekte Reihenfolge)
-            values_ordered = [
-                st.session_state.ergebnisse.get("Persönliche Voraussetzungen", 1),
-                st.session_state.ergebnisse.get("Qualifikation und Kompetenzentwicklung", 1),
-                st.session_state.ergebnisse.get("Automatisierung und Arbeitsplatzgestaltung", 1),
-                st.session_state.ergebnisse.get("Digitale Vernetzung und IT-Infrastruktur", 1),
-                st.session_state.ergebnisse.get("Kommunikation, Kooperation und Zusammenarbeit", 1),
-                st.session_state.ergebnisse.get("Organisatorische Umwelt", 1),
-                st.session_state.ergebnisse.get("Produktionsorganisation", 1),
-                st.session_state.ergebnisse.get("Unternehmenskultur", 1),
-                st.session_state.ergebnisse.get("Führung und Teamzusammenhalt", 1)
-            ]
-    
-            # Winkel und Werte zyklisch schließen
+        fig_mtok = None
+        radar_html = ""  # Default, falls etwas schiefgeht
+
+        if values_ordered and all(isinstance(v, (int, float)) for v in values_ordered):
             angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
             values_cycle = values_ordered + values_ordered[:1]
             angles_cycle = angles + angles[:1]
 
-            # Labels umbrechen für bessere Lesbarkeit
-            wrapped_labels = [label.replace(" und ", "\nund ").replace("(", "\n(") for label in labels_ordered]
-        
-            # Plot erzeugen
-            fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
-            ax.set_theta_offset(np.pi / 2)      # Start bei 12 Uhr
-            ax.set_theta_direction(-1)           # Uhrzeigersinn
+            wrapped_labels = [
+                lbl.replace(" und ", "\nund ").replace("(", "\n(")
+                for lbl in labels_ordered
+            ]
 
-            ax.plot(angles_cycle, values_cycle, color='royalblue', linewidth=2)
-            ax.fill(angles_cycle, values_cycle, color='cornflowerblue', alpha=0.25)
+            fig_mtok, ax_mtok = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
+            ax_mtok.set_theta_offset(np.pi / 2)
+            ax_mtok.set_theta_direction(-1)
 
-            ax.set_xticks(angles)
-            ax.set_xticklabels(wrapped_labels, fontsize=7)
+            ax_mtok.plot(angles_cycle, values_cycle, color="royalblue", linewidth=2)
+            ax_mtok.fill(angles_cycle, values_cycle, color="cornflowerblue", alpha=0.25)
 
-            ax.set_yticks([1, 2, 3, 4])
-            ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7, color='gray')
-            ax.set_ylim(0, 4)
+            ax_mtok.set_xticks(angles)
+            ax_mtok.set_xticklabels(wrapped_labels, fontsize=7)
 
-            ax.yaxis.grid(True, linestyle='dotted', color='lightgray')
-            ax.xaxis.grid(True, linestyle='solid', color='lightgray')
-            #ax.set_title("Cluster-Profil", fontsize=14, pad=20)
+            ax_mtok.set_yticks([1, 2, 3, 4])
+            ax_mtok.set_yticklabels(["1", "2", "3", "4"], fontsize=7, color="gray")
+            ax_mtok.set_ylim(0, 4)
 
-            # Ausgabe in Streamlit
-            # Radar-Diagramm als PNG speichern und gleichzeitig Base64-kodieren
+            ax_mtok.yaxis.grid(True, linestyle="dotted", color="lightgray")
+            ax_mtok.xaxis.grid(True, linestyle="solid", color="lightgray")
+
+            # Bild für HTML-Export vorbereiten
             buf = BytesIO()
-            fig.savefig(buf, format="png", bbox_inches="tight", dpi=300)
-            buf.seek(0)
-
-            # Für die Streamlit-Anzeige
-            st.image(buf, width=700)
-
-            # nach Erzeugung des ersten Radar-Figs / buf
-            col1, col2 = st.columns(2)
-            with col1:
-                st.image(buf, use_column_width=True)
-            with col2:
-                plot_cluster_radar(cluster_values, title="Cluster-Variablen-Profil")
-        
-            # Für den HTML-Export: Base64 umwandeln
+            fig_mtok.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             image_base64 = base64.b64encode(buf.read()).decode("utf-8")
             radar_html = f'<img src="data:image/png;base64,{image_base64}" alt="Radar-Diagramm" width="600"/>'
-    
-        else:
-            st.warning("❗ Keine gültigen Werte für Radar-Diagramm vorhanden.")
-          
 
-        # Cluster-Zuordnung
+        # 2. Cluster-Zuordnung
         cluster_result, abweichungen_detail, cluster_values = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
         st.session_state["cluster_result"] = cluster_result
@@ -1545,13 +1517,27 @@ elif current_tab == "Auswertung":
 
         if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
             st.warning(cluster_result)
-        else:
-            st.subheader("Automatische Clusterzuordnung")
-            st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
+            # An dieser Stelle keinen weiteren Kram rendern, da das Profil noch nicht valide ist
+            return
+
+        # 3. Zwei Diagramme nebeneinander
+        st.subheader("Automatische Clusterzuordnung")
+        st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
+
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.markdown("#### Unternehmens-Profil (MTOK)")
+            if fig_mtok is not None:
+                st.pyplot(fig_mtok)
+            else:
+                st.warning("Keine gültigen MTOK-Werte für das Radar-Diagramm.")
+
+        with col2:
+            st.markdown("#### Cluster-Variablen-Profil")
             plot_cluster_radar(cluster_values, title="Cluster-Variablen-Profil")
-          
-            
-          
+
+
             # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
             alle_cluster = list(cluster_beschreibungen.keys())
             
