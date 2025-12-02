@@ -1014,7 +1014,7 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
 labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
 if not labels:
     st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
-    return
+return
 
 values = [cluster_values[lbl] for lbl in labels]
 
