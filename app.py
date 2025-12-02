@@ -1557,18 +1557,18 @@ elif current_tab == "Auswertung":
                  if cluster_name == cluster_result:
                     st.info("📌 **Dies ist Ihr zugeordnetes Cluster**")
                     
-                 # Clusterbeschreibung
-                st.markdown("### Clusterbeschreibung")
-                st.info(cluster_beschreibungen.get(cluster_name, "Keine Beschreibung verfügbar."))
+                    # Clusterbeschreibung
+                    st.markdown("### Clusterbeschreibung")
+                    st.info(cluster_beschreibungen.get(cluster_name, "Keine Beschreibung verfügbar."))
                     
-                # Bild für das Cluster
-                bild_pfad = cluster_bilder.get(cluster_name)
-                if bild_pfad:
-                    st.image(bild_pfad, caption=cluster_name, width=400)
+                    # Bild für das Cluster
+                    bild_pfad = cluster_bilder.get(cluster_name)
+                    if bild_pfad:
+                        st.image(bild_pfad, caption=cluster_name, width=400)
                     
-                   # Handlungsempfehlungen
-                    st.markdown("### Handlungsempfehlungen")
-                    cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
+                       # Handlungsempfehlungen
+                        st.markdown("### Handlungsempfehlungen")
+                        cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
                     
                     if not cluster_empfehlungen:
                         st.warning("Keine Handlungsempfehlungen für dieses Cluster verfügbar.")
