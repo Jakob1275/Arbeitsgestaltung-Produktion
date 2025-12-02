@@ -1526,7 +1526,7 @@ elif current_tab == "Auswertung":
         col1, col2 = st.columns(2)
 
         with col1:
-            st.markdown("#### Unternehmens-Profil (MTOK)")
+            st.markdown("#### Handlungsfelder-Profil ")
             if fig_mtok is not None:
                 st.pyplot(fig_mtok)
             else:
@@ -1534,7 +1534,7 @@ elif current_tab == "Auswertung":
 
         with col2:
             st.markdown("#### Cluster-Variablen-Profil")
-            plot_cluster_radar(cluster_values, title="Cluster-Variablen-Profil")
+            plot_cluster_radar(cluster_values, title="")
 
 
             # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
@@ -1544,6 +1544,22 @@ elif current_tab == "Auswertung":
             if cluster_result in alle_cluster:
                 alle_cluster.remove(cluster_result)
                 alle_cluster.insert(0, cluster_result)
+
+            st.markdown("""
+            <style>
+            /* Tab-Leiste zentrieren */
+            .stTabs [data-baseweb="tab-list"] {
+                justify-content: center !important;
+            }
+
+            /* Optional: Tabs etwas größer / Abstand */
+            .stTabs [data-baseweb="tab"] {
+                padding-left: 20px;
+                padding-right: 20px;
+                font-size: 15px;
+            }
+            </style>
+            """, unsafe_allow_html=True)
             
             # Tabs erstellen (erstes Tab ist das zugeordnete Cluster)
             tab_labels = [f"✓ {cluster_result}" if c == cluster_result else c for c in alle_cluster]
