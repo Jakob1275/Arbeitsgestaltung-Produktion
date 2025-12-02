@@ -1517,7 +1517,7 @@ elif current_tab == "Auswertung":
 
         if isinstance(cluster_result, str) and "Bitte bewerten Sie" in cluster_result:
             st.warning(cluster_result)
-                return
+            st.stop()
 
         # 3. Zwei Diagramme nebeneinander
         st.subheader("Automatische Clusterzuordnung")
