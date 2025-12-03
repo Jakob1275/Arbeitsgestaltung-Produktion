@@ -1038,7 +1038,7 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
     ax.set_xticklabels(wrapped_labels, fontsize=8)
 
     ax.set_yticks([1, 2, 3, 4])
-    ax.set_yticklabels(['1', '2', '3', '4'], fontsize=8)
+    ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7)
     ax.set_ylim(0, 5)
 
     ax.grid(True, linestyle="dotted")
