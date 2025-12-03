@@ -1494,10 +1494,10 @@ elif current_tab == "Auswertung":
             ax_mtok.fill(angles_cycle, values_cycle, alpha=0.25)
 
             ax_mtok.set_xticks(angles)
-            ax_mtok.set_xticklabels(wrapped_labels, fontsize=8)
+            ax_mtok.set_xticklabels(wrapped_labels, fontsize=10)
 
             ax_mtok.set_yticks([1, 2, 3, 4])
-            ax_mtok.set_yticklabels(["1", "2", "3", "4"], fontsize=8)
+            ax_mtok.set_yticklabels(["1", "2", "3", "4"], fontsize=10)
             ax_mtok.set_ylim(0, 5)
 
             ax_mtok.grid(True, linestyle="dotted")
