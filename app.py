@@ -1486,7 +1486,7 @@ elif current_tab == "Auswertung":
                 for lbl in labels_ordered
             ]
 
-            fig_mtok, ax_mtok = plt.subplots(figsize=(7.5, 7.5), subplot_kw=dict(polar=True))
+            fig_mtok, ax_mtok = plt.subplots(figsize=(8.5, 8.5), subplot_kw=dict(polar=True))
             ax_mtok.set_theta_offset(np.pi / 2)
             ax_mtok.set_theta_direction(-1)
 
