@@ -1567,7 +1567,7 @@ elif current_tab == "Auswertung":
                     
                     # Handlungsempfehlungen
                     st.markdown("### Handlungsempfehlungen")
-                    cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
+                    cluster_empfehlungen = handlungsempfehlungen.get(cluster_name, {})
                     
                     if not cluster_empfehlungen:
                         st.warning("Keine Handlungsempfehlungen für dieses Cluster verfügbar.")
@@ -1582,7 +1582,7 @@ elif current_tab == "Auswertung":
                             <span style='color:#444; font-size: 94%; font-weight: normal;'>{eintrag['bemerkung']}</span>
                         </div>
                         """, unsafe_allow_html=True)
-                                st.markdown("---")
+                                    st.markdown("---")
 
         cluster_beschreibung_html = f"""
         <h2>Clusterbeschreibung</h2>
