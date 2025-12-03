@@ -1472,7 +1472,9 @@ elif current_tab == "Auswertung":
         ]
 
         fig_mtok = None
-        radar_html = ""  
+        fig_cluster = None
+        radar_html = ""
+        radar_html_cluster = ""
 
         if values_ordered and all(isinstance(v, (int, float)) for v in values_ordered):
             angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
