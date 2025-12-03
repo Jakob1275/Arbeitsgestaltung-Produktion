@@ -1510,14 +1510,7 @@ elif current_tab == "Auswertung":
             image_base64 = base64.b64encode(buf.read()).decode("utf-8")
             radar_html = f'<img src="data:image/png;base64,{image_base64}" alt="Radar-Diagramm" width="600"/>'
 
-        radar_html_cluster = ""
-        if fig_cluster is not None:
-            buf_cluster = BytesIO()
-            fig_cluster.savefig(buf_cluster, format="png", bbox_inches="tight", dpi=300)
-            buf_cluster.seek(0)
-            image_base64_cluster = base64.b64encode(buf_cluster.read()).decode("utf-8")
-            radar_html_cluster = f'<img src="data:image/png;base64,{image_base64_cluster}" alt="Cluster-Variablen-Profil" width="600"/>'
-
+        
         # 2. Cluster-Zuordnung
         cluster_result, abweichungen_detail, cluster_values = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
@@ -1546,7 +1539,14 @@ elif current_tab == "Auswertung":
             st.markdown("#### Cluster-Variablen-Profil")
             fig_cluster = plot_cluster_radar(cluster_values, title="")
 
+            if fig_cluster is not None:
+                buf_cluster = BytesIO()
+                fig_cluster.savefig(buf_cluster, format="png", bbox_inches="tight", dpi=300)
+                buf_cluster.seek(0)
+                image_base64_cluster = base64.b64encode(buf_cluster.read()).decode("utf-8")
+                radar_html_cluster = f'<img src="data:image/png;base64,{image_base64_cluster}" alt="Cluster-Variablen-Profil" width="600"/>'
 
+        
         # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
         alle_cluster = list(cluster_beschreibungen.keys())
             
