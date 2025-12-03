@@ -1663,7 +1663,7 @@ elif current_tab == "Auswertung":
             <div class="radar-container">
                 <div>
                     <h3 style="text-align: center;">Handlungsfelder-Profil</h3>
-                    {radar_html_mtok}
+                    {radar_html}
                 </div>
                 <div>
                     <h3 style="text-align: center;">Cluster-Variablen-Profil</h3>
