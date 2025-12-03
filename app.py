@@ -1556,33 +1556,33 @@ elif current_tab == "Auswertung":
                 if cluster_name == cluster_result:
                     st.info("📌 **Dies ist Ihr zugeordnetes Cluster**")
                     
-                    # Clusterbeschreibung
-                    st.markdown("### Clusterbeschreibung")
-                    st.info(cluster_beschreibungen.get(cluster_name, "Keine Beschreibung verfügbar."))
+                # Clusterbeschreibung
+                st.markdown("### Clusterbeschreibung")
+                st.info(cluster_beschreibungen.get(cluster_name, "Keine Beschreibung verfügbar."))
                     
-                    # Bild für das Cluster
-                    bild_pfad = cluster_bilder.get(cluster_name)
-                    if bild_pfad:
-                        st.image(bild_pfad, caption=cluster_name, width=400)
+                # Bild für das Cluster
+                bild_pfad = cluster_bilder.get(cluster_name)
+                if bild_pfad:
+                    st.image(bild_pfad, caption=cluster_name, width=400)
                     
-                    # Handlungsempfehlungen
-                    st.markdown("### Handlungsempfehlungen")
-                    cluster_empfehlungen = handlungsempfehlungen.get(cluster_name, {})
+                # Handlungsempfehlungen
+                st.markdown("### Handlungsempfehlungen")
+                cluster_empfehlungen = handlungsempfehlungen.get(cluster_name, {})
                     
-                    if not cluster_empfehlungen:
-                        st.warning("Keine Handlungsempfehlungen für dieses Cluster verfügbar.")
-                    else:
-                        for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
-                            if dimension in cluster_empfehlungen:
-                                st.markdown(f"#### {dimension}")
-                                for eintrag in cluster_empfehlungen[dimension]:
-                                    st.markdown(f"""
-                        <div style='margin-bottom: 22px;'>
-                            <strong>➤ {eintrag['text']}</strong><br>
-                            <span style='color:#444; font-size: 94%; font-weight: normal;'>{eintrag['bemerkung']}</span>
-                        </div>
-                        """, unsafe_allow_html=True)
-                                    st.markdown("---")
+                if not cluster_empfehlungen:
+                    st.warning("Keine Handlungsempfehlungen für dieses Cluster verfügbar.")
+                else:
+                    for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
+                        if dimension in cluster_empfehlungen:
+                            st.markdown(f"#### {dimension}")
+                            for eintrag in cluster_empfehlungen[dimension]:
+                                st.markdown(f"""
+                    <div style='margin-bottom: 22px;'>
+                        <strong>➤ {eintrag['text']}</strong><br>
+                        <span style='color:#444; font-size: 94%; font-weight: normal;'>{eintrag['bemerkung']}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
+                            st.markdown("---")
 
         cluster_beschreibung_html = f"""
         <h2>Clusterbeschreibung</h2>
