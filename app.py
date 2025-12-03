@@ -1472,7 +1472,7 @@ elif current_tab == "Auswertung":
         ]
 
         fig_mtok = None
-        radar_html = ""  # Default, falls etwas schiefgeht
+        radar_html = ""  
 
         if values_ordered and all(isinstance(v, (int, float)) for v in values_ordered):
             angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
@@ -1553,8 +1553,7 @@ elif current_tab == "Auswertung":
         # Für jedes Cluster einen Tab-Inhalt erstellen
         for idx, cluster_name in enumerate(alle_cluster):
             with tabs[idx]:
-                # Hinweis, wenn es das zugeordnete Cluster ist
-                 if cluster_name == cluster_result:
+                if cluster_name == cluster_result:
                     st.info("📌 **Dies ist Ihr zugeordnetes Cluster**")
                     
                     # Clusterbeschreibung
@@ -1585,12 +1584,12 @@ elif current_tab == "Auswertung":
                         """, unsafe_allow_html=True)
                                 st.markdown("---")
 
-            cluster_beschreibung_html = f"""
-            <h2>Clusterbeschreibung</h2>
-            <div class="box">
-                {cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar.")}
-            </div>
-            """
+        cluster_beschreibung_html = f"""
+        <h2>Clusterbeschreibung</h2>
+        <div class="box">
+            {cluster_beschreibungen.get(cluster_result, "Keine Beschreibung verfügbar.")}
+        </div>
+        """
 
             empfehlungen_html = ""
             for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
