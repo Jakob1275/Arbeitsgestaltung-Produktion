@@ -1700,11 +1700,8 @@ if current_tab == "Evaluation":
     st.markdown("""
         <div class="text-box">
             <p>Vielen Dank, dass Sie sich die Zeit genommen haben, das Modell zur Systematisierung flexibler Arbeit in der Zerspanung zu bearbeiten.</p>
-
             <p>Mit der Bearbeitung des Modells haben Sie mir bereits wertvolle Einblicke in die Flexibilitätsbedarfe Ihres Unternehmens gegeben.</p>
-
             <p>Nun bitte ich Sie um eine kurze Einschätzung zu <strong>Aufbau, Verständlichkeit und Praxisnutzen</strong> des Modells selbst. Ihre ehrliche und kritische Rückmeldung ist dabei das wichtigste Ziel: Nur so kann ich das Instrument optimieren und es zu einem wirkungsvollen Werkzeug für die gesamte Branche machen.</p>
-
             <p><strong>Ihre Antworten bleiben selbstverständlich anonym und werden ausschließlich für die wissenschaftliche Weiterentwicklung verwendet.</strong></p>
         </div>
     """, unsafe_allow_html=True)
