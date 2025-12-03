@@ -1508,6 +1508,14 @@ elif current_tab == "Auswertung":
             image_base64 = base64.b64encode(buf.read()).decode("utf-8")
             radar_html = f'<img src="data:image/png;base64,{image_base64}" alt="Radar-Diagramm" width="600"/>'
 
+        radar_html_cluster = ""
+        if fig_cluster is not None:
+            buf_cluster = BytesIO()
+            fig_cluster.savefig(buf_cluster, format="png", bbox_inches="tight", dpi=300)
+            buf_cluster.seek(0)
+            image_base64_cluster = base64.b64encode(buf_cluster.read()).decode("utf-8")
+            radar_html_cluster = f'<img src="data:image/png;base64,{image_base64_cluster}" alt="Cluster-Variablen-Profil" width="600"/>'
+
         # 2. Cluster-Zuordnung
         cluster_result, abweichungen_detail, cluster_values = berechne_clusterzuordnung(Kriterien)
         display_cluster_result = cluster_result
@@ -1534,7 +1542,7 @@ elif current_tab == "Auswertung":
 
         with col2:
             st.markdown("#### Cluster-Variablen-Profil")
-            plot_cluster_radar(cluster_values, title="")
+            fig_cluster = plot_cluster_radar(cluster_values, title="")
 
 
         # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
@@ -1649,8 +1657,17 @@ elif current_tab == "Auswertung":
             {cluster_beschreibung_html}
             <h2>Clusterspezifische Handlungsempfehlungen</h2>
             {empfehlungen_html}
-            <h2>Unternehmens-Profil</h2>
-            {radar_html}
+            <h2>Profile</h2>
+            <div class="radar-container">
+                <div>
+                    <h3 style="text-align: center;">Handlungsfelder-Profil</h3>
+                    {radar_html_mtok}
+                </div>
+                <div>
+                    <h3 style="text-align: center;">Cluster-Variablen-Profil</h3>
+                    {radar_html_cluster}
+                </div>
+            </div>
             {table_html}
         </body>
         </html>
