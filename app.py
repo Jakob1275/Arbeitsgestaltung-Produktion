@@ -1490,7 +1490,7 @@ elif current_tab == "Auswertung":
             ax_mtok.set_theta_offset(np.pi / 2)
             ax_mtok.set_theta_direction(-1)
 
-            ax_mtok.plot(angles_cycle, values_cycle, linewidth=2)
+            ax_mtok.plot(angles_cycle, values_cycle, linewidth=4)
             ax_mtok.fill(angles_cycle, values_cycle, alpha=0.25)
 
             ax_mtok.set_xticks(angles)
