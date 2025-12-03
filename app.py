@@ -1501,7 +1501,6 @@ elif current_tab == "Auswertung":
             ax_mtok.set_ylim(0, 5)
 
             ax_mtok.grid(True, linestyle="dotted")
-            ax.set_title(title, fontsize=12, pad=20)
         
             st.pyplot(fig)
 
