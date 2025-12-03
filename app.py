@@ -993,7 +993,7 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
 
     if not cluster_values:
         st.warning("Keine Clusterwerte vorhanden – bitte erst genügend Kriterien bewerten.")
-        return
+        return None 
 
 # Feste Reihenfolge der Variablen (damit Diagramm immer gleich aussieht)
     labels_ordered = [
@@ -1014,7 +1014,7 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
     labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
     if not labels:
         st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
-        return
+        return None 
 
     values = [cluster_values[lbl] for lbl in labels]
 
@@ -1046,7 +1046,7 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
         
     st.pyplot(fig)
 
-
+    return fig
 
 # Start des Streamlit UI Codes
 
