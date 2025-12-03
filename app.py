@@ -1567,7 +1567,7 @@ elif current_tab == "Auswertung":
                     
                     # Handlungsempfehlungen
                     st.markdown("### Handlungsempfehlungen")
-                    cluster_empfehlungen = handlungsempfehlungen.get(cluster_name, {})
+                    cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
                     
                     if not cluster_empfehlungen:
                         st.warning("Keine Handlungsempfehlungen für dieses Cluster verfügbar.")
