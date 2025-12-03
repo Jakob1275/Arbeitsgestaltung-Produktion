@@ -1565,9 +1565,9 @@ elif current_tab == "Auswertung":
                     if bild_pfad:
                         st.image(bild_pfad, caption=cluster_name, width=400)
                     
-                       # Handlungsempfehlungen
-                        st.markdown("### Handlungsempfehlungen")
-                        cluster_empfehlungen = handlungsempfehlungen.get(cluster_result, {})
+                    # Handlungsempfehlungen
+                    st.markdown("### Handlungsempfehlungen")
+                    cluster_empfehlungen = handlungsempfehlungen.get(cluster_name, {})
                     
                     if not cluster_empfehlungen:
                         st.warning("Keine Handlungsempfehlungen für dieses Cluster verfügbar.")
