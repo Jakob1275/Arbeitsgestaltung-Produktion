@@ -1037,8 +1037,8 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
     ax.set_xticks(angles)
     ax.set_xticklabels(wrapped_labels, fontsize=8)
 
-    ax.set_yticks([1, 2, 3, 4, 5])
-    ax.set_yticklabels(['1', '2', '3', '4', '5'], fontsize=7)
+    ax.set_yticks([1, 2, 3, 4])
+    ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7)
     ax.set_ylim(0, 5)
 
     ax.grid(True, linestyle="dotted")
@@ -1490,18 +1490,20 @@ elif current_tab == "Auswertung":
             ax_mtok.set_theta_offset(np.pi / 2)
             ax_mtok.set_theta_direction(-1)
 
-            ax_mtok.plot(angles_cycle, values_cycle, color="royalblue", linewidth=2)
-            ax_mtok.fill(angles_cycle, values_cycle, color="cornflowerblue", alpha=0.25)
+            ax_mtok.plot(angles_cycle, values_cycle, linewidth=2)
+            ax_mtok.fill(angles_cycle, values_cycle, alpha=0.25)
 
             ax_mtok.set_xticks(angles)
-            ax_mtok.set_xticklabels(wrapped_labels, fontsize=7)
+            ax_mtok.set_xticklabels(wrapped_labels, fontsize=8)
 
             ax_mtok.set_yticks([1, 2, 3, 4])
-            ax_mtok.set_yticklabels(["1", "2", "3", "4"], fontsize=7, color="gray")
-            ax_mtok.set_ylim(0, 4)
+            ax_mtok.set_yticklabels(["1", "2", "3", "4"], fontsize=8)
+            ax_mtok.set_ylim(0, 5)
 
-            ax_mtok.yaxis.grid(True, linestyle="dotted", color="lightgray")
-            ax_mtok.xaxis.grid(True, linestyle="solid", color="lightgray")
+            ax_mtok.grid(True, linestyle="dotted")
+            ax.set_title(title, fontsize=12, pad=20)
+        
+            st.pyplot(fig)
 
             # Bild für HTML-Export vorbereiten
             buf = BytesIO()
