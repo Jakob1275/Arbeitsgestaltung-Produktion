@@ -1042,7 +1042,7 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
     ax.set_ylim(0, 5)
 
     ax.grid(True, linestyle="dotted")
-    ax.set_title(title, fontsize=12, pad=20)
+    #ax.set_title(title, fontsize=12, pad=20)
         
     st.pyplot(fig)
 
