@@ -1591,77 +1591,77 @@ elif current_tab == "Auswertung":
         </div>
         """
 
-            empfehlungen_html = ""
-            for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
-                if dimension in cluster_empfehlungen:
-                    empfehlungs_block = "<ul>"
-                    for eintrag in cluster_empfehlungen[dimension]:
-                        empfehlungs_block += f"""
-                        <li>
-                            <strong>{eintrag['text']}</strong><br>
-                            <span style='font-size: 90%; color: #555;'>{eintrag['bemerkung']}</span>
-                        </li>
-                        """
-                    empfehlungs_block += "</ul>"
-                    empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
+        empfehlungen_html = ""
+        for dimension in ["Technik", "Organisation", "Kultur", "Mensch"]:
+            if dimension in cluster_empfehlungen:
+                empfehlungs_block = "<ul>"
+                for eintrag in cluster_empfehlungen[dimension]:
+                    empfehlungs_block += f"""
+                    <li>
+                        <strong>{eintrag['text']}</strong><br>
+                        <span style='font-size: 90%; color: #555;'>{eintrag['bemerkung']}</span>
+                    </li>
+                    """
+                empfehlungs_block += "</ul>"
+                empfehlungen_html += f"<h3>{dimension}</h3>{empfehlungs_block}"
         
-            # Tabelle erzeugen
-            table_rows = ""
-            for dim_name, handlungsfelder_in_dim in mtok_structure.items():
-                for hf_name in handlungsfelder_in_dim:
-                    val = st.session_state.ergebnisse.get(hf_name)
-                    if val is not None:
-                        table_rows += f"<tr><td>{hf_name}</td><td>{dim_name}</td><td style='text-align: center;'>{val:.1f}</td></tr>"
+        # Tabelle erzeugen
+        table_rows = ""
+        for dim_name, handlungsfelder_in_dim in mtok_structure.items():
+            for hf_name in handlungsfelder_in_dim:
+                val = st.session_state.ergebnisse.get(hf_name)
+                if val is not None:
+                    table_rows += f"<tr><td>{hf_name}</td><td>{dim_name}</td><td style='text-align: center;'>{val:.1f}</td></tr>"
 
-            table_html = f"""
-            <h2>Bewertung der Handlungsfelder</h2>
-            <table>
-                <thead><tr><th>Handlungsfeld</th><th>MTOK-Dimension</th><th>Mittelwert</th></tr></thead>
-                <tbody>{table_rows}</tbody>
-            </table>
-            """
+        table_html = f"""
+        <h2>Bewertung der Handlungsfelder</h2>
+        <table>
+            <thead><tr><th>Handlungsfeld</th><th>MTOK-Dimension</th><th>Mittelwert</th></tr></thead>
+            <tbody>{table_rows}</tbody>
+        </table>
+        """
 
     # HTML-Komplettausgabe
-            html_content = f"""
-            <!DOCTYPE html>
-            <html lang=\"de\">
-            <head>
-                <meta charset=\"utf-8\">
-                <title>Standortbestimmung</title>
-                <style>
-                    body {{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}
-                    h1 {{ font-size: 26px; color: #003366; }}
-                    h2 {{ font-size: 20px; color: #005599; margin-top: 30px; }}
-                    h3 {{ font-size: 16px; color: #333333; margin-top: 20px; }}
-                    .box {{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}
-                    img {{ display: block; margin: 20px auto; }}
-                    table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
-                    th, td {{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}
-                    th {{ background-color: #e1e9f0; text-align: left; }}
-                    td:nth-child(3) {{ text-align: center; }}
-                    ul {{ margin-top: 0; }}
-                    li {{ margin-bottom: 6px; }}
-                </style>
-            </head>
-            <body>
-                <h1>Ergebnisse des Modells</h1>
-                <div class=\"box\"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
-                {cluster_beschreibung_html}
-                <h2>Clusterspezifische Handlungsempfehlungen</h2>
-                {empfehlungen_html}
-                <h2>Unternehmens-Profil</h2>
-                {radar_html}
-                {table_html}
-            </body>
-            </html>
-            """
+        html_content = f"""
+        <!DOCTYPE html>
+        <html lang=\"de\">
+        <head>
+            <meta charset=\"utf-8\">
+            <title>Standortbestimmung</title>
+            <style>
+                body {{ font-family: Arial, sans-serif; padding: 40px; max-width: 800px; margin: auto; line-height: 1.6; }}
+                h1 {{ font-size: 26px; color: #003366; }}
+                h2 {{ font-size: 20px; color: #005599; margin-top: 30px; }}
+                h3 {{ font-size: 16px; color: #333333; margin-top: 20px; }}
+                .box {{ background: #f8f9fa; padding: 15px; border-left: 5px solid #005599; border-radius: 5px; margin-bottom: 25px; }}
+                img {{ display: block; margin: 20px auto; }}
+                table {{ width: 100%; border-collapse: collapse; margin-top: 20px; }}
+                th, td {{ border: 1px solid #ccc; padding: 8px; font-size: 13px; }}
+                th {{ background-color: #e1e9f0; text-align: left; }}
+                td:nth-child(3) {{ text-align: center; }}
+                ul {{ margin-top: 0; }}
+                li {{ margin-bottom: 6px; }}
+            </style>
+        </head>
+        <body>
+            <h1>Ergebnisse des Modells</h1>
+            <div class=\"box\"><strong>Clusterzuordnung:</strong><br>{display_cluster_result}</div>
+            {cluster_beschreibung_html}
+            <h2>Clusterspezifische Handlungsempfehlungen</h2>
+            {empfehlungen_html}
+            <h2>Unternehmens-Profil</h2>
+            {radar_html}
+            {table_html}
+        </body>
+        </html>
+        """
 
-            st.download_button(
-                label="📄 Ergebnisse als HTML herunterladen",
-                data=html_content,
-                file_name="auswertung.html",
-                mime="text/html"
-            )
+        st.download_button(
+            label="📄 Ergebnisse als HTML herunterladen",
+            data=html_content,
+            file_name="auswertung.html",
+            mime="text/html"
+        )
 
 #Evaluationsfragen
 if current_tab == "Evaluation":
