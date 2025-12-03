@@ -1501,8 +1501,6 @@ elif current_tab == "Auswertung":
             ax_mtok.set_ylim(0, 5)
 
             ax_mtok.grid(True, linestyle="dotted")
-        
-            st.pyplot(fig)
 
             # Bild für HTML-Export vorbereiten
             buf = BytesIO()
