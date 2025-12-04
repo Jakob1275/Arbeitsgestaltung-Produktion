@@ -973,15 +973,9 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 # Ende der Berechnungslogik
 
 # Inhalt Auswertungs-Tab
+# Radar-Helferfunktionen 
 
-# -----------------------------------------
-# Radar-Helferfunktionen (oben im Skript)
-# -----------------------------------------
-def plot_radar(labels, values, title="", r_max=5):
-    """
-    Einheitliche Radar-Plot-Funktion für MTOK- und Cluster-Profile.
-    Zeichnet NICHT selbst in Streamlit, sondern gibt nur fig zurück.
-    """
+def plot_radar(labels, values, title="", r_max=4):
     if not labels or not values or len(labels) != len(values):
         st.warning("Ungültige Daten für Radar-Diagramm.")
         return None
@@ -1036,9 +1030,7 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
     wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
 
     # Einheitliche Darstellung: Skala 1–5
-    return plot_radar(wrapped_labels, values, title=title, r_max=5)
-    #fig = plot_radar(wrapped_labels, values, title=title, r_max=5)
-    #return fig
+    return plot_radar(wrapped_labels, values, title=title, r_max=4)
 
 # Start des Streamlit UI Codes
 
