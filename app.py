@@ -1739,17 +1739,9 @@ if current_tab == "Evaluation":
     """, unsafe_allow_html=True)
 
     # Bewertungsoptionen
-    options = ["Niedrig", "Mittel", "Hoch", "Sehr hoch"]
+    options = ["Nicht erfüllt", "Teilweise erfüllt", "Weitgehend erfüllt", "Vollständig erfüllt"]
 
-    # Hilfsfunktion zur sicheren Umwandlung von Werten (mit Platzhalter für leere Werte)
-    def safe_value(val):
-        try:
-            if val in [None, ""] or (isinstance(val, float) and np.isnan(val)):
-                return "99999"
-            return str(val)
-        except Exception:
-            return "99999"
-
+  
     # Funktion zur Anzeige einer Frage (wie bei den Handlungsfeldern)
     def zeige_fragen(titel, fragen_liste, prefix):
         st.subheader(titel)
@@ -1790,7 +1782,7 @@ if current_tab == "Evaluation":
     # Bereich 3 – Anwendbarkeit
     fragen_3 = [
         "Das Modell eignet sich als Instrument zur Systematisierung flexibler Arbeit.",
-        "Das Modell unterstützt eine strukturierte Selbstbewertung und Reflexion im Unternehmen."
+        "Das Modell unterstützt eine strukturierte Selbstbewertung und Reflexion im Unternehmen.",
         "Die Clusterbeschreibung trifft auf unser Unternehmen zu.",
         "Mit Hilfe des Modells lassen sich konkrete betriebliche Entwicklungsmaßnahmen ableiten.",
     ]
