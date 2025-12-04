@@ -1036,8 +1036,9 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
     wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
 
     # Einheitliche Darstellung: Skala 1–5
-    fig = plot_radar(wrapped_labels, values, title=title, r_max=5)
-    return fig
+    return plot_radar(wrapped_labels, values, title=title, r_max=5)
+    #fig = plot_radar(wrapped_labels, values, title=title, r_max=5)
+    #return fig
 
 # Start des Streamlit UI Codes
 
@@ -1471,7 +1472,7 @@ elif current_tab == "Auswertung":
         fig_mtok = plot_radar(
             wrapped_mtok_labels,
             values_ordered,
-            title="Handlungsfelder-Profil",
+            title="",
             r_max=4,
         )
 
@@ -1524,6 +1525,8 @@ elif current_tab == "Auswertung":
         st.subheader("Automatische Clusterzuordnung")
         st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
 
+        fig_cluster = plot_cluster_radar(cluster_values, title="")
+        
         col1, col2 = st.columns(2)
 
         with col1:
@@ -1535,10 +1538,14 @@ elif current_tab == "Auswertung":
 
         with col2:
             st.markdown("#### Cluster-Variablen-Profil")
-            fig_cluster = plot_cluster_radar(cluster_values, title="")
+            if fig_cluster is not None:
+                st.pyplot(fig_cluster)
+            else:
+                st.warning("Keine gültigen Cluster-Werte für das Radar-Diagramm.")
 
         radar_html = ""
         radar_html_cluster = ""
+        
         if fig_mtok is not None:
             buf = BytesIO()
             fig_mtok.savefig(buf, format="png", bbox_inches="tight", dpi=300)
