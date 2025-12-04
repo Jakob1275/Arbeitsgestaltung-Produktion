@@ -974,25 +974,22 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 
 # Inhalt Auswertungs-Tab
 
+# -----------------------------------------
+# Radar-Helferfunktionen (oben im Skript)
+# -----------------------------------------
 def plot_radar(labels, values, title="", r_max=5):
     """
     Einheitliche Radar-Plot-Funktion für MTOK- und Cluster-Profile.
-    labels: Liste von Achsenlabels
-    values: Liste von Zahlenwerten
-    title:  Titel über dem Plot
-    r_max:  Maximalwert der Skala (z. B. 4 oder 5)
+    Zeichnet NICHT selbst in Streamlit, sondern gibt nur fig zurück.
     """
-    # Sicherheitscheck
     if not labels or not values or len(labels) != len(values):
         st.warning("Ungültige Daten für Radar-Diagramm.")
         return None
 
-    # Kreis schließen
     angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
     angles_cycle = angles + angles[:1]
     values_cycle = values + values[:1]
 
-    # Plot
     fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
     ax.set_theta_offset(np.pi / 2)
     ax.set_theta_direction(-1)
@@ -1011,7 +1008,6 @@ def plot_radar(labels, values, title="", r_max=5):
     if title:
         ax.set_title(title, fontsize=12, pad=20)
 
-    st.pyplot(fig)
     return fig
 
 def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Profil"):
@@ -1026,10 +1022,9 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
         "Aufwand Mobil",
         "Prozessinstabilität",
         "Akzeptanz",
-        "Flexibilitätsbereitschaft"
+        "Flexibilitätsbereitschaft",
     ]
 
-    # Nur Labels, die auch wirklich vorhanden sind
     labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
     if not labels:
         st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
@@ -1037,10 +1032,12 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
 
     values = [cluster_values[lbl] for lbl in labels]
 
-    # Labels umbrechen (gleiches Schema wie du willst)
+    # Label-Umbruch (damit gleiches Styling)
     wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
 
-    return plot_radar(wrapped_labels, values, title=title, r_max=5)
+    # Einheitliche Darstellung: Skala 1–5
+    fig = plot_radar(wrapped_labels, values, title=title, r_max=5)
+    return fig
 
 # Start des Streamlit UI Codes
 
@@ -1471,25 +1468,12 @@ elif current_tab == "Auswertung":
             for lbl in labels_ordered
         ]
 
-        radar_html = ""
-        radar_html_cluster = ""
-
         fig_mtok = plot_radar(
             wrapped_mtok_labels,
             values_ordered,
             title="Handlungsfelder-Profil",
             r_max=4,
         )
-
-        if fig_mtok is not None:
-            buf = BytesIO()
-            fig_mtok.savefig(buf, format="png", bbox_inches="tight", dpi=300)
-            buf.seek(0)
-            image_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            radar_html = (
-                f'<img src="data:image/png;base64,{image_base64}" '
-                f'alt="Radar-Diagramm" width="600"/>'
-            )
 
         #if values_ordered and all(isinstance(v, (int, float)) for v in values_ordered):
             #angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
@@ -1553,12 +1537,20 @@ elif current_tab == "Auswertung":
             st.markdown("#### Cluster-Variablen-Profil")
             fig_cluster = plot_cluster_radar(cluster_values, title="")
 
-            if fig_cluster is not None:
-                buf_cluster = BytesIO()
-                fig_cluster.savefig(buf_cluster, format="png", bbox_inches="tight", dpi=300)
-                buf_cluster.seek(0)
-                image_base64_cluster = base64.b64encode(buf_cluster.read()).decode("utf-8")
-                radar_html_cluster = f'<img src="data:image/png;base64,{image_base64_cluster}" alt="Cluster-Variablen-Profil" width="600"/>'
+        radar_html = ""
+        radar_html_cluster = ""
+        if fig_mtok is not None:
+            buf = BytesIO()
+            fig_mtok.savefig(buf, format="png", bbox_inches="tight", dpi=300)
+            buf.seek(0)
+            radar_html = f'<img src="data:image/png;base64,{base64.b64encode(buf.read()).decode("utf-8")}" width="600"/>'
+
+        if fig_cluster is not None:
+            buf_cluster = BytesIO()
+            fig_cluster.savefig(buf_cluster, format="png", bbox_inches="tight", dpi=300)
+            buf_cluster.seek(0)
+            image_base64_cluster = base64.b64encode(buf_cluster.read()).decode("utf-8")
+            radar_html_cluster = f'<img src="data:image/png;base64,{image_base64_cluster}" alt="Cluster-Variablen-Profil" width="600"/>'
 
         
         # Liste aller verfügbaren Cluster (Reihenfolge anpassen nach Bedarf)
