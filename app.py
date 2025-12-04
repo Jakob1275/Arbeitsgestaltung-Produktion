@@ -1499,7 +1499,7 @@ elif current_tab == "Auswertung":
             #wrapped_labels = [
                 #lbl.replace(" und ", "\nund ").replace("(", "\n(")
                 #for lbl in labels_ordered
-            ]
+            
 
             #fig_mtok, ax_mtok = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
             #ax_mtok.set_theta_offset(np.pi / 2)
