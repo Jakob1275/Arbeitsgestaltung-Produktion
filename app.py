@@ -1636,6 +1636,31 @@ elif current_tab == "Auswertung":
         </table>
         """
 
+        # --- Tabelle für Cluster-Variablen erzeugen ---
+        cluster_table_rows = ""
+        for var_name, var_value in cluster_values.items():
+            cluster_table_rows += (
+                f"<tr>"
+                f"<td>{var_name}</td>"
+                f"<td style='text-align: center;'>{var_value:.2f}</td>"
+                f"</tr>"
+            )
+
+        cluster_table_html = f"""
+        <h2>Bewertung der Cluster-Variablen</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Cluster-Variable</th>
+                    <th>Wert</th>
+                </tr>
+            </thead>
+            <tbody>
+                {cluster_table_rows}
+            </tbody>
+        </table>
+        """
+
     # HTML-Komplettausgabe
         html_content = f"""
         <!DOCTYPE html>
@@ -1676,6 +1701,7 @@ elif current_tab == "Auswertung":
                 </div>
             </div>
             {table_html}
+            {cluster_table_html}
         </body>
         </html>
         """
