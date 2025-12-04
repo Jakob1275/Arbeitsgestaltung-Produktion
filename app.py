@@ -208,7 +208,7 @@ Kriterien = {
       "begründung": "Offenheit gegenüber flexiblen Arbeitszeiten fördert Anpassungsfähigkeit und Akzeptanz betrieblicher Veränderungen."
     },
     {
-      "frage": "M1.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen selbst beheben.",
+      "frage": "M1.3 Beschäftigte können bei Prozessabweichungen eigenständig handeln und einfache Störungen (z.B. Werkzeugbruch) selbst beheben.",
       "begründung": "Die Fähigkeit, kleinere Fehler eigenverantwortlich zu lösen, ist entscheidend für reibungslose Abläufe in mobilen und zeitflexiblen Arbeitsmodellen."
     },
     {
@@ -218,10 +218,6 @@ Kriterien = {
     {
       "frage": "M1.5 Beschäftigte zeigen Offenheit und Interesse an automatisierten Produktionssystemen.",
       "begründung": "Offenheit und Interesse fördern die Bereitschaft, sich mit neuen Technologien auseinanderzusetzen."
-    },
-    {
-      "frage": "M1.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
-      "begründung": "Technikakzeptanz und Veränderungsbereitschaft sind zentrale Voraussetzungen für den erfolgreichen Umgang mit digitalisierten Arbeitsprozessen."
     }
     ],
     "Qualifikation und Kompetenzentwicklung": [
@@ -238,8 +234,8 @@ Kriterien = {
     "begründung": "In flexiblen Arbeitsmodellen ist es entscheidend, dass Beschäftigte auch ohne direkte Aufsicht Störungen erkennen und beheben können."
   },
   {
-    "frage": "M2.4 Beschäftigte werden gezielt darin gefördert, ihre Arbeit eigenverantwortlich zu organisieren und Entscheidungen im Rahmen ihrer Aufgaben zu treffen.",
-    "begründung": "Flexible Arbeitsformen erfordern ein hohes Maß an Selbstorganisation und Entscheidungskompetenz."
+    "frage": "M2.4 Beschäftigte werden frühzeitig und systematisch in Veränderungsprozesse eingebunden.",
+    "begründung": "Eine strukturierte Beteiligung stärkt Transparenz, wirkt Widerständen entgegen und fördert die Entwicklung der Beschäftigten."
   }
   ],
    "Automatisierung und Arbeitsplatzgestaltung": [
@@ -272,23 +268,19 @@ Kriterien = {
         "einschraenkung": "1_und_4"
     },
     {
-        "frage": "T2.3 Prozess- und Maschinendaten stehen in Echtzeit digital zur Verfügung.",
-        "begründung": "Echtzeitdaten ermöglichen Steuerung und Optimierung auch bei variabler Anwesenheit."
+        "frage": "T2.3 Prozess- und Maschinendaten stehen digital zur Verfügung.",
+        "begründung": "Prozess- und Maschinendaten ermöglichen die Steuerung und Optimierung auch bei flexibler Anwesenheit."
     },
     {
-        "frage": "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
-        "begründung": "Monitoring-Tools oder Kameras erlauben Kontrolle ohne dauerhafte Präsenz."
-    },
-    {
-        "frage": "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und abgebildet.",
+        "frage": "T2.4 Werkzeuge und Betriebsmittel sind digital erfasst und abgebildet.",
         "begründung": "Digitale Toolmanagement-Systeme ermöglichen eine flexible und effiziente Betriebsmittelplanung."
     },   
     {
-        "frage": "T2.6 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
+        "frage": "T2.5 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
         "begründung": "Zuverlässiger IT-Support sichert technische Funktionsfähigkeit und reduziert Akzeptanzbarrieren."
     },
     {
-        "frage": "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
+        "frage": "T2.6 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
         "begründung": "Starke IT-Sicherheit schützt sensible Daten und gewährleistet stabile Abläufe bei flexibler Arbeit."
     }
     ],
@@ -312,14 +304,13 @@ Kriterien = {
     ],
     "Organisatorische Umwelt": [
     {
-      "frage": "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
+      "frage": "O2.1 Verbindliche Betriebsvereinbarungen zu flexiblen Arbeitsformen bestehen.",
       "begründung": "Klare Regelungen schaffen Rechtssicherheit, Orientierung und Transparenz für Beschäftigte und Führungskräfte.",
       "einschraenkung": "1_und_4"
     },
     {
       "frage": "O2.2 Die Personalplanung berücksichtigt flexible <u>Arbeitszeiten</u>.",
       "begründung": "Digitale Planungssysteme wie MES oder ERP ermöglichen eine verlässliche Steuerung und Dokumentation flexibler Arbeitszeiten.",
-      "einschraenkung": "1_und_4"
     },
     {
       "frage": "O2.3 Die Personalplanung berücksichtigt flexible <u>Arbeitsorte</u>.",
@@ -389,12 +380,12 @@ Kriterien = {
     ],
    "Führung und Teamzusammenhalt": [
    {
-      "frage": "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv.",
+      "frage": "K2.1 Die Unternehmensführung zeigt sich offen gegenüber flexiblen Arbeitsmodellen.",
       "begründung": "Offenheit der Unternehmensleitung schafft Raum für Innovation und fördert die Bereitschaft, flexible Arbeitsmodelle gemeinsam zu gestalten."
     },
     {
-      "frage": "K2.2 Führungskräfte stehen flexible Arbeitsformen offen gegenüber und führen ergebnisorientiert.",
-      "begründung": "Vertrauen und Ergebnisorientierung statt Präsenzkontrolle fördern Eigenverantwortung und Motivation im Team."
+      "frage": "K2.2 Führungskräfte fördern eine ergebnisorientierte und vertrauensbasierte Zusammenarbeit.",
+      "begründung": "Ergebnisorientierung und Vertrauen fördern Eigenverantwortung und Motivation im Team."
     },
     {
       "frage": "K2.3 Die Teamkultur ist von gegenseitiger Unterstützung und Kooperation geprägt.",
@@ -767,8 +758,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
         "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
         "T2.3 Prozess- und Maschinendaten stehen in Echtzeit digital zur Verfügung.",
-        "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
-        "T2.5 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
+        "T2.4 Werkzeuge und Betriebsmittel sind digital erfasst und jederzeit verfügbar.",
         "O1.2 Erfahrungswissen wird dokumentiert und digital zugänglich gemacht.",
         "O3.2 Beschäftigte können während der Maschinenlaufzeit digitale Aufgaben (z. B. Programmierung, Dokumentation, Datenpflege) durchführen.",
         "O3.4 Qualitätssicherungsprozesse (z. B. Maßkontrollen) sind automatisiert in den Fertigungsprozess eingebunden und werden direkt durch die Werkzeugmaschine ausgeführt.",
@@ -793,8 +783,8 @@ kriterien_item_to_cluster_variable_mapping = {
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.3 Zielerreichung und Ergebnisse stehen vor physischer Anwesenheit.",
         "K1.4 Herausforderungen und Zielkonflikte flexibler Arbeit werden offen angesprochen und reflektiert.",
-        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv.",
-        "K2.2 Führungskräfte stehen flexible Arbeitsformen offen gegenüber und führen ergebnisorientiert."
+        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber flexiblen Arbeitsmodellen.",
+        "K2.2 Führungskräfte fördern eine ergebnisorientierte und vertrauensbasierte Zusammenarbeit."
     ],
     
     # 9. Akzeptanz
@@ -802,18 +792,18 @@ kriterien_item_to_cluster_variable_mapping = {
         "M1.1 Beschäftigte zeigen Offenheit gegenüber mobiler Arbeit.",
         "M1.2 Beschäftigte zeigen Offenheit gegenüber zeitflexibler Arbeit.",
         "M1.5 Beschäftigte zeigen Offenheit und Interesse an automatisierten Produktionssystemen.",
-        "M1.6 Beschäftigte stehen neuen, digital vernetzten Technologien und Abläufen offen und veränderungsbereit gegenüber.",
+        "M2.4 Beschäftigte werden frühzeitig und systematisch in Veränderungsprozesse eingebunden.",
         "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
         "O3.6 Produktivitäts- und Qualitätskennzahlen werden regelmäßig analysiert und für Verbesserungen genutzt.",
         "K1.1 Vertrauen bildet die Grundlage der Zusammenarbeit.",
-        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv."
+        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber flexiblen Arbeitsmodellen."
     ],
     
     # 10. Aufwand Zeit (Wahrgenommener Zeitaufwand für flexible Arbeit)
     # HINWEIS: Bei der Berechnung dieser Variablen wird der Wert inbvertiert, da ein höherer Score in der Frage ("können mitgestalten") einen niedrigeren "Aufwand Zeit" für das Cluster bedeutet.
     "Aufwand Zeit": [
         "M2.2 Beschäftigten werden Voraussetzungen und Grenzen zeitflexibler Arbeit klar kommuniziert.",
-        "M2.4 Beschäftigte werden gezielt darin gefördert, ihre Arbeit eigenverantwortlich zu organisieren und Entscheidungen im Rahmen ihrer Aufgaben zu treffen.",
+        "M2.4 Beschäftigte werden frühzeitig und systematisch in Veränderungsprozesse eingebunden.",
         "T1.2 CNC-Werkzeugmaschinen können ohne ständige Anwesenheit betrieben werden.",
         "T1.4 Fertigungsprozesse sind standardisiert dokumentiert.",
         "O1.1 Informationen zu Planung, Schichtübergaben und Störfällen sind digital und zeitnah verfügbar.",
@@ -821,7 +811,7 @@ kriterien_item_to_cluster_variable_mapping = {
         "O2.2 Die Personalplanung berücksichtigt flexible Arbeitszeiten.",
         "O2.4 Beschäftigte können Beginn und Ende ihrer Arbeitszeit innerhalb festgelegter Grenzen selbst bestimmen.",
         "O2.6 Arbeitszeitkonten oder vergleichbare Systeme werden aktiv genutzt.",
-        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv."
+        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber flexiblen Arbeitsmodellen."
     ],
     
     # 11. Aufwand Mobil (Wahrgenommener Aufwand für mobiles Arbeiten)
@@ -835,13 +825,12 @@ kriterien_item_to_cluster_variable_mapping = {
         "T1.3 Am oder nahe dem Maschinenarbeitsplatz sind Bereiche für computergestützte Tätigkeiten und digitale Zusammenarbeit vorhanden.",
         "T2.1 Mobile Endgeräte können für mobile Arbeit zur Verfügung gestellt werden.",
         "T2.2 Der Zugriff auf relevante Systeme (z. B. ERP, MES) ist ortsunabhängig und sicher möglich.",
-        "T2.4 Fernüberwachung und -zugriff auf Maschinen sind möglich.",
-        "T2.6 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
-        "T2.7 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
+        "T2.5 Der IT-Support kann auch produktionsbezogene IT-Probleme beheben.",
+        "T2.6 IT-Sicherheitskonzepte sind etabliert und werden regelmäßig geprüft.",
         "O2.1 Verbindliche Betriebsvereinbarungen zu mobiler und/ oder zeitflexibler Arbeit bestehen.",
         "O2.3 Die Personalplanung berücksichtigt flexible Arbeitsorte.",
         "O3.1 Aufgaben sind hinsichtlich ihrer Präsenzbindung analysiert und systematisch aufteilbar.",
-        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber neuen Formen flexibler Arbeit und diskutiert diese aktiv."
+        "K2.1 Die Unternehmensführung zeigt sich offen gegenüber flexiblen Arbeitsmodellen."
     ]
 }
 
@@ -985,46 +974,23 @@ def berechne_clusterzuordnung(kriterien_all_items_dict):
 
 # Inhalt Auswertungs-Tab
 
-def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Profil"):
+def plot_radar(labels, values, title="", r_max=5):
     """
-    Zeigt die berechneten Cluster-Variablen des Nutzers als Radar-Chart in Streamlit an.
-    cluster_values: Dict[str, float] – z. B. aus berechne_clusterzuordnung
+    Einheitliche Radar-Plot-Funktion für MTOK- und Cluster-Profile.
+    labels: Liste von Achsenlabels
+    values: Liste von Zahlenwerten
+    title:  Titel über dem Plot
+    r_max:  Maximalwert der Skala (z. B. 4 oder 5)
     """
-
-    if not cluster_values:
-        st.warning("Keine Clusterwerte vorhanden – bitte erst genügend Kriterien bewerten.")
-        return None 
-
-# Feste Reihenfolge der Variablen (damit Diagramm immer gleich aussieht)
-    labels_ordered = [
-    "Anzahl CNC-Werkzeugmaschinen",
-    "Automatisierungsgrad",
-    "Losgröße",
-    "Durchlaufzeit",
-    "Laufzeit",
-    "Digitalisierungsgrad",
-    "Aufwand Zeit",
-    "Aufwand Mobil",
-    "Prozessinstabilität",
-    "Akzeptanz",
-    "Flexibilitätsbereitschaft"
-]
-
-# Nur Labels verwenden, die auch wirklich in cluster_values enthalten sind
-    labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
-    if not labels:
-        st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
-        return None 
-
-    values = [cluster_values[lbl] for lbl in labels]
+    # Sicherheitscheck
+    if not labels or not values or len(labels) != len(values):
+        st.warning("Ungültige Daten für Radar-Diagramm.")
+        return None
 
     # Kreis schließen
     angles = np.linspace(0, 2 * np.pi, len(labels), endpoint=False).tolist()
     angles_cycle = angles + angles[:1]
     values_cycle = values + values[:1]
-
-    # Labels ggf. umbrechen
-    wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
 
     # Plot
     fig, ax = plt.subplots(figsize=(5.5, 5.5), subplot_kw=dict(polar=True))
@@ -1035,18 +1001,46 @@ def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Pro
     ax.fill(angles_cycle, values_cycle, alpha=0.25)
 
     ax.set_xticks(angles)
-    ax.set_xticklabels(wrapped_labels, fontsize=8)
+    ax.set_xticklabels(labels, fontsize=8)
 
-    ax.set_yticks([1, 2, 3, 4])
-    ax.set_yticklabels(['1', '2', '3', '4'], fontsize=7)
-    ax.set_ylim(0, 5)
+    ax.set_yticks(list(range(1, r_max + 1)))
+    ax.set_yticklabels([str(i) for i in range(1, r_max + 1)], fontsize=8)
+    ax.set_ylim(0, r_max)
 
     ax.grid(True, linestyle="dotted")
-    #ax.set_title(title, fontsize=12, pad=20)
-        
-    st.pyplot(fig)
+    if title:
+        ax.set_title(title, fontsize=12, pad=20)
 
+    st.pyplot(fig)
     return fig
+
+def plot_cluster_radar(cluster_values: dict, title: str = "Cluster-Variablen-Profil"):
+    labels_ordered = [
+        "Anzahl CNC-Werkzeugmaschinen",
+        "Automatisierungsgrad",
+        "Losgröße",
+        "Durchlaufzeit",
+        "Laufzeit",
+        "Digitalisierungsgrad",
+        "Aufwand Zeit",
+        "Aufwand Mobil",
+        "Prozessinstabilität",
+        "Akzeptanz",
+        "Flexibilitätsbereitschaft"
+    ]
+
+    # Nur Labels, die auch wirklich vorhanden sind
+    labels = [lbl for lbl in labels_ordered if lbl in cluster_values]
+    if not labels:
+        st.warning("Keine passenden Cluster-Variablen für das Radar-Diagramm gefunden.")
+        return None
+
+    values = [cluster_values[lbl] for lbl in labels]
+
+    # Labels umbrechen (gleiches Schema wie du willst)
+    wrapped_labels = [lbl.replace(" ", "\n") for lbl in labels]
+
+    return plot_radar(wrapped_labels, values, title=title, r_max=5)
 
 # Start des Streamlit UI Codes
 
@@ -1471,43 +1465,64 @@ elif current_tab == "Auswertung":
             st.session_state.ergebnisse.get("Führung und Teamzusammenhalt", 1),
         ]
 
-        fig_mtok = None
-        fig_cluster = None
+        # Labels wie gehabt umbrechen
+        wrapped_mtok_labels = [
+            lbl.replace(" und ", "\nund ").replace("(", "\n(")
+            for lbl in labels_ordered
+        ]
+
         radar_html = ""
         radar_html_cluster = ""
 
-        if values_ordered and all(isinstance(v, (int, float)) for v in values_ordered):
-            angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
-            values_cycle = values_ordered + values_ordered[:1]
-            angles_cycle = angles + angles[:1]
+        fig_mtok = plot_radar(
+            wrapped_mtok_labels,
+            values_ordered,
+            title="Handlungsfelder-Profil",
+            r_max=4,
+        )
 
-            wrapped_labels = [
-                lbl.replace(" und ", "\nund ").replace("(", "\n(")
-                for lbl in labels_ordered
-            ]
-
-            fig_mtok, ax_mtok = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
-            ax_mtok.set_theta_offset(np.pi / 2)
-            ax_mtok.set_theta_direction(-1)
-
-            ax_mtok.plot(angles_cycle, values_cycle, linewidth=4)
-            ax_mtok.fill(angles_cycle, values_cycle, alpha=0.25)
-
-            ax_mtok.set_xticks(angles)
-            ax_mtok.set_xticklabels(wrapped_labels, fontsize=12)
-
-            ax_mtok.set_yticks([1, 2, 3, 4])
-            ax_mtok.set_yticklabels(["1", "2", "3", "4"], fontsize=12)
-            ax_mtok.set_ylim(0, 5)
-
-            ax_mtok.grid(True, linestyle="dotted")
-
-            # Bild für HTML-Export vorbereiten
+        if fig_mtok is not None:
             buf = BytesIO()
             fig_mtok.savefig(buf, format="png", bbox_inches="tight", dpi=300)
             buf.seek(0)
             image_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            radar_html = f'<img src="data:image/png;base64,{image_base64}" alt="Radar-Diagramm" width="600"/>'
+            radar_html = (
+                f'<img src="data:image/png;base64,{image_base64}" '
+                f'alt="Radar-Diagramm" width="600"/>'
+            )
+
+        #if values_ordered and all(isinstance(v, (int, float)) for v in values_ordered):
+            #angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
+            #values_cycle = values_ordered + values_ordered[:1]
+            #angles_cycle = angles + angles[:1]
+
+            #wrapped_labels = [
+                #lbl.replace(" und ", "\nund ").replace("(", "\n(")
+                #for lbl in labels_ordered
+            ]
+
+            #fig_mtok, ax_mtok = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
+            #ax_mtok.set_theta_offset(np.pi / 2)
+            #ax_mtok.set_theta_direction(-1)
+
+            #ax_mtok.plot(angles_cycle, values_cycle, linewidth=4)
+            #ax_mtok.fill(angles_cycle, values_cycle, alpha=0.25)
+
+            #ax_mtok.set_xticks(angles)
+            #ax_mtok.set_xticklabels(wrapped_labels, fontsize=12)
+
+            #ax_mtok.set_yticks([1, 2, 3, 4])
+            #ax_mtok.set_yticklabels(["1", "2", "3", "4"], fontsize=12)
+            #ax_mtok.set_ylim(0, 5)
+
+            #ax_mtok.grid(True, linestyle="dotted")
+
+            # Bild für HTML-Export vorbereiten
+            #buf = BytesIO()
+            #fig_mtok.savefig(buf, format="png", bbox_inches="tight", dpi=300)
+            #buf.seek(0)
+            #image_base64 = base64.b64encode(buf.read()).decode("utf-8")
+            #radar_html = f'<img src="data:image/png;base64,{image_base64}" alt="Radar-Diagramm" width="600"/>'
 
         
         # 2. Cluster-Zuordnung
