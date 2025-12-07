@@ -412,7 +412,7 @@ cluster_beschreibungen = {
         "steht klar im Vordergrund. Kulturelle Barrieren sowie fehlende organisatorische Modelle zur Flexibilisierung hemmen den Wandel. "
         "Technisch wäre Flexibilität oft bereits möglich, scheitert jedoch an Einstellung, Struktur oder fehlender Systematik."
     ),
-    "Cluster 3 – Digital-affin und akzeptanzstark": (
+    "Cluster 3 – Digital-affin und flexibilisierungsbereit": (
         "Diese Unternehmen zeichnen sich durch eine hohe Technikreife, stabile Prozesse sowie eine ausgeprägte Offenheit für neue Arbeitsformen aus. "
         "Mobile und zeitflexible Arbeit wird bereits eingesetzt oder ist in Pilotbereichen etabliert. Die Führungskultur ist dialogorientiert, "
         "und Beschäftigte werden aktiv eingebunden. Dieses Cluster hat sehr gute Voraussetzungen, flexible Arbeit systematisch auszurollen "
@@ -430,7 +430,7 @@ cluster_beschreibungen = {
 cluster_bilder = {
     "Cluster 1 – Traditionell und reaktiv": "Cluster 1.png",
     "Cluster 2 – Produktionsstark, aber mobilitätsfern": "Cluster 2.png",
-    "Cluster 3 – Digital-affin und akzeptanzstark": "Cluster 3.png",
+    "Cluster 3 – Digital-affin und flexibilisierungsbereit": "Cluster 3.png",
     "Cluster 4 – Technisch solide, aber prozessual träge": "Cluster 4.png"
  }
 
@@ -554,7 +554,7 @@ handlungsempfehlungen = {
         ]
     },
 
-    "Cluster 3 – Digital-affin und akzeptanzstark": {
+    "Cluster 3 – Digital-affin und flexibilisierungsbereit": {
         "Technik": [
             {
                   "text": "Schaffen Sie zentrale, digitale Informationspunkte („Single Points of Information“) zur Bereitstellung relevanter Produktions-, Auftrags- oder Mitarbeiterdaten.",
@@ -862,7 +862,7 @@ cluster_item_values = {
         "Aufwand Zeit": 3,
         "Aufwand Mobil": 4
     },
-    "Cluster 3 – Digital-affin und akzeptanzstark": {
+    "Cluster 3 – Digital-affin und flexibilisierungsbereit": {
         "Automatisierungsgrad": 4,
         "Anzahl CNC-Werkzeugmaschinen": 2, 
         "Losgröße": 2,
