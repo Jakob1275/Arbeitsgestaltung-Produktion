@@ -44,6 +44,18 @@ st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", la
 # Style-Block
 st.markdown("""
 <style>
+    /* Erzwingt Light-Mode, auch wenn der User Dark-Mode aktiviert hat */
+    :root, [data-theme="dark"] {
+        --text-color: #000 !important;
+        --background-color: #ffffff !important;
+        --secondary-background-color: #f3f3f3 !important;
+        --primary-color: #005C7F !important;
+
+        /* Optional: Falls dein CSS mit Streamlit-Variablen arbeitet */
+        --text-color-primary: #000 !important;
+        --background-color-primary: #ffffff !important;
+    }
+
     html, body, [class*="css"]  {
         font-size: 18px !important;
         line-height: 1.6;
