@@ -1467,40 +1467,6 @@ elif current_tab == "Auswertung":
             title="",
             r_max=4,
         )
-
-        #if values_ordered and all(isinstance(v, (int, float)) for v in values_ordered):
-            #angles = np.linspace(0, 2 * np.pi, len(labels_ordered), endpoint=False).tolist()
-            #values_cycle = values_ordered + values_ordered[:1]
-            #angles_cycle = angles + angles[:1]
-
-            #wrapped_labels = [
-                #lbl.replace(" und ", "\nund ").replace("(", "\n(")
-                #for lbl in labels_ordered
-            
-
-            #fig_mtok, ax_mtok = plt.subplots(figsize=(10, 10), subplot_kw=dict(polar=True))
-            #ax_mtok.set_theta_offset(np.pi / 2)
-            #ax_mtok.set_theta_direction(-1)
-
-            #ax_mtok.plot(angles_cycle, values_cycle, linewidth=4)
-            #ax_mtok.fill(angles_cycle, values_cycle, alpha=0.25)
-
-            #ax_mtok.set_xticks(angles)
-            #ax_mtok.set_xticklabels(wrapped_labels, fontsize=12)
-
-            #ax_mtok.set_yticks([1, 2, 3, 4])
-            #ax_mtok.set_yticklabels(["1", "2", "3", "4"], fontsize=12)
-            #ax_mtok.set_ylim(0, 5)
-
-            #ax_mtok.grid(True, linestyle="dotted")
-
-            # Bild für HTML-Export vorbereiten
-            #buf = BytesIO()
-            #fig_mtok.savefig(buf, format="png", bbox_inches="tight", dpi=300)
-            #buf.seek(0)
-            #image_base64 = base64.b64encode(buf.read()).decode("utf-8")
-            #radar_html = f'<img src="data:image/png;base64,{image_base64}" alt="Radar-Diagramm" width="600"/>'
-
         
         # 2. Cluster-Zuordnung
         cluster_result, abweichungen_detail, cluster_values = berechne_clusterzuordnung(Kriterien)
@@ -1517,6 +1483,13 @@ elif current_tab == "Auswertung":
         st.subheader("Automatische Clusterzuordnung")
         st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
 
+        st.success(
+    "Nachfolgend werden die Ausprägungen der Handlungsfelder sowie die daraus "
+    "abgeleitete Clusterzuordnung dargestellt. "
+    "Die Bewertung erfolgt auf einer vierstufigen Skala von 1 (nicht erfüllt) "
+    "bis 4 (vollständig erfüllt)."
+)
+        
         fig_cluster = plot_cluster_radar(cluster_values, title="")
         
         col1, col2 = st.columns(2)
