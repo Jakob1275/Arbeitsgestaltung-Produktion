@@ -1483,7 +1483,7 @@ elif current_tab == "Auswertung":
         st.subheader("Automatische Clusterzuordnung")
         st.success(f"Der Betrieb wird dem folgenden Cluster zugeordnet:\n\n**{cluster_result}**")
 
-        st.success(
+        st.info(
     "Nachfolgend werden die Ausprägungen der Handlungsfelder sowie die daraus "
     "abgeleitete Clusterzuordnung dargestellt. "
     "Die Bewertung erfolgt auf einer vierstufigen Skala von 1 (nicht erfüllt) "
