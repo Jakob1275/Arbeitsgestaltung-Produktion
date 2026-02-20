@@ -1705,108 +1705,106 @@ if current_tab == "Evaluation":
     st.markdown("""
         <div class="text-box">
             <p>Vielen Dank, dass Sie sich die Zeit genommen haben, das Modell zur Systematisierung flexibler Arbeit in der Zerspanung zu bearbeiten.</p>
-            <p>Mit der Bearbeitung des Modells haben Sie mir bereits wertvolle Einblicke in die Flexibilitätsbedarfe Ihres Unternehmens gegeben.</p>
-            <p>Nun bitte ich Sie um eine kurze Einschätzung zu <strong>Aufbau, Verständlichkeit und Praxisnutzen</strong> des Modells selbst. Ihre ehrliche und kritische Rückmeldung ist dabei das wichtigste Ziel: Nur so kann ich das Instrument optimieren und es zu einem wirkungsvollen Werkzeug für die gesamte Branche machen.</p>
-            <p><strong>Ihre Antworten bleiben selbstverständlich anonym und werden ausschließlich für die wissenschaftliche Weiterentwicklung verwendet.</strong></p>
+            <p>Die Evaluation ist beendet.</p>
         </div>
     """, unsafe_allow_html=True)
 
     # Bewertungsoptionen
-    options = ["Nicht erfüllt", "Teilweise erfüllt", "Weitgehend erfüllt", "Vollständig erfüllt"]
+    # options = ["Nicht erfüllt", "Teilweise erfüllt", "Weitgehend erfüllt", "Vollständig erfüllt"]
 
   
-    # Funktion zur Anzeige einer Frage (wie bei den Handlungsfeldern)
-    def zeige_fragen(titel, fragen_liste, prefix):
-        st.subheader(titel)
-        for idx, frage in enumerate(fragen_liste):
-            radio_key = f"{prefix}_{idx}"
+    # Funktion zur Anzeige einer Frage
+#    def zeige_fragen(titel, fragen_liste, prefix):
+#        st.subheader(titel)
+#        for idx, frage in enumerate(fragen_liste):
+#            radio_key = f"{prefix}_{idx}"
 
-            st.markdown(f"""
-                <div style='margin-bottom: -0.2rem; margin-top: 0.7rem'>
-                    <strong>{frage}</strong>
-                </div>
-            """, unsafe_allow_html=True)
+#            st.markdown(f"""
+#                <div style='margin-bottom: -0.2rem; margin-top: 0.7rem'>
+#                    <strong>{frage}</strong>
+#                </div>
+#            """, unsafe_allow_html=True)
 
-            score = st.radio(
-                label="",
-                options=options,
-                key=radio_key,
-                index=0
-            )
+#            score = st.radio(
+#                label="",
+#                options=options,
+#                key=radio_key,
+#                index=0
+#            )
 
-            st.session_state[radio_key + "_score"] = score
+#            st.session_state[radio_key + "_score"] = score
 
-    # Bereich 1 – Verständlichkeit
-    fragen_1 = [
-        "Die verwendeten Begriffe und Formulierungen in den Bewertungskriterien waren klar verständlich.",
-        "Die Erklärungen zu Handlungsfeldern und Bewertungsskalen waren hilfreich.",
-        "Die grafische Darstellung der Ergebnisse war unterstützend."
-    ]
-    zeige_fragen("1. Verständlichkeit und Transparenz des Modells", fragen_1, "eval1")
+#    # Bereich 1 – Verständlichkeit
+#    fragen_1 = [
+#        "Die verwendeten Begriffe und Formulierungen in den Bewertungskriterien waren klar verständlich.",
+#        "Die Erklärungen zu Handlungsfeldern und Bewertungsskalen waren hilfreich.",
+#        "Die grafische Darstellung der Ergebnisse war unterstützend."
+#    ]
+#    zeige_fragen("1. Verständlichkeit und Transparenz des Modells", fragen_1, "eval1")
 
-    # Bereich 2 – Relevanz
-    fragen_2 = [
-        "Die im Modell adressierten Themenfelder sind für unser Unternehmen relevant.",
-        "Die Bewertungskriterien spiegeln praxisrelevante Herausforderungen in der Produktion wider.",
-        "Die Branchenspezifika der zerspanenden Fertigung wurden im Modell angemessen berücksichtigt."
-    ]
-    zeige_fragen("2. Relevanz und betriebliche Passung", fragen_2, "eval2")
+#    # Bereich 2 – Relevanz
+#    fragen_2 = [
+#        "Die im Modell adressierten Themenfelder sind für unser Unternehmen relevant.",
+#        "Die Bewertungskriterien spiegeln praxisrelevante Herausforderungen in der Produktion wider.",
+#        "Die Branchenspezifika der zerspanenden Fertigung wurden im Modell angemessen berücksichtigt."
+#    ]
+#    zeige_fragen("2. Relevanz und betriebliche Passung", fragen_2, "eval2")
 
-    # Bereich 3 – Anwendbarkeit
-    fragen_3 = [
-        "Das Modell eignet sich als Instrument zur Systematisierung flexibler Arbeit.",
-        "Das Modell unterstützt eine strukturierte Selbstbewertung und Reflexion im Unternehmen.",
-        "Die Clusterbeschreibung trifft auf unser Unternehmen zu.",
-        "Mit Hilfe des Modells lassen sich konkrete betriebliche Entwicklungsmaßnahmen ableiten.",
-    ]
-    zeige_fragen("3. Anwendbarkeit und betrieblicher Nutzen", fragen_3, "eval3")
+#    # Bereich 3 – Anwendbarkeit
+#    fragen_3 = [
+#        "Das Modell eignet sich als Instrument zur Systematisierung flexibler Arbeit.",
+#        "Das Modell unterstützt eine strukturierte Selbstbewertung und Reflexion im Unternehmen.",
+#        "Die Clusterbeschreibung trifft auf unser Unternehmen zu.",
+#        "Mit Hilfe des Modells lassen sich konkrete betriebliche Entwicklungsmaßnahmen ableiten.",
+#    ]
+#    zeige_fragen("3. Anwendbarkeit und betrieblicher Nutzen", fragen_3, "eval3")
 
     # Bereich 4 – Gesamturteil
-    fragen_4 = [
-        "Das Modell ist insgesamt frei von Widersprüchen.",
-        "Ich würde das Modell anderen Unternehmen oder Kollegen weiterempfehlen.",
-        "Der erwartete Nutzen des Modells überwiegt den Aufwand der Anwendung."
-    ]
-    zeige_fragen("4. Gesamturteil und Weiterempfehlung", fragen_4, "eval4")
+#    fragen_4 = [
+#        "Das Modell ist insgesamt frei von Widersprüchen.",
+#        "Ich würde das Modell anderen Unternehmen oder Kollegen weiterempfehlen.",
+#        "Der erwartete Nutzen des Modells überwiegt den Aufwand der Anwendung."
+#    ]
+#    zeige_fragen("4. Gesamturteil und Weiterempfehlung", fragen_4, "eval4")
 
     # Bereich 5 – Freitext
-    st.subheader("5. Offene Rückmeldung")
-    st.text_area(
-        "Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik zum Modell?",
-        key="evaluation_feedback_text"
-    )
+#    st.subheader("5. Offene Rückmeldung")
+#    st.text_area(
+#        "Haben Sie Anregungen, Verbesserungsvorschläge oder Kritik zum Modell?",
+#        key="evaluation_feedback_text"
+#    )
 
     # Hilfsfunktion zur Bewertungskonvertierung
-    def bewertung_in_zahl(wert):
-        mapping = {
-            "Nicht erfüllt": 1,
-            "Teilweise erfüllt": 2,
-            "Weitgehend erfüllt": 3,
-            "Vollständig erfüllt": 4
-        }
-        return mapping.get(wert, 99999)
+#    def bewertung_in_zahl(wert):
+#        mapping = {
+#            "Nicht erfüllt": 1,
+#            "Teilweise erfüllt": 2,
+#            "Weitgehend erfüllt": 3,
+#            "Vollständig erfüllt": 4
+#        }
+#        return mapping.get(wert, 99999)
 
     # Hilfsfunktion zur sicheren Speicherung
-    def safe_value(val):
-        if val is None:
-            return 99999
-        if isinstance(val, float) and np.isnan(val):
-            return 99999
-        if isinstance(val, str):
-            if val.strip() == "":
-                return 99999
-            return val  # Freitext oder Cluster-Text erhalten
-        return val
+#    def safe_value(val):
+#        if val is None:
+#            return 99999
+#        if isinstance(val, float) and np.isnan(val):
+#            return 99999
+#        if isinstance(val, str):
+#            if val.strip() == "":
+#                return 99999
+#            return val  # Freitext oder Cluster-Text erhalten
+#        return val
 
       # Anzahl bewerteter MTOK-Felder zählen
-    def zaehle_bewertete_clustervariablen(mtok_daten):
-        werte = list(mtok_daten.values())[:9]  # Nur die 9 MTOK-Felder
-        return sum(1 for v in werte if isinstance(v, (int, float)) and v > 0)
+#    def zaehle_bewertete_clustervariablen(mtok_daten):
+#        werte = list(mtok_daten.values())[:9]  # Nur die 9 MTOK-Felder
+#        return sum(1 for v in werte if isinstance(v, (int, float)) and v > 0)
 
 
     # Absenden und speichern
-    if st.button("Absenden und speichern"):
-        speichere_daten(status="Final")
+#    if st.button("Absenden und speichern"):
+#        speichere_daten(status="Final")
     
            
 # Trenner
