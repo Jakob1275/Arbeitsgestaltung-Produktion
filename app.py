@@ -406,7 +406,7 @@ cluster_beschreibungen = {
         "Arbeitsmodelle werden nicht genutzt oder aktiv abgelehnt. Die Führung agiert überwiegend hierarchisch, Veränderungsbereitschaft "
         "ist kaum erkennbar. Die Einführung flexibler Arbeit erfordert grundlegende strukturelle, kulturelle und technische Vorarbeiten."
      ),
-    "Cluster 2 – Produktionsstark, aber mobilitätsfern": (
+    "Cluster 2 – Produktionsstark, aber flexibilitätsfern": (
         "Betriebe dieses Clusters verfügen über eine moderne technische Ausstattung und stabile Produktionsprozesse, "
         "zeigen jedoch eine geringe Offenheit und Akzeptanz für mobile oder zeitflexible Arbeitsmodelle. Die Wertschöpfung im Produktionsbereich "
         "steht klar im Vordergrund. Kulturelle Barrieren sowie fehlende organisatorische Modelle zur Flexibilisierung hemmen den Wandel. "
@@ -429,7 +429,7 @@ cluster_beschreibungen = {
 #Clusterbilder
 cluster_bilder = {
     "Cluster 1 – Traditionell und reaktiv": "Cluster 1.png",
-    "Cluster 2 – Produktionsstark, aber mobilitätsfern": "Cluster 2.png",
+    "Cluster 2 – Produktionsstark, aber flexibilitätsfern": "Cluster 2.png",
     "Cluster 3 – Digital-affin und flexibilisierungsbereit": "Cluster 3.png",
     "Cluster 4 – Technisch solide, aber prozessual träge": "Cluster 4.png"
  }
@@ -495,7 +495,7 @@ handlungsempfehlungen = {
         ]
     },
 
-    "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
+    "Cluster 2 – Produktionsstark, aber flexibilitätsfern": {
         "Technik": [
             {
                 "text": "Ermöglichen Sie sicheren Remote-Zugriff auf produktionsrelevante Systeme für indirekte Bereiche (z. B. Arbeitsvorbereitung, Konstruktion, Qualitätssicherung, NC-Programmierung).",
@@ -849,7 +849,7 @@ cluster_item_values = {
         "Aufwand Zeit": 3, 
         "Aufwand Mobil": 4 
     },
-    "Cluster 2 – Produktionsstark, aber mobilitätsfern": {
+    "Cluster 2 – Produktionsstark, aber flexibilitätsfern": {
         "Automatisierungsgrad": 3,
         "Anzahl CNC-Werkzeugmaschinen": 3,
         "Losgröße": 4,
