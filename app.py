@@ -20,23 +20,23 @@ if "current_step" not in st.session_state:
 
 #Google Sheet Verbindung
 
-@st.cache_resource
-def get_worksheet():
+#@st.cache_resource
+#def get_worksheet():
     # Zugriff auf die Secrets
-    service_account_info = st.secrets["gcp_service_account"]
+    #service_account_info = st.secrets["gcp_service_account"]
 
     # Authentifizierung mit aktuellem Scope
-    scope = ["https://www.googleapis.com/auth/spreadsheets"]
-    credentials = Credentials.from_service_account_info(service_account_info, scopes=scope)
+    #scope = ["https://www.googleapis.com/auth/spreadsheets"]
+    #credentials = Credentials.from_service_account_info(service_account_info, scopes=scope)
 
     # Autorisierung für Google Sheets
-    client = gspread.authorize(credentials)
+    #client = gspread.authorize(credentials)
 
     # Spreadsheet öffnen
-    return client.open_by_key("1pPljjp03HAB7KM_Qk9B4IYnnx0NVuFMxV81qvD67B3g").worksheet("Tabellenblatt1")
+    #return client.open_by_key("1pPljjp03HAB7KM_Qk9B4IYnnx0NVuFMxV81qvD67B3g").worksheet("Tabellenblatt1")
 
 # worksheet global verwenden
-worksheet = get_worksheet()
+#worksheet = get_worksheet()
 
 #Titel der Seiten
 st.set_page_config(page_title="Modell zur Systematisierung flexibler Arbeit", layout="wide")
